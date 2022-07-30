@@ -1,0 +1,46 @@
+<!-- inspiration - https://dribbble.com/shots/15794174-Chakri-Job-Portal-Landing-page-v2/attachments/7604296?mode=media -->
+
+<div class="main text-white">
+    <div class="d-flex justify-content-between px-5 pt-4 pb-4">
+        <div class="flex-grow-1">
+            <h1>Gl<span class="text-warning">i</span>nt</h1>
+        </div>
+        <div class="pe-3">
+            <button pButton
+                type="button"
+                class="p-button-text p-button text-white">
+                    Login
+            </button>
+        </div>
+        <div class="pe-3">
+            <button pButton
+                type="button"
+                class="p-button-outlined text-white">
+                    Register
+            </button>
+        </div>
+    </div>
+
+
+    <div class="vh-100 pt-5">
+        <div class="text-center">
+            <div class="pt-4"></div>
+            <p class="fw-bold">It's simple and smart</p>
+            <h1 class="fw-bold text-white">Search, Find & Apply</h1>
+            
+            <div class="d-flex justify-content-center pt-4">
+                <div class="pe-4">
+                    <img src="assets/job.svg" height="40px" width="40px" alt="">
+                    {{totalJobCount}} Job
+                </div>
+                <div>
+                    <img src="assets/company.png" height="40px" width="40px" alt="">
+                    {{totalCompanyCount}} Companies
+                </div>
+            </div>
+
+            <div class="pt-5"></div>
+            <app-search-bar></app-search-bar>
+        </div>
+    </div>
+</div>
