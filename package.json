@@ -5,8 +5,7 @@
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build --base-href '/glint/'",
-    "watch": "ng build --watch --configuration development",
-    "deploy": "npx angular-cli-ghpages --dir=dist/glint"
+    "watch": "ng build --watch --configuration development"
   },
   "private": true,
   "dependencies": {

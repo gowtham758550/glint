@@ -26,6 +26,18 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
-    - run: npm ci
-    - run: npm run build
-    - run: npm run deploy
+
+    - name: Install Dependencies
+      if: steps.cache-nodemodules.outputs.cache-hit != 'true'
+      run: |
+        npm ci
+
+    - name: Build
+      run: |
+        npm run build 
+
+    - name: Deploy
+      uses: glint/actions-gh-pages@v3
+      with:
+      github_token: ${{ secrets.TOKEN_GITHUB_ACTION }}
+      destination_dir: dist/glint
