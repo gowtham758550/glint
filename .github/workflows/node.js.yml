@@ -39,5 +39,5 @@ jobs:
     - name: Deploy
       uses: glint/actions-gh-pages@v3
       with:
-      github_token: ${{ secrets.TOKEN_GITHUB_ACTION }}
-      destination_dir: dist/glint
+        github_token: ${{ secrets.TOKEN_GITHUB_ACTION }}
+        destination_dir: dist/glint
