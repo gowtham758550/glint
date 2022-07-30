@@ -37,7 +37,7 @@ jobs:
         npm run build 
 
     - name: Deploy
-      uses: gowtham758550/glint@main
+      uses: JamesIves/github-pages-deploy-action@4.1.1
       with:
-        github_token: ${{ secrets.TOKEN_GITHUB_ACTION }}
-        destination_dir: dist/glint
+        branch: gh-pages
+        folder: glint/dist/glint
