@@ -24,6 +24,7 @@
     left: -130px;
     background: radial-gradient(#BF8C80, #191F40);
     overflow: hidden;
+    opacity: 0.5;
   }
   
   #radius-shape-2 {
@@ -34,6 +35,7 @@
     height: 300px;
     background: radial-gradient(#BF8C80, #191F40);
     overflow: hidden;
+    opacity:0.5;
   }
   
   .bg-glass {
