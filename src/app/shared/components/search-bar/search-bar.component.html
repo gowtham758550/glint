@@ -1,58 +1,60 @@
 
 <div class="d-flex justify-content-center">
-    <div class="card">
-        <div class="d-flex justify-content-center p-2">
-        
-            <!-- search icon -->
-            <div class="pt-2">
-                <button pButton 
-                    pRipple 
+    <form [formGroup]="form">
+        <div class="card">
+            <div class="d-flex justify-content-center p-2">
+                <!-- search icon -->
+                <div class="pt-2">
+                    <button pButton 
+                        pRipple 
+                        type="button"
+                        [disabled]="true"
+                        icon="pi pi-search"
+                        class="p-button-rounded p-button-text mr-2 mb-2">
+                    </button>
+                </div>
+                <ng-container *ngFor="let item of searchBarData; let i = index">
+                    <!-- Disabled for first field -->
+                    <div *ngIf="i != 0" class="vl ps-3"></div>
+                    <ng-container [ngSwitch]="item.type">
+                        <!-- input -->
+                        <ng-template [ngSwitchCase]="'input'">
+                            <input type="text"
+                                pInputText
+                                [formControlName]="item.formControlName"
+                                class="border-0 input"
+                                [placeholder]="item.label">
+                        </ng-template>
+    
+                        <!-- select -->
+                        <ng-template [ngSwitchCase]="'select'">
+                            <!-- <p-dropdown [options]="experience" optionLabel="label" class="pt-2 input"></p-dropdown> -->
+                            <div class="pe-4 d-flex">
+                                <select class="input bg-white pe-5"
+                                    [formControlName]="item.formControlName"
+                                    [ngClass]="isFirstOption? 'text-muted': 'text-dark'"
+                                    (change)="selectOnChange($event)">
+                                    <option *ngFor="let option of item.options; let i = index"
+                                        [value]="option.value"
+                                        class="text-dark bg-white"
+                                        [disabled]="i == 0"
+                                        >   
+                                    {{option.label}}
+                                </option>
+                                </select>
+                            </div>
+                        </ng-template>
+                    </ng-container>
+                </ng-container>
+                <!-- emits search data to parent -->
+                <button pButton
+                    class="p-button-raised p-button-rounded px-4 fs-4 bg-primary text-white"
                     type="button"
-                    [disabled]="true"
-                    icon="pi pi-search"
-                    class="p-button-rounded p-button-text mr-2 mb-2">
+                    (click)="emitData()">
+                        <i class="pi pi-search pe-3"></i>
+                        Search
                 </button>
             </div>
-        
-            <ng-container *ngFor="let item of searchBarData; let i = index">
-                <!-- Disabled for first field -->
-                <div *ngIf="i != 0" class="vl ps-3"></div>
-                <ng-container [ngSwitch]="item.type">
-                    <!-- input -->
-                    <ng-template [ngSwitchCase]="'input'">
-                        <input type="text"
-                            pInputText
-                            class="border-0 input"
-                            [placeholder]="item.label">
-                    </ng-template>
-
-                    <!-- select -->
-                    <ng-template [ngSwitchCase]="'select'">
-                        <!-- <p-dropdown [options]="experience" optionLabel="label" class="pt-2 input"></p-dropdown> -->
-                        <div class="pe-4 d-flex">
-                            <select class="input bg-white pe-5"
-                                [ngClass]="isFirstOption? 'text-muted': 'text-dark'"
-                                (change)="selectOnChange($event)">
-                                <option *ngFor="let option of experience; let i = index"
-                                    [value]="option.value"
-                                    class="text-dark bg-white"
-                                    [disabled]="i == 0"
-                                    >   
-                                {{option.label}}
-                            </option>
-                            </select>
-                        </div>
-                    </ng-template>
-                </ng-container>
-            </ng-container>
-        
-            <!-- emits search data to parent -->
-            <button pButton
-                class="p-button-raised p-button-rounded px-4 fs-4 bg-primary text-white"
-                type="button">
-                    <i class="pi pi-search pe-3"></i>
-                    Search
-            </button>
         </div>
-    </div>
+    </form>
 </div>

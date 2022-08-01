@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { FormField } from 'src/app/data/models/form-field.model';
+import { FormBuilder, FormGroup } from '@angular/forms';
+import { SearchBar } from 'src/app/data/models/search-bar.model';
+import { Option } from 'src/app/data/models/options.model';
 
 @Component({
   selector: 'app-landing-page',
@@ -11,29 +12,43 @@ export class LandingPageComponent implements OnInit {
 
   totalJobCount!: number;
   totalCompanyCount!: number;
-
-  field: FormField[] = [
+  experience: Option[] = [
     {
-      type: 'select',
-      label: 'Username',
-      formControlName: 'username',
-      class: ['w-100'],
-      options: [
-        {value: 'a', option: 'a'},
-        {value: 'a', option: 'a'},
-        {value: 'a', option: 'a'},
-      ]
+      value: 0,
+      label: 'Select experience'
     },
     {
-      type: 'input',
-      label: 'label',
-      formControlName: 'label',
-      class: ['w-100']
+        value: 1,
+        label: 'Fresher'
+    },
+    {
+      value: 2,
+      label: 'Experienced'
     }
-  ]
-  group: FormGroup = this.formBuilder.group({
-    username: ['', [Validators.required, Validators.email]]
-  });
+  ];
+  searchBarData: SearchBar[] = [
+    {
+      label: 'Enter designation',
+      type: 'input',
+      formControlName: 'designation'
+    },
+    {
+      label: 'Select experience',
+      type: 'select',
+      options: this.experience,
+      formControlName: 'experience'
+    },
+    {
+      label: 'Enter location',
+      type: 'input',
+      formControlName: 'location'
+    }
+  ];
+  searchBarForm: FormGroup = this.formBuilder.group({
+    designation: '',
+    experience: 0,
+    location: ''
+  })
 
   constructor(
     private formBuilder: FormBuilder
@@ -42,6 +57,10 @@ export class LandingPageComponent implements OnInit {
   ngOnInit(): void {
     this.totalJobCount = 43;
     this.totalCompanyCount = 12;
+  }
+
+  receiveSearchData() {
+    console.log(this.searchBarForm.value);
   }
 
 }
