@@ -15,7 +15,7 @@
         <div class="pe-3">
             <button pButton
                 type="button"
-                class="p-button-outlined text-white">
+                class="p-button-outlined p-button text-white">
                     Register
             </button>
         </div>
@@ -41,6 +41,7 @@
 
             <div class="pt-5"></div>
             <app-search-bar></app-search-bar>
+            <app-form [formFields]="field" [formGroup]="group"></app-form>
         </div>
     </div>
 </div>
