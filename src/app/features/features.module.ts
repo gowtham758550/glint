@@ -12,7 +12,7 @@ import { JobSeekerModule } from './job-seeker/job-seeker.module';
     CommonModule,
     AdminModule,
     EmployerModule,
-    JobSeekerModule
+    JobSeekerModule,
   ]
 })
 export class FeaturesModule { }

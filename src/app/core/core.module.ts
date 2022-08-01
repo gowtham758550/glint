@@ -5,10 +5,12 @@ import { ButtonModule } from 'primeng/button';
 import { FeaturesModule } from '../features/features.module';
 import { LandingPageComponent } from './components/landing-page/landing-page.component';
 import { CoreRoutingModule } from './core-routing.module';
-import { SharedModule } from '../shared/shared.module';
+
 import { RegisterComponent } from './components/User-register/register.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { UserLoginComponent } from './components/user-login/user-login.component';
+import { SharedModule } from '../shared/shared.module';
+
 
 
 
