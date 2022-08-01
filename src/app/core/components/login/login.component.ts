@@ -35,7 +35,7 @@ export class LoginComponent implements OnInit {
     {
       type: 'submit',
       label: 'Login',
-      class: ['bg-primary', 'w-100'],
+      class: [],
     },
     {
       type: 'anchor',
