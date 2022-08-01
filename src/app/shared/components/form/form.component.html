@@ -1,0 +1,164 @@
+
+
+<form [formGroup]="formGroup"
+    class="text-start text-dark">
+
+    <ng-container *ngFor="let field of formFields">
+        <ng-container [ngSwitch]="field.type">
+
+            <!-- title -->
+            <ng-template [ngSwitchCase]="'title'">
+                <h4 class="py-3">
+                    {{field.label}}
+                </h4>
+            </ng-template>
+
+            <!-- input:text -->
+            <ng-template [ngSwitchCase]="'input'">
+                <div class="mb-3">
+                    <label [for]="field.formControlName">
+                        {{field.label}}
+                    </label>
+                    <input type="text"
+                        class="form-control"
+                        [ngClass]="field.class"
+                        [placeholder]="field.label"
+                        [id]="field.formControlName"
+                        formControlName={{field.formControlName}}
+                        >
+                    <div class="form-text">
+                        {{field.hintMessage}}
+                    </div>
+                </div>
+            </ng-template>
+
+            <!-- input:email -->
+            <ng-template [ngSwitchCase]="'email'">
+                <div class="mb-3">
+                    <label [for]="field.formControlName">
+                        {{field.label}}
+                    </label>
+                    <input type="email"
+                        class="form-control"
+                        [ngClass]="field.class"
+                        [placeholder]="field.label"
+                        [id]="field.formControlName"
+                        formControlName={{field.formControlName}}
+                        >
+                    <div class="form-text">
+                        {{field.hintMessage}}
+                    </div>
+                </div>
+            </ng-template>
+
+            <!-- input:number -->
+            <ng-template [ngSwitchCase]="'number'">
+                <div class="mb-3">
+                    <label [for]="field.formControlName">
+                        {{field.label}}
+                    </label>
+                    <input type="number"
+                        class="form-control"
+                        [ngClass]="field.class"
+                        [placeholder]="field.label"
+                        [id]="field.formControlName"
+                        formControlName={{field.formControlName}}
+                        >
+                    <div class="form-text">
+                        {{field.hintMessage}}
+                    </div>
+                </div>
+            </ng-template>
+
+            <!-- input:password             -->
+            <ng-template [ngSwitchCase]="'password'">
+                <div class="mb-3">
+                    <label [for]="field.formControlName">
+                        {{field.label}}
+                    </label>
+                    <input type="password"
+                        class="form-control"
+                        [ngClass]="field.class"
+                        [placeholder]="field.label"
+                        [id]="field.formControlName"
+                        formControlName={{field.formControlName}}
+                        >
+                    <div class="form-text">
+                        {{field.hintMessage}}
+                    </div>
+                </div>
+            </ng-template>
+
+            <!-- input:date -->
+            <ng-template [ngSwitchCase]="'date'">
+                <div class="mb-3">
+                    <label [for]="field.formControlName">
+                        {{field.label}}
+                    </label>
+                    <input type="date"
+                        class="form-control"
+                        [ngClass]="field.class"
+                        [id]="field.formControlName"
+                        formControlName={{field.formControlName}}>
+                </div>
+            </ng-template>
+
+            <!-- type select -->
+            <ng-template [ngSwitchCase]="'select'">
+                <div class="mb-3"
+                    [ngClass]="field.class">
+                    <label [for]="field.formControlName">
+                        {{field.label}}
+                    </label>
+                    <select class="form-select"
+                        formControlName={{field.formControlName}}>
+                        <option selected disabled value="">Select</option>
+                        <option *ngFor="let option of field.options" [value]="option.value">
+                            {{option.option}}
+                        </option>
+                      </select>
+                </div>
+            </ng-template>
+
+            <!-- type textarea -->
+            <ng-template [ngSwitchCase]="'textarea'">
+                <div class="mb-3"
+                    [ngClass]="field.class">
+                    <label [for]="field.formControlName">
+                        {{field.label}}
+                    </label>
+                    <textarea class="form-control"
+                        [placeholder]="field.label"
+                        rows="5"
+                        formControlName={{field.formControlName}}>
+                    </textarea>
+                </div>
+            </ng-template>
+
+            <!-- anchor -->
+            <ng-template [ngSwitchCase]="'anchor'">
+                <div class="mb-3"
+                    [ngClass]="field.class">
+                    <a [routerLink]="field.routeTo">
+                        {{field.label}}
+                    </a>
+                </div>
+            </ng-template>
+
+            <!-- input:submit -->
+            <ng-template [ngSwitchCase]="'submit'">
+                <div class="mb-3 text-center"
+                    [ngClass]="field.class">
+                    <button type="submit"
+                        pButton
+                        [disabled]="!formGroup.valid"
+                        (click)="emitFormData()"
+                        class="p-button-raised p-button-rounded px-4 bg-primary text-white text-center raise">
+                        {{field.label}}
+                    </button>
+                </div>
+            </ng-template>
+        </ng-container>
+    </ng-container>
+
+</form>

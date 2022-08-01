@@ -5,14 +5,22 @@ import { InputTextModule } from 'primeng/inputtext';
 import { CardModule } from 'primeng/card';
 import { ButtonModule } from 'primeng/button';
 import { DropdownModule } from 'primeng/dropdown'
+import { StepperComponent } from './components/stepper/stepper.component';
 
 import { SearchBarComponent } from './components/search-bar/search-bar.component';
-
-
+import { FormComponent } from './components/form/form.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { LogoComponent } from './components/logo/logo.component';
+import { StepsModule } from 'primeng/steps';
+import { DashboardComponent } from './components/dashboard/dashboard.component';
 
 @NgModule({
   declarations: [
-    SearchBarComponent
+    SearchBarComponent,
+    FormComponent,
+    LogoComponent,
+    StepperComponent,
+    DashboardComponent
   ],
   imports: [
     CommonModule,
@@ -20,10 +28,17 @@ import { SearchBarComponent } from './components/search-bar/search-bar.component
     CardModule,
     ButtonModule,
     DropdownModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    FormsModule,
+    ReactiveFormsModule,
+    StepsModule
   ],
   exports: [
-    SearchBarComponent
+    SearchBarComponent,
+    FormComponent,
+    LogoComponent,
+    StepperComponent,
+    DashboardComponent
   ]
 })
 export class SharedModule { }
