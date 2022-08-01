@@ -7,12 +7,15 @@ import { ButtonModule } from 'primeng/button';
 import { DropdownModule } from 'primeng/dropdown'
 
 import { SearchBarComponent } from './components/search-bar/search-bar.component';
+import { FormComponent } from './components/form/form.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 
 @NgModule({
   declarations: [
-    SearchBarComponent
+    SearchBarComponent,
+    FormComponent
   ],
   imports: [
     CommonModule,
@@ -20,10 +23,13 @@ import { SearchBarComponent } from './components/search-bar/search-bar.component
     CardModule,
     ButtonModule,
     DropdownModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
   exports: [
-    SearchBarComponent
+    SearchBarComponent,
+    FormComponent
   ]
 })
 export class SharedModule { }
