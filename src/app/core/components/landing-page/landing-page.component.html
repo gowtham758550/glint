@@ -3,19 +3,19 @@
 <div class="main text-white">
     <div class="d-flex justify-content-between px-5 pt-4 pb-4">
         <div class="flex-grow-1">
-            <h1>Gl<span class="text-warning">i</span>nt</h1>
+            <app-logo></app-logo>
         </div>
         <div class="pe-3">
             <button pButton
                 type="button"
-                class="p-button-text p-button text-white">
+                class="p-button-text p-button text-white" routerLink="/login">
                     Login
             </button>
         </div>
         <div class="pe-3">
             <button pButton
                 type="button"
-                class="p-button-outlined p-button text-white">
+                class="p-button-outlined text-white" routerLink="/job-seeker/signup">
                     Register
             </button>
         </div>
@@ -40,8 +40,9 @@
             </div>
 
             <div class="pt-5"></div>
-            <app-search-bar></app-search-bar>
-            <app-form [formFields]="field" [formGroup]="group"></app-form>
+            <app-search-bar [form]="searchBarForm"
+                [searchBarData]="searchBarData"
+                (dataEmitter)="receiveSearchData()"></app-search-bar>
         </div>
     </div>
 </div>

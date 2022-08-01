@@ -5,6 +5,7 @@
     --primary: #0d1126;
     --secondary: #bf8c80;
     --info: #7a9fbf;
+    --success: #155724;
     /* --secondary: #60b193; */
 }
 
@@ -14,4 +15,36 @@
 
 .bg-secondary {
     background-color: var(--secondary) !important;
+}
+
+.bg-success {
+    background-color: #d4edda !important;
+    color: var(--success);
+}
+
+.main {
+    background-image: linear-gradient(to right bottom, #bf8c80, #c08a97, #b18fae, #9797bd, #7a9fbf);
+}
+
+.w {
+    width: 300px;
+}
+
+.card-shadow {
+    -webkit-box-shadow: 14px 10px 5px -1px rgba(0,0,0,0.75);
+    -moz-box-shadow: 14px 10px 5px -1px rgba(0,0,0,0.75);
+    box-shadow: 14px 10px 5px -1px rgba(0,0,0,0.75);
+}
+
+.raise:hover,
+.raise:focus {
+    -webkit-box-shadow: 14px 10px 5px -1px rgba(0,0,0,0.75);
+    -moz-box-shadow: 14px 10px 5px -1px rgba(0,0,0,0.75);
+    box-shadow: 14px 10px 5px -1px rgba(0,0,0,0.75);
+    transform: translateY(-0.20em);
+}
+
+.active:hover,
+.active:focus {
+    color: var(--primary);
 }

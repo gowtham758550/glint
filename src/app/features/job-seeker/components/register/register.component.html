@@ -1,0 +1,57 @@
+<div class="p-4 bg-secondary">
+    <app-logo></app-logo>
+
+    <app-stepper [items]="items"></app-stepper>
+    <hr>
+    <div class="card card-shadow">
+        <div class="d-flex justify-content-center">
+            <router-outlet></router-outlet>
+        </div>
+    </div>
+    <div class="p-5">
+        <div class="text-center">
+            {{profileForm.value | json}}
+            <app-form [formFields]="profileFields"
+                [formGroup]="profileForm">
+            </app-form>
+
+            {{hobbiesArray.value | json}}
+            <div class="input-row" *ngFor="let hobby of hobbiesArray.controls; index as idx; last as isLast">
+                <input type="text" [formControl]="hobby">
+                <button mat-icon-button color="warn" *ngIf="hobbiesArray.length > 1" (click)="removeInputControl(idx)">
+                    remove
+                </button>
+                <button mat-icon-button color="primary" *ngIf="isLast" (click)="addInputControl()">
+                    add
+                </button>
+            </div>
+
+            {{educationDetails.value | json}}
+            <!-- {{educationDetails.controls.values | json}} -->
+            <div *ngFor="let education of educationDetails.controls">
+                <form [formGroup]="education"
+                    class="text-start">
+                    <div class="mb-3">
+                        <label for="qualification">
+                            Qualification
+                        </label>
+                        <input type="text"
+                            formControlName="qualification"
+                            class="form-control w"
+                            id="qualification">
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="courseName">
+                            Course Name
+                        </label>
+                        <input type="text"
+                            formControlName="courseName"
+                            class="form-control w"
+                            id="courseName">
+                    </div>
+                </form> 
+            </div>
+        </div>
+    </div>
+</div>

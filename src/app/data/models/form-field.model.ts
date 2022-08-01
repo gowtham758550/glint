@@ -4,8 +4,9 @@ export interface FormField {
     type: string,
     label: string,
     options?: Option[] | any,
-    formControlName: string,
+    formControlName?: string,
     class: string[],
     hintMessage?: string,
-    customError?: string
+    customError?: string,
+    routeTo?: string
 }
