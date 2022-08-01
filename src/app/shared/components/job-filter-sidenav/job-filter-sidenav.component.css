@@ -1,0 +1,12 @@
+.sidenav {
+    height:90%;
+    width: 350px;
+    position:absolute;
+    z-index: 1;
+    top: 16%;
+    right: 1%;
+    border-radius: 20px;
+    background-color: rgba(249, 244, 244, 0.4);
+    transition: 0.5s;
+    padding-top: 30px;
+}
