@@ -1,0 +1,277 @@
+body {
+    margin: 0px;
+    padding: 0px;
+    background-image: linear-gradient(to right bottom, #bf8c80, #c08a97, #b18fae, #9797bd, #7a9fbf);
+    font-family: system-ui;
+    height: auto;
+}
+.btn{
+    font-size: 13px;
+    color: white;
+    font-weight: 700;
+}
+
+.card {
+    width: 655px;
+    height: 150px;
+    font-size: medium;
+    background-color: rgba(249, 244, 244, 0.6);
+    color: black;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.card:hover {
+    box-shadow: 0 8px 8px 0 rgba(0, 0, 0, 0.5), 0 10px 20px 0 rgba(0, 0, 0, 0.5);
+}
+
+.clearfix {
+    clear: both;
+}
+
+.custombar1 .ui-scrollpanel-bar {
+    background-color: #e5eaee;
+    opacity: 1;
+    transition: background-color .3s;
+}
+
+.card-body {
+    font-size: 13px;
+}
+
+.card-body .company-info {
+    position: relative;
+    font-size: 13px;
+    line-height: 15px;
+    margin-right: 5px;
+    padding: 5px 20px;
+    border-radius: 50px;
+    font-weight: 600;
+    margin-bottom: 10px;
+    display: inline-block;
+    background: #F0F5F7
+}
+
+.card-body .company-info.privacy {
+    background: rgba(120, 235, 150, 0.5);
+    color: #111212;
+
+    border-radius: 10px;
+}
+
+.card-body .company-info.time {
+    background: rgba(104, 135, 227, 0.5);
+    color: #191a19
+}
+
+.card-body .company-info.required {
+    background: rgba(229, 141, 27, 0.5);
+    color: #121111
+}
+
+.logo {
+    margin: 0px;
+    margin-left: 28px;
+    font-weight: bold;
+    color: white;
+    margin-bottom: 30px;
+}
+
+.logo span {
+    color: #f3da36;
+}
+
+.sidenav {
+    height: 100%;
+    width: 300px;
+    position: fixed;
+    overflow: auto;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: #272c4a;
+    /* overflow: auto; */
+    transition: 0.5s;
+    padding-top: 30px;
+}
+
+
+.sidenav a {
+    padding: 15px 8px 15px 32px;
+    text-decoration: none;
+    font-size: 20px;
+    color: #ffffff;
+    display: block;
+    transition: 0.3s;
+}
+
+.sidenav a:hover {
+    color: #f1f1f1;
+    background-color: #1b203d;
+}
+
+.sidenav {
+    position: absolute;
+    top: 0;
+    right: 25px;
+    font-size: 36px;
+}
+
+.container {
+    height: 590px;
+    max-width: 66%;
+    /* height:100%;
+    width: 65%; */
+    display: flex;
+    margin-right: 60%;
+    border: #111212;
+}
+
+#main {
+    transition: margin-left .5s;
+    padding: 16px;
+    margin-left: 250px;
+    height: 100%;
+}
+
+.head {
+    margin-top: 0%;
+    padding: 5px;
+}
+
+.col-div-6 {
+    width: 50%;
+    float: left;
+}
+
+.profile {
+    display: inline-block;
+    /* float: right; */
+    width: 160px;
+}
+
+.pro-img {
+    float: left;
+    width: 50px;
+    margin-top: 5px;
+    height: 50px;
+    border-radius: 50%;
+}
+
+.profile p {
+    color: white;
+    font-weight: 500;
+    margin-left: 55px;
+    margin-top: 10px;
+    font-size: 13.5px;
+}
+
+.profile p span {
+    font-weight: 400;
+    font-size: 12px;
+    display: block;
+    color: #f7efef;
+}
+
+.col-div-3 {
+    width: 25%;
+    float: left;
+}
+
+.box {
+    /* width: 85%; */
+    /* height: 100px; */
+    background-color: #272c4a;
+    /* margin-left: 10px; */
+    /* border: #9797bd; */
+    /* padding:10px; */
+    border-radius: 10%;
+}
+
+.box1 {
+    background-color: white;
+    opacity: 0.5;
+    margin-top: 0%;
+    border-style: groove;
+    border-radius: 10%;
+    height: 20%;
+    padding: 10px;
+    margin: 0px;
+    font-size: 20px;
+
+}
+
+.box1 p {
+    float: left;
+    /* background-color: #ddd; */
+    padding: 3px 10px;
+    font-size: 15px;
+}
+
+.box1 p span {
+    float: right;
+    /* background-color: #ddd; */
+    padding: 3px 10px;
+    font-size: 15px;
+}
+
+.box p {
+    font-size: 35px;
+    color: white;
+    font-weight: bold;
+    line-height: 30px;
+    padding-left: 10px;
+    margin-top: 20px;
+    display: inline-block;
+}
+
+.box p span {
+    font-size: 20px;
+    font-weight: 400;
+    color: #fefefe;
+}
+
+/* .box-icon {
+    font-size: 40px !important;
+    float: right;
+    margin-top: 35px !important;
+    color: #fdfcfc;
+    padding-right: 10px;
+} */
+
+.col-div-8 {
+    width: 70%;
+    float: left;
+}
+
+.col-div-4 {
+    width: 30%;
+    float: left;
+}
+
+
+
+.box-8,
+.box-4 {
+    width: 95%;
+    background-color: #272c4a;
+    height: 330px;
+
+}
+
+.nav2 {
+    display: none;
+}
+
+.box-8 {
+    margin-left: 10px;
+}
+
+.circle-wrap {
+    margin: 50px auto;
+    width: 150px;
+    height: 150px;
+    background: #e6e2e7;
+    border-radius: 50%;
+}
