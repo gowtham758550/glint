@@ -12,7 +12,8 @@ import { VerifyComponent } from './components/verify/verify.component';
 import { ButtonModule } from 'primeng/button';
 import {MessagesModule} from 'primeng/messages';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
-
+import { DataModule } from 'src/app/data/data.module';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,9 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
     SharedModule,
     ReactiveFormsModule,
     ButtonModule,
-    MessagesModule
+    MessagesModule,
+    DataModule,
+    NgbModule
   ]
 })
 export class JobSeekerModule { }

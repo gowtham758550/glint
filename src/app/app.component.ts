@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { Subject } from 'rxjs';
+import { LoaderService } from './core/services/loader.service';
 
 interface Route {
   value: string,
@@ -7,21 +9,13 @@ interface Route {
 
 @Component({
   selector: 'app-root',
-  template: `
-
-    <ng-container *ngFor="let route of routes">
-      <a [routerLink]="route.routeTo"
-        class="px-2">
-        {{route.value}}
-      </a>
-    </ng-container>
-
-    <router-outlet></router-outlet>
-  `,
+  templateUrl: './app.component.html',
   styles: []
 })
 export class AppComponent {
   title = 'glint';
+  isLoading!: Subject<boolean>;
+  a=true;
   routes: Route[] = [
     {
       value: 'landing page',
@@ -44,8 +38,18 @@ export class AppComponent {
       routeTo: '/employer/dashboard'
     },
     {
-      value: 'dashboard 1',
+      value: 'dashboard 2',
       routeTo: '/job-seeker/dashboard'
     }
   ]
+  class = {
+    blur: this.isLoading
+  }
+
+  constructor(
+    private loaderService: LoaderService
+  ) {
+    console.log(this.loaderService.isLoading);
+    this.isLoading = this.loaderService.isLoading;
+  }
 }

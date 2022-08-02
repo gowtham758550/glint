@@ -1,12 +1,12 @@
-import { AfterContentChecked, AfterContentInit, Component, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-verify-job-seeker',
+  selector: 'app-verify-employer',
   template: `
     <app-verify></app-verify>
   `,
-  styles: [],
-  providers: []
+  styles: [
+  ]
 })
 export class VerifyComponent implements OnInit {
 

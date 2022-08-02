@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { FormField } from 'src/app/data/models/form-field.model';
+import { AuthService } from 'src/app/data/services/auth.service';
+import { LocalStorage } from 'src/app/data/services/local-storage.service';
 
 @Component({
   selector: 'app-login',
@@ -11,7 +13,7 @@ import { FormField } from 'src/app/data/models/form-field.model';
 export class LoginComponent implements OnInit {
 
   loginForm: FormGroup = this.formBuilder.group({
-    usernameOrMailAddress: ['', [Validators.required]],
+    userName_or_Email: ['', [Validators.required]],
     password: ['', Validators.required]
   })
   loginFields: FormField[] = [
@@ -19,7 +21,7 @@ export class LoginComponent implements OnInit {
       type: 'input',
       label: 'Username or Mail address',
       class: [],
-      formControlName: 'usernameOrMailAddress'
+      formControlName: 'userName_or_Email'
     },
     {
       type: 'password',
@@ -46,14 +48,25 @@ export class LoginComponent implements OnInit {
   ]
 
   constructor(
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private authService: AuthService,
+    private localStorage: LocalStorage
   ) { }
 
   ngOnInit(): void {
   }
 
   recieveFormData() {
-    console.log(this.loginForm.value);
+    this.login(this.loginForm.value);
+  }
+
+  login(credentials: object) {
+    this.authService.login(credentials).subscribe({
+      next: data => {
+        const dataObject = JSON.parse(JSON.stringify(data));
+        this.localStorage.setItem('accessToken', dataObject.jwt);
+      }
+    });
   }
 
 }

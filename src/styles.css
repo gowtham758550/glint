@@ -1,4 +1,5 @@
 /* You can add global styles to this file, and also import other style files */
+@import '~ngx-toastr/toastr';
 
 :root {
     /* --primary: #191f40; */
@@ -27,13 +28,15 @@
 }
 
 .w {
-    width: 300px;
+    width: 500px;
 }
+
 
 .card-shadow {
     -webkit-box-shadow: 14px 10px 5px -1px rgba(0,0,0,0.75);
     -moz-box-shadow: 14px 10px 5px -1px rgba(0,0,0,0.75);
     box-shadow: 14px 10px 5px -1px rgba(0,0,0,0.75);
+    border-radius: 10px;
 }
 
 .raise:hover,
@@ -47,4 +50,33 @@
 .active:hover,
 .active:focus {
     color: var(--primary);
+}
+
+.progress-spinner {
+    position: fixed;
+    z-index: 999;
+    /* height: 2em;
+    width: 2em; */
+    overflow: show;
+    margin: auto;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+}
+
+/* Transparent Overlay */
+.progress-spinner:before {
+  content: '';
+  display: block;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  /* background-color: rgba(5, 5, 5, 0.53); */
+}
+
+.blur {
+    filter: blur(4px);
 }

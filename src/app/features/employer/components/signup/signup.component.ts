@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
-
 @Component({
-  selector: 'app-signup-job-seeker',
+  selector: 'app-signup-employer',
   template: `
     <app-signup></app-signup>
   `,
@@ -10,8 +9,10 @@ import { Component, OnInit } from '@angular/core';
   ]
 })
 export class SignupComponent implements OnInit {
-  
-  constructor() {}
 
-  ngOnInit(): void { }
+  constructor() { }
+
+  ngOnInit(): void {
+  }
+
 }
