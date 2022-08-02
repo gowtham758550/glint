@@ -13,6 +13,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { LogoComponent } from './components/logo/logo.component';
 import { StepsModule } from 'primeng/steps';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { SignupComponent } from './components/signup/signup.component';
+import { VerifyComponent } from './components/verify/verify.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +22,9 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
     FormComponent,
     LogoComponent,
     StepperComponent,
-    DashboardComponent
+    DashboardComponent,
+    SignupComponent,
+    VerifyComponent
   ],
   imports: [
     CommonModule,
@@ -38,7 +42,9 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
     FormComponent,
     LogoComponent,
     StepperComponent,
-    DashboardComponent
+    DashboardComponent,
+    SignupComponent,
+    VerifyComponent
   ]
 })
 export class SharedModule { }

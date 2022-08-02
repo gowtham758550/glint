@@ -8,5 +8,6 @@ export interface FormField {
     class: string[],
     hintMessage?: string,
     customError?: string,
-    routeTo?: string
+    routeTo?: string,
+    disabled?: boolean
 }

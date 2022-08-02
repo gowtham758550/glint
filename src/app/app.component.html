@@ -1,0 +1,26 @@
+<ng-container *ngFor="let route of routes">
+    <a [routerLink]="route.routeTo" class="px-2">
+        {{route.value}}
+    </a>
+</ng-container>
+<br>
+
+<ng-container *ngIf="isLoading | async; then blur; else normal">
+</ng-container>
+
+<ng-template #blur>
+    <div class="blur">
+        <router-outlet></router-outlet>
+    </div>
+</ng-template>
+
+<ng-template #normal>
+    <div>
+        <router-outlet></router-outlet>
+    </div>
+</ng-template>
+
+
+<div class="progress-spinner" *ngIf="isLoading | async">
+    <img src="../assets/breath-glint.svg" class="progress-spinner">
+</div>
