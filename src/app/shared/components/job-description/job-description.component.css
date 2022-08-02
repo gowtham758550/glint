@@ -1,0 +1,9 @@
+.container {
+    height: 590px;
+    max-width: 66%;
+    /* height:100%;
+    width: 65%; */
+    display: flex;
+    margin-right: 60%;
+    border: #111212;
+}
