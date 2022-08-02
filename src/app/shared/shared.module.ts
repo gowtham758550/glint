@@ -13,6 +13,10 @@ import { SidenavComponent } from './components/sidenav/sidenav.component';
 import { JobFilterSidenavComponent } from './components/job-filter-sidenav/job-filter-sidenav.component';
 import { SearchbarDashboardComponent } from './components/searchbar-dashboard/searchbar-dashboard.component';
 import { SearchDesignationPipe } from './Pipes/search-designation.pipe';
+import { JobDescriptionComponent } from './components/job-description/job-description.component';
+import { ScrollPanelModule } from 'primeng/scrollpanel';
+import { ToastModule } from "primeng/toast";
+
 
 
 
@@ -23,7 +27,8 @@ import { SearchDesignationPipe } from './Pipes/search-designation.pipe';
     SidenavComponent,
     JobFilterSidenavComponent,
     SearchbarDashboardComponent,
-    SearchDesignationPipe
+    SearchDesignationPipe,
+    JobDescriptionComponent
   ],
   imports: [
     CommonModule,
@@ -35,6 +40,8 @@ import { SearchDesignationPipe } from './Pipes/search-designation.pipe';
     FormsModule,
     ReactiveFormsModule,
     CheckboxModule,
+    ScrollPanelModule,
+    ToastModule
   ],
   exports: [
     SearchBarComponent,
