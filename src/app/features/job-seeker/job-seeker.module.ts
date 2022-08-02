@@ -8,6 +8,9 @@ import { ScrollPanelModule } from 'primeng/scrollpanel';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatListModule } from '@angular/material/list';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MessagesModule } from "primeng/messages";
+import { MessageModule } from "primeng/message";
+import { ToastModule } from "primeng/toast";
 
 
 
@@ -24,6 +27,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     MatSidenavModule,
     MatListModule,
     BrowserAnimationsModule,
+    MessageModule,
+    MessagesModule,
+    ToastModule
   ]
 })
 export class JobSeekerModule { }

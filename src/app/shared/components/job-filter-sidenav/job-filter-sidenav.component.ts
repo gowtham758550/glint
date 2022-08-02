@@ -30,6 +30,10 @@ export class JobFilterSidenavComponent implements OnInit {
   getFilteredDesignation(){
     this.getSelectedDesignation.emit(this.selectedDesignation);
   }
+  @Output() getSelectedLocation = new EventEmitter<any>();
+  getFilteredLocation(){
+    this.getSelectedLocation.emit(this.selectedLocation);
+  }
   constructor() { }
 
   ngOnInit(): void {
