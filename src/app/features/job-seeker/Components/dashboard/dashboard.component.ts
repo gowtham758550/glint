@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MessageService } from 'primeng/api';
+import { JobsList } from '../../Data/jobList';
 
 @Component({
   selector: 'app-dashboard',
@@ -8,52 +9,10 @@ import { MessageService } from 'primeng/api';
   providers: [MessageService]
 })
 export class DashboardComponent implements OnInit {
-  InitialJobArray: any = [{
-    image: '/assets/Conzio.jpg',
-    Company_Name: 'Conzio Constructions',
-    Job_title: 'Software Engineer',
-    Location: 'Coimbatore',
-    CTC: 25000,
-    Job_Type: 'Full Time',
-    Experience: 'Fresher'
-
-  }, {
-    image: '/assets/Midway Overline.jpg',
-    Company_Name: 'Midway Overline',
-    Job_title: 'Software Engineer',
-    Location: 'Coimbatore',
-    CTC: 50000,
-    Job_Type: 'Full Time',
-    Experience: 'Experienced'
-  },
-  {
-    image: '/assets/Midway Overline.jpg',
-    Company_Name: 'Midway Overline',
-    Job_title: 'IOS Developer',
-    Location: 'Coimbatore',
-    CTC: 50000,
-    Job_Type: 'Full Time',
-    Experience: 'Fresher'
-  },
-  {
-    image: '/assets/Midway Overline.jpg',
-    Company_Name: 'Midway Overline',
-    Job_title: 'Android Developer',
-    Location: 'Chennai',
-    CTC: 50000,
-    Job_Type: 'Full Time',
-    Experience: 'Experienced'
-  },
-  {
-    image: '/assets/Midway Overline.jpg',
-    Company_Name: 'Midway Overline',
-    Job_title: 'Full Stack Developer',
-    Location: 'Coimbatore',
-    CTC: 50000,
-    Job_Type: 'Full Time',
-    Experience: 'Experienced'
-  }];
+  InitialJobArray: any = this.jobs.getJobs();
   Jobs: any = this.InitialJobArray;
+  AppliedJob: any = [];
+  isApplied: boolean = false;
   //Implementation to return the jobs based on searchbox keywords
   SearchJobEmitter: any;
   getSearchJob(event: any) {
@@ -154,15 +113,16 @@ export class DashboardComponent implements OnInit {
   }
 
   // Toast Message to be displayed on applying Jobs
-  showMessage() {
-      this.messageService.add({severity:'info', detail:'Applied Successfully', key: 'tl'});
-      console.log(this.messageService);
+  showMessage(appliedJob: any) {
+    this.AppliedJob.push(appliedJob);
+    console.log(this.AppliedJob);
+    this.messageService.add({ severity: 'info', detail: 'Applied Successfully', key: 'tl' });
+    console.log(this.messageService);
   }
-  isApplied:boolean=false;
 
 
-  constructor(private messageService: MessageService) {
 
+  constructor(private messageService: MessageService , private jobs: JobsList) {
   }
 
   ngOnInit(): void {
