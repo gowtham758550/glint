@@ -7,7 +7,7 @@
         <label for="search" style="margin-left:5%;">Experience</label>
         <div *ngFor="let category of CategoryExperienceBased" class="p-field-checkbox" style="margin-left:10%">
             <p-checkbox name="group2" value="category" [value]="category" [(ngModel)]="selectedCategories"
-                [inputId]="category.key" (click)="print()"></p-checkbox>
+                [inputId]="category.key" (click)="getFilteredExperience()"></p-checkbox>
             <label [for]="category.key">{{category.name}}</label>
         </div>
     </div>
@@ -16,7 +16,7 @@
         <label for="search" style="margin-left:5%;">Designation </label>
         <div *ngFor="let category of Designation" class="p-field-checkbox" style="margin-left:10%">
             <p-checkbox name="group2" value="category" [value]="category" [(ngModel)]="selectedDesignation"
-                [inputId]="category.key" (click)="print()"></p-checkbox>
+                [inputId]="category.key" (click)="getFilteredDesignation()"></p-checkbox>
             <label [for]="category.key">{{category.title}}</label>
         </div>
     </div>
@@ -25,7 +25,7 @@
         <label for="search" style="margin-left:5%;">Location </label>
         <div *ngFor="let category of Location" class="p-field-checkbox" style="margin-left:10%">
             <p-checkbox name="group2" value="category" [value]="category" [(ngModel)]="selectedLocation"
-                [inputId]="category.key" (click)="print()"></p-checkbox>
+                [inputId]="category.key"></p-checkbox>
             <label [for]="category.key">{{category.location}}</label>
         </div>
     </div>
