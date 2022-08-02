@@ -6,7 +6,10 @@
         <div class="head">
             <!-- Search Bar -->
             <div class="col-div-6">
-                <app-searchbar-dashboard (DesignationEmitter)=getSearchDesignation($event)></app-searchbar-dashboard>
+                <!-- <p-messages [(value)]="msgs"></p-messages> -->
+                <p-toast [style]="{marginTop: '20px', width: '20%', height: '20%'}" position="top-right" key="tl">
+                    dhkjdkfd</p-toast>
+                <app-searchbar-dashboard (SearchJobEmitter)=getSearchJob($event)></app-searchbar-dashboard>
             </div>
 
             <!--  Profile Pic -->
@@ -30,9 +33,10 @@
                     <h3 style="font-size: larger; margin-top: 3%; font-weight: 500;">JOBS RECOMMENDED</h3>
 
                     <div class="col-div-12" style="width: 75%;"
-                        *ngIf="(Jobs | searchDesignation: DesignationEmitter).length > 0">
+                        *ngIf="(Jobs | searchDesignation: SearchJobEmitter).length > 0" else noResults>
 
-                        <div class="card" *ngFor="let i of Jobs" style="position:relative; ">
+                        <div class="card" *ngFor="let i of Jobs| searchDesignation: SearchJobEmitter; let j = index"
+                            style="position:relative; ">
                             <div class="card-body">
                                 <div class="d-sm-flex text-center text-sm-start">
                                     <div class="flex-shrink-0 mb-3 mb-sm-0">
@@ -71,18 +75,29 @@
                                         </div>
                                         <a href="#!" class="bookmark-btn"><i class="ti-bookmark"></i></a>
                                     </div>
-                                    <button class="btn btn-success"
-                                        style="width:20%; height:10%;display: inline-block">Apply</button>
+
+                                    <button class="btn btn-success" *ngIf="!isApplied" style="width:20%; height:10%;"
+                                        (click)="showMessage()">Apply</button>
+                                    <p *ngIf="isApplied"> Applied</p>
+                                    <!-- <button class="btn btn-success" *ngIf="isApplied" 
+                                        style="width:20%; height:10%;" (click)="showMessage()" disabled>Applied</button> -->
                                 </div>
                             </div>
                         </div>
+                        <ng-template #noResults>
+                            <p>No Jobs Found</p>
+                        </ng-template>
                         <br>
+                    </div>
+                    <div *ngIf="Jobs.length==0">
+                        <p>No jobs found.</p>
                     </div>
                 </p-scrollPanel>
             </div>
             <!-- Job Filter Side Nav -->
             <app-job-filter-sidenav (getSelectedExperience)=ExperienceAdded($event)
-                (getSelectedDesignation)=DesignationAdded($event)></app-job-filter-sidenav>
+                (getSelectedDesignation)=DesignationAdded($event) (getSelectedLocation)=LocationAdded($event)>
+            </app-job-filter-sidenav>
         </div>
         <div class="clearfix"></div>
     </div>
