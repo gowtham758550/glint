@@ -7,16 +7,10 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
   styleUrls: ['searchbar-dashboard.component.css']
 })
 export class SearchbarDashboardComponent implements OnInit {
-  SearchDesignation: string = '';
-  @Output() DesignationEmitter: any = new EventEmitter<any>();
-  SearchLocation: string = '';
-  @Output() LocationEmitter: any = new EventEmitter<any>();
-  getSearchDesignation() {
-    console.log(this.SearchDesignation);
-    this.DesignationEmitter.emit(this.SearchDesignation);
-  }
-  getSearchLocation(){
-    this.LocationEmitter.emit(this.SearchLocation);
+  SearchJob: string = '';
+  @Output() SearchJobEmitter: any = new EventEmitter<any>();
+  getSearchJob() {
+    this.SearchJobEmitter.emit(this.SearchJob);
   }
 
   constructor() {

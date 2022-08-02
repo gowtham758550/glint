@@ -1,14 +1,10 @@
 <div class="container" style="border-radius:100px;">
     <div class="search">
         <div class="row">
-            <div class="col-md-6">
-                <div class="search-1"> <i class='pi pi-search'></i> <input  type="text" placeholder="Designation" [(ngModel)]="SearchDesignation">
-                </div>
-            </div>
-            <div class="col-md-6">
-                <div>
-                    <div class="search-2"><i class="pi pi-map-marker"></i><input (click)="getSearchLocation()" type="text" placeholder="Location" [(ngModel)]="SearchLocation"> <button (click)="getSearchDesignation()">Search</button>
-                    </div>
+            <div class="col-md-12">
+                <div class="search-1"> <i class='pi pi-search'></i> <input type="text" placeholder="Search Job"
+                        [(ngModel)]="SearchJob">
+                    <button (click)="getSearchJob()">Search</button>
                 </div>
             </div>
         </div>

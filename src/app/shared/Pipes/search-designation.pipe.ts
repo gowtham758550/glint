@@ -5,13 +5,13 @@ import { Pipe, PipeTransform } from '@angular/core';
 })
 export class SearchDesignationPipe implements PipeTransform {
 
-  transform(items: any[], searchText: string): any[] {
+  transform(items: any[], SearchJob: string): any[] {
     if (!items) return [];
-    if (!searchText) return items;
+    if (!SearchJob) return items;
 
     return items.filter(item => {
       return Object.keys(item).some(key => {
-        return String(item[key]).toLowerCase().includes(searchText.toLowerCase());
+        return String(item[key]).toLowerCase().includes(SearchJob.toLowerCase());
       });
     });
   }
