@@ -37,7 +37,7 @@ body {
 }
 
 .card-body {
-    font-size: 13px;
+    font-size: 12px;
 }
 
 .card-body .company-info {
@@ -170,10 +170,9 @@ body {
 .profile p span {
     font-weight: 400;
     font-size: 12px;
-    display: block;
+    display: flex;
     color: #f7efef;
 }
-
 .col-div-3 {
     width: 25%;
     float: left;

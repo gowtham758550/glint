@@ -6,7 +6,7 @@
         <div class="head">
             <!-- Search Bar -->
             <div class="col-div-6">
-               <app-searchbar-dashboard></app-searchbar-dashboard>
+                <app-searchbar-dashboard (DesignationEmitter)=getSearchDesignation($event)></app-searchbar-dashboard>
             </div>
 
             <!--  Profile Pic -->
@@ -15,7 +15,7 @@
                     <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTSDeb7EdCJ9we20WwncsOe9y13SO-TPxP3bg&usqp=CAU"
                         class="pro-img" />
                     <p style="display:inline-flexbox;">Name
-                        <span>Designation</span>
+                        <span>Designation<i class="pi pi-angle-double-down"></i></span>
                     </p>
                 </div>
             </div>
@@ -25,13 +25,12 @@
 
         <!-- Main Content(Job Cards) -->
         <div class="container mat-elevation-z8">
-
-
             <div class="row ui-g-12 ui-md-4">
                 <p-scrollPanel [style]="{width: '104%', height: '590px'}" styleClass="custombar1">
                     <h3 style="font-size: larger; margin-top: 3%; font-weight: 500;">JOBS RECOMMENDED</h3>
 
-                    <div class="col-div-12" style="width: 75%;">
+                    <div class="col-div-12" style="width: 75%;"
+                        *ngIf="(Jobs | searchDesignation: DesignationEmitter).length > 0">
 
                         <div class="card" *ngFor="let i of Jobs" style="position:relative; ">
                             <div class="card-body">
@@ -40,7 +39,7 @@
                                         <img src={{i.image}} alt="...">
                                     </div>
                                     <div class="flex-grow-1 ms-sm-3">
-                                        <h3>{{i.Company_Name}}</h3>
+                                        <h3 style="font-size:15px">{{i.Company_Name}}</h3>
                                         <div class="mb-3">
                                             <span class="me-2 display-30 font-weight-600">{{i.Job_title}}</span>
                                             <span class="me-2 vertical-align-middle display-30 font-weight-600"><svg
@@ -66,9 +65,9 @@
                                                     class="bi bi-cash-coin pe-2 text-secondary"></i>{{i.CTC}}</span>
                                         </div>
                                         <div>
-                                            <div class="company-info time">Full Time</div>
-                                            <div class="company-info privacy">Private</div>
-                                            <div class="company-info required">Urgent</div>
+                                            <div class="company-info time">{{i.Job_Type}}</div>
+                                            <div class="company-info privacy">{{i.Experience}}</div>
+                                            <!-- <div class="company-info required">Urgent</div> -->
                                         </div>
                                         <a href="#!" class="bookmark-btn"><i class="ti-bookmark"></i></a>
                                     </div>
@@ -82,7 +81,8 @@
                 </p-scrollPanel>
             </div>
             <!-- Job Filter Side Nav -->
-            <app-job-filter-sidenav></app-job-filter-sidenav>
+            <app-job-filter-sidenav (getSelectedExperience)=ExperienceAdded($event)
+                (getSelectedDesignation)=DesignationAdded($event)></app-job-filter-sidenav>
         </div>
         <div class="clearfix"></div>
     </div>
