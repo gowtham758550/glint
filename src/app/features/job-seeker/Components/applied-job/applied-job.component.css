@@ -1,0 +1,18 @@
+body {
+    margin: 0px;
+    padding: 0px;
+    background-color: linear-gradient(to right bottom, #bf8c80, #c08a97, #b18fae, #9797bd, #7a9fbf);
+    font-family: system-ui;
+    height: auto;
+}
+#main {
+    /* transition: margin-left .5s; */
+    padding: 16px;
+    margin-left: 250px;
+    height:fit-content;
+}
+
+.head {
+    margin-top: 0%;
+    padding: 5px;
+}
