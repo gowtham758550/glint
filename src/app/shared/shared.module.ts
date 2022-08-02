@@ -12,6 +12,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SidenavComponent } from './components/sidenav/sidenav.component';
 import { JobFilterSidenavComponent } from './components/job-filter-sidenav/job-filter-sidenav.component';
 import { SearchbarDashboardComponent } from './components/searchbar-dashboard/searchbar-dashboard.component';
+import { SearchDesignationPipe } from './Pipes/search-designation.pipe';
 
 
 
@@ -21,7 +22,8 @@ import { SearchbarDashboardComponent } from './components/searchbar-dashboard/se
     FormComponent,
     SidenavComponent,
     JobFilterSidenavComponent,
-    SearchbarDashboardComponent
+    SearchbarDashboardComponent,
+    SearchDesignationPipe
   ],
   imports: [
     CommonModule,
@@ -39,7 +41,8 @@ import { SearchbarDashboardComponent } from './components/searchbar-dashboard/se
     FormComponent,
     SidenavComponent,
     JobFilterSidenavComponent,
-    SearchbarDashboardComponent
+    SearchbarDashboardComponent,
+    SearchDesignationPipe
   ]
 })
 export class SharedModule { }

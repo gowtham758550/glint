@@ -3,6 +3,8 @@ import { CommonModule } from '@angular/common';
 import { AdminModule } from './admin/admin.module';
 import { EmployerModule } from './employer/employer.module';
 import { JobSeekerModule } from './job-seeker/job-seeker.module';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatListModule } from '@angular/material/list';
 
 
 
@@ -13,6 +15,8 @@ import { JobSeekerModule } from './job-seeker/job-seeker.module';
     AdminModule,
     EmployerModule,
     JobSeekerModule,
+    MatSidenavModule,
+    MatListModule
   ]
 })
 export class FeaturesModule { }
