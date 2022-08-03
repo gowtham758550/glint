@@ -1,9 +1,125 @@
 .container {
-    height: 590px;
+    height: 100vh;
     max-width: 66%;
     /* height:100%;
     width: 65%; */
     display: flex;
     margin-right: 60%;
     border: #111212;
+    justify-content: center;
+}
+
+body {
+    margin: 0px;
+    padding: 0px;
+    /* background-image: linear-gradient(to right bottom, #bf8c80, #c08a97, #b18fae, #9797bd, #7a9fbf); */
+    font-family: system-ui;
+    height: 100vh;
+}
+
+.btn {
+    font-size: 13px;
+    color: white;
+    font-weight: 700;
+}
+
+.card {
+    width: 1050px;
+    height: 150px;
+    font-size: medium;
+    background-color: rgba(249, 244, 244, 0.6);
+    color: black;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.card:hover {
+    box-shadow: 0 8px 8px 0 rgba(0, 0, 0, 0.5), 0 10px 20px 0 rgba(0, 0, 0, 0.5);
+}
+
+.card-description {
+    margin-top: 3%;
+    width: 655px;
+    height: 400px;
+    font-size: medium;
+    background-color: rgba(249, 244, 244, 0.6);
+    color: black;
+    /* box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); */
+    margin-bottom: 10px;
+    border-radius: 10px;
+}
+
+.card-description:hover {
+    box-shadow: 0 8px 8px 0 rgba(0, 0, 0, 0.5), 0 10px 20px 0 rgba(0, 0, 0, 0.5);
+}
+
+.card-body-description {
+    font-size: 12px;
+    margin-left: 5%;
+    top: 10%;
+}
+
+.clearfix {
+    clear: both;
+}
+
+.custombar1 .ui-scrollpanel-bar {
+    background-color: #e5eaee;
+    opacity: 1;
+    transition: background-color .3s;
+}
+
+.card-body {
+    font-size: 12px;
+}
+
+.card-body .company-info {
+    position: relative;
+    font-size: 13px;
+    line-height: 15px;
+    margin-right: 5px;
+    padding: 5px 20px;
+    border-radius: 50px;
+    font-weight: 600;
+    margin-bottom: 10px;
+    display: inline-block;
+    background: #F0F5F7
+}
+
+.card-body .company-info.privacy {
+    background: rgba(120, 235, 150, 0.5);
+    color: #111212;
+
+    border-radius: 10px;
+}
+
+.card-body .company-info.time {
+    background: rgba(104, 135, 227, 0.5);
+    color: #191a19
+}
+
+.card-body .company-info.required {
+    background: rgba(229, 141, 27, 0.5);
+    color: #121111
+}
+.sidenav {
+    height:59%;
+    width: 350px;
+    position:absolute;
+    z-index: 1;
+    top: 29%;
+    right: 4%;
+    margin-top: 3%;
+    font-size: 12px;
+    background-color: rgba(249, 244, 244, 0.6);
+    color: black;
+    
+    /* box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); */
+    margin-bottom: 15px;
+    border-radius: 10px;
+}
+.sidenav:hover{
+    box-shadow: 0 8px 8px 0 rgba(0, 0, 0, 0.5), 0 10px 20px 0 rgba(0, 0, 0, 0.5);
+
 }

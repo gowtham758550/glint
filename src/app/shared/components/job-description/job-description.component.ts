@@ -26,8 +26,8 @@ export class JobDescriptionComponent implements OnInit {
     console.log(this.individualJob);
   }
   showMessage(appliedJob: any) {
-    this.AppliedJob.push(appliedJob);
-    console.log(this.AppliedJob);
+    this.jobList.appliedJobs.push(appliedJob);
+    console.log(this.jobList.appliedJobs)
     this.messageService.add({ severity: 'info', detail: 'Applied Successfully', key: 'tl' });
     console.log(this.messageService);
   }
