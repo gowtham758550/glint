@@ -71,4 +71,5 @@ export class JobsList {
     getJobs() {
         return this.jobList;
     }
+    appliedJobs:any=[];
 }

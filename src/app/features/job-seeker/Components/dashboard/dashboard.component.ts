@@ -11,8 +11,6 @@ import { JobsList } from '../../Data/jobList';
 export class DashboardComponent implements OnInit {
   InitialJobArray: any = this.jobs.getJobs();
   Jobs: any = this.InitialJobArray;
-  AppliedJob: any = [];
-  isApplied: boolean = false;
   //Implementation to return the jobs based on searchbox keywords
   SearchJobEmitter: any;
   getSearchJob(event: any) {
@@ -37,7 +35,7 @@ export class DashboardComponent implements OnInit {
     this.isJobFilterExperience = true;
 
     if (experienceList.length > 0 && experienceList.length != 2) {
-      this.Jobs = this.Jobs.filter((x: any) => this.ReturnJobCardsExperienceBased(experienceList, x));
+      this.Jobs = this.InitialJobArray.filter((x: any) => this.ReturnJobCardsExperienceBased(experienceList, x));
     }
     else if (experienceList.length == 2) {
       this.Jobs = this.InitialJobArray;
@@ -65,7 +63,7 @@ export class DashboardComponent implements OnInit {
     this.isJobFilterExperience = true;
     // console.log(DesignationList);
     if (DesignationList.length > 0) {
-      this.Jobs = this.Jobs.filter((x: any) => this.ReturnJobCardsDesignationBased(DesignationList, x));
+      this.Jobs = this.InitialJobArray.filter((x: any) => this.ReturnJobCardsDesignationBased(DesignationList, x));
     }
     else if (DesignationList.length == 6) {
       this.Jobs = this.InitialJobArray;
@@ -92,7 +90,7 @@ export class DashboardComponent implements OnInit {
   LocationAdded(LocationList: any) {
     this.isJobFilterLocation = true;
     if (LocationList.length > 0) {
-      this.Jobs = this.Jobs.filter((x: any) => this.ReturnJobCardsLocationBased(LocationList, x));
+      this.Jobs = this.InitialJobArray.filter((x: any) => this.ReturnJobCardsLocationBased(LocationList, x));
     }
     else if (LocationList.length == 4) {
       this.Jobs = this.InitialJobArray;
@@ -112,17 +110,9 @@ export class DashboardComponent implements OnInit {
     }
   }
 
-  // Toast Message to be displayed on applying Jobs
-  showMessage(appliedJob: any) {
-    this.AppliedJob.push(appliedJob);
-    console.log(this.AppliedJob);
-    this.messageService.add({ severity: 'info', detail: 'Applied Successfully', key: 'tl' });
-    console.log(this.messageService);
-  }
 
 
-
-  constructor(private messageService: MessageService , private jobs: JobsList) {
+  constructor(private messageService: MessageService, private jobs: JobsList) {
   }
 
   ngOnInit(): void {
