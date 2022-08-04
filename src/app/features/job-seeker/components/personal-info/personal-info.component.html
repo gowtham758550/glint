@@ -87,7 +87,7 @@
                     </div>
                     <div class="text-muted">
                         Experience: 
-                        {{experience.controls['yearOfExperience'].value}} years
+                        {{experience.controls['yearOfExperience'].value}} year(s)
                     </div>
                 </div>
                 <div class="ps-2 pt-3">
@@ -106,7 +106,7 @@
 
     <!-- end of profile -->
     <div class="text-end pt-3">
-        <button class="btn btn-primary bg-primary"
+        <button class="btn btn-primary bg-dark"
             [disabled]="!profileForm.valid">
             Complete
         </button>
@@ -130,7 +130,7 @@
     </div>
     <hr>
     <div class="text-end pb-3 pe-3">
-        <button class="btn bg-primary text-white"
+        <button class="btn bg-dark text-white"
             style="border-radius: 13px;"
             [disabled]="!educationForm.valid"
             (click)="executeEducationAction()">
@@ -155,7 +155,7 @@
     </div>
     <hr>
     <div class="text-end pb-3 pe-3">
-        <button class="btn bg-primary text-white"
+        <button class="btn bg-dark text-white"
             style="border-radius: 13px;"
             [disabled]="!experienceForm.valid"
             (click)="executeExperienceAction()">

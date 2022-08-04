@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/data/services/auth.service';
 import { LocalStorage } from 'src/app/data/services/local-storage.service';
@@ -10,6 +10,9 @@ import { LocalStorage } from 'src/app/data/services/local-storage.service';
   ]
 })
 export class VerifyComponent implements OnInit {
+
+  @Input()
+  role!: string;
 
   isVerified = false;
   email!: string;
@@ -37,7 +40,11 @@ export class VerifyComponent implements OnInit {
     // console.log("vstatus");
     this.authService.isVerifed(this.localStorage.getItem('email'))
       .subscribe({
-        next: res => this.router.navigateByUrl('/job-seeker/signup/personal-information')
+        next: res => {
+          console.log(this.role);
+          if (this.role == 'Employer') this.router.navigateByUrl('/employer/signup/company-detail');
+          else this.router.navigateByUrl('/job-seeker/signup/personal-information');
+        }
       });
   }
 

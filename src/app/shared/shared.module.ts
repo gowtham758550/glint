@@ -15,6 +15,8 @@ import { StepsModule } from 'primeng/steps';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { SignupComponent } from './components/signup/signup.component';
 import { VerifyComponent } from './components/verify/verify.component';
+import { JobCardComponent } from './components/job-card/job-card.component';
+import { JobInfoComponent } from './components/job-info/job-info.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +26,9 @@ import { VerifyComponent } from './components/verify/verify.component';
     StepperComponent,
     DashboardComponent,
     SignupComponent,
-    VerifyComponent
+    VerifyComponent,
+    JobCardComponent,
+    JobInfoComponent
   ],
   imports: [
     CommonModule,
@@ -44,7 +48,9 @@ import { VerifyComponent } from './components/verify/verify.component';
     StepperComponent,
     DashboardComponent,
     SignupComponent,
-    VerifyComponent
+    VerifyComponent,
+    JobCardComponent,
+    JobInfoComponent
   ]
 })
 export class SharedModule { }

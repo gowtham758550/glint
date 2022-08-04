@@ -40,6 +40,10 @@ export class AppComponent {
     {
       value: 'dashboard 2',
       routeTo: '/job-seeker/dashboard'
+    },
+    {
+      value: 'search 2',
+      routeTo: '/search'
     }
   ]
   class = {

@@ -2,12 +2,10 @@
 @import '~ngx-toastr/toastr';
 
 :root {
-    /* --primary: #191f40; */
-    --primary: #0d1126;
-    --secondary: #bf8c80;
-    --info: #7a9fbf;
-    --success: #155724;
-    /* --secondary: #60b193; */
+    --primary: #ff0038;
+    --secondary: #fef5f8;
+    --warning: #ffb31d;
+    --dark: #171b34;
 }
 
 .bg-primary {
@@ -23,8 +21,34 @@
     color: var(--success);
 }
 
+.bg-dark {
+    background-color: var(--dark) !important;
+}
+
+.bg-warning {
+    background-color: var(--warning) !important;
+}
+
+.text-primary {
+    color: var(--primary) !important;
+}
+
+.text-secondary {
+    color: var(--secondary) !important;
+}
+
+.text-dark {
+    color: var(--dark) !important;
+}
+
+.text-warning {
+    color: var(--warning) !important;
+}
+
 .main {
-    background-image: linear-gradient(to right bottom, #bf8c80, #c08a97, #b18fae, #9797bd, #7a9fbf);
+    /* background-image: linear-gradient(to right bottom, #171b34, #51485e, #8b7c8d, #c5b6bf, #fef5f8); */
+    background-color: var(--secondary);
+    color: var(--dark) !important;
 }
 
 .w {
@@ -33,9 +57,9 @@
 
 
 .card-shadow {
-    -webkit-box-shadow: 14px 10px 5px -1px rgba(0,0,0,0.75);
-    -moz-box-shadow: 14px 10px 5px -1px rgba(0,0,0,0.75);
-    box-shadow: 14px 10px 5px -1px rgba(0,0,0,0.75);
+    /* -webkit-box-shadow: 1px -2px 24px 2px #5C5C5C;
+    -moz-box-shadow: 1px -2px 24px 2px #5C5C5C; */
+    box-shadow: 0 0.3rem 1rem rgba(0,0,0,0.4);
     border-radius: 10px;
 }
 

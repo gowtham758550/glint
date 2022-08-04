@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 @Component({
   selector: 'app-logo',
   template: `
-    <h1>Gl<span class="text-warning">i</span>nt</h1>
+    <h1>Gl<span class="text-primary">i</span>nt</h1>
   `,
   styles: [
   ]

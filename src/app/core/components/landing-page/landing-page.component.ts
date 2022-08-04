@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { SearchBar } from 'src/app/data/models/search-bar.model';
 import { Option } from 'src/app/data/models/options.model';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-landing-page',
@@ -51,7 +52,8 @@ export class LandingPageComponent implements OnInit {
   })
 
   constructor(
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
@@ -61,6 +63,10 @@ export class LandingPageComponent implements OnInit {
 
   receiveSearchData() {
     console.log(this.searchBarForm.value);
+    this.router.navigate(
+      ['search'],
+      { queryParams: this.searchBarForm.value }
+    )
   }
 
 }

@@ -3,18 +3,25 @@ import { Injectable } from "@angular/core";
 import { catchError, finalize, Observable, throwError } from "rxjs";
 import { LoaderService } from "./loader.service";
 import { ToastrService } from 'ngx-toastr';
+import { LocalStorage } from "src/app/data/services/local-storage.service";
 
 @Injectable()
 export class Interceptor implements HttpInterceptor {
 
     constructor(
         private loaderService: LoaderService,
-        private toastr: ToastrService
+        private toastr: ToastrService,
+        private localStorage: LocalStorage
     ) {}
 
     intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-        console.log(this.loaderService.isLoading);
         this.loaderService.show();
+        const accessToken = this.localStorage.getItem('accessToken');
+        req = req.clone({
+            setHeaders: {
+                Authorization: `Bearer ${accessToken}`
+            }
+        })
         return next.handle(req)
             .pipe(
 

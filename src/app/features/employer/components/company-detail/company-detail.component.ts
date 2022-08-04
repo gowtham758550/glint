@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { FormField } from 'src/app/data/models/form-field.model';
+import { EmployerService } from 'src/app/data/services/employer.service';
 import { LocalStorage } from 'src/app/data/services/local-storage.service';
 
 @Component({
@@ -14,31 +16,31 @@ export class CompanyDetailComponent implements OnInit {
   profileForm: FormGroup = this.formBuilder.group({
     firstName: [this.localStorage.getItem('firstName'), [Validators.required]],
     lastName: [this.localStorage.getItem('lastName'), [Validators.required]],
-    dateOfBirth: ['', Validators.required],
+    // dateOfBirth: ['', Validators.required],
     companyName: ['', Validators.required],
     about: ['', Validators.required]
   })
   profileFields: FormField[] = [
-    {
-      type: 'input',
-      label: 'First name',
-      formControlName: 'firstName',
-      class: ['w'],
-      disabled: true
-    },
-    {
-      type: 'input',
-      label: 'Last name',
-      formControlName: 'lastName',
-      class: ['w'],
-      disabled: true
-    },
-    {
-      type: 'date',
-      label: 'Date of Birth',
-      formControlName: 'dateOfBirth',
-      class: ['w']
-    },
+    // {
+    //   type: 'input',
+    //   label: 'First name',
+    //   formControlName: 'firstName',
+    //   class: ['w'],
+    //   disabled: true
+    // },
+    // {
+    //   type: 'input',
+    //   label: 'Last name',
+    //   formControlName: 'lastName',
+    //   class: ['w'],
+    //   disabled: true
+    // },
+    // {
+    //   type: 'date',
+    //   label: 'Date of Birth',
+    //   formControlName: 'dateOfBirth',
+    //   class: ['w']
+    // },
     {
       type: 'input',
       label: 'Company name',
@@ -60,14 +62,22 @@ export class CompanyDetailComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
-    private localStorage: LocalStorage
+    private localStorage: LocalStorage,
+    private employerService: EmployerService,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
   }
 
   recieveFormData() {
-    console.log(this.profileForm.value);
+    // console.log(this.profileForm.value);
+    this.employerService.updateEmployerProfile(this.profileForm.value).subscribe({
+      next: data => {
+        this.localStorage.removeItem('accessToken')
+        this.router.navigateByUrl('/login');
+      }
+    });
   }
 
 }

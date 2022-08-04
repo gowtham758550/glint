@@ -11,9 +11,9 @@ import { SignupComponent } from './components/signup/signup.component';
 import { VerifyComponent } from './components/verify/verify.component';
 import { ButtonModule } from 'primeng/button';
 import {MessagesModule} from 'primeng/messages';
-import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { DataModule } from 'src/app/data/data.module';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { SearchComponent } from './components/search/search.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +22,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     PersonalInfoComponent,
     SignupComponent,
     VerifyComponent,
-    DashboardComponent,
+    SearchComponent,
   ],
   imports: [
     CommonModule,

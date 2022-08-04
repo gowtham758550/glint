@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from "@angular/common/http";
 import { environment } from 'src/environments/environment';
-import { map } from 'rxjs';
+import { map, Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +14,7 @@ export class AuthService {
     private httpClient: HttpClient
   ) { }
 
-  signup(userInfo: object) {
+  signup(userInfo: object): Observable<any> {
     return this.httpClient.post(`${this.host}/register`, userInfo);
   }
 

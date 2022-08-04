@@ -12,4 +12,8 @@ export class LocalStorage {
     getItem(key: string): string {
         return localStorage.getItem(key) || "";
     }
+
+    removeItem(key: string) {
+        localStorage.removeItem(key);
+    }
 }

@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { VerifyComponent } from '../job-seeker/components/verify/verify.component';
+import { VerifyComponent } from './components/verify/verify.component';
 import { CompanyDetailComponent } from './components/company-detail/company-detail.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { HomeComponent } from './components/home/home.component';

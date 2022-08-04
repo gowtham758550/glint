@@ -3,7 +3,7 @@ import { AfterContentChecked, AfterContentInit, Component, OnInit } from '@angul
 @Component({
   selector: 'app-verify-job-seeker',
   template: `
-    <app-verify></app-verify>
+    <app-verify [role]="'JobSeeker'"></app-verify>
   `,
   styles: [],
   providers: []
