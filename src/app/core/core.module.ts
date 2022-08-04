@@ -11,13 +11,15 @@ import { LoginComponent } from './components/login/login.component';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { Interceptor } from './services/interceptor.service';
 import { ToastrModule } from 'ngx-toastr';
+import { UserVerificationComponent } from './components/user-verification/user-verification.component';
 
 
 
 @NgModule({
   declarations: [
     LandingPageComponent,
-    LoginComponent
+    LoginComponent,
+    UserVerificationComponent
   ],
   imports: [
     CommonModule,

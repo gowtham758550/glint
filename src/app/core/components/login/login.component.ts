@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { FormField } from 'src/app/data/models/form-field.model';
 import { AuthService } from 'src/app/data/services/auth.service';
 import { LocalStorage } from 'src/app/data/services/local-storage.service';
@@ -50,7 +51,8 @@ export class LoginComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private authService: AuthService,
-    private localStorage: LocalStorage
+    private localStorage: LocalStorage,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
@@ -65,6 +67,7 @@ export class LoginComponent implements OnInit {
       next: data => {
         const dataObject = JSON.parse(JSON.stringify(data));
         this.localStorage.setItem('accessToken', dataObject.jwt);
+        this.router.navigateByUrl('/');
       }
     });
   }

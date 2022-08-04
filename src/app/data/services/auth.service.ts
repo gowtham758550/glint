@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from "@angular/common/http";
 import { environment } from 'src/environments/environment';
-import { map, Observable } from 'rxjs';
+import { Observable } from 'rxjs';
+import jwtDecode from "jwt-decode";
 
 @Injectable({
   providedIn: 'root'
@@ -26,5 +27,10 @@ export class AuthService {
 
   login(credentials: object) {
     return this.httpClient.post(`${this.host}/login`, credentials);
+  }
+
+  getRole(accessToken: string) {
+    const claims: any = jwtDecode(accessToken);
+    return claims['http://schemas.microsoft.com/ws/2008/06/identity/claims/role'];
   }
 }
