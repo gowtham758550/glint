@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './components/home/home.component';
 import { PersonalInfoComponent } from './components/personal-info/personal-info.component';
+import { ProfileComponent } from './components/profile/profile.component';
 
 import { RegisterComponent } from './components/register/register.component';
 import { SearchComponent } from './components/search/search.component';
@@ -31,6 +32,10 @@ const routes: Routes = [
     path: 'job-seeker',
     component: HomeComponent,
     children: [
+      {
+        path:'profile',
+        component: ProfileComponent
+      }
     ]
   },
   {
