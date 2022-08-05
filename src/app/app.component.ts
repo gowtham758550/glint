@@ -48,6 +48,10 @@ export class AppComponent {
     {
       value: 'user-profile',
       routeTo: '/job-seeker/profile'
+    },
+    {
+      value: 'user-verification',
+      routeTo: '/user-verification'
     }
   ]
   class = {

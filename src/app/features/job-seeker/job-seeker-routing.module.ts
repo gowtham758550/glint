@@ -29,7 +29,7 @@ const routes: Routes = [
     ]
   },
   {
-    path: 'job-seeker',
+    path: 'job-seeker/dashboard',
     component: HomeComponent,
     children: [
       {
@@ -38,16 +38,16 @@ const routes: Routes = [
       }
     ]
   },
-  {
-    path: 'search',
-    component: HomeComponent,
-    children: [
-      {
-        path: '',
-        component: SearchComponent
-      }
-    ]
-  }
+  // {
+  //   path: 'dashboard',
+  //   component: HomeComponent,
+  //   children: [
+  //     {
+  //       path: '',
+  //       component: SearchComponent
+  //     }
+  //   ]
+  // }
 ];
 
 @NgModule({
