@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { SearchBar } from 'src/app/data/models/search-bar.model';
 import { Option } from 'src/app/data/models/options.model';
 import { Router } from '@angular/router';
+import { AuthGuard } from '../../guards/auth.guard';
 
 @Component({
   selector: 'app-landing-page',
@@ -11,6 +12,7 @@ import { Router } from '@angular/router';
 })
 export class LandingPageComponent implements OnInit {
 
+  isLoggedIn!: boolean;
   totalJobCount!: number;
   totalCompanyCount!: number;
   experience: Option[] = [
@@ -53,10 +55,12 @@ export class LandingPageComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
-    private router: Router
+    private router: Router,
+    private authGuard: AuthGuard
   ) { }
 
   ngOnInit(): void {
+    // this.isLoggedIn = this.authGuard.canActivate();
     this.totalJobCount = 43;
     this.totalCompanyCount = 12;
   }

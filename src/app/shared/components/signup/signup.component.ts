@@ -20,9 +20,11 @@ export class SignupComponent implements OnInit {
     firstName: ['', Validators.required],
     lastName: ['', Validators.required],
     email: ['', [Validators.required, Validators.email]],
-    password: ['', Validators.required],
-    confirmPassword: ['', Validators.required]
-  })
+    password: ['', [Validators.required, Validators.minLength(8)]],
+    confirmPassword: ['', [Validators.required, Validators.minLength(8)]]
+  },
+  {validator: this.passwordValidator}
+  );
   registerationFields: FormField[] = [
     {
       type: 'input',
@@ -92,6 +94,9 @@ export class SignupComponent implements OnInit {
         },
         error: err => console.log(err)
       });
-    
+  }
+
+  passwordValidator(form: FormGroup) {
+      return form.controls['password'].value === form.controls['confirmPassword'].value ? null : {'mismatch': true};
   }
 }

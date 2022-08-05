@@ -13,9 +13,10 @@ interface Route {
   styles: []
 })
 export class AppComponent {
+
+  visibility: boolean = true;
   title = 'glint';
   isLoading!: Subject<boolean>;
-  a=true;
   routes: Route[] = [
     {
       value: 'landing page',

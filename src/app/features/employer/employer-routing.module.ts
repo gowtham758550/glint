@@ -7,6 +7,7 @@ import { HomeComponent } from './components/home/home.component';
 
 import { RegisterComponent } from './components/register/register.component';
 import { SignupComponent } from './components/signup/signup.component';
+import { AuthGuard } from 'src/app/core/guards/auth.guard';
 
 const routes: Routes = [
   {
@@ -15,7 +16,8 @@ const routes: Routes = [
     children: [
       {
         path: '',
-        component: SignupComponent
+        component: SignupComponent,
+        canActivate: [AuthGuard]
       },
       {
         path: 'verify-account',

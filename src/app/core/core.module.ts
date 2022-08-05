@@ -12,6 +12,8 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { Interceptor } from './services/interceptor.service';
 import { ToastrModule } from 'ngx-toastr';
 import { UserVerificationComponent } from './components/user-verification/user-verification.component';
+import { ForgotPasswordComponent } from './components/forgot-password/forgot-password.component';
+import { ResetPasswordComponent } from './components/reset-password/reset-password.component';
 
 
 
@@ -19,7 +21,9 @@ import { UserVerificationComponent } from './components/user-verification/user-v
   declarations: [
     LandingPageComponent,
     LoginComponent,
-    UserVerificationComponent
+    UserVerificationComponent,
+    ForgotPasswordComponent,
+    ResetPasswordComponent
   ],
   imports: [
     CommonModule,

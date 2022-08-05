@@ -104,3 +104,12 @@
 .blur {
     filter: blur(4px);
 }
+
+.border-none {
+    border-style: none;
+}
+
+.vl {
+    border-left: 2px solid #aeaeb4;
+}
+

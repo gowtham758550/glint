@@ -25,7 +25,8 @@ export class VerifyComponent implements OnInit {
 
   ngOnInit(): void {
     this.email = this.localStorage.getItem('email');
-    // this.getVerificationStatus();
+    setTimeout(this.getVerificationStatus, 1000);
+    
   }
 
   next() {
@@ -38,10 +39,10 @@ export class VerifyComponent implements OnInit {
 
   getVerificationStatus() {
     // console.log("vstatus");
-    this.authService.isVerifed(this.localStorage.getItem('email'))
+    const email = this.localStorage.getItem('email');
+    this.authService.isVerified(email)
       .subscribe({
         next: res => {
-          console.log(this.role);
           if (this.role == 'Employer') this.router.navigateByUrl('/employer/signup/company-detail');
           else this.router.navigateByUrl('/job-seeker/signup/personal-information');
         }
