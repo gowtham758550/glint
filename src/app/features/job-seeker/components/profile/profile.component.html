@@ -1,8 +1,8 @@
-<div class="container py-2 h-60 ml-15">
+<div class="container py-2 h-60 ml-5">
     <div class="d-flex justify-content-center align-items-center h-100">
         <div class="col col-lg-9 col-xl-7">
             <!-- Profile Image -->
-            <div class="card" style="width:650%; height: 400px;">
+            <div class="card" style="width:650%; height: 450px;">
                 <div class="rounded-top text-white d-flex flex-row" style="background-color: #cbebec; height:200px;">
                     <div class="ms-4 mt-5 d-flex flex-column" style="width: 200px;">
                         <img src="..//src/assets/profileimage.png"
@@ -13,26 +13,31 @@
                 </div>
                 <br>
                 <!-- Profile Details -->
-                <div class="card-body p-4 text-black" [formGroup]="profileForm">
-                    <div class="flex">
+                <form [formGroup]="profileForm">
+                    <div class="card-body p-4 text-black">
                         <div class="flex">
-                            <p class="lead fw-normal mb-1 float-start">Deepikaa Ravishankar</p>
-                            <div class="float-end">
-                                <button class="btn btn-rounded">
-                                    <i class="pi pi-pencil"></i>
-                                </button>
+                            <div class="flex">
+                                <p class="lead fw-normal mb-1 float-start">{{profileForm.controls['Name'].value}}</p>
+                                <div class="float-end">
+                                    <button class="btn btn-rounded">
+                                        <i class="pi pi-pencil" (click)="updateProfile(profileModal)"></i>
+                                    </button>
+                                </div>
+                                <span class="clearfix"></span>
+                                <p class="fw-200 mb-1">{{profileForm.controls['Designation'].value}}</p>
+                                <p class="fw-200 mb-1">{{profileForm.controls['Location'].value}}</p>
+                                <span class="clearfix"></span>
+                                <p><i class="p-2 pi pi-envelope"></i>Email : {{profileForm.controls['Email'].value}}</p>
+                                <div class=" pt-3">
+                                    <button class="btn btn-rounded bg-dark text-white">Change Email</button>
+                                    <button class="btn btn-rounded">Change Password</button>
+                                </div>
                             </div>
-                            <span class="clearfix"></span>
-                            <p class="fw-200 mb-1">Software Engineer</p>
-                            <p class="fw-200 mb-1">Coimbatore, Tamil Nadu, India</p>
-                            <span class="clearfix"></span>
-                            <p><i class="p-2 pi pi-envelope"></i>Email : deepiravi300@gmail.com</p>
                         </div>
                     </div>
-
-                </div>
+                </form>
                 <!-- Education Details -->
-                <div class="card p-3">
+                <div class="card p-4" style="margin-top:0%">
                     <div class="d-flex">
                         <div class="flex-grow-1 fs-4">
                             Education
@@ -65,25 +70,25 @@
                             </div>
                             <div class="ps-2 pt-3">
                                 <button class="btn btn-rounded" (click)="editEducation(educationModal, id)">
-                                    <i class="pi pi-pencil text-primary"></i>
+                                    <i class="pi pi-pencil"></i>
                                 </button>
                                 <button class="ps-2 btn btn-rounded-danger" (click)="deleteEducation(id)">
-                                    <i class="pi pi-trash text-danger"></i>
+                                    <i class="pi pi-trash"></i>
                                 </button>
                             </div>
                         </div>
                     </ng-container>
                 </div>
-                <div class="p-3"></div>
+                <div class="p-2"></div>
                 <!-- Experience Details  -->
-                <div class="card p-3">
+                <div class="card p-4" style="margin-top:0%">
                     <div class="d-flex">
                         <div class="flex-grow-1 fs-4">
                             Experience
                         </div>
                         <div>
                             <button class="btn btn-rounded" (click)="addExperience(experienceModal)">
-                                <i class="pi pi-plus text-primary"></i>
+                                <i class="pi pi-plus"></i>
                             </button>
                         </div>
                     </div>
@@ -153,6 +158,25 @@
         <div class="text-end pb-3 pe-3">
             <button class="btn bg-dark text-white" style="border-radius: 13px;" [disabled]="!experienceForm.valid"
                 (click)="executeExperienceAction()">
+                {{action}}
+            </button>
+        </div>
+    </ng-template>
+    <ng-template #profileModal let-modal>
+        <div class="modal-header">
+            <h4 class="modal-title" id="modal-basic-title">
+                {{action}} Profile
+            </h4>
+            <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+        </div>
+        <div class="modal-body d-flex justify-content-center">
+            <app-form [formGroup]="profileForm" [formFields]="profileFields">
+            </app-form>
+        </div>
+        <hr>
+        <div class="text-end pb-3 pe-3">
+            <button class="btn bg-dark text-white" style="border-radius: 13px;" [disabled]="!profileForm.valid"
+                (click)="executeProfileAction()">
                 {{action}}
             </button>
         </div>

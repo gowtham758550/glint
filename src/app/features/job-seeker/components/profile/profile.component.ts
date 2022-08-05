@@ -8,58 +8,49 @@ import { LocalStorage } from 'src/app/data/services/local-storage.service';
 
 @Component({
   selector: 'app-profile',
-  templateUrl:'profile.component.html',
-  styleUrls:['profile.component.css']
+  templateUrl: 'profile.component.html',
+  styleUrls: ['profile.component.css']
 })
 export class ProfileComponent implements OnInit {
   profileForm: FormGroup = this.formBuilder.group({
-    Name: [this.localStorage.getItem('firstName'), [Validators.required, Validators.minLength(3)]],
-    Email: [this.localStorage.getItem('lastName'), [Validators.required, Validators.minLength(2)]],
-    Location: ['', Validators.required],
-    Designation: ['', Validators.required],
-    about: [''],
+    Name: ['Deepikaa Ravishankar', [Validators.required, Validators.minLength(3)]],
+    Email: ['deepikaa@gmail.com', [Validators.required, Validators.minLength(2)]],
+    Location: ['Coimbatore, TamilNadu, Coimbatore', Validators.required],
+    Designation: ['Software Engineer', Validators.required],
+    Bio: ['Software Engineer'],
   })
   profileFields: FormField[] = [
     {
       type: 'input',
-      label: 'First name',
-      formControlName: 'firstName',
+      label: 'Name',
+      formControlName: 'Name',
       class: ['w'],
     },
     {
       type: 'input',
-      label: 'Last name',
-      formControlName: 'lastName',
+      label: 'Email',
+      formControlName: 'Email',
       class: ['w'],
     },
     {
-      type: 'date',
-      label: 'Date of Birth',
-      formControlName: 'dateOfBirth',
+      type: 'input',
+      label: 'Location',
+      formControlName: 'Location',
       class: ['w']
-    }, 
-    {
-      type: 'select',
-      label: 'Gender',
-      formControlName: 'gender',
-      class: ['w'],
-      options: [
-        {
-          value: 'Male',
-          option: 'Male'
-        },
-        {
-          value: 'Female',
-          option: 'Female'
-        }
-      ]
     },
     {
       type: 'textarea',
       label: 'Bio',
-      formControlName: 'about',
+      formControlName: 'Bio',
+      class: ['w']
+    },
+    {
+      type: 'input',
+      label: 'Designation',
+      formControlName: 'Designation',
       class: ['w']
     }
+
   ]
   educationForm!: FormGroup;
   educationFields: FormField[] = [
@@ -120,6 +111,7 @@ export class ProfileComponent implements OnInit {
       class: ['w']
     }
   ]
+  profileDetails!: FormGroup;
   educationDetails = new FormArray<FormGroup>([]);
   experienceDetails = new FormArray<FormGroup>([]);
   action!: string;
@@ -150,14 +142,14 @@ export class ProfileComponent implements OnInit {
   addEducation(ref: any) {
     this.action = 'Add';
     this.educationForm = this.getEducation();
-    this.modalService.open(ref).result.then((result) => {})  
+    this.modalService.open(ref).result.then((result) => { })
   }
 
   editEducation(ref: any, id: number) {
     this.action = 'Update';
     this.editableId = id;
     this.educationForm = this.educationDetails.controls[id];
-    this.modalService.open(ref).result.then((result) => {})  
+    this.modalService.open(ref).result.then((result) => { })
   }
 
   deleteEducation(id: number) {
@@ -186,15 +178,15 @@ export class ProfileComponent implements OnInit {
 
   addExperience(ref: any) {
     this.action = 'Add',
-    this.experienceForm = this.getExperience();
-    this.modalService.open(ref).result.then(result => {});
+      this.experienceForm = this.getExperience();
+    this.modalService.open(ref).result.then(result => { });
   }
 
   editExperience(ref: any, id: number) {
     this.action = 'Update',
-    this.editableId = id;
+      this.editableId = id;
     this.experienceForm = this.experienceDetails.controls[id];
-    this.modalService.open(ref).result.then(result => {});
+    this.modalService.open(ref).result.then(result => { });
   }
 
   deleteExperience(id: number) {
@@ -212,12 +204,21 @@ export class ProfileComponent implements OnInit {
     this.modalService.dismissAll();
   }
 
-  // update profile api call
-  updateProfile() {
-    this.jobSeekerService.updateProfile(this.profileForm.value)
-      .subscribe({
-        next: res => console.log(res)
-      });
+  // update profile method
+  updateProfile(ref: any) {
+    // this.jobSeekerService.updateProfile(this.profileForm.value)
+    //   .subscribe({
+    //     next: res => console.log(res)
+    //   });
+    this.action = 'Update';
+    console.log(this.action);
+    this.modalService.open(ref).result.then((result) => { })
+  }
+  executeProfileAction() {
+    if (this.action == 'Update') {
+      this.toastr.success('Profile updated', 'Success');
+    }
+    this.modalService.dismissAll();
   }
 
 

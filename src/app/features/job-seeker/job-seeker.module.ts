@@ -4,7 +4,7 @@ import { CommonModule } from '@angular/common';
 import { JobSeekerRoutingModule } from './job-seeker-routing.module';
 import { RegisterComponent } from './components/register/register.component';
 import { SharedModule } from 'src/app/shared/shared.module';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HomeComponent } from './components/home/home.component';
 import { PersonalInfoComponent } from './components/personal-info/personal-info.component';
 import { SignupComponent } from './components/signup/signup.component';
@@ -35,6 +35,7 @@ import { ProfileComponent } from './components/profile/profile.component';
     MessagesModule,
     DataModule,
     NgbModule,
+    FormsModule
   ]
 })
 export class JobSeekerModule { }
