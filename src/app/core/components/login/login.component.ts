@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import jwtDecode from 'jwt-decode';
+import { ToastrService } from 'ngx-toastr';
 import { FormField } from 'src/app/data/models/form-field.model';
 import { AuthService } from 'src/app/data/services/auth.service';
 import { LocalStorage } from 'src/app/data/services/local-storage.service';
@@ -34,6 +36,7 @@ export class LoginComponent implements OnInit {
       type: 'anchor',
       label: 'Forgot password',
       class: ['text-end'],
+      routeTo: '/forgot-password'
     },
     {
       type: 'submit',
@@ -52,7 +55,8 @@ export class LoginComponent implements OnInit {
     private formBuilder: FormBuilder,
     private authService: AuthService,
     private localStorage: LocalStorage,
-    private router: Router
+    private router: Router,
+    private toastr: ToastrService
   ) { }
 
   ngOnInit(): void {
@@ -65,9 +69,12 @@ export class LoginComponent implements OnInit {
   login(credentials: object) {
     this.authService.login(credentials).subscribe({
       next: data => {
+        this.toastr.success('Logged in successfully');
         const dataObject = JSON.parse(JSON.stringify(data));
         this.localStorage.setItem('accessToken', dataObject.jwt);
-        this.router.navigateByUrl('/');
+        const role = this.authService.getRole(dataObject.jwt);
+        if (role == 'JobSeeker') this.router.navigateByUrl('/job-seeker/dashboard');
+        else if (role == 'Employer') this.router.navigateByUrl('/employer/dashboard');
       }
     });
   }

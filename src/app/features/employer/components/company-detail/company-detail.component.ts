@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { FormField } from 'src/app/data/models/form-field.model';
 import { EmployerService } from 'src/app/data/services/employer.service';
 import { LocalStorage } from 'src/app/data/services/local-storage.service';
@@ -64,7 +65,8 @@ export class CompanyDetailComponent implements OnInit {
     private formBuilder: FormBuilder,
     private localStorage: LocalStorage,
     private employerService: EmployerService,
-    private router: Router
+    private router: Router,
+    private toastr: ToastrService
   ) { }
 
   ngOnInit(): void {
@@ -75,6 +77,7 @@ export class CompanyDetailComponent implements OnInit {
     this.employerService.updateEmployerProfile(this.profileForm.value).subscribe({
       next: data => {
         this.localStorage.removeItem('accessToken')
+        this.toastr.success('Registeration completed successfully');
         this.router.navigateByUrl('/login');
       }
     });

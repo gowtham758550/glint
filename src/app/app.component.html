@@ -1,9 +1,13 @@
-<ng-container *ngFor="let route of routes">
-    <a [routerLink]="route.routeTo" class="px-2">
-        {{route.value}}
-    </a>
+<ng-container *ngIf="visibility">
+    <ng-container *ngFor="let route of routes">
+        <a [routerLink]="route.routeTo" class="px-2">
+            {{route.value}}
+        </a>
+    </ng-container>
+    <input type="checkbox"
+        [(ngModel)]="visibility">
+    <br>    
 </ng-container>
-<br>
 
 <ng-container *ngIf="isLoading | async; then blur; else normal">
 </ng-container>

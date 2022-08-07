@@ -8,7 +8,8 @@
 
             <!-- title -->
             <ng-template [ngSwitchCase]="'title'">
-                <h4 class="py-3">
+                <h4 class="py-3"
+                    [ngClass]="field.class">
                     {{field.label}}
                 </h4>
             </ng-template>

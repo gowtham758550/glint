@@ -18,14 +18,18 @@
                     Pending
                 </span>
             </p>
-            <div class="spinner-border align-start" role="status">
+            <button class="btn border-none bg-secondary border mb-3"
+                (click)="getVerificationStatus()">
+                <i class="pi pi-sync"></i>
+            </button>
+            <!-- <div class="spinner-border align-start" role="status">
                 <span class="sr-only"></span>
-            </div>
-            <button class="btn btn-primary"
+            </div> -->
+            <!-- <button class="btn border-none bg-secondary"
                 (click)="getVerificationStatus()">
                 Check
-            </button>
+            </button> -->
         </div>
-        <p>Once you verify your mail we will automatically redirect you to next page</p>
+        <!-- <p>Once you verify your mail we will automatically redirect you to next page</p> -->
     </div>
 </div>

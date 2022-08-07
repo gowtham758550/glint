@@ -5,6 +5,10 @@ import { JobSeekerService } from 'src/app/data/services/job-seeker.service';
 import { LocalStorage } from 'src/app/data/services/local-storage.service';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import { ToastrService } from 'ngx-toastr';
+import { EducationService } from 'src/app/data/services/education.service';
+import { Education } from 'src/app/data/models/education.model';
+import { ExperienceService } from 'src/app/data/services/experience.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-personal-info',
@@ -83,15 +87,15 @@ export class PersonalInfoComponent implements OnInit {
       class: ['w']
     },
     {
-      type: 'input',
+      type: 'date',
       label: 'Start year',
       formControlName: 'startDate',
       class: ['w']
     },
     {
-      type: 'input',
+      type: 'date',
       label: 'End year',
-      formControlName: 'endDate',
+      formControlName: 'completionDate',
       class: ['w']
     },
     // {
@@ -105,7 +109,7 @@ export class PersonalInfoComponent implements OnInit {
     {
       type: 'input',
       label: 'Company name',
-      formControlName: 'companyName',
+      formControlName: 'previousCompanyName',
       class: ['w']
     },
     {
@@ -131,7 +135,10 @@ export class PersonalInfoComponent implements OnInit {
     private localStorage: LocalStorage,
     private jobSeekerService: JobSeekerService,
     private modalService: NgbModal,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    private educationService: EducationService,
+    private experienceService: ExperienceService,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
@@ -144,7 +151,7 @@ export class PersonalInfoComponent implements OnInit {
       courseName: ['', Validators.required],
       universityName: ['', Validators.required],
       startDate: ['', Validators.required],
-      endDate: ['', Validators.required]
+      completionDate: ['', Validators.required]
     });
   }
 
@@ -179,7 +186,7 @@ export class PersonalInfoComponent implements OnInit {
   // experience operations
   getExperience(): FormGroup {
     return this.formBuilder.group({
-      companyName: ['', Validators.required],
+      previousCompanyName: ['', Validators.required],
       designation: ['', Validators.required],
       yearOfExperience: ['']
     })
@@ -221,5 +228,24 @@ export class PersonalInfoComponent implements OnInit {
       });
   }
 
-
+  complete() {
+    this.jobSeekerService.updateProfile(this.profileForm.value).subscribe();
+    const educations = [];
+    for (let i = 0; i < this.educationDetails.length; i++) {
+      educations.push(this.educationDetails.controls[i].value);
+    }
+    console.log(educations);
+    this.educationService.addEducations(educations).subscribe({
+      next: data => console.log(data)
+    });
+    const experiences = [];
+    for (let i = 0; i < this.experienceDetails.length; i++) {
+      experiences.push(this.experienceDetails.controls[i].value);
+    }
+    this.experienceService.addExperiences(experiences).subscribe({
+      next: data => console.log(data)
+    });
+    this.toastr.success("Registeration completed");
+    this.router.navigateByUrl('/job-seeker/dashboard');
+  }
 }
