@@ -15,6 +15,9 @@ import { DataModule } from 'src/app/data/data.module';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { SearchComponent } from './components/search/search.component';
 import { ProfileComponent } from './components/profile/profile.component';
+import { AccountSettingsComponent } from './components/account-settings/account-settings.component';
+import { DialogModule } from 'primeng/dialog';
+
 
 @NgModule({
   declarations: [
@@ -24,7 +27,8 @@ import { ProfileComponent } from './components/profile/profile.component';
     SignupComponent,
     VerifyComponent,
     SearchComponent,
-    ProfileComponent
+    ProfileComponent,
+    AccountSettingsComponent
   ],
   imports: [
     CommonModule,
@@ -35,7 +39,9 @@ import { ProfileComponent } from './components/profile/profile.component';
     MessagesModule,
     DataModule,
     NgbModule,
-    FormsModule
+    FormsModule,
+    DialogModule,
+    
   ]
 })
 export class JobSeekerModule { }

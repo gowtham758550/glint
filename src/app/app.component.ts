@@ -47,11 +47,15 @@ export class AppComponent {
     },
     {
       value: 'user-profile',
-      routeTo: '/job-seeker/profile'
+      routeTo: '/job-seeker/dashboard/profile'
     },
     {
       value: 'user-verification',
       routeTo: '/user-verification'
+    },
+    {
+      value: 'account-settings',
+      routeTo: '/job-seeker/dashboard/account'
     }
   ]
   class = {

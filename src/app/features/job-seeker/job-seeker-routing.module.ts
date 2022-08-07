@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { AccountSettingsComponent } from './components/account-settings/account-settings.component';
 import { HomeComponent } from './components/home/home.component';
 import { PersonalInfoComponent } from './components/personal-info/personal-info.component';
 import { ProfileComponent } from './components/profile/profile.component';
@@ -35,6 +36,10 @@ const routes: Routes = [
       {
         path:'profile',
         component: ProfileComponent
+      },
+      {
+        path:'account',
+        component: AccountSettingsComponent
       }
     ]
   },
