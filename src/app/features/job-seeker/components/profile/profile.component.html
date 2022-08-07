@@ -2,8 +2,8 @@
     <div class="d-flex justify-content-center align-items-center h-100">
         <div class="col col-lg-9 col-xl-7">
             <!-- Profile Image -->
-            <div class="card" style="width:650%; height: 450px;">
-                <div class="rounded-top text-white d-flex flex-row" style="background-color: #cbebec; height:200px;">
+            <div class="card" style="width:650%; height: 400px;">
+                <div class="rounded-top text-white d-flex flex-row" style="background-color: #05292a; height:200px;">
                     <div class="ms-4 mt-5 d-flex flex-column" style="width: 200px;">
                         <img src="..//src/assets/profileimage.png"
                             class="rounded-circle mt-5 img-fluid img-thumbnail mt-4 mb-2"
@@ -28,10 +28,7 @@
                                 <p class="fw-200 mb-1">{{profileForm.controls['Location'].value}}</p>
                                 <span class="clearfix"></span>
                                 <p><i class="p-2 pi pi-envelope"></i>Email : {{profileForm.controls['Email'].value}}</p>
-                                <div class=" pt-3">
-                                    <button class="btn btn-rounded bg-dark text-white">Change Email</button>
-                                    <button class="btn btn-rounded">Change Password</button>
-                                </div>
+                                
                             </div>
                         </div>
                     </div>
@@ -124,6 +121,7 @@
             </div>
         </div>
     </div>
+    <div class="p-2"></div>
     <ng-template #educationModal let-modal>
         <div class="modal-header">
             <h4 class="modal-title" id="modal-basic-title">

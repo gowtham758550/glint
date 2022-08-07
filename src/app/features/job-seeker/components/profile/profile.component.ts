@@ -13,8 +13,8 @@ import { LocalStorage } from 'src/app/data/services/local-storage.service';
 })
 export class ProfileComponent implements OnInit {
   profileForm: FormGroup = this.formBuilder.group({
-    Name: ['Deepikaa Ravishankar', [Validators.required, Validators.minLength(3)]],
-    Email: ['deepikaa@gmail.com', [Validators.required, Validators.minLength(2)]],
+    Name: ['Deepikaa Ravishankar', [Validators.required]],
+    Email: ['deepikaa@gmail.com', [Validators.required]],
     Location: ['Coimbatore, TamilNadu, Coimbatore', Validators.required],
     Designation: ['Software Engineer', Validators.required],
     Bio: ['Software Engineer'],
