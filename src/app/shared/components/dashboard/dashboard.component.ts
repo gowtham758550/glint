@@ -7,8 +7,7 @@ import { AuthService } from 'src/app/data/services/auth.service';
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
-  styles: [
-  ]
+  styleUrls: ['dashboard.component.css']
 })
 export class DashboardComponent implements OnInit {
 
@@ -23,6 +22,7 @@ export class DashboardComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    console.log(this.sidebarItems);
   }
 
   toggleSidebarVisibility() {

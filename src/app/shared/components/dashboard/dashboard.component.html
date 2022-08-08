@@ -1,21 +1,16 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="ps-4">
-        <button pButton pRipple
-            type="button"
-            icon="pi pi-bars"
-            class="p-button-rounded p-button-text mr-2 mb-2 text-white"
-            (click)="toggleSidebarVisibility()">
+        <button pButton pRipple type="button" icon="pi pi-bars"
+            class="p-button-rounded p-button-text mr-2 mb-2 text-white" (click)="toggleSidebarVisibility()">
         </button>
     </div>
     <div class="container-fluid">
-        <a routerLink="/"
-            class="text-decoration-none text-white">
+        <a routerLink="/" class="text-decoration-none text-white">
             <app-logo></app-logo>
         </a>
     </div>
     <div class="pe-3">
-        <button class="d-flex btn text-white border-none"
-            (click)="logout()">
+        <button class="d-flex btn text-white border-none" (click)="logout()">
             <i class="pi pi-sign-out"></i>
             <span class="align-start">
                 Logout
@@ -24,7 +19,7 @@
     </div>
 </nav>
 
-<div class="d-flex col-sm-12">
+<!-- <div class="d-flex col-sm-12">
     <div class="card vh-100 ps-3 pe-5"
         *ngIf="showSidebar">
         <ng-container *ngFor="let item of sidebarItems">
@@ -35,6 +30,32 @@
                     </i>
                     {{item.label}}
                 </a>
+        </ng-container>
+    </div>
+
+    <div>
+        <ng-content></ng-content>
+    </div>
+</div> -->
+<div class="d-flex col-sm-12">
+    <div class="card vh-100 ps-3 pe-5" *ngIf="showSidebar">
+        <ng-container *ngFor="let item of sidebarItems">
+            <div class="area">
+                <nav class="main-menu">
+                    <ul>
+                        <p>{{item.label}}</p>
+                        <li>
+                            <a routerLink="/{{item.routeTo}}">
+                                <i class="pi pi-{{item.icon}} pi-2x"></i>
+                                <span class="nav-text">
+                                    {{item.label}}
+                                </span>
+                            </a>
+                        </li>
+
+                    </ul>
+                </nav>
+            </div>
         </ng-container>
     </div>
 
