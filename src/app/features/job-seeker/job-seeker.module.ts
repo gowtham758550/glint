@@ -17,6 +17,7 @@ import { SearchComponent } from './components/search/search.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { AccountSettingsComponent } from './components/account-settings/account-settings.component';
 import { DialogModule } from 'primeng/dialog';
+import { DashboardComponent } from './components/dashboard/dashboard.component';
 
 
 @NgModule({
@@ -28,7 +29,8 @@ import { DialogModule } from 'primeng/dialog';
     VerifyComponent,
     SearchComponent,
     ProfileComponent,
-    AccountSettingsComponent
+    AccountSettingsComponent,
+    DashboardComponent
   ],
   imports: [
     CommonModule,
