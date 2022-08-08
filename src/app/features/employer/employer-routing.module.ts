@@ -8,6 +8,10 @@ import { HomeComponent } from './components/home/home.component';
 import { RegisterComponent } from './components/register/register.component';
 import { SignupComponent } from './components/signup/signup.component';
 import { AuthGuard } from 'src/app/core/guards/auth.guard';
+import { NewJobComponent } from './components/new-job/new-job.component';
+import { JobsComponent } from './components/jobs/jobs.component';
+import { JobInfoComponent } from 'src/app/shared/components/job-info/job-info.component';
+import { EditJobComponent } from './components/edit-job/edit-job.component';
 
 const routes: Routes = [
   {
@@ -36,9 +40,25 @@ const routes: Routes = [
       {
         path: 'dashboard',
         component: DashboardComponent
+      },
+      {
+        path: 'jobs',
+        component: JobsComponent
+      },
+      {
+        path: 'job/new',
+        component: NewJobComponent
+      },
+      {
+        path: 'job/:postJobDetailId',
+        component: JobInfoComponent
+      },
+      {
+        path: 'job/edit/:postJobDetaiId',
+        component: EditJobComponent
       }
     ]
-  }
+  },
 ];
 
 @NgModule({

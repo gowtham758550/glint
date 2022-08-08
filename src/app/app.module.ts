@@ -7,7 +7,6 @@ import {BlockUIModule} from 'primeng/blockui';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { CoreModule } from './core/core.module';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -20,7 +19,6 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     FormsModule,
     ProgressSpinnerModule,
     BlockUIModule,
-    NgbModule
   ],
   providers: [],
   bootstrap: [AppComponent]

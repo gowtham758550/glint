@@ -1,3 +1,74 @@
+<div class="area"></div>
+<div class="fixed">
+    <nav class="main-menu fixed">
+        <ul>
+            <div class="pt-5 pb-5 text-center pe-5">
+                <a class="text-white text-decoration-none d-flex text-nowrap">
+                    <span class="pi pt-1 ps-3 pe-3 fs-1">
+                        ✨
+                    </span>
+                    <span class="ps-2">
+                        <app-logo></app-logo>
+                    </span>
+                </a>
+            </div>
+            
+            <li *ngFor="let item of sidebarItems"
+                class="pt-3">
+                <ng-container [ngSwitch]="item.type">
+                    <!-- menu item -->
+                    <ng-template [ngSwitchCase]="'menu-item'">
+                        <a [routerLink]="item.routeTo">
+                            <i class="pi pt-1 fs-4 ps-4 pe-3"
+                                [ngClass]="item.icon">
+                            </i>
+                            <span class="nav-text fs-4 ps-3">
+                                {{item.label}}
+                            </span>
+                        </a>
+                    </ng-template>
+
+                    <!-- accordion -->
+                    <ng-template [ngSwitchCase]="'accordion'">
+                        <a class="w-100">
+                            <i class="pi pt-1 fs-4 ps-4 pe-3"
+                                [ngClass]="item.icon">
+                            </i>
+                            <span class="nav-item fs-4 ps-3">
+                                {{item.label}}
+                            </span>
+                        </a>
+                        <ul class="text-white">
+                            <li *ngFor="let children of item.children">
+                                <a class="w-100">
+                                    <i class="pi pt-1 fs-6 ps-4 pe-3"
+                                        [ngClass]="children.icon">
+                                    </i>
+                                    <span class="nav-item fs-5 ps-3">
+                                        {{children.label}}
+                                    </span>
+                                </a>
+                            </li>
+                        </ul>
+                    </ng-template>
+                </ng-container>
+            </li>
+        </ul>
+        <!-- <ul class="logout">
+            <li>
+                <a (click)="logout()">
+                    <i class="pi pi-sign-out pt-1 ps-3 pe-3"></i>
+                    <span class="nav-text fs-5 align-start">
+                        Logout
+                    </span>
+                </a>
+            </li>  
+        </ul> -->
+    </nav>
+</div>
+
+
+<!-- 
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="ps-4">
         <button pButton pRipple type="button" icon="pi pi-bars"
@@ -10,16 +81,17 @@
         </a>
     </div>
     <div class="pe-3">
-        <button class="d-flex btn text-white border-none" (click)="logout()">
+        <button class="d-flex btn text-white border-none"
+            (click)="logout()">
             <i class="pi pi-sign-out"></i>
             <span class="align-start">
                 Logout
             </span>
         </button>
     </div>
-</nav>
+</nav> -->
 
-<!-- <div class="d-flex col-sm-12">
+<div class="d-flex justify-content-start">
     <div class="card vh-100 ps-3 pe-5"
         *ngIf="showSidebar">
         <ng-container *ngFor="let item of sidebarItems">
@@ -31,33 +103,9 @@
                     {{item.label}}
                 </a>
         </ng-container>
-    </div>
-
-    <div>
-        <ng-content></ng-content>
-    </div>
+    </div> 
 </div> -->
-<div class="d-flex col-sm-12">
-    <div class="card vh-100 ps-3 pe-5" *ngIf="showSidebar">
-        <ng-container *ngFor="let item of sidebarItems">
-            <div class="area">
-                <nav class="main-menu">
-                    <ul>
-                        <p>{{item.label}}</p>
-                        <li>
-                            <a routerLink="/{{item.routeTo}}">
-                                <i class="pi pi-{{item.icon}} pi-2x"></i>
-                                <span class="nav-text">
-                                    {{item.label}}
-                                </span>
-                            </a>
-                        </li>
 
-                    </ul>
-                </nav>
-            </div>
-        </ng-container>
-    </div>
 
     <div>
         <ng-content></ng-content>
