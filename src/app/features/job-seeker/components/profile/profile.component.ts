@@ -3,6 +3,7 @@ import { FormGroup, Validators, FormArray, FormBuilder } from '@angular/forms';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrService } from 'ngx-toastr';
 import { FormField } from 'src/app/data/models/form-field.model';
+import { EducationService } from 'src/app/data/services/education.service';
 import { JobSeekerService } from 'src/app/data/services/job-seeker.service';
 import { LocalStorage } from 'src/app/data/services/local-storage.service';
 
@@ -122,7 +123,8 @@ export class ProfileComponent implements OnInit {
     private localStorage: LocalStorage,
     private jobSeekerService: JobSeekerService,
     private modalService: NgbModal,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    private educationService: EducationService
   ) { }
 
   ngOnInit(): void {
@@ -142,6 +144,8 @@ export class ProfileComponent implements OnInit {
   addEducation(ref: any) {
     this.action = 'Add';
     this.educationForm = this.getEducation();
+
+    this.educationService.addEducations(this.educationForm).subscribe(res=>console.log(res));
     this.modalService.open(ref).result.then((result) => { })
   }
 
