@@ -7,9 +7,9 @@ import { PersonalInfoComponent } from './components/personal-info/personal-info.
 import { ProfileComponent } from './components/profile/profile.component';
 
 import { RegisterComponent } from './components/register/register.component';
-import { SearchComponent } from './components/search/search.component';
 import { SignupComponent } from './components/signup/signup.component';
 import { VerifyComponent } from './components/verify/verify.component';
+import { DashboardComponent } from './components/dashboard/dashboard.component';
 
 const routes: Routes = [
   {
@@ -35,16 +35,16 @@ const routes: Routes = [
     path: 'job-seeker',
     component: HomeComponent,
     children: [
-      // {
-      //   path: 'dashboard',
-      //   component: 
-      // },
+      {
+        path: 'dashboard',
+        component: DashboardComponent
+      },
       {
         path:'profile',
         component: ProfileComponent
       },
       {
-        path:'account',
+        path:'account-settings',
         component: AccountSettingsComponent
       }
     ]
