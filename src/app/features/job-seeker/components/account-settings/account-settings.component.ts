@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrService } from 'ngx-toastr';
 import { PrimeNGConfig } from 'primeng/api';
 import { FormField } from 'src/app/data/models/form-field.model';
+import { JobSeekerService } from 'src/app/data/services/job-seeker.service';
 
 @Component({
   selector: 'app-account-settings',
@@ -23,8 +25,19 @@ export class AccountSettingsComponent implements OnInit {
       class: ['w'],
     },
   ]
-  changePassword(){
-    this.toastr.success('Password changed successfully', 'Success');
+  currentPassword!: string;
+  newPassword!: string;
+  passwordObject: any;
+  changePassword(currentPassword: string, newPassword: string) {
+    console.log(currentPassword, newPassword)
+    this.passwordObject = { CurrentPassword: currentPassword, NewPassword: newPassword }
+    this.jobseekerservice.changePassword(this.passwordObject).subscribe({
+      next: () => {
+
+        this.toastr.success('Password changed successfully', 'Success');
+        setTimeout(() => this.router.navigateByUrl('job-seeker/signup'), 1000);
+      }
+    });
   }
 
   // -----------------  Update email actions -------------------
@@ -58,8 +71,12 @@ export class AccountSettingsComponent implements OnInit {
   }
   // --------------------------------------------------------------------------------//
 
-  constructor(private formBuilder: FormBuilder, private modalService: NgbModal,
-    private toastr: ToastrService, private primengConfig: PrimeNGConfig) { }
+  constructor(private formBuilder: FormBuilder,
+    private modalService: NgbModal,
+    private toastr: ToastrService,
+    private primengConfig: PrimeNGConfig,
+    private jobseekerservice: JobSeekerService,
+    private router: Router) { }
 
   ngOnInit(): void {
     this.primengConfig.ripple = true;
