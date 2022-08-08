@@ -4,7 +4,7 @@ import { CommonModule } from '@angular/common';
 import { JobSeekerRoutingModule } from './job-seeker-routing.module';
 import { RegisterComponent } from './components/register/register.component';
 import { SharedModule } from 'src/app/shared/shared.module';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HomeComponent } from './components/home/home.component';
 import { PersonalInfoComponent } from './components/personal-info/personal-info.component';
 import { SignupComponent } from './components/signup/signup.component';
@@ -14,6 +14,10 @@ import {MessagesModule} from 'primeng/messages';
 import { DataModule } from 'src/app/data/data.module';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { SearchComponent } from './components/search/search.component';
+import { ProfileComponent } from './components/profile/profile.component';
+import { AccountSettingsComponent } from './components/account-settings/account-settings.component';
+import { DialogModule } from 'primeng/dialog';
+
 
 @NgModule({
   declarations: [
@@ -23,6 +27,8 @@ import { SearchComponent } from './components/search/search.component';
     SignupComponent,
     VerifyComponent,
     SearchComponent,
+    ProfileComponent,
+    AccountSettingsComponent
   ],
   imports: [
     CommonModule,
@@ -32,7 +38,10 @@ import { SearchComponent } from './components/search/search.component';
     ButtonModule,
     MessagesModule,
     DataModule,
-    NgbModule
+    NgbModule,
+    FormsModule,
+    DialogModule,
+    
   ]
 })
 export class JobSeekerModule { }

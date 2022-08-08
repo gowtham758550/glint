@@ -101,7 +101,7 @@
         <ng-container *ngFor="let item of sidebarItems">
                 <a [routerLink]="item.routeTo"
                     class="text-decoration-none active pt-2 ">
-                    <i class="pi"
+                    <i class="pi pi-{{item.icon}}"
                         [ngClass]="item.icon">
                     </i>
                     {{item.label}}

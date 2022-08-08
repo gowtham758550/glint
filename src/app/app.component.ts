@@ -47,8 +47,16 @@ export class AppComponent implements OnInit, AfterContentChecked {
       routeTo: '/search'
     },
     {
+      value: 'user-profile',
+      routeTo: '/job-seeker/dashboard/profile'
+    },
+    {
       value: 'user-verification',
       routeTo: '/user-verification'
+    },
+    {
+      value: 'account-settings',
+      routeTo: '/job-seeker/dashboard/account'
     }
   ]
   class = {
