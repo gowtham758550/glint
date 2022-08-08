@@ -19,7 +19,7 @@ export class PersonalInfoComponent implements OnInit {
   
   profileForm: FormGroup = this.formBuilder.group({
     firstName: [this.localStorage.getItem('firstName'), [Validators.required, Validators.minLength(3)]],
-    lastName: [this.localStorage.getItem('lastName'), [Validators.required, Validators.minLength(2)]],
+    lastName: [this.localStorage.getItem('lastName'), [Validators.required, Validators.minLength(1)]],
     gender: ['', Validators.required],
     dateOfBirth: ['', Validators.required],
     about: [''],

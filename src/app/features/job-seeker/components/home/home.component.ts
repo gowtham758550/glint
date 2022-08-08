@@ -11,10 +11,13 @@ export class HomeComponent implements OnInit {
 
   sidebarItems: SidebarItems[] = [
     {
+      type: 'menu-item',
       label: 'Dashboard',
-      routeTo: '/job-seeker/dashboard'
+      routeTo: '/job-seeker/dashboard',
+      icon: 'pi-search'
     },
     {
+      type: 'menu-item',
       label: 'My Jobs',
       routeTo: '/job-seeker/jobs'
     }

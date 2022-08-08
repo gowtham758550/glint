@@ -33,6 +33,32 @@
                 </div>
             </ng-template>
 
+            <!-- input with suggestion -->
+            <ng-template [ngSwitchCase]="'input-with-suggestion'">
+                <div class="mb-3">
+                    <label [for]="field.formControlName">
+                        {{field.label}}
+                    </label>
+                    <input type="text"
+                        class="form-control"
+                        [ngClass]="field.class"
+                        [placeholder]="field.label"
+                        [id]="field.formControlName"
+                        formControlName={{field.formControlName}}
+                        list="datalist"
+                        >
+                    <datalist id="datalist">
+                        <option *ngFor="let option of field.datalist"
+                            >
+                            {{option | titlecase}}
+                        </option>
+                    </datalist>
+                    <div class="form-text">
+                        {{field.hintMessage}}
+                    </div>
+                </div>
+            </ng-template>
+
             <!-- input:email -->
             <ng-template [ngSwitchCase]="'email'">
                 <div class="mb-3">
@@ -114,8 +140,8 @@
                     <select class="form-select"
                         formControlName={{field.formControlName}}>
                         <option selected disabled value="">Select</option>
-                        <option *ngFor="let option of field.options" [value]="option.value">
-                            {{option.option}}
+                        <option *ngFor="let option of field.options" [value]="option.value || option.label">
+                            {{option.label}}
                         </option>
                       </select>
                 </div>

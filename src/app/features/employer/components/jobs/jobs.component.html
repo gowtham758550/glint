@@ -1,0 +1,15 @@
+<div>
+    <div class="text-end p-3">
+        <button class="btn border-none border-dark rounded-fill bg-primary text-white"
+            [routerLink]="'/employer/job/new'">
+            Add new
+        </button>
+    </div>
+
+    <!-- jobs table -->
+    <div>
+        <app-sort-table [title]="'All jobs'"
+            [jobs]="jobs">
+        </app-sort-table>
+    </div>
+</div>

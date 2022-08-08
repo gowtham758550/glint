@@ -1,3 +1,74 @@
+<div class="area"></div>
+<div class="fixed">
+    <nav class="main-menu fixed">
+        <ul>
+            <div class="pt-5 pb-5 text-center pe-5">
+                <a class="text-white text-decoration-none d-flex text-nowrap">
+                    <span class="pi pt-1 ps-3 pe-3 fs-1">
+                        ✨
+                    </span>
+                    <span class="ps-2">
+                        <app-logo></app-logo>
+                    </span>
+                </a>
+            </div>
+            
+            <li *ngFor="let item of sidebarItems"
+                class="pt-3">
+                <ng-container [ngSwitch]="item.type">
+                    <!-- menu item -->
+                    <ng-template [ngSwitchCase]="'menu-item'">
+                        <a [routerLink]="item.routeTo">
+                            <i class="pi pt-1 fs-4 ps-4 pe-3"
+                                [ngClass]="item.icon">
+                            </i>
+                            <span class="nav-text fs-4 ps-3">
+                                {{item.label}}
+                            </span>
+                        </a>
+                    </ng-template>
+
+                    <!-- accordion -->
+                    <ng-template [ngSwitchCase]="'accordion'">
+                        <a class="w-100">
+                            <i class="pi pt-1 fs-4 ps-4 pe-3"
+                                [ngClass]="item.icon">
+                            </i>
+                            <span class="nav-item fs-4 ps-3">
+                                {{item.label}}
+                            </span>
+                        </a>
+                        <ul class="text-white">
+                            <li *ngFor="let children of item.children">
+                                <a class="w-100">
+                                    <i class="pi pt-1 fs-6 ps-4 pe-3"
+                                        [ngClass]="children.icon">
+                                    </i>
+                                    <span class="nav-item fs-5 ps-3">
+                                        {{children.label}}
+                                    </span>
+                                </a>
+                            </li>
+                        </ul>
+                    </ng-template>
+                </ng-container>
+            </li>
+        </ul>
+        <!-- <ul class="logout">
+            <li>
+                <a (click)="logout()">
+                    <i class="pi pi-sign-out pt-1 ps-3 pe-3"></i>
+                    <span class="nav-text fs-5 align-start">
+                        Logout
+                    </span>
+                </a>
+            </li>  
+        </ul> -->
+    </nav>
+</div>
+
+
+<!-- 
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="ps-4">
         <button pButton pRipple
@@ -16,15 +87,15 @@
     <div class="pe-3">
         <button class="d-flex btn text-white border-none"
             (click)="logout()">
-            <i class="pi pi-sign-out"></i>
+            <i class="pi pi-sign-out pt-1 pe-2"></i>
             <span class="align-start">
                 Logout
             </span>
         </button>
     </div>
-</nav>
+</nav> -->
 
-<div class="d-flex justify-content-start">
+<!-- <div class="d-flex justify-content-start">
     <div class="card vh-100 ps-3 pe-5"
         *ngIf="showSidebar">
         <ng-container *ngFor="let item of sidebarItems">
@@ -36,9 +107,54 @@
                     {{item.label}}
                 </a>
         </ng-container>
-    </div>
+    </div> 
+</div> -->
 
-    <div>
-        <ng-content></ng-content>
+
+<div class="content">
+    <div class="pt-3"></div>
+    <div class="card card-shadow">
+        <!-- profile -->
+        <div class="dropdown text-end p-3">
+            <button class="btn border border-dark rounded-pill"
+                type="button"
+                id="profile"
+                data-bs-toggle="dropdown">
+              <i class="pi pi-user"></i>
+            </button>
+            <div class="dropdown-menu p-4"
+                aria-labelledby="profile">
+                <div class="text-center">
+                    <div>
+                        <button class="btn border-none border-dark rounded-pill fs-1">
+                            <i class="pi pi-user fs-1"></i>
+                        </button>
+                    </div>
+                    <div class="fw-bold">
+                        username
+                    </div>
+                    <div class="text-muted">
+                        email@domain.com
+                    </div>
+                    <div class="py-2">
+                        <button class="btn border-dark border-dark rounded-pill">
+                            Manage your account
+                        </button>
+                    </div>
+                    <hr>
+                    <button class="btn border-dark"
+                        (click)="logout()">
+                        <!-- <i class="pi pi-sign-out px-2"></i> -->
+                        Logout
+                    </button>
+                </div>
+            </div>
+        </div>
+        <hr>
+        
+        <div class="p-3">
+            <ng-content></ng-content>
+        </div>
     </div>
+    <div class="pb-3"></div>
 </div>
