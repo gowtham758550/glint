@@ -44,7 +44,7 @@ const routes: Routes = [
         component: ProfileComponent
       },
       {
-        path:'account',
+        path:'account-settings',
         component: AccountSettingsComponent
       }
     ]
