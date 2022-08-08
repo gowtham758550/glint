@@ -36,7 +36,7 @@ export class AuthService {
   }
 
   forgotPassword(info: object) {
-    return this.httpClient.post(`${this.host}/forgot_password`, info);
+    return this.httpClient.post(`${this.host}/forgot_password`, info, {responseType: 'text'});
   }
 
   resetPassword(data: object) {

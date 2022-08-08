@@ -42,6 +42,10 @@ const routes: Routes = [
       {
         path:'account',
         component: AccountSettingsComponent
+      },
+      {
+        path:'search',
+        component: SearchComponent
       }
     ]
   },

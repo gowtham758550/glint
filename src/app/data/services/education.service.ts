@@ -14,7 +14,7 @@ export class EducationService {
         private httpClient: HttpClient
     ) {}
 
-    addEducations(educationList: Education[]) {
+    addEducations(educationList: any) {
         return this.httpClient.post(`${this.host}/add`, educationList);
     }
 }
