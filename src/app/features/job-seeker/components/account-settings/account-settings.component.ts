@@ -5,7 +5,9 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrService } from 'ngx-toastr';
 import { PrimeNGConfig } from 'primeng/api';
 import { FormField } from 'src/app/data/models/form-field.model';
+import { AuthService } from 'src/app/data/services/auth.service';
 import { JobSeekerService } from 'src/app/data/services/job-seeker.service';
+import { LocalStorage } from 'src/app/data/services/local-storage.service';
 
 @Component({
   selector: 'app-account-settings',
@@ -13,10 +15,17 @@ import { JobSeekerService } from 'src/app/data/services/job-seeker.service';
   styleUrls: ['account-settings.component.css']
 })
 export class AccountSettingsComponent implements OnInit {
-  emailForm: FormGroup = this.formBuilder.group({
 
-    Email: ['deepikaa@gmail.com', [Validators.required]],
-  })
+  jwt: string = '';
+  Email: string = '';
+  emailForm!: FormGroup;
+  currentPassword!: string;
+  newPassword!: string;
+  passwordObject: any;
+  action!: string;
+  editableId!: number;
+  displayMaximizable!: boolean;
+
   emailFields: FormField[] = [
     {
       type: 'input',
@@ -25,9 +34,29 @@ export class AccountSettingsComponent implements OnInit {
       class: ['w'],
     },
   ]
-  currentPassword!: string;
-  newPassword!: string;
-  passwordObject: any;
+
+  constructor(private formBuilder: FormBuilder,
+    private modalService: NgbModal,
+    private toastr: ToastrService,
+    private primengConfig: PrimeNGConfig,
+    private jobseekerservice: JobSeekerService,
+    private router: Router,
+    private authService: AuthService,
+    private localStorageService: LocalStorage) {
+  }
+
+  ngOnInit(): void {
+    this.primengConfig.ripple = true;
+    const accessToken = this.localStorageService.getItem('accessToken');
+    this.Email = this.authService.getEmail(accessToken);
+    console.log(this.Email)
+    this.emailForm = this.formBuilder.group({
+      Email: [this.Email, [Validators.required]],
+    })
+  }
+
+  // --------------------------  change password --------------------------------------------
+
   changePassword(currentPassword: string, newPassword: string) {
     console.log(currentPassword, newPassword)
     this.passwordObject = { CurrentPassword: currentPassword, NewPassword: newPassword }
@@ -38,48 +67,41 @@ export class AccountSettingsComponent implements OnInit {
         setTimeout(() => this.router.navigateByUrl('job-seeker/signup'), 1000);
       }
     });
+    this.authService.logout();
+    this.router.navigateByUrl("/login");
   }
 
-  // -----------------  Update email actions -------------------
-  action!: string;
-  editableId!: number;
+  // -----------------  Update email actions --------------------------------------------------
 
   updateEmail(ref: any) {
-    // this.jobSeekerService.updateProfile(this.profileForm.value)
-    //   .subscribe({
-    //     next: res => console.log(res)
-    //   });
     this.action = 'Update';
     console.log(this.action);
     this.modalService.open(ref).result.then((result) => { })
   }
   executeEmailAction() {
-    if (this.action == 'Update') {
-      this.toastr.success('Email updated', 'Success');
-    }
+    const updatedEmail = this.emailForm.controls["Email"].value;
+    this.jobseekerservice.changeEmail(updatedEmail)
+      .subscribe({
+        next: () =>
+          this.toastr.success('Email updated. Verify your email and Login', 'Success')
+      });
+    this.authService.logout();
+    this.router.navigateByUrl("/login");
     this.modalService.dismissAll();
   }
+
   // ------------------------- Delete Profile dialog box -----------------------------//
 
-  displayMaximizable!: boolean;
+
   showMaximizableDialog() {
     this.displayMaximizable = true;
   }
   showtoastrmessage() {
+    this.authService.deleteProfile().subscribe(res => console.log(res))
     this.displayMaximizable = false;
     this.toastr.success('Account deleted', 'Success');
   }
   // --------------------------------------------------------------------------------//
 
-  constructor(private formBuilder: FormBuilder,
-    private modalService: NgbModal,
-    private toastr: ToastrService,
-    private primengConfig: PrimeNGConfig,
-    private jobseekerservice: JobSeekerService,
-    private router: Router) { }
-
-  ngOnInit(): void {
-    this.primengConfig.ripple = true;
-  }
 
 }

@@ -21,10 +21,9 @@ export class JobSeekerService {
         return this.httpClient.put(`${this.host}/change_password`, passwordObject,{responseType: 'text'});
     }
     changeEmail(email:string){
-        return this.httpClient.get(`${this.host}/change_email`);
+        console.log(email);
+        return this.httpClient.get(`${this.host}/change_email/?Email=${email}`, {responseType: 'text'});
     }
-    deleteProfile(){
-        return this.httpClient.delete(`${this.host}/delete`);
-    }
+   
     
 }

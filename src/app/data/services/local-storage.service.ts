@@ -16,4 +16,14 @@ export class LocalStorage {
     removeItem(key: string) {
         localStorage.removeItem(key);
     }
+
+    jwt:string='';
+    Email:string='';
+    
+    getClaims(){
+    this.jwt = this.getItem('accessToken');
+    console.log(this.jwt);
+    let jwtData: any = this.getItem('accessToken')?.split('.')[1];
+    return jwtData;
+    }
 }

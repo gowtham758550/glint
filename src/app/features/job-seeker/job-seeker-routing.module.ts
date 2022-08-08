@@ -10,8 +10,13 @@ import { RegisterComponent } from './components/register/register.component';
 import { SignupComponent } from './components/signup/signup.component';
 import { VerifyComponent } from './components/verify/verify.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { LoginComponent } from 'src/app/core/components/login/login.component';
 
 const routes: Routes = [
+  {
+    path:'login',
+    component:LoginComponent
+  },
   {
     path: 'job-seeker/signup',
     component: RegisterComponent,

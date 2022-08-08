@@ -47,4 +47,13 @@ export class AuthService {
     const claims: any = jwtDecode(accessToken);
     return claims['http://schemas.microsoft.com/ws/2008/06/identity/claims/role'];
   }
+
+  getEmail(accessToken: string) {
+    const claims: any = jwtDecode(accessToken);
+    return claims['Email'];
+  }
+
+  deleteProfile(){
+    return this.httpClient.delete(`${this.host}/delete`, {responseType: 'text'});
+}
 }
