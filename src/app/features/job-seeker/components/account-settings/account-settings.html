@@ -1,16 +1,18 @@
 <div class="card p-4 justify-content-center" style="margin-top:0%">
+    <form [formGroup]="emailForm">
     <div class="d-flex">
         <div class=" fs-4">
             Change Email
         </div>
     </div>
     <hr>
-    <p><i class="p-2 pi pi-envelope"></i>Email : deepiravi3000@gmail.com
+    <p><i class="p-2 pi pi-envelope"></i>Email : {{emailForm.controls['Email'].value}}
         <br><br>
         <button class="btn btn primary bg-dark text-white w-50" (click)="updateEmail(emailModal)">
             Change Email
         </button>
     </p>
+</form>
 </div>
 <div class="p-2"></div>
 <div class="card p-4" style="height:auto">
@@ -21,12 +23,12 @@
     </div>
     <hr>
     <label for="currentPassword"> Current Password</label>
-    <input class="w-50 btn-rounded text-muted" type="password" placeholder="Current Password" required>
+    <input class="w-50 btn-rounded text-muted" type="password" placeholder="Current Password" [(ngModel)]="currentPassword" required>
     <br>
     <label for="NewPassword"> New Password</label>
-    <input class="align-center w-50 btn-rounded" type="password" placeholder="New Password" required>
+    <input class="align-center w-50 btn-rounded" type="password" placeholder="New Password" [(ngModel)]="newPassword" required>
     <br>
-    <button class="btn btn primary bg-dark text-white float-end w-50" (click)="changePassword()">
+    <button class="btn btn primary bg-dark text-white float-end w-50" (click)="changePassword(currentPassword,newPassword)">
         Change Password
     </button>
 
