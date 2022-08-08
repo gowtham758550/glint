@@ -32,9 +32,13 @@ const routes: Routes = [
     ]
   },
   {
-    path: 'job-seeker/dashboard',
+    path: 'job-seeker',
     component: HomeComponent,
     children: [
+      // {
+      //   path: 'dashboard',
+      //   component: 
+      // },
       {
         path:'profile',
         component: ProfileComponent

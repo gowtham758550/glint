@@ -7,7 +7,7 @@ import { FormField } from 'src/app/data/models/form-field.model';
 
 @Component({
   selector: 'app-account-settings',
-  templateUrl: 'account-settings.html',
+  templateUrl: './account-settings.component.html',
   styleUrls: ['account-settings.component.css']
 })
 export class AccountSettingsComponent implements OnInit {

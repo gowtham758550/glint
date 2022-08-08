@@ -1013,7 +1013,7 @@ export class JobService {
         return this.httpClient.get(`${this.host}/get`);
     }
 
-    getJobById(id: number) {
+    getJobById(id: number): Observable<any> {
         return this.httpClient.get(`${this.host}/get/${id}`);
     }
 

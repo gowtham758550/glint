@@ -1,17 +1,17 @@
 
-<div class="card p-1">
+<div class="card p-4">
     <div class="fs-3 fw-bold">
-        {{jobs.JobTitle}}
+        {{job.jobTitle}}
     </div>
     <div class="fs-6">
-        <span>
+        <span *ngIf="isJobSeeker">
             <i class="pi pi-building"></i>
-            {{jobs.CompanyName}}
+            company name
+            .
         </span>
-        .
         <span>
             <i class="pi pi-map-marker"></i>
-           {{jobs.Location}}
+           {{job.location}}
         </span>
         .
         <span class="text-success">
@@ -22,10 +22,11 @@
 
     <div class="pt-2">
         <i class="pi pi-briefcase"></i>
-        {{jobs.JobType}}
+        {{job.jobType}}
     </div>
 
-    <div class="pt-2">
+    <div class="pt-2"
+        *ngIf="isJobSeeker">
         <button class="btn btn-primary bg-dark">
             Apply now
         </button>
@@ -40,13 +41,13 @@
         Company Description
     </div>
     <div class="fs-6">
-        {{jobs.Description}}
+        {{job.description}}
     </div>
 
     <div class="fs-5 fw-bold pt-4">
         Job Description
     </div>
     <div class="fs-6">
-        {{jobs.Description}}
+        {{job.description}}
     </div>
 </div>
