@@ -1,0 +1,57 @@
+<div class="d-flex justify-content-center align-items-center h-100">
+    <div class="flex-grow-1">
+        <!-- Profile Image -->
+        <div class="card">
+            <div class="rounded-top text-white d-flex flex-row" style="background-color: #05292a; height:200px;">
+                <div class="ms-4 mt-5 d-flex flex-column" style="width: 200px;">
+                    <img src="..//src/assets/profileimage.png" class="rounded-circle mt-5 mt-4 mb-2"
+                        style="width: 150px;">
+                </div>
+            </div>
+            <br>
+            <!-- Profile Details -->
+            <form [formGroup]="profileForm">
+                <div class="card-body p-4 text-black">
+                    <div class="flex">
+                        <div class="flex">
+                            <p class="lead fw-normal mb-1 float-start">{{jobSeekerArray.companyName}}
+                               </p>
+                            <div class="float-end">
+                                <button class="btn btn-rounded">
+                                    <i class="pi pi-pencil" (click)="updateProfile(profileModal)"></i>
+                                </button>
+                            </div>
+                            <span class="clearfix"></span>
+                            <p class="fw-200 mb-1">{{jobSeekerArray.firstName}} {{jobSeekerArray.lastName}}</p>
+                            
+                            <span class="clearfix"></span>
+                            <p><i class="p-2 pi pi-envelope"></i>Email : {{email}}</p>
+                            <p><i class="p-2 pi pi-calendar"></i>DateOfBirth :
+                                {{jobSeekerArray.dateOfBirth}}</p>
+
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<ng-template #profileModal let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">
+            {{action}} Profile
+        </h4>
+        <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+    </div>
+    <div class="modal-body d-flex justify-content-center">
+        <app-form [formGroup]="profileForm" [formFields]="profileFields">
+        </app-form>
+    </div>
+    <hr>
+    <div class="text-end pb-3 pe-3">
+        <button class="btn bg-dark text-white" style="border-radius: 13px;" [disabled]="!profileForm.valid"
+            (click)="executeProfileAction()">
+            {{action}}
+        </button>
+    </div>
+</ng-template>

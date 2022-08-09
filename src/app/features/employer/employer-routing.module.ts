@@ -14,6 +14,7 @@ import { JobInfoComponent } from 'src/app/shared/components/job-info/job-info.co
 import { EditJobComponent } from './components/edit-job/edit-job.component';
 import { AccountSettingsEmployerComponent } from './components/account-settings-employer/account-settings-employer.component';
 import { LoginComponent } from 'src/app/core/components/login/login.component';
+import { EmployerProfileComponent } from './components/employer-profile/employer-profile.component';
 
 const routes: Routes = [
   {
@@ -66,6 +67,10 @@ const routes: Routes = [
       {
         path: 'account-settings',
         component: AccountSettingsEmployerComponent
+      },
+      {
+        path: 'profile',
+        component: EmployerProfileComponent
       }
     ]
   },

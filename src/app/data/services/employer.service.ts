@@ -20,7 +20,7 @@ export class EmployerService {
     }
     updateProfile(userInfo: object): Observable<any>  {
         console.log(userInfo);
-        return this.httpClient.put(`${this.host}/update`, userInfo);
+        return this.httpClient.put(`${this.host}/update`, userInfo,{responseType: 'text'});
     } 
     changePassword(passwordObject: changePasswordDTO){
         return this.httpClient.put(`${this.host}/change_password`, passwordObject,{responseType: 'text'});
@@ -29,8 +29,8 @@ export class EmployerService {
         console.log(email);
         return this.httpClient.get(`${this.host}/change_email/${email}`, {responseType: 'text'});
     }
-    getUserById(id: number){
-        return this.httpClient.get(`${this.host}/get/?id=${id}`)
+    getEmployerById(){
+        return this.httpClient.get(`${this.host}/get`);
     }
 
 }

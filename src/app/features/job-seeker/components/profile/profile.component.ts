@@ -98,12 +98,7 @@ export class ProfileComponent implements OnInit {
       label: 'End year',
       formControlName: 'completionDate',
       class: ['w']
-    },
-    // {
-    //   type: 'submit',
-    //   label: 'Add',
-    //   class: ['d-flex justify-content-end']
-    // }
+    }
   ]
   experienceForm!: FormGroup;
   experienceFields: FormField[] = [
@@ -198,7 +193,7 @@ export class ProfileComponent implements OnInit {
           firstName: [res.firstName, [Validators.required]],
           lastName: [res.lastName, [Validators.required]],
           gender: [res.gender, [Validators.required]],
-          dateOfBirth: [res.dateOfBirth],
+          dateOfBirth: [formatDate(res.dateOfBirth, 'yyyy-MM-dd', 'en')],
           location: [res.location, Validators.required],
           about: ['Software Engineer'],
         });
@@ -244,7 +239,7 @@ export class ProfileComponent implements OnInit {
     this.educationService.deleteEducationById(id).subscribe(res => {
       console.log(res);
       this.getEducationList()
-      this.toastr.success('Education deleted', 'Success');
+      this.toastr.success('Education deleted');
     })
     this.educationDetails.removeAt(id);
   }
@@ -257,7 +252,7 @@ export class ProfileComponent implements OnInit {
       this.educationService.addEducations(currentEducation).subscribe(res => { console.log(res); this.getEducationList() })
       this.educationDetails.push(this.educationForm);
       console.log(this.educationDetails)
-      this.toastr.success('Education added', 'Success');
+      this.toastr.success('Education added');
     } else {
       this.educationToEdit =
       {
@@ -271,12 +266,12 @@ export class ProfileComponent implements OnInit {
       console.log(this.educationToEdit)
       this.educationService.updateEducationById(this.editableId, this.educationToEdit).subscribe(res => { console.log(res); this.getEducationList() })
       this.educationDetails.controls[this.editableId] = this.educationForm;
-      this.toastr.success('Education updated', 'Success');
+      this.toastr.success('Education updated');
     }
     this.modalService.dismissAll();
   }
 
-  // -----------------------------------experience operations------------------------------
+  // ----------------------------------- experience operations ------------------------------
   getExperience(): FormGroup {
     return this.formBuilder.group({
       previousCompanyName: ['', Validators.required],
@@ -320,7 +315,7 @@ export class ProfileComponent implements OnInit {
     this.experienceService.deleteExperienceById(id).subscribe(res => {
       console.log(res);
       this.getExperienceList()
-      this.toastr.success('Experience deleted', 'Success');
+      this.toastr.success('Experience deleted');
     })
     this.experienceDetails.removeAt(id);
   }
@@ -332,7 +327,7 @@ export class ProfileComponent implements OnInit {
       console.log(this.experienceForm.value)
       this.experienceService.addExperiences(currentExperience).subscribe(res => { console.log(res); this.getExperienceList() })
       this.experienceDetails.push(this.experienceForm);
-      this.toastr.success('Experience added', 'Success');
+      this.toastr.success('Experience added');
     } else {
       this.experienceToEdit =
       {
@@ -345,7 +340,7 @@ export class ProfileComponent implements OnInit {
       console.log(this.experienceToEdit)
       this.experienceService.updateExperienceById(this.editableExperienceId, this.experienceToEdit).subscribe(res => { console.log(res); this.getExperienceList() })
       this.experienceDetails.controls[this.editableExperienceId] = this.experienceForm;
-      this.toastr.success('Experience updated', 'Success');
+      this.toastr.success('Experience updated');
     }
     this.modalService.dismissAll();
   }
@@ -364,7 +359,7 @@ export class ProfileComponent implements OnInit {
         this.getJobSeeker();
       });
 
-      this.toastr.success('Profile updated', 'Success');
+      this.toastr.success('Profile updated');
     }
     this.modalService.dismissAll();
   }

@@ -16,6 +16,7 @@ import { EditJobComponent } from './components/edit-job/edit-job.component';
 import { AccountSettingsEmployerComponent } from './components/account-settings-employer/account-settings-employer.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DialogModule } from 'primeng/dialog';
+import { EmployerProfileComponent } from './components/employer-profile/employer-profile.component';
 
 
 
@@ -31,6 +32,7 @@ import { DialogModule } from 'primeng/dialog';
     JobsComponent,
     EditJobComponent,
     AccountSettingsEmployerComponent,
+    EmployerProfileComponent,
   ],
   imports: [
     CommonModule,

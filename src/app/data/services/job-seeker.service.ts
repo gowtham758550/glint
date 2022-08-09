@@ -27,7 +27,7 @@ export class JobSeekerService {
         return this.httpClient.get(`${this.host}/change_email/?Email=${email}`, {responseType: 'text'});
     }
     getUserById(id: number){
-        return this.httpClient.get(`${this.host}/get/?id=${id}`)
+        return this.httpClient.get(`${this.host}/get/${id}`)
     }
    
     
