@@ -63,7 +63,7 @@
                             </div>
                             <div class="text-muted">
                                 {{education.startDate}} -
-                                {{education.endDate}}
+                                {{education.completionDate}}
                             </div>
                         </div>
                         <div class="ps-2 pt-3">
@@ -93,29 +93,29 @@
                     </div>
                 </div>
                 <hr>
-                <ng-container *ngFor="let experience of experienceDetails.controls; let id = index">
+                <ng-container *ngFor="let experience of experienceArray; let id = index">
                     <div class="pt-3 d-flex justify-content-start">
                         <div class="pt-3">
                             <img src="../../../../../assets/company.png" height="50px" width="50px">
                         </div>
                         <div class="ps-4 d-flex flex-column flex-grow-1">
                             <div class="fs-4 fw-bold">
-                                {{experience.controls['previousCompanyName'].value}}
+                                {{experience.previousCompanyName}}
                             </div>
                             <div class="fs-7">
-                                {{experience.controls['designation'].value}}
+                                {{experience.designation}}
                             </div>
                             <div class="text-muted">
                                 Experience:
-                                {{experience.controls['yearOfExperience'].value}} year(s)
+                                {{experience.yearOfExperience}}
                             </div>
                         </div>
                         <div class="ps-2 pt-3">
-                            <button class="btn btn-rounded" (click)="editExperience(experienceModal, id)">
-                                <i class="pi pi-pencil text-primary"></i>
+                            <button class="btn btn-rounded" (click)="editExperience(experienceModal, experience.experienceDetailId)">
+                                <i class="pi pi-pencil"></i>
                             </button>
-                            <button class="ps-2 btn btn-rounded-danger" (click)="deleteExperience(id)">
-                                <i class="pi pi-trash text-danger"></i>
+                            <button class="ps-2 btn btn-rounded-danger" (click)="deleteExperience(experience.experienceDetailId)">
+                                <i class="pi pi-trash"></i>
                             </button>
                         </div>
                     </div>

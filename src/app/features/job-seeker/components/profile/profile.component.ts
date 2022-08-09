@@ -6,6 +6,7 @@ import { ToastrService } from 'ngx-toastr';
 import { FormField } from 'src/app/data/models/form-field.model';
 import { AuthService } from 'src/app/data/services/auth.service';
 import { EducationService } from 'src/app/data/services/education.service';
+import { ExperienceService } from 'src/app/data/services/experience.service';
 import { JobSeekerService } from 'src/app/data/services/job-seeker.service';
 import { LocalStorage } from 'src/app/data/services/local-storage.service';
 
@@ -21,6 +22,11 @@ export class ProfileComponent implements OnInit {
   profileForm!: FormGroup;
   educationInfo: any;
   educationToEdit: any;
+  experienceInfo: any;
+  experienceToEdit: any;
+  experienceArray: any = [];
+  editableExperience: any;
+  editableExperienceId!: number;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -29,18 +35,26 @@ export class ProfileComponent implements OnInit {
     private modalService: NgbModal,
     private toastr: ToastrService,
     private authService: AuthService,
-    private educationService: EducationService
+    private educationService: EducationService,
+    private experienceService: ExperienceService
   ) { }
 
   ngOnInit(): void {
     this.getJobSeekerProfile();
     this.email = this.authService.getEmail(this.accessToken);
     this.getEducationList();
+    this.getExperienceList();
 
   }
   getEducationList() {
     this.educationInfo = this.educationService.getEducation().subscribe(res => {
       this.educationArray = res;
+      // console.log(res)
+    });
+  }
+  getExperienceList() {
+    this.experienceInfo = this.experienceService.getExperience().subscribe(res => {
+      this.experienceArray = res;
       // console.log(res)
     });
   }
@@ -132,7 +146,7 @@ export class ProfileComponent implements OnInit {
     {
       type: 'date',
       label: 'End year',
-      formControlName: 'endDate',
+      formControlName: 'completionDate',
       class: ['w']
     },
     // {
@@ -186,7 +200,7 @@ export class ProfileComponent implements OnInit {
       courseName: ['', Validators.required],
       universityName: ['', Validators.required],
       startDate: ['', Validators.required],
-      endDate: ['', Validators.required]
+      completionDate: ['', Validators.required]
     });
   }
 
@@ -209,7 +223,7 @@ export class ProfileComponent implements OnInit {
       this.educationForm.controls['universityName'].setValue(res.universityName)
       this.educationForm.controls['courseName'].setValue(res.courseName)
       this.educationForm.controls['startDate'].setValue(formatDate(res.startDate, 'yyyy-MM-dd', 'en'))
-      this.educationForm.controls['endDate'].setValue(formatDate(res.endDate, 'yyyy-MM-dd', 'en'))
+      this.educationForm.controls['completionDate'].setValue(formatDate(res.completionDate, 'yyyy-MM-dd', 'en'))
     }
     );
 
@@ -261,37 +275,69 @@ export class ProfileComponent implements OnInit {
       previousCompanyName: ['', Validators.required],
       designation: ['', Validators.required],
       yearOfExperience: [''],
-      previousSalary:[''],
+      previousSalary: [''],
     })
   }
 
   addExperience(ref: any) {
     this.action = 'Add',
       this.experienceForm = this.getExperience();
+    this.getExperienceList();
 
     this.modalService.open(ref).result.then(result => { });
   }
 
   editExperience(ref: any, id: number) {
     this.action = 'Update',
-      this.editableId = id;
+      this.editableExperienceId = id;
+    console.log(this.editableExperienceId)
+    this.experienceForm = this.getExperience()
 
-    this.experienceForm = this.experienceDetails.controls[id];
+    this.experienceService.getExperienceById(id).subscribe(res => {
+      this.editableExperience = res;
+
+      console.log(res.previousCompanyName);
+      this.experienceForm.controls['previousCompanyName'].setValue(res.previousCompanyName);
+      this.experienceForm.controls['designation'].setValue(res.designation)
+      this.experienceForm.controls['yearOfExperience'].setValue(res.yearOfExperience)
+      this.experienceForm.controls['previousSalary'].setValue(res.previousSalary)
+    }
+    );
+
+    console.log("***********" + this.experienceForm.value)
 
     this.modalService.open(ref).result.then(result => { });
   }
 
   deleteExperience(id: number) {
+    this.experienceService.deleteExperienceById(id).subscribe(res => {
+      console.log(res);
+      this.getExperienceList()
+      this.toastr.success('Experience deleted', 'Success');
+    })
     this.experienceDetails.removeAt(id);
   }
 
   executeExperienceAction() {
     if (this.action == 'Add') {
-      
+      const currentExperience: any = [];
+      currentExperience.push(this.experienceForm.value)
+      console.log(this.experienceForm.value)
+      this.experienceService.addExperiences(currentExperience).subscribe(res => { console.log(res); this.getExperienceList() })
       this.experienceDetails.push(this.experienceForm);
       this.toastr.success('Experience added', 'Success');
     } else {
-      this.experienceDetails.controls[this.editableId] = this.experienceForm;
+      this.experienceToEdit =
+      {
+        "experienceDetailId": this.editableExperienceId,
+        "previousCompanyName": this.experienceForm.value.previousCompanyName,
+        "designation": this.experienceForm.value.designation,
+        "yearOfExperience": this.experienceForm.value.yearOfExperience,
+        "previousSalary": this.experienceForm.value.previousSalary
+      }
+      console.log(this.experienceToEdit)
+      this.experienceService.updateExperienceById(this.editableExperienceId, this.experienceToEdit).subscribe(res => { console.log(res); this.getExperienceList() })
+      this.experienceDetails.controls[this.editableExperienceId] = this.experienceForm;
       this.toastr.success('Experience updated', 'Success');
     }
     this.modalService.dismissAll();
