@@ -1,27 +1,46 @@
-<div class="p-4 card" style="width: 50rem;">
-    <div class="fs-3 fw-bold">
-        {{jobs.JobTitle}}
+<div style="cursor: pointer;"
+    [routerLink]="'/job-seeker/job/' + job.postJobDetailId">
+    <div class="p-4 card card-shadow">
+        <div class="d-flex justify-content-between">
+            <div class="fs-3 fw-bold">
+                {{job.jobTitle}}
+            </div>
+            <div>
+                <ng-container *ngIf="isApplied; then applied; else notApplied">
+                </ng-container>
+                <ng-template #applied>
+                    <button class="btn bg-dark text-white rounded-pill" [disabled]="isApplied">
+                        Applied
+                    </button>
+                </ng-template>
+                <ng-template #notApplied>
+                    <button class="btn bg-dark text-white rounded-pill" (click)="applyForJob()">
+                        Apply
+                    </button>
+                </ng-template>
+            </div>
+        </div>
+        <div class="fs-5">
+            <i class="pi pi-building"></i>
+            <span class="align-bottom">
+                company name
+            </span>
+        </div>
+        <div class="fs-6 text-muted">
+            <i class="pi pi-map-marker"></i>
+            {{job.location}}
+        </div>
+        <div class="pt-2">
+            <span class="badge badge-primary bg-warning text-dark">
+                <i class="pi pi-wallet"></i>
+                {{job.salary | currency: 'INR'}}
+            </span>
+            <span class="pe-2"></span>
+            <span class="badge badge-secondary bg-warning text-dark">
+                <i class="pi pi-briefcase"></i>
+                {{job.jobType}}
+            </span>
+        </div>
     </div>
-    <div class="fs-5">
-        <i class="pi pi-building"></i>
-        <span class="align-bottom">
-            {{jobs.CompanyName}}
-        </span>
-    </div>
-    <div class="fs-6 text-muted">
-        <i class="pi pi-map-marker"></i>
-       {{jobs.Location}}
-    </div>
-    <div class="pt-2">
-        <span class="badge badge-primary bg-warning text-dark">
-            <i class="pi pi-wallet"></i>
-            {{jobs.Salary}}
-        </span>
-        <span class="pe-2"></span>
-        <span class="badge badge-secondary bg-warning text-dark">
-            <i class="pi pi-briefcase"></i>
-            {{jobs.JobType}}
-        </span>
-    </div>
+    <div class="pt-4"></div>
 </div>
-<div class="pt-4"></div>

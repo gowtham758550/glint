@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { FormField } from 'src/app/data/models/form-field.model';
 import { JobService } from 'src/app/data/services/job.service';
@@ -84,7 +85,8 @@ export class NewJobComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private jobService: JobService,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
@@ -95,6 +97,7 @@ export class NewJobComponent implements OnInit {
     this.jobService.postJob(this.jobForm.value).subscribe({
       next: data => {
         this.toastr.success('Job created successfully', 'Success');
+        this.router.navigateByUrl('/employer/jobs');
       }
     });
   }

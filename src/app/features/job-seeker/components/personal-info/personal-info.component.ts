@@ -51,11 +51,11 @@ export class PersonalInfoComponent implements OnInit {
       options: [
         {
           value: 'Male',
-          option: 'Male'
+          label: 'Male'
         },
         {
           value: 'Female',
-          option: 'Female'
+          label: 'Female'
         }
       ]
     },

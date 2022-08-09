@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ButtonModule } from 'primeng/button';
+import { TableModule } from 'primeng/table';
 
 import { EmployerRoutingModule } from './employer-routing.module';
 import { RegisterComponent } from './components/register/register.component';
@@ -13,6 +14,7 @@ import { VerifyComponent } from './components/verify/verify.component';
 import { NewJobComponent } from './components/new-job/new-job.component';
 import { JobsComponent } from './components/jobs/jobs.component';
 import { EditJobComponent } from './components/edit-job/edit-job.component';
+import { ViewJobComponent } from './components/view-job/view-job.component';
 
 
 @NgModule({
@@ -25,13 +27,15 @@ import { EditJobComponent } from './components/edit-job/edit-job.component';
     VerifyComponent,
     NewJobComponent,
     JobsComponent,
-    EditJobComponent
+    EditJobComponent,
+    ViewJobComponent,
   ],
   imports: [
     CommonModule,
     EmployerRoutingModule,
     SharedModule,
-    ButtonModule
+    ButtonModule,
+    TableModule
   ]
 })
 export class EmployerModule { }

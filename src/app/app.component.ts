@@ -1,4 +1,4 @@
-import { AfterContentChecked, ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { AfterContentChecked, AfterContentInit, AfterViewInit, ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { Subject } from 'rxjs';
 import { LoaderService } from './core/services/loader.service';
 
@@ -12,7 +12,7 @@ interface Route {
   templateUrl: './app.component.html',
   styles: []
 })
-export class AppComponent implements OnInit, AfterContentChecked {
+export class AppComponent implements OnInit, AfterViewInit {
 
   visibility: boolean = false;
   title = 'glint';
@@ -73,7 +73,7 @@ export class AppComponent implements OnInit, AfterContentChecked {
     this.isLoading = this.loaderService.isLoading;
   }
 
-  ngAfterContentChecked(): void {
+  ngAfterViewInit(): void {
     // this.changeDetector.detectChanges();
   }
 }
