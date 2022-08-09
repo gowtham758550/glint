@@ -15,20 +15,20 @@
                 <div class="card-body p-4 text-black">
                     <div class="flex">
                         <div class="flex">
-                            <p class="lead fw-normal mb-1 float-start">{{profileForm.controls['firstName'].value}}
-                                {{profileForm.controls['lastName'].value}}</p>
+                            <p class="lead fw-normal mb-1 float-start">{{jobSeekerArray.firstName}}
+                                {{jobSeekerArray.lastName}}</p>
                             <div class="float-end">
                                 <button class="btn btn-rounded">
                                     <i class="pi pi-pencil" (click)="updateProfile(profileModal)"></i>
                                 </button>
                             </div>
                             <span class="clearfix"></span>
-                            <p class="fw-200 mb-1">{{profileForm.controls['about'].value}}</p>
-                            <p class="fw-200 mb-1">{{profileForm.controls['location'].value}}</p>
+                            <p class="fw-200 mb-1">{{jobSeekerArray.about}}</p>
+                            <p class="fw-200 mb-1">{{jobSeekerArray.location}}</p>
                             <span class="clearfix"></span>
                             <p><i class="p-2 pi pi-envelope"></i>Email : {{email}}</p>
                             <p><i class="p-2 pi pi-calendar"></i>DateOfBirth :
-                                {{profileForm.controls['dateOfBirth'].value}}</p>
+                                {{jobSeekerArray.dateOfBirth}}</p>
 
                         </div>
                     </div>

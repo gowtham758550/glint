@@ -27,57 +27,7 @@ export class ProfileComponent implements OnInit {
   experienceArray: any = [];
   editableExperience: any;
   editableExperienceId!: number;
-
-  constructor(
-    private formBuilder: FormBuilder,
-    private localStorage: LocalStorage,
-    private jobSeekerService: JobSeekerService,
-    private modalService: NgbModal,
-    private toastr: ToastrService,
-    private authService: AuthService,
-    private educationService: EducationService,
-    private experienceService: ExperienceService
-  ) { }
-
-  ngOnInit(): void {
-    this.getJobSeekerProfile();
-    this.email = this.authService.getEmail(this.accessToken);
-    this.getEducationList();
-    this.getExperienceList();
-
-  }
-  getEducationList() {
-    this.educationInfo = this.educationService.getEducation().subscribe(res => {
-      this.educationArray = res;
-      // console.log(res)
-    });
-  }
-  getExperienceList() {
-    this.experienceInfo = this.experienceService.getExperience().subscribe(res => {
-      this.experienceArray = res;
-      // console.log(res)
-    });
-  }
-  // For getting Job Seeker Profile using Id
-  getJobSeekerProfile() {
-    this.jobSeekerService.getUserById(
-      this.authService.getUserId(
-        this.localStorage.getItem('accessToken')
-      )).subscribe((res: any) => {
-        console.log(res)
-        this.jobSeekerProfile = res
-        this.profileForm = this.formBuilder.group({
-          firstName: [res.firstName, [Validators.required]],
-          lastName: [res.lastName, [Validators.required]],
-          gender: [res.gender, [Validators.required]],
-          dateOfBirth: [res.dateOfBirth],
-          location: [res.location, Validators.required],
-          about: ['Software Engineer'],
-        })
-      });
-  }
-
-
+  jobSeekerArray: any;
   profileFields: FormField[] = [
     {
       type: 'input',
@@ -192,8 +142,69 @@ export class ProfileComponent implements OnInit {
 
 
 
+  constructor(
+    private formBuilder: FormBuilder,
+    private localStorage: LocalStorage,
+    private jobSeekerService: JobSeekerService,
+    private modalService: NgbModal,
+    private toastr: ToastrService,
+    private authService: AuthService,
+    private educationService: EducationService,
+    private experienceService: ExperienceService
+  ) { }
 
-  // education operations
+  ngOnInit(): void {
+    this.getJobSeekerProfile();
+    this.email = this.authService.getEmail(this.accessToken);
+    this.getEducationList();
+    this.getExperienceList();
+
+  }
+  //-----------------------Get Education List Api Call ---------------------------------
+  getEducationList() {
+    this.educationInfo = this.educationService.getEducation().subscribe(res => {
+      this.educationArray = res;
+    });
+  }
+  //-----------------------Get Experience List Api Call ---------------------------------
+
+  getExperienceList() {
+    this.experienceInfo = this.experienceService.getExperience().subscribe(res => {
+      this.experienceArray = res;
+    });
+  }
+  //-----------------------Get JobSeeker Detail Api Call ---------------------------------
+
+  getJobSeeker() {
+    this.jobSeekerService.getUserById(
+      this.authService.getUserId(
+        this.localStorage.getItem('accessToken')
+      )).subscribe((res: any) => {
+        console.log(res)
+        this.jobSeekerArray = res
+      });
+  }
+  //-----------------------Get JobSeeker Profile using ID Api Call ---------------------------------
+  getJobSeekerProfile() {
+    this.jobSeekerService.getUserById(
+      this.authService.getUserId(
+        this.localStorage.getItem('accessToken')
+      )).subscribe((res: any) => {
+        console.log(res);
+        this.jobSeekerArray = res;
+        console.log(this.jobSeekerArray);
+        this.jobSeekerProfile = res;
+        this.profileForm = this.formBuilder.group({
+          firstName: [res.firstName, [Validators.required]],
+          lastName: [res.lastName, [Validators.required]],
+          gender: [res.gender, [Validators.required]],
+          dateOfBirth: [res.dateOfBirth],
+          location: [res.location, Validators.required],
+          about: ['Software Engineer'],
+        });
+      });
+  }
+  // ----------------------------education operations--------------------------------
   getEducation() {
     return this.formBuilder.group({
       qualification: ['', Validators.required],
@@ -226,10 +237,6 @@ export class ProfileComponent implements OnInit {
       this.educationForm.controls['completionDate'].setValue(formatDate(res.completionDate, 'yyyy-MM-dd', 'en'))
     }
     );
-
-    console.log(this.educationForm.value)
-
-
     this.modalService.open(ref).result.then((result) => { })
   }
 
@@ -269,7 +276,7 @@ export class ProfileComponent implements OnInit {
     this.modalService.dismissAll();
   }
 
-  // experience operations
+  // -----------------------------------experience operations------------------------------
   getExperience(): FormGroup {
     return this.formBuilder.group({
       previousCompanyName: ['', Validators.required],
@@ -343,7 +350,7 @@ export class ProfileComponent implements OnInit {
     this.modalService.dismissAll();
   }
 
-  // update profile method
+       //--------------------------------------- update profile method------------------------------------------------
   updateProfile(ref: any) {
     this.action = 'Update';
     console.log(this.action);
@@ -352,9 +359,14 @@ export class ProfileComponent implements OnInit {
   executeProfileAction() {
     if (this.action == 'Update') {
       console.log(this.profileForm.value);
-      this.jobSeekerService.updateProfile(this.profileForm.value).subscribe(res => console.log(res));
+      this.jobSeekerService.updateProfile(this.profileForm.value).subscribe(res => {
+        console.log(res);
+        this.getJobSeeker();
+      });
+
       this.toastr.success('Profile updated', 'Success');
     }
     this.modalService.dismissAll();
   }
+  //-------------------------------------------------------------------------------------------------------------------
 }
