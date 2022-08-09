@@ -1,6 +1,14 @@
-import { AfterViewInit, Component, EventEmitter, OnInit, Output, ViewChild } from "@angular/core";
+import {
+  AfterViewInit,
+  Component,
+  EventEmitter,
+  OnInit,
+  Output,
+  ViewChild,
+} from "@angular/core";
 import { FormGroup, Validators, FormArray, FormBuilder } from "@angular/forms";
 import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
+import { NgxCroppedEvent, NgxPhotoEditorService } from "ngx-photo-editor";
 import { ToastrService } from "ngx-toastr";
 import { delay } from "rxjs";
 import { FormField } from "src/app/data/models/form-field.model";
@@ -8,7 +16,6 @@ import { ProfilePicture } from "src/app/data/models/profile-picture.model";
 import { BlobService } from "src/app/data/services/blob.service";
 import { JobSeekerService } from "src/app/data/services/job-seeker.service";
 import { LocalStorage } from "src/app/data/services/local-storage.service";
-import { DashboardComponent } from "src/app/shared/components/dashboard/dashboard.component";
 import { environment } from "src/environments/environment";
 
 @Component({
@@ -17,9 +24,6 @@ import { environment } from "src/environments/environment";
   styleUrls: ["profile.component.css"],
 })
 export class ProfileComponent implements OnInit, AfterViewInit {
-
-  @Output() profileImageEmitter = new EventEmitter();
-  @ViewChild('') profile!: DashboardComponent;
   imageUrl!: string;
   profileForm: FormGroup = this.formBuilder.group({
     Name: ["Deepikaa Ravishankar", [Validators.required]],
@@ -125,36 +129,47 @@ export class ProfileComponent implements OnInit, AfterViewInit {
   action!: string;
   editableId!: number;
 
+  imageOutput?: NgxCroppedEvent;
+
   constructor(
     private formBuilder: FormBuilder,
     private modalService: NgbModal,
     private toastr: ToastrService,
-    private profileService: BlobService
+    private profileService: BlobService,
+    private imgService: NgxPhotoEditorService
   ) {}
-
 
   ngOnInit(): void {
     this.getProfilePicture();
   }
 
-  ngAfterViewInit(): void {
+  ngAfterViewInit(): void {}
+
+  updateProfilePicture($event: any) {
+    this.imgService
+      .open($event, {
+        aspectRatio: 4 / 3,
+        autoCropArea: 1,
+      })
+      .subscribe((data) => {
+        this.imageOutput = data;
+        let file: any = data.file;
+        let formData: FormData = new FormData();
+        formData.append("profilePicture", file, file.name);
+        this.profileService.addProfilePicture(formData).subscribe({
+          next: (_data) => {
+            console.log("success");
+            this.getProfilePicture();
+          },
+          error: (error) => {
+            console.log(error);
+          },
+        });
+      });
   }
 
-  updateProfilePicture(event: any) {
-    let file: File = event.target.files[0];
-    let formData: FormData = new FormData();
-    formData.append("profilePicture", file, file.name);
-    this.profileService.addProfilePicture(formData).subscribe({
-      next: (data) => {
-        console.log("success");
-        this.getProfilePicture();
-        this.profile.getProfilePicture();
-        this.profileImageEmitter.emit();
-      },
-      error: (error) => {
-        console.log(error);
-      },
-    });
+  triggerSelectFile(fileInput: HTMLInputElement) {
+    fileInput.click();
   }
 
   getProfilePicture() {
