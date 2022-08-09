@@ -1,116 +1,124 @@
-import { Component, OnInit } from '@angular/core';
-import { FormGroup, Validators, FormArray, FormBuilder } from '@angular/forms';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { ToastrService } from 'ngx-toastr';
-import { FormField } from 'src/app/data/models/form-field.model';
-import { JobSeekerService } from 'src/app/data/services/job-seeker.service';
-import { LocalStorage } from 'src/app/data/services/local-storage.service';
+import { AfterViewInit, Component, EventEmitter, OnInit, Output, ViewChild } from "@angular/core";
+import { FormGroup, Validators, FormArray, FormBuilder } from "@angular/forms";
+import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
+import { ToastrService } from "ngx-toastr";
+import { delay } from "rxjs";
+import { FormField } from "src/app/data/models/form-field.model";
+import { ProfilePicture } from "src/app/data/models/profile-picture.model";
+import { BlobService } from "src/app/data/services/blob.service";
+import { JobSeekerService } from "src/app/data/services/job-seeker.service";
+import { LocalStorage } from "src/app/data/services/local-storage.service";
+import { DashboardComponent } from "src/app/shared/components/dashboard/dashboard.component";
+import { environment } from "src/environments/environment";
 
 @Component({
-  selector: 'app-profile',
-  templateUrl: 'profile.component.html',
-  styleUrls: ['profile.component.css']
+  selector: "app-profile",
+  templateUrl: "profile.component.html",
+  styleUrls: ["profile.component.css"],
 })
-export class ProfileComponent implements OnInit {
+export class ProfileComponent implements OnInit, AfterViewInit {
+
+  @Output() profileImageEmitter = new EventEmitter();
+  @ViewChild('') profile!: DashboardComponent;
+  imageUrl!: string;
   profileForm: FormGroup = this.formBuilder.group({
-    Name: ['Deepikaa Ravishankar', [Validators.required]],
-    Email: ['deepikaa@gmail.com', [Validators.required]],
-    Location: ['Coimbatore, TamilNadu, Coimbatore', Validators.required],
-    Designation: ['Software Engineer', Validators.required],
-    Bio: ['Software Engineer'],
-  })
+    Name: ["Deepikaa Ravishankar", [Validators.required]],
+    Email: ["deepikaa@gmail.com", [Validators.required]],
+    Location: ["Coimbatore, TamilNadu, Coimbatore", Validators.required],
+    Designation: ["Software Engineer", Validators.required],
+    Bio: ["Software Engineer"],
+  });
   profileFields: FormField[] = [
     {
-      type: 'input',
-      label: 'Name',
-      formControlName: 'Name',
-      class: ['w'],
+      type: "input",
+      label: "Name",
+      formControlName: "Name",
+      class: ["w"],
     },
     {
-      type: 'input',
-      label: 'Email',
-      formControlName: 'Email',
-      class: ['w'],
+      type: "input",
+      label: "Email",
+      formControlName: "Email",
+      class: ["w"],
     },
     {
-      type: 'input',
-      label: 'Location',
-      formControlName: 'Location',
-      class: ['w']
+      type: "input",
+      label: "Location",
+      formControlName: "Location",
+      class: ["w"],
     },
     {
-      type: 'textarea',
-      label: 'Bio',
-      formControlName: 'Bio',
-      class: ['w']
+      type: "textarea",
+      label: "Bio",
+      formControlName: "Bio",
+      class: ["w"],
     },
     {
-      type: 'input',
-      label: 'Designation',
-      formControlName: 'Designation',
-      class: ['w']
-    }
-
-  ]
+      type: "input",
+      label: "Designation",
+      formControlName: "Designation",
+      class: ["w"],
+    },
+  ];
   educationForm!: FormGroup;
   educationFields: FormField[] = [
     {
-      type: 'input',
-      label: 'University or College Name',
-      formControlName: 'universityName',
-      class: ['w']
+      type: "input",
+      label: "University or College Name",
+      formControlName: "universityName",
+      class: ["w"],
     },
     {
-      type: 'input',
-      label: 'Degree',
-      formControlName: 'qualification',
-      class: ['w']
+      type: "input",
+      label: "Degree",
+      formControlName: "qualification",
+      class: ["w"],
     },
     {
-      type: 'input',
-      label: 'Field of study',
-      formControlName: 'courseName',
-      class: ['w']
+      type: "input",
+      label: "Field of study",
+      formControlName: "courseName",
+      class: ["w"],
     },
     {
-      type: 'input',
-      label: 'Start year',
-      formControlName: 'startDate',
-      class: ['w']
+      type: "input",
+      label: "Start year",
+      formControlName: "startDate",
+      class: ["w"],
     },
     {
-      type: 'input',
-      label: 'End year',
-      formControlName: 'endDate',
-      class: ['w']
+      type: "input",
+      label: "End year",
+      formControlName: "endDate",
+      class: ["w"],
     },
     // {
     //   type: 'submit',
     //   label: 'Add',
     //   class: ['d-flex justify-content-end']
     // }
-  ]
+  ];
   experienceForm!: FormGroup;
   experienceFields: FormField[] = [
     {
-      type: 'input',
-      label: 'Company name',
-      formControlName: 'companyName',
-      class: ['w']
+      type: "input",
+      label: "Company name",
+      formControlName: "companyName",
+      class: ["w"],
     },
     {
-      type: 'input',
-      label: 'Designation',
-      formControlName: 'designation',
-      class: ['w']
+      type: "input",
+      label: "Designation",
+      formControlName: "designation",
+      class: ["w"],
     },
     {
-      type: 'number',
-      label: 'Year of in this company',
-      formControlName: 'yearOfExperience',
-      class: ['w']
-    }
-  ]
+      type: "number",
+      label: "Year of in this company",
+      formControlName: "yearOfExperience",
+      class: ["w"],
+    },
+  ];
   profileDetails!: FormGroup;
   educationDetails = new FormArray<FormGroup>([]);
   experienceDetails = new FormArray<FormGroup>([]);
@@ -119,37 +127,67 @@ export class ProfileComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
-    private localStorage: LocalStorage,
-    private jobSeekerService: JobSeekerService,
     private modalService: NgbModal,
-    private toastr: ToastrService
-  ) { }
+    private toastr: ToastrService,
+    private profileService: BlobService
+  ) {}
+
 
   ngOnInit(): void {
+    this.getProfilePicture();
+  }
+
+  ngAfterViewInit(): void {
+  }
+
+  updateProfilePicture(event: any) {
+    let file: File = event.target.files[0];
+    let formData: FormData = new FormData();
+    formData.append("profilePicture", file, file.name);
+    this.profileService.addProfilePicture(formData).subscribe({
+      next: (data) => {
+        console.log("success");
+        this.getProfilePicture();
+        this.profile.getProfilePicture();
+        this.profileImageEmitter.emit();
+      },
+      error: (error) => {
+        console.log(error);
+      },
+    });
+  }
+
+  getProfilePicture() {
+    this.profileService.getProfilePicture().subscribe({
+      next: (data: any) => {
+        let res = data.url;
+        this.imageUrl = res + "?" + environment.sas_token;
+      },
+    });
   }
 
   // education operations
   getEducation() {
     return this.formBuilder.group({
-      qualification: ['', Validators.required],
-      courseName: ['', Validators.required],
-      universityName: ['', Validators.required],
-      startDate: ['', Validators.required],
-      endDate: ['', Validators.required]
+      qualification: ["", Validators.required],
+      courseName: ["", Validators.required],
+      universityName: ["", Validators.required],
+      startDate: ["", Validators.required],
+      endDate: ["", Validators.required],
     });
   }
 
   addEducation(ref: any) {
-    this.action = 'Add';
+    this.action = "Add";
     this.educationForm = this.getEducation();
-    this.modalService.open(ref).result.then((result) => { })
+    this.modalService.open(ref).result.then((result) => {});
   }
 
   editEducation(ref: any, id: number) {
-    this.action = 'Update';
+    this.action = "Update";
     this.editableId = id;
     this.educationForm = this.educationDetails.controls[id];
-    this.modalService.open(ref).result.then((result) => { })
+    this.modalService.open(ref).result.then((result) => {});
   }
 
   deleteEducation(id: number) {
@@ -157,12 +195,12 @@ export class ProfileComponent implements OnInit {
   }
 
   executeEducationAction() {
-    if (this.action == 'Add') {
+    if (this.action == "Add") {
       this.educationDetails.push(this.educationForm);
-      this.toastr.success('Education added', 'Success');
+      this.toastr.success("Education added", "Success");
     } else {
       this.educationDetails.controls[this.editableId] = this.educationForm;
-      this.toastr.success('Education updated', 'Success');
+      this.toastr.success("Education updated", "Success");
     }
     this.modalService.dismissAll();
   }
@@ -170,23 +208,21 @@ export class ProfileComponent implements OnInit {
   // experience operations
   getExperience(): FormGroup {
     return this.formBuilder.group({
-      companyName: ['', Validators.required],
-      designation: ['', Validators.required],
-      yearOfExperience: ['']
-    })
+      companyName: ["", Validators.required],
+      designation: ["", Validators.required],
+      yearOfExperience: [""],
+    });
   }
 
   addExperience(ref: any) {
-    this.action = 'Add',
-      this.experienceForm = this.getExperience();
-    this.modalService.open(ref).result.then(result => { });
+    (this.action = "Add"), (this.experienceForm = this.getExperience());
+    this.modalService.open(ref).result.then((result) => {});
   }
 
   editExperience(ref: any, id: number) {
-    this.action = 'Update',
-      this.editableId = id;
+    (this.action = "Update"), (this.editableId = id);
     this.experienceForm = this.experienceDetails.controls[id];
-    this.modalService.open(ref).result.then(result => { });
+    this.modalService.open(ref).result.then((result) => {});
   }
 
   deleteExperience(id: number) {
@@ -194,12 +230,12 @@ export class ProfileComponent implements OnInit {
   }
 
   executeExperienceAction() {
-    if (this.action == 'Add') {
+    if (this.action == "Add") {
       this.experienceDetails.push(this.experienceForm);
-      this.toastr.success('Experience added', 'Success');
+      this.toastr.success("Experience added", "Success");
     } else {
       this.experienceDetails.controls[this.editableId] = this.experienceForm;
-      this.toastr.success('Experience updated', 'Success');
+      this.toastr.success("Experience updated", "Success");
     }
     this.modalService.dismissAll();
   }
@@ -210,16 +246,14 @@ export class ProfileComponent implements OnInit {
     //   .subscribe({
     //     next: res => console.log(res)
     //   });
-    this.action = 'Update';
+    this.action = "Update";
     console.log(this.action);
-    this.modalService.open(ref).result.then((result) => { })
+    this.modalService.open(ref).result.then((result) => {});
   }
   executeProfileAction() {
-    if (this.action == 'Update') {
-      this.toastr.success('Profile updated', 'Success');
+    if (this.action == "Update") {
+      this.toastr.success("Profile updated", "Success");
     }
     this.modalService.dismissAll();
   }
-
-
 }

@@ -119,7 +119,7 @@
             <button class="btn border border-dark rounded-pill"
                 type="button"
                 id="profile"
-                data-bs-toggle="dropdown">
+                data-bs-toggle="dropdown" (click)="getProfilePicture()">
               <i class="pi pi-user"></i>
             </button>
             <div class="dropdown-menu p-4"
@@ -127,7 +127,8 @@
                 <div class="text-center">
                     <div>
                         <button class="btn border-none border-dark rounded-pill fs-1">
-                            <i class="pi pi-user fs-1"></i>
+                            <img [src]="imageUrl" alt="profile picture" style="border-radius: 50%; width:70px; height:70px;">
+                            <!-- <i class="pi pi-user fs-1"></i> -->
                         </button>
                     </div>
                     <div class="fw-bold">

@@ -4,9 +4,12 @@
         <div class="card">
             <div class="rounded-top text-white d-flex flex-row" style="background-color: #05292a; height:200px;">
                 <div class="ms-4 mt-5 d-flex flex-column" style="width: 200px;">
-                    <img src="..//src/assets/profileimage.png"
-                        class="rounded-circle mt-5 mt-4 mb-2" style="width: 150px; z-index: 1">
+                    <img [src]="imageUrl" class="rounded-circle" style="width: 150px; height: 150px;">
 
+                </div>
+                <div>
+                    <input type="file" (change)="updateProfilePicture($event)" placeholder="Upload file"
+                        accept=".png,.jpg,.jpeg">
                 </div>
             </div>
             <br>
