@@ -10,6 +10,7 @@ import { RegisterComponent } from './components/register/register.component';
 import { SignupComponent } from './components/signup/signup.component';
 import { VerifyComponent } from './components/verify/verify.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { JobInfoComponent } from 'src/app/shared/components/job-info/job-info.component';
 
 const routes: Routes = [
   {
@@ -38,6 +39,10 @@ const routes: Routes = [
       {
         path: 'dashboard',
         component: DashboardComponent
+      },
+      {
+        path: 'job/:postJobDetailId',
+        component: JobInfoComponent
       },
       {
         path:'profile',

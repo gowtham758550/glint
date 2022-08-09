@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import jwtDecode from 'jwt-decode';
 import { ToastrService } from 'ngx-toastr';
 import { FormField } from 'src/app/data/models/form-field.model';
 import { AuthService } from 'src/app/data/services/auth.service';
@@ -17,7 +16,7 @@ export class LoginComponent implements OnInit {
 
   loginForm: FormGroup = this.formBuilder.group({
     userName_or_Email: ['', [Validators.required]],
-    password: ['', Validators.required]
+    password: ['', [Validators.required]]
   })
   loginFields: FormField[] = [
     {

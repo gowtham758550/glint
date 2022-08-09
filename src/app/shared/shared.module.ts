@@ -7,7 +7,6 @@ import { ButtonModule } from 'primeng/button';
 import { DropdownModule } from 'primeng/dropdown'
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { StepsModule } from 'primeng/steps';
-import { TableModule } from 'primeng/table'
 
 import { StepperComponent } from './components/stepper/stepper.component';
 import { SearchBarComponent } from './components/search-bar/search-bar.component';
@@ -18,7 +17,6 @@ import { SignupComponent } from './components/signup/signup.component';
 import { VerifyComponent } from './components/verify/verify.component';
 import { JobCardComponent } from './components/job-card/job-card.component';
 import { JobInfoComponent } from './components/job-info/job-info.component';
-import { SortTableComponent } from './components/sort-table/sort-table.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +29,6 @@ import { SortTableComponent } from './components/sort-table/sort-table.component
     VerifyComponent,
     JobCardComponent,
     JobInfoComponent,
-    SortTableComponent
   ],
   imports: [
     CommonModule,
@@ -43,7 +40,6 @@ import { SortTableComponent } from './components/sort-table/sort-table.component
     FormsModule,
     ReactiveFormsModule,
     StepsModule,
-    TableModule
   ],
   exports: [
     SearchBarComponent,
@@ -55,7 +51,6 @@ import { SortTableComponent } from './components/sort-table/sort-table.component
     VerifyComponent,
     JobCardComponent,
     JobInfoComponent,
-    SortTableComponent
   ]
 })
 export class SharedModule { }

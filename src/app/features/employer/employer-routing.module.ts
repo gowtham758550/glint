@@ -10,8 +10,8 @@ import { SignupComponent } from './components/signup/signup.component';
 import { AuthGuard } from 'src/app/core/guards/auth.guard';
 import { NewJobComponent } from './components/new-job/new-job.component';
 import { JobsComponent } from './components/jobs/jobs.component';
-import { JobInfoComponent } from 'src/app/shared/components/job-info/job-info.component';
 import { EditJobComponent } from './components/edit-job/edit-job.component';
+import { ViewJobComponent } from './components/view-job/view-job.component';
 
 const routes: Routes = [
   {
@@ -51,7 +51,7 @@ const routes: Routes = [
       },
       {
         path: 'job/:postJobDetailId',
-        component: JobInfoComponent
+        component: ViewJobComponent
       },
       {
         path: 'job/edit/:postJobDetaiId',
