@@ -12,6 +12,8 @@ import { NewJobComponent } from './components/new-job/new-job.component';
 import { JobsComponent } from './components/jobs/jobs.component';
 import { JobInfoComponent } from 'src/app/shared/components/job-info/job-info.component';
 import { EditJobComponent } from './components/edit-job/edit-job.component';
+import { AccountSettingsEmployerComponent } from './components/account-settings-employer/account-settings-employer.component';
+import { LoginComponent } from 'src/app/core/components/login/login.component';
 
 const routes: Routes = [
   {
@@ -32,6 +34,10 @@ const routes: Routes = [
         component: CompanyDetailComponent
       }
     ]
+  },
+  {
+    path: 'employer/login',
+    component:LoginComponent
   },
   {
     path: 'employer',
@@ -56,6 +62,10 @@ const routes: Routes = [
       {
         path: 'job/edit/:postJobDetaiId',
         component: EditJobComponent
+      },
+      {
+        path: 'account-settings',
+        component: AccountSettingsEmployerComponent
       }
     ]
   },

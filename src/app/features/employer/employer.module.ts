@@ -13,6 +13,10 @@ import { VerifyComponent } from './components/verify/verify.component';
 import { NewJobComponent } from './components/new-job/new-job.component';
 import { JobsComponent } from './components/jobs/jobs.component';
 import { EditJobComponent } from './components/edit-job/edit-job.component';
+import { AccountSettingsEmployerComponent } from './components/account-settings-employer/account-settings-employer.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { DialogModule } from 'primeng/dialog';
+
 
 
 @NgModule({
@@ -25,13 +29,17 @@ import { EditJobComponent } from './components/edit-job/edit-job.component';
     VerifyComponent,
     NewJobComponent,
     JobsComponent,
-    EditJobComponent
+    EditJobComponent,
+    AccountSettingsEmployerComponent,
   ],
   imports: [
     CommonModule,
     EmployerRoutingModule,
     SharedModule,
-    ButtonModule
+    ButtonModule,
+    ReactiveFormsModule,
+    FormsModule,
+    DialogModule
   ]
 })
 export class EmployerModule { }
