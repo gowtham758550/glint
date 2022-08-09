@@ -4,8 +4,8 @@
         <div class="card">
             <div class="rounded-top text-white d-flex flex-row" style="background-color: #05292a; height:200px;">
                 <div class="ms-4 mt-5 d-flex flex-column" style="width: 200px;">
-                    <img src="..//src/assets/profileimage.png"
-                        class="rounded-circle mt-5 mt-4 mb-2" style="width: 150px;">
+                    <img src="..//src/assets/profileimage.png" class="rounded-circle mt-5 mt-4 mb-2"
+                        style="width: 150px;">
 
                 </div>
             </div>
@@ -15,7 +15,8 @@
                 <div class="card-body p-4 text-black">
                     <div class="flex">
                         <div class="flex">
-                            <p class="lead fw-normal mb-1 float-start">{{profileForm.controls['firstName'].value}} {{profileForm.controls['lastName'].value}}</p>
+                            <p class="lead fw-normal mb-1 float-start">{{profileForm.controls['firstName'].value}}
+                                {{profileForm.controls['lastName'].value}}</p>
                             <div class="float-end">
                                 <button class="btn btn-rounded">
                                     <i class="pi pi-pencil" (click)="updateProfile(profileModal)"></i>
@@ -26,7 +27,8 @@
                             <p class="fw-200 mb-1">{{profileForm.controls['location'].value}}</p>
                             <span class="clearfix"></span>
                             <p><i class="p-2 pi pi-envelope"></i>Email : {{email}}</p>
-                            <p><i class="p-2 pi pi-calendar"></i>DateOfBirth : {{profileForm.controls['dateOfBirth'].value}}</p>
+                            <p><i class="p-2 pi pi-calendar"></i>DateOfBirth :
+                                {{profileForm.controls['dateOfBirth'].value}}</p>
 
                         </div>
                     </div>
@@ -45,7 +47,7 @@
                     </div>
                 </div>
                 <hr>
-                <ng-container *ngFor="let education of educationArray; let id = index">
+                <ng-container *ngFor="let education of educationArray;">
                     <div class="pt-3 d-flex justify-content-start">
                         <div class="pt-3">
                             <img src="assets/university.svg" height="50px" width="50px">
@@ -53,22 +55,24 @@
                         <div class="ps-4 d-flex flex-column flex-grow-1">
                             <!-- {{education.value | json}} -->
                             <div class="fs-4 fw-bold">
-                                {{educationForm.controls['universityName'].value}}
+                                {{education.universityName}}
                             </div>
                             <div class="fs-7">
-                                {{educationForm.controls['qualification'].value}} -
-                                {{educationForm.controls['courseName'].value}}
+                                {{education.qualification}}-
+                                {{education.courseName}}
                             </div>
                             <div class="text-muted">
-                                {{educationForm.controls['startDate'].value}} -
-                                {{educationForm.controls['endDate'].value}}
+                                {{education.startDate}} -
+                                {{education.endDate}}
                             </div>
                         </div>
                         <div class="ps-2 pt-3">
-                            <button class="btn btn-rounded" (click)="editEducation(educationModal, id)">
+                            <button class="btn btn-rounded"
+                                (click)="editEducation(educationModal, education.educationDetailId)">
                                 <i class="pi pi-pencil"></i>
                             </button>
-                            <button class="ps-2 btn btn-rounded-danger" (click)="deleteEducation(id)">
+                            <button class="ps-2 btn btn-rounded-danger"
+                                (click)="deleteEducation(education.educationDetailId)">
                                 <i class="pi pi-trash"></i>
                             </button>
                         </div>
@@ -94,9 +98,9 @@
                         <div class="pt-3">
                             <img src="../../../../../assets/company.png" height="50px" width="50px">
                         </div>
-                        <div class="ps-4 d-flex flex-column">
+                        <div class="ps-4 d-flex flex-column flex-grow-1">
                             <div class="fs-4 fw-bold">
-                                {{experience.controls['companyName'].value}}
+                                {{experience.controls['previousCompanyName'].value}}
                             </div>
                             <div class="fs-7">
                                 {{experience.controls['designation'].value}}

@@ -1,3 +1,4 @@
+import { formatDate } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, Validators, FormArray, FormBuilder } from '@angular/forms';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
@@ -19,6 +20,7 @@ export class ProfileComponent implements OnInit {
   jobSeekerProfile: any = {};
   profileForm!: FormGroup;
   educationInfo: any;
+  educationToEdit: any;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -33,8 +35,14 @@ export class ProfileComponent implements OnInit {
   ngOnInit(): void {
     this.getJobSeekerProfile();
     this.email = this.authService.getEmail(this.accessToken);
-    this.educationInfo = this.educationService.getEducation().subscribe(res => { this.educationArray=res });
+    this.getEducationList();
 
+  }
+  getEducationList() {
+    this.educationInfo = this.educationService.getEducation().subscribe(res => {
+      this.educationArray = res;
+      // console.log(res)
+    });
   }
   // For getting Job Seeker Profile using Id
   getJobSeekerProfile() {
@@ -94,7 +102,6 @@ export class ProfileComponent implements OnInit {
     //   formControlName: 'Designation',
     //   class: ['w']
     // }
-
   ]
   educationForm!: FormGroup;
   educationFields: FormField[] = [
@@ -139,7 +146,7 @@ export class ProfileComponent implements OnInit {
     {
       type: 'input',
       label: 'Company name',
-      formControlName: 'companyName',
+      formControlName: 'previousCompanyName',
       class: ['w']
     },
     {
@@ -153,6 +160,12 @@ export class ProfileComponent implements OnInit {
       label: 'Year of in this company',
       formControlName: 'yearOfExperience',
       class: ['w']
+    },
+    {
+      type: 'number',
+      label: 'Previous Salary',
+      formControlName: 'previousSalary',
+      class: ['w']
     }
   ]
   profileDetails!: FormGroup;
@@ -161,6 +174,7 @@ export class ProfileComponent implements OnInit {
   experienceDetails = new FormArray<FormGroup>([]);
   action!: string;
   editableId!: number;
+  editableEducation: any;
 
 
 
@@ -179,30 +193,62 @@ export class ProfileComponent implements OnInit {
   addEducation(ref: any) {
     this.action = 'Add';
     this.educationForm = this.getEducation();
-    console.log(this.educationForm)
+
+    this.getEducationList()
     this.modalService.open(ref).result.then((result) => { })
   }
 
   editEducation(ref: any, id: number) {
     this.action = 'Update';
     this.editableId = id;
-    this.educationForm = this.educationDetails.controls[id];
+    this.educationForm = this.getEducation()
+    this.educationService.getEducationById(id).subscribe(res => {
+      this.editableEducation = res;
+      console.log(res);
+      this.educationForm.controls['qualification'].setValue(res.qualification)
+      this.educationForm.controls['universityName'].setValue(res.universityName)
+      this.educationForm.controls['courseName'].setValue(res.courseName)
+      this.educationForm.controls['startDate'].setValue(formatDate(res.startDate, 'yyyy-MM-dd', 'en'))
+      this.educationForm.controls['endDate'].setValue(formatDate(res.endDate, 'yyyy-MM-dd', 'en'))
+    }
+    );
+
+    console.log(this.educationForm.value)
+
+
     this.modalService.open(ref).result.then((result) => { })
   }
 
   deleteEducation(id: number) {
+    this.educationService.deleteEducationById(id).subscribe(res => {
+      console.log(res);
+      this.getEducationList()
+      this.toastr.success('Education deleted', 'Success');
+    })
     this.educationDetails.removeAt(id);
   }
 
   executeEducationAction() {
     if (this.action == 'Add') {
-      // this.educationArray.push(this.educationInfo)
-      console.log(typeof this.educationInfo);
-      console.log(this.educationArray);
-      this.educationService.addEducations(this.educationArray).subscribe(res => console.log(res))
+      const currentEducation: any = [];
+      currentEducation.push(this.educationForm.value)
+      console.log(this.educationForm.value)
+      this.educationService.addEducations(currentEducation).subscribe(res => { console.log(res); this.getEducationList() })
       this.educationDetails.push(this.educationForm);
+      console.log(this.educationDetails)
       this.toastr.success('Education added', 'Success');
     } else {
+      this.educationToEdit =
+      {
+        "educationDetailId": this.editableId,
+        "qualification": this.educationForm.value.qualification,
+        "courseName": this.educationForm.value.courseName,
+        "universityName": this.educationForm.value.universityName,
+        "startDate": this.educationForm.value.startDate,
+        "completionDate": this.educationForm.value.endDate
+      }
+      console.log(this.educationToEdit)
+      this.educationService.updateEducationById(this.editableId, this.educationToEdit).subscribe(res => { console.log(res); this.getEducationList() })
       this.educationDetails.controls[this.editableId] = this.educationForm;
       this.toastr.success('Education updated', 'Success');
     }
@@ -212,22 +258,26 @@ export class ProfileComponent implements OnInit {
   // experience operations
   getExperience(): FormGroup {
     return this.formBuilder.group({
-      companyName: ['', Validators.required],
+      previousCompanyName: ['', Validators.required],
       designation: ['', Validators.required],
-      yearOfExperience: ['']
+      yearOfExperience: [''],
+      previousSalary:[''],
     })
   }
 
   addExperience(ref: any) {
     this.action = 'Add',
       this.experienceForm = this.getExperience();
+
     this.modalService.open(ref).result.then(result => { });
   }
 
   editExperience(ref: any, id: number) {
     this.action = 'Update',
       this.editableId = id;
+
     this.experienceForm = this.experienceDetails.controls[id];
+
     this.modalService.open(ref).result.then(result => { });
   }
 
@@ -237,6 +287,7 @@ export class ProfileComponent implements OnInit {
 
   executeExperienceAction() {
     if (this.action == 'Add') {
+      
       this.experienceDetails.push(this.experienceForm);
       this.toastr.success('Experience added', 'Success');
     } else {
