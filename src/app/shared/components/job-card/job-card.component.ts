@@ -12,6 +12,7 @@ import { AppliedJobService } from 'src/app/data/services/applied-job.service';
 export class JobCardComponent implements OnInit {
 
   @Input() job!: Job;
+
   isApplied: boolean = false;
   
   constructor(
@@ -21,9 +22,7 @@ export class JobCardComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.appliedJobService.isApplied(this.job.postJobDetailId).subscribe({
-      next: (data: any) => this.isApplied = data.status
-    });
+    // this.getIsApplied();
   }
 
   applyForJob() {
@@ -35,5 +34,11 @@ export class JobCardComponent implements OnInit {
         }
       });
     }
+  }
+
+  getIsApplied() {
+    this.appliedJobService.isApplied(this.job.postJobDetailId).subscribe({
+      next: (data: any) => this.isApplied = data.status
+    });
   }
 }

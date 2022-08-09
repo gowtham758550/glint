@@ -3,7 +3,6 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { SearchBar } from 'src/app/data/models/search-bar.model';
 import { Option } from 'src/app/data/models/options.model';
 import { Router } from '@angular/router';
-import { AuthGuard } from '../../guards/auth.guard';
 
 @Component({
   selector: 'app-landing-page',
@@ -56,7 +55,6 @@ export class LandingPageComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private router: Router,
-    private authGuard: AuthGuard
   ) { }
 
   ngOnInit(): void {

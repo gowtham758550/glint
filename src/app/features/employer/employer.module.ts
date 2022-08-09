@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ButtonModule } from 'primeng/button';
 import { TableModule } from 'primeng/table';
+import {SkeletonModule} from 'primeng/skeleton';
 
 import { EmployerRoutingModule } from './employer-routing.module';
 import { RegisterComponent } from './components/register/register.component';
@@ -35,7 +36,8 @@ import { ViewJobComponent } from './components/view-job/view-job.component';
     EmployerRoutingModule,
     SharedModule,
     ButtonModule,
-    TableModule
+    TableModule,
+    SkeletonModule
   ]
 })
 export class EmployerModule { }

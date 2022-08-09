@@ -4,55 +4,115 @@
     </div>
     
     <div>
-        <p-table [value]="appliers"
-            responsiveLayout="scroll">
-            <ng-template pTemplate="header">
-                <tr>
-                    <th pSortableColumn="fullName">
-                        Full name
-                        <p-sortIcon field="fullName"></p-sortIcon>
-                    </th>
-                    <th pSortableColumn="email">
-                        Email
-                        <p-sortIcon field="email"></p-sortIcon>
-                    </th>
-                    <th pSortableColumn="status">
-                        Status
-                        <p-sortIcon field="status"></p-sortIcon>
-                    </th>
-                    <th pSortableColumn="gender">
-                        Gender
-                        <p-sortIcon field="gender"></p-sortIcon>
-                    </th>
-                    <th>
-                        Actions
-                    </th>
-                </tr>
-            </ng-template>
-            <ng-template pTemplate="body" let-job>
-                <tr>
-                    <td>{{job.fullName}}</td>
-                    <td>{{job.email}}</td>
-                    <td>
-                        <span class="status"
-                            [ngClass]="job.status == 'Pending' ? 'status-pending' : 'status-success'">
-                            {{job.status}}
-                        </span>
-                    </td>
-                    <td>{{job.gender}}</td>
-                    <td>{{job.dateOfBirth | date: 'short' }}</td>
-                    <td>
-                        <button class="btn border-none"
-                            [routerLink]="'/employer/job/' + job.postJobDetailId">
-                            <i class="pi pi-eye"></i>
-                        </button>
-                        <button class="btn border-none"
-                            [routerLink]="'/employer/job/edit/' + job.postJobDetailId">
-                            <i class="pi pi-pencil"></i>
-                        </button>
-                    </td>
-                </tr>
-            </ng-template>
-        </p-table>
+
+        <ng-container *ngIf="isLoaded; then data; else loader"></ng-container>
+
+        <!-- loader -->
+        <ng-template #loader>
+            <p-table responsiveLayout="scroll">
+                <ng-template pTemplate="header">
+                    <tr>
+                        <th>
+                            Full name
+                            <p-sortIcon></p-sortIcon>
+                        </th>
+                        <th>
+                            Email
+                            <p-sortIcon></p-sortIcon>
+                        </th>
+                        <th>
+                            Status
+                            <p-sortIcon></p-sortIcon>
+                        </th>
+                        <th>
+                            Gender
+                            <p-sortIcon></p-sortIcon>
+                        </th>
+                        <th>
+                            DOB
+                            <p-sortIcon></p-sortIcon>
+                        </th>
+                    </tr>
+                    <tr>
+                        <td><p-skeleton height="2rem"></p-skeleton></td>
+                        <td><p-skeleton height="2rem"></p-skeleton></td>
+                        <td><p-skeleton height="2rem"></p-skeleton></td>
+                        <td><p-skeleton height="2rem"></p-skeleton></td>
+                        <td><p-skeleton height="2rem"></p-skeleton></td>
+                    </tr>
+                    <tr>
+                        <td><p-skeleton height="2rem"></p-skeleton></td>
+                        <td><p-skeleton height="2rem"></p-skeleton></td>
+                        <td><p-skeleton height="2rem"></p-skeleton></td>
+                        <td><p-skeleton height="2rem"></p-skeleton></td>
+                        <td><p-skeleton height="2rem"></p-skeleton></td>
+                    </tr>
+                    <tr>
+                        <td><p-skeleton height="2rem"></p-skeleton></td>
+                        <td><p-skeleton height="2rem"></p-skeleton></td>
+                        <td><p-skeleton height="2rem"></p-skeleton></td>
+                        <td><p-skeleton height="2rem"></p-skeleton></td>
+                        <td><p-skeleton height="2rem"></p-skeleton></td>
+                    </tr>
+                </ng-template>
+            </p-table>
+        </ng-template>
+
+        <ng-template #data>
+            <p-table [value]="appliers"
+                responsiveLayout="scroll">
+                <ng-template pTemplate="header">
+                    <tr>
+                        <th pSortableColumn="fullName">
+                            Full name
+                            <p-sortIcon field="fullName"></p-sortIcon>
+                        </th>
+                        <th pSortableColumn="email">
+                            Email
+                            <p-sortIcon field="email"></p-sortIcon>
+                        </th>
+                        <th pSortableColumn="status">
+                            Status
+                            <p-sortIcon field="status"></p-sortIcon>
+                        </th>
+                        <th pSortableColumn="gender">
+                            Gender
+                            <p-sortIcon field="gender"></p-sortIcon>
+                        </th>
+                        <th pSortableColumn="dateOfBirth">
+                            DOB
+                            <p-sortIcon field="dateOfBirth"></p-sortIcon>
+                        </th>
+                        <!-- <th>
+                            Actions
+                        </th> -->
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-job>
+                    <tr class="pointer">
+                        <td>{{job.fullName}}</td>
+                        <td>{{job.email}}</td>
+                        <td>
+                            <span class="status"
+                                [ngClass]="job.status == 'Pending' ? 'status-pending' : 'status-success'">
+                                {{job.status}}
+                            </span>
+                        </td>
+                        <td>{{job.gender}}</td>
+                        <td>{{job.dateOfBirth | date: 'short' }}</td>
+                        <!-- <td>
+                            <button class="btn border-none"
+                                [routerLink]="'/employer/job/' + job.postJobDetailId">
+                                <i class="pi pi-eye"></i>
+                            </button>
+                            <button class="btn border-none"
+                                [routerLink]="'/employer/job/edit/' + job.postJobDetailId">
+                                <i class="pi pi-pencil"></i>
+                            </button>
+                        </td> -->
+                    </tr>
+                </ng-template>
+            </p-table>
+        </ng-template>
     </div>
 </div>

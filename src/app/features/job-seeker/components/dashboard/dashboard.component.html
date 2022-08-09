@@ -1,6 +1,73 @@
-<div>
-    <div *ngFor="let job of allJobs">
-        <app-job-card [job]="job">
-        </app-job-card>
+<div class="d-flex justify-content-start">
+    <div class="flex-grow-1">
+        <ng-container *ngFor="let job of filteredJobs">
+            <app-job-card [job]="job">
+            </app-job-card>
+        </ng-container>
+    </div>
+
+    <div class="ps-3"></div>
+
+    <div class="flex-grow-1">
+        <div class="card card-shadow p-3">
+            <div class="d-flex justify-content-between">
+                <div>
+                    <i class="pi pi-filter"></i>
+                    All Filters
+                </div>
+                <div>
+                    <a class="btn border-none btn-link" 
+                        (click)="clearFilters()">
+                        clear all filters
+                    </a>
+                </div>
+            </div>
+
+            <div class="pt-3">
+                <p-accordion [multiple]="true">
+                    <!-- Experience filters -->
+                    <p-accordionTab header="Experience"
+                        [selected]="true">
+                        <ng-container *ngFor="let experience of experiences">
+                            <div class="pb-2">
+                                <p-checkbox [value]="experience"
+                                    name="experience"
+                                    [inputId]="experience"
+                                    [(ngModel)]="filteredExperience">
+                                </p-checkbox>
+                                <label class="ps-2 pointer"
+                                    [for]="experience">
+                                    {{experience}}
+                                </label>
+                            </div>
+                        </ng-container>
+                    </p-accordionTab>
+
+                    <!-- location filters -->
+                    <p-accordionTab header="Location"
+                        [selected]="true">
+                        <ng-container *ngFor="let location of locations">
+                            <div class="pb-2">
+                                <p-checkbox [value]="location"
+                                    [inputId]="location"
+                                    [(ngModel)]="filteredLocations">
+                                </p-checkbox>
+                                <label class="ps-2 pointer"
+                                    [for]="location">
+                                    {{location}}
+                                </label>
+                            </div>
+                        </ng-container>
+                    </p-accordionTab>
+                </p-accordion>
+            </div>
+
+            <div class="pt-3 text-end">
+                <button class="btn bg-dark text-secondary rounded-pill"
+                    (click)="applyFilters()">
+                    Apply filters
+                </button>
+            </div>
+        </div>
     </div>
 </div>

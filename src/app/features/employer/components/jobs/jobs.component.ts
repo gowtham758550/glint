@@ -11,6 +11,7 @@ import { JobService } from 'src/app/data/services/job.service';
 export class JobsComponent implements OnInit {
 
   jobs: Job[] = [];
+  isLoaded = false;
 
   constructor(
     private jobService: JobService
@@ -24,6 +25,7 @@ export class JobsComponent implements OnInit {
     this.jobService.getPostedJob().subscribe({
       next: data => {
         this.jobs = data;
+        this.isLoaded = true;
       }
     });
   }

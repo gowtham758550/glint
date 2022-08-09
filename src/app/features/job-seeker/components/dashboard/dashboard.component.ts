@@ -12,6 +12,11 @@ import { JobService } from 'src/app/data/services/job.service';
 export class DashboardComponent implements OnInit {
 
   allJobs!: Job[];
+  filteredJobs!: Job[];
+  locations = ['Bangalore', 'Coimbatore', 'Chennai', 'Kolkata', 'Mumbai']
+  experiences = ['Experienced', 'Fresher']
+  filteredLocations: string[] = [];
+  filteredExperience: string[] = [];
 
   constructor(
     private filterService: FilterService
@@ -23,7 +28,27 @@ export class DashboardComponent implements OnInit {
 
   getAllJob() {
     this.filterService.getAllJobs().subscribe({
-      next: (data:Job[]) => this.allJobs = data
+      next: (data:Job[]) => {
+        this.allJobs = data;
+        this.filteredJobs = data;
+      }
     });
+  }
+
+  applyFilters() {
+    if (this.filteredExperience.length > 0 || this.filteredLocations.length > 0) {
+      this.filteredJobs = this.allJobs.filter(job => {
+        const experience = job.experienceNeeded > 0 ? 'Experienced' : 'Fresher';
+        return this.filteredExperience.includes(experience) && this.filteredLocations.includes(job.location);
+      })
+    } else {
+      this.filteredJobs = this.allJobs;
+    }
+    console.log(this.filteredJobs);
+  }
+
+  clearFilters() {
+    this.filteredExperience = [];
+    this.filteredLocations = [];
   }
 }

@@ -10,6 +10,7 @@ import { FilterService } from 'src/app/data/services/filter.service';
 })
 export class ViewJobComponent implements OnInit {
 
+  isLoaded = false;
   appliers: any;
 
   constructor(
@@ -24,7 +25,10 @@ export class ViewJobComponent implements OnInit {
   getJobAppliers() {
     const postJobDetailId = this.activatedRoute.snapshot.params['postJobDetailId']
     this.filterService.getJobAppliers(postJobDetailId).subscribe({
-      next: data => this.appliers = data
+      next: data => {
+        this.appliers = data;
+        this.isLoaded = true;
+      }
     });
   }
 }
