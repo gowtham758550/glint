@@ -9,7 +9,7 @@
     <br>    
 </ng-container>
 
-<ng-container *ngIf="isLoading | async; then blur; else normal">
+<!-- <ng-container *ngIf="isLoading | async; then blur; else normal">
 </ng-container>
 
 <ng-template #blur>
@@ -27,4 +27,8 @@
 
 <div class="progress-spinner" *ngIf="isLoading | async">
     <img src="../assets/breath-glint.svg" class="progress-spinner">
+</div> -->
+
+<div>
+    <router-outlet></router-outlet>
 </div>
