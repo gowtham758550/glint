@@ -8,13 +8,17 @@ import { Education } from "../models/education.model";
 })
 export class EducationService {
 
-    host = `${environment.host}/Education`;
+    host = `${environment.host}/education`;
 
     constructor(
         private httpClient: HttpClient
     ) {}
 
-    addEducations(educationList: Education[]) {
-        return this.httpClient.post(`${this.host}/add`, educationList);
+    addEducations(educationList: any) {
+        console.log(educationList);
+        return this.httpClient.post(`${this.host}/add`, educationList, {responseType: 'text'});
+    }
+    getEducation(){
+        return this.httpClient.get(`${this.host}/get`)
     }
 }

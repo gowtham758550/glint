@@ -3,6 +3,8 @@ import { FormGroup, Validators, FormArray, FormBuilder } from '@angular/forms';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrService } from 'ngx-toastr';
 import { FormField } from 'src/app/data/models/form-field.model';
+import { AuthService } from 'src/app/data/services/auth.service';
+import { EducationService } from 'src/app/data/services/education.service';
 import { JobSeekerService } from 'src/app/data/services/job-seeker.service';
 import { LocalStorage } from 'src/app/data/services/local-storage.service';
 
@@ -12,54 +14,90 @@ import { LocalStorage } from 'src/app/data/services/local-storage.service';
   styleUrls: ['profile.component.css']
 })
 export class ProfileComponent implements OnInit {
-  profileForm: FormGroup = this.formBuilder.group({
-    Name: ['Deepikaa Ravishankar', [Validators.required]],
-    Email: ['deepikaa@gmail.com', [Validators.required]],
-    Location: ['Coimbatore, TamilNadu, Coimbatore', Validators.required],
-    Designation: ['Software Engineer', Validators.required],
-    Bio: ['Software Engineer'],
-  })
+  email!: string;
+  accessToken = this.localStorage.getItem('accessToken');
+  jobSeekerProfile: any = {};
+  profileForm!: FormGroup;
+  educationInfo: any;
+
+  constructor(
+    private formBuilder: FormBuilder,
+    private localStorage: LocalStorage,
+    private jobSeekerService: JobSeekerService,
+    private modalService: NgbModal,
+    private toastr: ToastrService,
+    private authService: AuthService,
+    private educationService: EducationService
+  ) { }
+
+  ngOnInit(): void {
+    this.getJobSeekerProfile();
+    this.email = this.authService.getEmail(this.accessToken);
+    this.educationInfo = this.educationService.getEducation().subscribe(res => { this.educationArray=res });
+
+  }
+  // For getting Job Seeker Profile using Id
+  getJobSeekerProfile() {
+    this.jobSeekerService.getUserById(
+      this.authService.getUserId(
+        this.localStorage.getItem('accessToken')
+      )).subscribe((res: any) => {
+        console.log(res)
+        this.jobSeekerProfile = res
+        this.profileForm = this.formBuilder.group({
+          firstName: [res.firstName, [Validators.required]],
+          lastName: [res.lastName, [Validators.required]],
+          gender: [res.gender, [Validators.required]],
+          dateOfBirth: [res.dateOfBirth],
+          location: [res.location, Validators.required],
+          about: ['Software Engineer'],
+        })
+      });
+  }
+
+
   profileFields: FormField[] = [
     {
       type: 'input',
-      label: 'Name',
-      formControlName: 'Name',
+      label: 'FirstName',
+      formControlName: 'firstName',
       class: ['w'],
     },
     {
       type: 'input',
-      label: 'Email',
-      formControlName: 'Email',
+      label: 'LastName',
+      formControlName: 'lastName',
       class: ['w'],
     },
     {
       type: 'input',
       label: 'Location',
-      formControlName: 'Location',
-      class: ['w']
+      formControlName: 'location',
+      class: ['w'],
     },
     {
       type: 'textarea',
       label: 'Bio',
-      formControlName: 'Bio',
+      formControlName: 'about',
       class: ['w']
     },
     {
-      type: 'input',
-      label: 'Designation',
-      formControlName: 'Designation',
+      type: 'date',
+      label: 'Date Of Birth',
+      formControlName: 'dateOfBirth',
       class: ['w']
     }
+    // },
+    // {
+    //   type: 'input',
+    //   label: 'Designation',
+    //   formControlName: 'Designation',
+    //   class: ['w']
+    // }
 
   ]
   educationForm!: FormGroup;
   educationFields: FormField[] = [
-    {
-      type: 'input',
-      label: 'University or College Name',
-      formControlName: 'universityName',
-      class: ['w']
-    },
     {
       type: 'input',
       label: 'Degree',
@@ -74,12 +112,18 @@ export class ProfileComponent implements OnInit {
     },
     {
       type: 'input',
+      label: 'University or College Name',
+      formControlName: 'universityName',
+      class: ['w']
+    },
+    {
+      type: 'date',
       label: 'Start year',
       formControlName: 'startDate',
       class: ['w']
     },
     {
-      type: 'input',
+      type: 'date',
       label: 'End year',
       formControlName: 'endDate',
       class: ['w']
@@ -112,21 +156,14 @@ export class ProfileComponent implements OnInit {
     }
   ]
   profileDetails!: FormGroup;
+  educationArray: any = [];
   educationDetails = new FormArray<FormGroup>([]);
   experienceDetails = new FormArray<FormGroup>([]);
   action!: string;
   editableId!: number;
 
-  constructor(
-    private formBuilder: FormBuilder,
-    private localStorage: LocalStorage,
-    private jobSeekerService: JobSeekerService,
-    private modalService: NgbModal,
-    private toastr: ToastrService
-  ) { }
 
-  ngOnInit(): void {
-  }
+
 
   // education operations
   getEducation() {
@@ -142,6 +179,7 @@ export class ProfileComponent implements OnInit {
   addEducation(ref: any) {
     this.action = 'Add';
     this.educationForm = this.getEducation();
+    console.log(this.educationForm)
     this.modalService.open(ref).result.then((result) => { })
   }
 
@@ -158,6 +196,10 @@ export class ProfileComponent implements OnInit {
 
   executeEducationAction() {
     if (this.action == 'Add') {
+      // this.educationArray.push(this.educationInfo)
+      console.log(typeof this.educationInfo);
+      console.log(this.educationArray);
+      this.educationService.addEducations(this.educationArray).subscribe(res => console.log(res))
       this.educationDetails.push(this.educationForm);
       this.toastr.success('Education added', 'Success');
     } else {
@@ -206,20 +248,16 @@ export class ProfileComponent implements OnInit {
 
   // update profile method
   updateProfile(ref: any) {
-    // this.jobSeekerService.updateProfile(this.profileForm.value)
-    //   .subscribe({
-    //     next: res => console.log(res)
-    //   });
     this.action = 'Update';
     console.log(this.action);
     this.modalService.open(ref).result.then((result) => { })
   }
   executeProfileAction() {
     if (this.action == 'Update') {
+      console.log(this.profileForm.value);
+      this.jobSeekerService.updateProfile(this.profileForm.value).subscribe(res => console.log(res));
       this.toastr.success('Profile updated', 'Success');
     }
     this.modalService.dismissAll();
   }
-
-
 }

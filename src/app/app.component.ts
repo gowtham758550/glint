@@ -70,7 +70,7 @@ export class AppComponent implements OnInit, AfterContentChecked {
   }
 
   ngOnInit(): void {
-    this.isLoading = this.loaderService.isLoading;
+    // this.isLoading = this.loaderService.isLoading;
   }
 
   ngAfterContentChecked(): void {
