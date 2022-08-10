@@ -23,7 +23,6 @@ export class JobCardComponent implements OnInit {
   ngOnInit(): void {
     // this.getIsApplied();
   }
-<<<<<<< HEAD
 
   applyForJob() {
     if (this.job.postJobDetailId) {

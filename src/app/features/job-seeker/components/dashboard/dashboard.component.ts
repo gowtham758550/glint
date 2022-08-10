@@ -1,10 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Job } from 'src/app/data/models/job.model';
 import { FilterService } from 'src/app/data/services/filter.service';
-import { JobService } from 'src/app/data/services/job.service';
-import { Job } from 'src/app/data/models/job.model';
-import { FilterService } from 'src/app/data/services/filter.service';
-import { JobService } from 'src/app/data/services/job.service';
 
 @Component({
   selector: 'app-dashboard-job-seeker',

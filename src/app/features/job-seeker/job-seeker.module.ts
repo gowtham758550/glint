@@ -21,7 +21,7 @@ import { SearchComponent } from './components/search/search.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { AccountSettingsComponent } from './components/account-settings/account-settings.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
-import {NgxPhotoEditorModule} from "ngx-photo-editor";
+import { NgxPhotoEditorModule } from "ngx-photo-editor";
 
 
 @NgModule({
@@ -49,7 +49,8 @@ import {NgxPhotoEditorModule} from "ngx-photo-editor";
     DialogModule,
     AccordionModule,
     CheckboxModule,
-    SkeletonModule
+    SkeletonModule,
+    NgxPhotoEditorModule
   ]
 })
 export class JobSeekerModule { }

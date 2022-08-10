@@ -1,23 +1,17 @@
-import {
-  AfterViewInit,
-  Component,
-  EventEmitter,
-  OnInit,
-  Output,
-  ViewChild,
-} from "@angular/core";
+import { formatDate } from "@angular/common";
+import { Component, OnInit } from "@angular/core";
 import { FormGroup, Validators, FormArray, FormBuilder } from "@angular/forms";
 import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
 import { NgxCroppedEvent, NgxPhotoEditorService } from "ngx-photo-editor";
 import { ToastrService } from "ngx-toastr";
-import { delay } from "rxjs";
 import { FormField } from "src/app/data/models/form-field.model";
-import { ProfilePicture } from "src/app/data/models/profile-picture.model";
+import { AuthService } from "src/app/data/services/auth.service";
 import { BlobService } from "src/app/data/services/blob.service";
+import { EducationService } from "src/app/data/services/education.service";
+import { ExperienceService } from "src/app/data/services/experience.service";
 import { JobSeekerService } from "src/app/data/services/job-seeker.service";
 import { LocalStorage } from "src/app/data/services/local-storage.service";
 import { environment } from "src/environments/environment";
-import { NgxCroppedEvent, NgxPhotoEditorService } from "ngx-photo-editor";
 
 @Component({
   selector: 'app-profile',
@@ -153,14 +147,19 @@ export class ProfileComponent implements OnInit {
     private modalService: NgbModal,
     private toastr: ToastrService,
     private profileService: BlobService,
-    private imageService: NgxPhotoEditorService
-  ) {}
+    private imageService: NgxPhotoEditorService,
+    private localStorage: LocalStorage,
+    private educationService: EducationService,
+    private experienceService: ExperienceService,
+    private jobSeekerService: JobSeekerService,
+    private authService: AuthService
+  ) { }
 
   ngOnInit(): void {
     this.getProfilePicture();
   }
 
-  ngAfterViewInit(): void {}
+  ngAfterViewInit(): void { }
 
   openFileTrigger(component: HTMLElement) {
     component.click();
@@ -172,8 +171,8 @@ export class ProfileComponent implements OnInit {
         autoCropArea: 1,
       })
       .subscribe((data) => {
-        this.output = data;
-        let file: any = this.output.file;
+        // this.output = data;
+        let file: any = data.file;
         let formData: FormData = new FormData();
         formData.append("profilePicture", file, file.name);
         this.profileService.addProfilePicture(formData).subscribe({
@@ -386,7 +385,7 @@ export class ProfileComponent implements OnInit {
     this.modalService.dismissAll();
   }
 
-       //--------------------------------------- update profile method------------------------------------------------
+  //--------------------------------------- update profile method------------------------------------------------
   updateProfile(ref: any) {
     // this.jobSeekerService.updateProfile(this.profileForm.value)
     //   .subscribe({
@@ -394,7 +393,7 @@ export class ProfileComponent implements OnInit {
     //   });
     this.action = "Update";
     console.log(this.action);
-    this.modalService.open(ref).result.then((result) => {});
+    this.modalService.open(ref).result.then((result) => { });
   }
   executeProfileAction() {
     if (this.action == 'Update') {
