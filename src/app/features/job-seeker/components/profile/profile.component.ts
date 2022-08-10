@@ -144,7 +144,6 @@ export class ProfileComponent implements OnInit {
   isImageLoaded = false;
 
 
-  imageOutput?: NgxCroppedEvent;
 
 
   constructor(

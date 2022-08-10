@@ -24,6 +24,7 @@ import { EmployerProfileComponent } from './components/employer-profile/employer
 import { DatePipe } from '@angular/common';
 import { JobSeekerProfileComponent } from './components/job-seeker-profile/job-seeker-profile.component'
 
+import { NgxPhotoEditorModule } from 'ngx-photo-editor';
 
 
 @NgModule({
@@ -51,6 +52,7 @@ import { JobSeekerProfileComponent } from './components/job-seeker-profile/job-s
     FormsModule,
     DialogModule,
     TableModule,
+    NgxPhotoEditorModule,
     SkeletonModule,
     KnobModule
   ],
