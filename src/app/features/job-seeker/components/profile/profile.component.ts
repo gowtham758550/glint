@@ -1,4 +1,4 @@
-import { formatDate } from '@angular/common';
+import { DatePipe, formatDate } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, Validators, FormArray, FormBuilder } from '@angular/forms';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
@@ -134,6 +134,8 @@ export class ProfileComponent implements OnInit {
   action!: string;
   editableId!: number;
   editableEducation: any;
+  startDate: any;
+  endDate: any;
 
 
 
@@ -145,7 +147,8 @@ export class ProfileComponent implements OnInit {
     private toastr: ToastrService,
     private authService: AuthService,
     private educationService: EducationService,
-    private experienceService: ExperienceService
+    private experienceService: ExperienceService,
+    private datePipe: DatePipe
   ) { }
 
   ngOnInit(): void {
@@ -153,11 +156,13 @@ export class ProfileComponent implements OnInit {
     this.email = this.authService.getEmail(this.accessToken);
     this.getEducationList();
     this.getExperienceList();
+    this.getJobSeeker();
 
   }
   //-----------------------Get Education List Api Call ---------------------------------
   getEducationList() {
     this.educationInfo = this.educationService.getEducation().subscribe(res => {
+      this.educationArray = res;
       this.educationArray = res;
     });
   }
@@ -175,11 +180,14 @@ export class ProfileComponent implements OnInit {
       this.authService.getUserId(
         this.localStorage.getItem('accessToken')
       )).subscribe((res: any) => {
+        res.dateOfBirth = this.datePipe.transform(res.dateOfBirth, 'dd-MM-yyyy');
+        console.log(res.dateOfBirth)
         console.log(res)
         this.jobSeekerArray = res
       });
   }
   //-----------------------Get JobSeeker Profile using ID Api Call ---------------------------------
+  dob: any;
   getJobSeekerProfile() {
     this.jobSeekerService.getUserById(
       this.authService.getUserId(
@@ -189,6 +197,7 @@ export class ProfileComponent implements OnInit {
         this.jobSeekerArray = res;
         console.log(this.jobSeekerArray);
         this.jobSeekerProfile = res;
+        this.dob = this.datePipe.transform(res.dateOfBirth, 'dd-MM-yyyy');
         this.profileForm = this.formBuilder.group({
           firstName: [res.firstName, [Validators.required]],
           lastName: [res.lastName, [Validators.required]],
@@ -345,7 +354,7 @@ export class ProfileComponent implements OnInit {
     this.modalService.dismissAll();
   }
 
-       //--------------------------------------- update profile method------------------------------------------------
+  //--------------------------------------- update profile method------------------------------------------------
   updateProfile(ref: any) {
     this.action = 'Update';
     console.log(this.action);
