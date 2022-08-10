@@ -2,7 +2,8 @@ import { formatDate } from "@angular/common";
 import { Component, OnInit } from "@angular/core";
 import { FormGroup, Validators, FormArray, FormBuilder } from "@angular/forms";
 import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
-import { NgxCroppedEvent, NgxPhotoEditorService } from "ngx-photo-editor";
+import { NgxPhotoEditorService } from "ngx-photo-editor";
+import { NgxCroppedEvent } from "ngx-photo-editor/lib/ngx-photo-editor.component";
 import { ToastrService } from "ngx-toastr";
 import { FormField } from "src/app/data/models/form-field.model";
 import { AuthService } from "src/app/data/services/auth.service";
@@ -26,6 +27,7 @@ export class ProfileComponent implements OnInit {
   educationInfo: any;
   educationToEdit: any;
   experienceInfo: any;
+  imageUrl!: string;
   experienceToEdit: any;
   experienceArray: any = [];
   editableExperience: any;
