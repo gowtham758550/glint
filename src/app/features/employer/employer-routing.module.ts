@@ -34,6 +34,10 @@ const routes: Routes = [
     ]
   },
   {
+    path: 'employer/login',
+    component:LoginComponent
+  },
+  {
     path: 'employer',
     component: HomeComponent,
     children: [
@@ -56,6 +60,14 @@ const routes: Routes = [
       {
         path: 'job/edit/:postJobDetaiId',
         component: EditJobComponent
+      },
+      {
+        path: 'account-settings',
+        component: AccountSettingsEmployerComponent
+      },
+      {
+        path: 'profile',
+        component: EmployerProfileComponent
       }
     ]
   },

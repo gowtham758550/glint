@@ -18,6 +18,12 @@ import { JobsComponent } from './components/jobs/jobs.component';
 import { EditJobComponent } from './components/edit-job/edit-job.component';
 import { ViewJobComponent } from './components/view-job/view-job.component';
 import { FormsModule } from '@angular/forms';
+import { AccountSettingsEmployerComponent } from './components/account-settings-employer/account-settings-employer.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { DialogModule } from 'primeng/dialog';
+import { EmployerProfileComponent } from './components/employer-profile/employer-profile.component';
+import { DatePipe } from '@angular/common'
+
 
 
 @NgModule({
@@ -31,17 +37,19 @@ import { FormsModule } from '@angular/forms';
     NewJobComponent,
     JobsComponent,
     EditJobComponent,
-    ViewJobComponent,
+    ViewJobComponent,,
+    AccountSettingsEmployerComponent,
+    EmployerProfileComponent,
   ],
   imports: [
     CommonModule,
     EmployerRoutingModule,
     SharedModule,
     ButtonModule,
-    TableModule,
-    SkeletonModule,
-    KnobModule,
-    FormsModule
-  ]
+    ReactiveFormsModule,
+    FormsModule,
+    DialogModule
+  ],
+  providers: [DatePipe]
 })
 export class EmployerModule { }

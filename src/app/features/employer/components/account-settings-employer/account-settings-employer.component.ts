@@ -1,21 +1,22 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrService } from 'ngx-toastr';
 import { PrimeNGConfig } from 'primeng/api';
 import { FormField } from 'src/app/data/models/form-field.model';
 import { AuthService } from 'src/app/data/services/auth.service';
+import { EmployerService } from 'src/app/data/services/employer.service';
 import { JobSeekerService } from 'src/app/data/services/job-seeker.service';
 import { LocalStorage } from 'src/app/data/services/local-storage.service';
 
 @Component({
-  selector: 'app-account-settings',
-  templateUrl: './account-settings.component.html',
-  styleUrls: ['account-settings.component.css']
+  selector: 'app-account-settings-employer',
+  templateUrl: 'account-settings-employer.component.html',
+  styles: [
+  ]
 })
-export class AccountSettingsComponent implements OnInit {
-
+export class AccountSettingsEmployerComponent implements OnInit {
   jwt: string = '';
   Email: string = '';
   emailForm!: FormGroup;
@@ -39,7 +40,7 @@ export class AccountSettingsComponent implements OnInit {
     private modalService: NgbModal,
     private toastr: ToastrService,
     private primengConfig: PrimeNGConfig,
-    private jobseekerservice: JobSeekerService,
+    private employerService: EmployerService,
     private router: Router,
     private authService: AuthService,
     private localStorageService: LocalStorage) {
@@ -60,15 +61,14 @@ export class AccountSettingsComponent implements OnInit {
   changePassword(currentPassword: string, newPassword: string) {
     console.log(currentPassword, newPassword)
     this.passwordObject = { CurrentPassword: currentPassword, NewPassword: newPassword }
-    this.jobseekerservice.changePassword(this.passwordObject).subscribe({
+    this.employerService.changePassword(this.passwordObject).subscribe({
       next: () => {
 
         this.toastr.success('Password changed successfully', 'Success');
-        setTimeout(() => this.router.navigateByUrl('job-seeker/signup'), 1000);
+        this.authService.logout();
+        setTimeout(() => this.router.navigateByUrl('employer/login'), 1000);
       }
     });
-    this.authService.logout();
-    this.router.navigateByUrl("/login");
   }
 
   // -----------------  Update email actions --------------------------------------------------
@@ -80,13 +80,15 @@ export class AccountSettingsComponent implements OnInit {
   }
   executeEmailAction() {
     const updatedEmail = this.emailForm.controls["Email"].value;
-    this.jobseekerservice.changeEmail(updatedEmail)
+    this.employerService.changeEmail(updatedEmail)
       .subscribe({
-        next: () =>
-          this.toastr.success('Email updated. Verify your email and Login', 'Success')
+        next: () => {
+          this.toastr.success('Email updated. Verify your email and Login', 'Success');
+          this.authService.logout();
+          this.router.navigateByUrl("employer/login");
+        }
       });
-    this.authService.logout();
-    this.router.navigateByUrl("/login");
+
     this.modalService.dismissAll();
   }
 

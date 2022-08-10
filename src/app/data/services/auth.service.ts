@@ -43,8 +43,22 @@ export class AuthService {
     return this.httpClient.post(`${this.host}/reset_password`, data);
   }
 
+  getUserId(accessToken:string){
+    const claims:any=jwtDecode(accessToken);
+    return claims['UserID']
+  }
+
   getRole(accessToken: string) {
     const claims: any = jwtDecode(accessToken);
     return claims['http://schemas.microsoft.com/ws/2008/06/identity/claims/role'];
   }
+
+  getEmail(accessToken: string) {
+    const claims: any = jwtDecode(accessToken);
+    return claims['Email'];
+  }
+
+  deleteProfile(){
+    return this.httpClient.delete(`${this.host}/delete`, {responseType: 'text'});
+}
 }

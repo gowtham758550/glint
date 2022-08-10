@@ -15,7 +15,7 @@ export class Interceptor implements HttpInterceptor {
     ) {}
 
     intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-        this.loaderService.show();
+        // this.loaderService.show();
         const accessToken = this.localStorage.getItem('accessToken');
         req = req.clone({
             setHeaders: {
@@ -27,13 +27,13 @@ export class Interceptor implements HttpInterceptor {
 
                 catchError((error: HttpErrorResponse) => {
                     setTimeout(() => {
-                        this.loaderService.hide();
+                        // this.loaderService.hide();
                         this.toastr.error(error.error.title != undefined ? error.error.title : error.error, 'Error');
                     }, 1000)
                     return throwError(error);
                 }),
                 finalize(() => {
-                    this.loaderService.hide();
+                    // this.loaderService.hide();
                 })
             )
     }

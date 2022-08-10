@@ -70,7 +70,7 @@ export class AppComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit(): void {
-    this.isLoading = this.loaderService.isLoading;
+    // this.isLoading = this.loaderService.isLoading;
   }
 
   ngAfterViewInit(): void {
