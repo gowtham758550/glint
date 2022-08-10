@@ -141,6 +141,7 @@ export class ProfileComponent implements OnInit {
   editableEducation: any;
   startDate: any;
   endDate: any;
+  isImageLoaded = false;
 
 
   imageOutput?: NgxCroppedEvent;
@@ -198,10 +199,12 @@ export class ProfileComponent implements OnInit {
   }
 
   getProfilePicture() {
+    this.isImageLoaded = false;
     this.profileService.getProfilePicture().subscribe({
       next: (data: any) => {
         let res = data.url;
         this.imageUrl = res + "?" + environment.sas_token;
+        this.isImageLoaded = true;
       },
     });
   }

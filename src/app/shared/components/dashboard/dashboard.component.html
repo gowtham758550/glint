@@ -120,7 +120,10 @@
                 <div class="text-center">
                     <div>
                         <button class="btn border-none border-dark rounded-pill fs-1">
-                            <img [src]="imageUrl" alt="profile picture" style="border-radius: 50%; width:70px; height:70px;" routerLink="/job-seeker/profile">
+                            <img [src]="imageUrl" alt="profile picture"
+                                style="border-radius: 50%; width:70px;
+                                height:70px;"
+                                (click)="routeToProfile()">
                         </button>
                     </div>
                     <div class="fw-bold">

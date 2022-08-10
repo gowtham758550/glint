@@ -21,7 +21,8 @@ import { AccountSettingsEmployerComponent } from './components/account-settings-
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DialogModule } from 'primeng/dialog';
 import { EmployerProfileComponent } from './components/employer-profile/employer-profile.component';
-import { DatePipe } from '@angular/common'
+import { DatePipe } from '@angular/common';
+import { JobSeekerProfileComponent } from './components/job-seeker-profile/job-seeker-profile.component'
 
 
 
@@ -39,6 +40,7 @@ import { DatePipe } from '@angular/common'
     ViewJobComponent,
     AccountSettingsEmployerComponent,
     EmployerProfileComponent,
+    JobSeekerProfileComponent,
   ],
   imports: [
     CommonModule,

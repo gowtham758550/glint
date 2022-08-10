@@ -12,6 +12,7 @@ import { VerifyComponent } from './components/verify/verify.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { JobInfoComponent } from 'src/app/shared/components/job-info/job-info.component';
 import { LoginComponent } from 'src/app/core/components/login/login.component';
+import { MyJobsComponent } from './components/my-jobs/my-jobs.component';
 
 const routes: Routes = [
   {
@@ -44,6 +45,10 @@ const routes: Routes = [
       {
         path: 'dashboard',
         component: DashboardComponent
+      },
+      {
+        path: 'my-jobs',
+        component: MyJobsComponent
       },
       {
         path: 'job/:postJobDetailId',
