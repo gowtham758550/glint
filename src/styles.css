@@ -6,6 +6,7 @@
     --secondary: #fef5f8;
     --warning: #ffb31d;
     --dark: #171b34;
+    --success: #8cffa7;
 }
 
 .bg-primary {
@@ -17,7 +18,7 @@
 }
 
 .bg-success {
-    background-color: #d4edda !important;
+    background-color: var(--success) !important;
     color: var(--success);
 }
 
@@ -111,5 +112,21 @@
 
 .vl {
     border-left: 2px solid #aeaeb4;
+}
+
+.status {
+    padding: 2px;
+    border-radius: 2px;
+    font-size: smaller;
+}
+
+.status-pending {
+    background-color: var(--primary);
+    color: var(--secondary);
+}
+
+.status-success {
+    background-color: var(--success);
+    color: var(--dark);
 }
 

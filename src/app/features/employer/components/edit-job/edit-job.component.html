@@ -1,5 +1,6 @@
 <div>
     <app-form [formFields]="jobFields"
-        [formGroup]="jobForm">
+        [formGroup]="jobForm"
+        (formEmitter)="updateJob()">
     </app-form>
 </div>

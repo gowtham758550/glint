@@ -10,7 +10,8 @@ import { Observable } from "rxjs";
 })
 export class JobService {
 
-    host = `${environment.host}/post_job`;
+    employerHost = `${environment.host}/post_job`;
+    jobSeekerHost = `${environment.host}/preferred_job`
     jobTypeOptions: Option[] = [
         { label: 'Internship' },
         { label: 'Part time' },
@@ -1010,15 +1011,27 @@ export class JobService {
     ) { }
 
     getPostedJob(): Observable<any> {
-        return this.httpClient.get(`${this.host}/get`);
+        return this.httpClient.get(`${this.employerHost}/get`);
     }
 
     getJobById(id: number): Observable<any> {
-        return this.httpClient.get(`${this.host}/get/${id}`);
+        return this.httpClient.get(`${this.employerHost}/get/${id}`);
     }
 
     postJob(jobDetails: Job) {
-        return this.httpClient.post(`${this.host}/add`, jobDetails);
+        return this.httpClient.post(`${this.employerHost}/add`, jobDetails);
+    }
+
+    updateJob(jobDetails: Job) {
+        return this.httpClient.put(`${this.employerHost}/update`, jobDetails);
+    }
+
+    deleteJob(jobId: number) {
+        return this.httpClient.delete(`${this.employerHost}/delete/${jobId}`);
+    } 
+
+    getAllJob(): Observable<Job[]> {
+        return this.httpClient.get<Job[]>(`${this.employerHost}/getall`);
     }
 
 }

@@ -8,6 +8,7 @@ import {
 } from "@angular/core";
 import { FormGroup, Validators, FormArray, FormBuilder } from "@angular/forms";
 import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
+import { NgxCroppedEvent, NgxPhotoEditorService } from "ngx-photo-editor";
 import { ToastrService } from "ngx-toastr";
 import { delay } from "rxjs";
 import { FormField } from "src/app/data/models/form-field.model";
@@ -15,7 +16,6 @@ import { ProfilePicture } from "src/app/data/models/profile-picture.model";
 import { BlobService } from "src/app/data/services/blob.service";
 import { JobSeekerService } from "src/app/data/services/job-seeker.service";
 import { LocalStorage } from "src/app/data/services/local-storage.service";
-import { DashboardComponent } from "src/app/shared/components/dashboard/dashboard.component";
 import { environment } from "src/environments/environment";
 import { NgxCroppedEvent, NgxPhotoEditorService } from "ngx-photo-editor";
 
@@ -26,7 +26,6 @@ import { NgxCroppedEvent, NgxPhotoEditorService } from "ngx-photo-editor";
 })
 export class ProfileComponent implements OnInit, AfterViewInit {
   imageUrl!: string;
-  output?: NgxCroppedEvent;
   profileForm: FormGroup = this.formBuilder.group({
     Name: ["Deepikaa Ravishankar", [Validators.required]],
     Email: ["deepikaa@gmail.com", [Validators.required]],
@@ -130,6 +129,8 @@ export class ProfileComponent implements OnInit, AfterViewInit {
   experienceDetails = new FormArray<FormGroup>([]);
   action!: string;
   editableId!: number;
+
+  imageOutput?: NgxCroppedEvent;
 
   constructor(
     private formBuilder: FormBuilder,

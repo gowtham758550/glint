@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { FormField } from 'src/app/data/models/form-field.model';
 import { JobService } from 'src/app/data/services/job.service';
 
@@ -25,7 +26,7 @@ export class EditJobComponent implements OnInit {
   jobFields: FormField[] = [
     {
       type: 'title',
-      label: 'Create new job',
+      label: `Update job`,
       class: ['fw-bold']
     },
     {
@@ -76,15 +77,18 @@ export class EditJobComponent implements OnInit {
     },
     {
       type: 'submit',
-      label: 'Create job',
+      label: 'Update job',
       class: []
     }
   ]
+  postJobDetailId!: number;
 
   constructor(
     private formBuilder: FormBuilder,
     private jobService: JobService,
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
+    private toastr: ToastrService,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
@@ -93,9 +97,25 @@ export class EditJobComponent implements OnInit {
 
   getJobById() {
     const postJobDetaiId = this.activatedRoute.snapshot.params['postJobDetaiId'];
+    this.postJobDetailId = postJobDetaiId;
     this.jobService.getJobById(postJobDetaiId).subscribe({
-      next: data => console.log(data)
+      next: data => this.jobForm.patchValue(data)
     })
+  }
+
+  updateJob() {
+    const updatedJob = {
+      ...this.jobForm.value,
+      ...{
+        postJobDetailId: this.postJobDetailId
+      }
+    }
+    this.jobService.updateJob(updatedJob).subscribe({
+      next: data => {
+        this.toastr.success('Job updated successfully');
+        this.router.navigateByUrl(`/employer/job/${this.postJobDetailId}`);
+      }
+    });
   }
 
 }
