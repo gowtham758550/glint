@@ -12,6 +12,9 @@ import { NewJobComponent } from './components/new-job/new-job.component';
 import { JobsComponent } from './components/jobs/jobs.component';
 import { EditJobComponent } from './components/edit-job/edit-job.component';
 import { ViewJobComponent } from './components/view-job/view-job.component';
+import { AccountSettingsEmployerComponent } from './components/account-settings-employer/account-settings-employer.component';
+import { EmployerProfileComponent } from './components/employer-profile/employer-profile.component';
+import { LoginComponent } from 'src/app/core/components/login/login.component';
 
 const routes: Routes = [
   {
@@ -35,7 +38,7 @@ const routes: Routes = [
   },
   {
     path: 'employer/login',
-    component:LoginComponent
+    component: LoginComponent
   },
   {
     path: 'employer',

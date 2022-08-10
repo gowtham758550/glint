@@ -17,7 +17,6 @@ import { NewJobComponent } from './components/new-job/new-job.component';
 import { JobsComponent } from './components/jobs/jobs.component';
 import { EditJobComponent } from './components/edit-job/edit-job.component';
 import { ViewJobComponent } from './components/view-job/view-job.component';
-import { FormsModule } from '@angular/forms';
 import { AccountSettingsEmployerComponent } from './components/account-settings-employer/account-settings-employer.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DialogModule } from 'primeng/dialog';
@@ -37,7 +36,7 @@ import { DatePipe } from '@angular/common'
     NewJobComponent,
     JobsComponent,
     EditJobComponent,
-    ViewJobComponent,,
+    ViewJobComponent,
     AccountSettingsEmployerComponent,
     EmployerProfileComponent,
   ],
@@ -48,7 +47,10 @@ import { DatePipe } from '@angular/common'
     ButtonModule,
     ReactiveFormsModule,
     FormsModule,
-    DialogModule
+    DialogModule,
+    TableModule,
+    SkeletonModule,
+    KnobModule
   ],
   providers: [DatePipe]
 })
