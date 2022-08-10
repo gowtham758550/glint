@@ -11,6 +11,7 @@ import { JobService } from 'src/app/data/services/job.service';
 })
 export class DashboardComponent implements OnInit {
 
+  isLoaded = false;
   allJobs!: Job[];
   filteredJobs!: Job[];
   locations = ['Bangalore', 'Coimbatore', 'Chennai', 'Kolkata', 'Mumbai']
@@ -31,6 +32,7 @@ export class DashboardComponent implements OnInit {
       next: (data:Job[]) => {
         this.allJobs = data;
         this.filteredJobs = data;
+        this.isLoaded = true;
       }
     });
   }

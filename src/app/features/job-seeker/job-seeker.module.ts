@@ -6,6 +6,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ButtonModule } from 'primeng/button';
 import { MessagesModule } from 'primeng/messages';
 import { CheckboxModule } from 'primeng/checkbox';
+import { SkeletonModule } from 'primeng/skeleton';
 
 import { JobSeekerRoutingModule } from './job-seeker-routing.module';
 import { RegisterComponent } from './components/register/register.component';
@@ -46,7 +47,8 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
     FormsModule,
     DialogModule,
     AccordionModule,
-    CheckboxModule
+    CheckboxModule,
+    SkeletonModule
   ]
 })
 export class JobSeekerModule { }

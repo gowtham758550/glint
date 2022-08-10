@@ -133,3 +133,7 @@
 .pointer {
     cursor: pointer;
 }
+
+.scrollable {
+    overflow-y: scroll;
+}
