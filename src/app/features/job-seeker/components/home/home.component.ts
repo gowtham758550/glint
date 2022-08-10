@@ -19,7 +19,8 @@ export class HomeComponent implements OnInit {
     {
       type: 'menu-item',
       label: 'My Jobs',
-      routeTo: '/job-seeker/jobs'
+      routeTo: '/job-seeker/jobs',
+      icon: 'pi-briefcase'
     }
   ]
 

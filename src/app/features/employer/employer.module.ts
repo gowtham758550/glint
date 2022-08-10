@@ -2,7 +2,8 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ButtonModule } from 'primeng/button';
 import { TableModule } from 'primeng/table';
-import {SkeletonModule} from 'primeng/skeleton';
+import { SkeletonModule } from 'primeng/skeleton';
+import { KnobModule } from 'primeng/knob';
 
 import { EmployerRoutingModule } from './employer-routing.module';
 import { RegisterComponent } from './components/register/register.component';
@@ -16,6 +17,7 @@ import { NewJobComponent } from './components/new-job/new-job.component';
 import { JobsComponent } from './components/jobs/jobs.component';
 import { EditJobComponent } from './components/edit-job/edit-job.component';
 import { ViewJobComponent } from './components/view-job/view-job.component';
+import { FormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -37,7 +39,9 @@ import { ViewJobComponent } from './components/view-job/view-job.component';
     SharedModule,
     ButtonModule,
     TableModule,
-    SkeletonModule
+    SkeletonModule,
+    KnobModule,
+    FormsModule
   ]
 })
 export class EmployerModule { }
