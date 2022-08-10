@@ -4,9 +4,10 @@
         <div class="card">
             <div class="rounded-top text-white d-flex flex-row" style="background-color: #05292a; height:200px;">
                 <div class="ms-4 mt-5 d-flex flex-column" style="width: 200px;">
-                    <img src="..//src/assets/profileimage.png" class="rounded-circle mt-5 mt-4 mb-2"
-                        style="width: 150px;">
+                    <img [src]="imageUrl" class="rounded-circle mt-5 mt-4 mb-2" style="width: 150px;">
                 </div>
+                <input type="file" (change)="updateProfilePicture($event)" accept=".png,.jpg,.jpeg"
+                    style="display: none;" #fileTigger>
             </div>
             <br>
             <!-- Profile Details -->
@@ -15,7 +16,7 @@
                     <div class="flex">
                         <div class="flex">
                             <p class="lead fw-normal mb-1 float-start">{{jobSeekerArray.companyName}}
-                               </p>
+                            </p>
                             <div class="float-end">
                                 <button class="btn btn-rounded">
                                     <i class="pi pi-pencil" (click)="updateProfile(profileModal)"></i>
@@ -23,7 +24,7 @@
                             </div>
                             <span class="clearfix"></span>
                             <p class="fw-200 mb-1">{{jobSeekerArray.firstName}} {{jobSeekerArray.lastName}}</p>
-                            
+
                             <span class="clearfix"></span>
                             <p><i class="p-2 pi pi-envelope"></i>Email : {{email}}</p>
                             <p><i class="p-2 pi pi-calendar"></i>DateOfBirth :

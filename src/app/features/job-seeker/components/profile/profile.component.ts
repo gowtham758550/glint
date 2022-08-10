@@ -129,7 +129,6 @@ export class ProfileComponent implements OnInit, AfterViewInit {
   action!: string;
   editableId!: number;
 
-  imageOutput?: NgxCroppedEvent;
 
   constructor(
     private formBuilder: FormBuilder,

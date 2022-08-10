@@ -15,6 +15,7 @@ import { NewJobComponent } from './components/new-job/new-job.component';
 import { JobsComponent } from './components/jobs/jobs.component';
 import { EditJobComponent } from './components/edit-job/edit-job.component';
 import { ViewJobComponent } from './components/view-job/view-job.component';
+import { NgxPhotoEditorModule } from 'ngx-photo-editor';
 
 
 @NgModule({
@@ -35,7 +36,8 @@ import { ViewJobComponent } from './components/view-job/view-job.component';
     EmployerRoutingModule,
     SharedModule,
     ButtonModule,
-    TableModule
+    TableModule,
+    NgxPhotoEditorModule
   ]
 })
 export class EmployerModule { }
