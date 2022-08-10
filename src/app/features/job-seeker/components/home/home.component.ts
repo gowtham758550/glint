@@ -21,7 +21,27 @@ export class HomeComponent implements OnInit {
       label: 'My Jobs',
       routeTo: '/job-seeker/jobs',
       icon: 'pi-briefcase'
-    }
+    },
+    {
+      type: 'menu-item',
+      label: 'Profile',
+      routeTo: '/job-seeker/profile',
+      icon: 'pi-user'
+    },
+    {
+      type: 'menu-item',
+      label: 'Manage Account',
+      routeTo: '/job-seeker/account-settings',
+      icon: 'pi-cog'
+    },
+    {
+      type: 'menu-item',
+      label: 'Applied Jobs',
+      routeTo: '/job-seeker/applied-jobs',
+      icon: 'pi-briefcase'
+    },
+
+
   ]
 
   constructor() { }

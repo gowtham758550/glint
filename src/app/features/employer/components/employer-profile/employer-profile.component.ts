@@ -64,6 +64,7 @@ export class EmployerProfileComponent implements OnInit {
     this.action = 'Update';
     console.log(this.action);
     this.modalService.open(ref).result.then((result) => { })
+
   }
   executeProfileAction() {
     if (this.action == 'Update') {

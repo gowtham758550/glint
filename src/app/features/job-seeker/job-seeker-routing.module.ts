@@ -12,6 +12,7 @@ import { VerifyComponent } from './components/verify/verify.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { JobInfoComponent } from 'src/app/shared/components/job-info/job-info.component';
 import { LoginComponent } from 'src/app/core/components/login/login.component';
+import { AppliedJobsComponent } from './components/applied-jobs/applied-jobs.component';
 
 const routes: Routes = [
   {
@@ -56,6 +57,10 @@ const routes: Routes = [
       {
         path:'account-settings',
         component: AccountSettingsComponent
+      },
+      {
+        path:'applied-jobs',
+        component: AppliedJobsComponent
       }
     ]
   },

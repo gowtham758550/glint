@@ -74,7 +74,7 @@
                                 {{education.courseName}}
                             </div>
                             <div class="text-muted">
-                                {{education.startDate | date}} -
+                                {{education.startDate | date}}-
                                 {{education.completionDate | date}}
                             </div>
                         </div>
@@ -118,8 +118,7 @@
                                 {{experience.designation}}
                             </div>
                             <div class="text-muted">
-                                Year(s) of Experience:
-                                {{experience.yearOfExperience}}
+                                {{experience.startDate | date}}  -  {{experience.toDate|date}}
                             </div>
                         </div>
                         <div class="ps-2 pt-3">

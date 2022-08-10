@@ -21,7 +21,8 @@ import { SearchComponent } from './components/search/search.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { AccountSettingsComponent } from './components/account-settings/account-settings.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
-import { NgxPhotoEditorModule } from "ngx-photo-editor";
+import { NgxPhotoEditorModule } from 'ngx-photo-editor';
+import { AppliedJobsComponent } from './components/applied-jobs/applied-jobs.component';
 
 
 @NgModule({
@@ -34,7 +35,8 @@ import { NgxPhotoEditorModule } from "ngx-photo-editor";
     SearchComponent,
     ProfileComponent,
     AccountSettingsComponent,
-    DashboardComponent
+    DashboardComponent,
+    AppliedJobsComponent
   ],
   imports: [
     CommonModule,

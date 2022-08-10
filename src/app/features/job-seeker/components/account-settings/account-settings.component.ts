@@ -25,12 +25,27 @@ export class AccountSettingsComponent implements OnInit {
   action!: string;
   editableId!: number;
   displayMaximizable!: boolean;
+  showButton=true;
 
   emailFields: FormField[] = [
     {
       type: 'input',
       label: 'Email',
       formControlName: 'Email',
+      class: ['w'],
+    },
+  ]
+  passwordForm: FormField[] = [
+    {
+      type: 'password',
+      label: 'Current Password',
+      formControlName: 'currentPassword',
+      class: ['w'],
+    },
+    {
+      type: 'password',
+      label: 'New Password',
+      formControlName: 'newPassword',
       class: ['w'],
     },
   ]
@@ -64,13 +79,20 @@ export class AccountSettingsComponent implements OnInit {
       next: () => {
 
         this.toastr.success('Password changed successfully', 'Success');
-        setTimeout(() => this.router.navigateByUrl('job-seeker/signup'), 1000);
+        this.authService.logout();
+        this.router.navigateByUrl("/login");
       }
     });
-    this.authService.logout();
-    this.router.navigateByUrl("/login");
-  }
 
+  }
+  checkSame(newPassword:string){
+    console.log(this.currentPassword);
+    if(newPassword!=undefined){
+    if(newPassword=== this.currentPassword){
+      this.showButton=false;
+    }
+  }
+  }
   // -----------------  Update email actions --------------------------------------------------
 
   updateEmail(ref: any) {
