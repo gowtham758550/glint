@@ -17,6 +17,7 @@ import { AccountSettingsEmployerComponent } from './components/account-settings-
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DialogModule } from 'primeng/dialog';
 import { EmployerProfileComponent } from './components/employer-profile/employer-profile.component';
+import { DatePipe } from '@angular/common'
 
 
 
@@ -42,6 +43,7 @@ import { EmployerProfileComponent } from './components/employer-profile/employer
     ReactiveFormsModule,
     FormsModule,
     DialogModule
-  ]
+  ],
+  providers: [DatePipe]
 })
 export class EmployerModule { }

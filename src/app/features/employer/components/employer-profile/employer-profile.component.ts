@@ -9,6 +9,7 @@ import { AuthService } from 'src/app/data/services/auth.service';
 import { EmployerService } from 'src/app/data/services/employer.service';
 import { JobSeekerService } from 'src/app/data/services/job-seeker.service';
 import { LocalStorage } from 'src/app/data/services/local-storage.service';
+import { DatePipe } from '@angular/common'
 
 @Component({
   selector: 'app-employer-profile',
@@ -83,6 +84,7 @@ export class EmployerProfileComponent implements OnInit {
         this.jobSeekerArray = res
       });
   }
+  dob:any;
   employerProfile() {
     this.employerService.getEmployerById().subscribe((res:any)=>
       {
@@ -90,12 +92,14 @@ export class EmployerProfileComponent implements OnInit {
         this.jobSeekerArray = res;
         console.log(this.jobSeekerArray);
         this.jobSeekerProfile = res;
+        this.dob=this.datePipe.transform(res.dateOfBirth,'dd-MM-yyyy');
+        console.log(this.dob)
         this.profileForm = this.formBuilder.group({
           companyName: [res.companyName, [Validators.required]],
           firstName: [res.firstName, [Validators.required]],
           lastName: [res.lastName, [Validators.required]],
           contactNumber: [res.contactNumber, [Validators.required]],
-          dateOfBirth: [formatDate(res.dateOfBirth, 'yyyy-MM-dd', 'en')],
+          dateOfBirth: [formatDate(this.dob, 'yyyy-MM-dd', 'en')],
           about: [res.about, [Validators.required]],
         });
       })
@@ -106,7 +110,8 @@ export class EmployerProfileComponent implements OnInit {
     private toastr: ToastrService,
     private authService: AuthService,
     private localStorage: LocalStorage,
-    private formBuilder: FormBuilder,) { }
+    private formBuilder: FormBuilder,
+    private datePipe: DatePipe) { }
 
   ngOnInit(): void {
     this.email = this.authService.getEmail(this.accessToken);
