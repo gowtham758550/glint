@@ -8,7 +8,6 @@ import {
 } from "@angular/core";
 import { FormGroup, Validators, FormArray, FormBuilder } from "@angular/forms";
 import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
-import { NgxCroppedEvent, NgxPhotoEditorService } from "ngx-photo-editor";
 import { ToastrService } from "ngx-toastr";
 import { delay } from "rxjs";
 import { FormField } from "src/app/data/models/form-field.model";
@@ -156,8 +155,7 @@ export class ProfileComponent implements OnInit, AfterViewInit {
         autoCropArea: 1,
       })
       .subscribe((data) => {
-        this.output = data;
-        let file: any = this.output.file;
+        let file: any = data.file;
         let formData: FormData = new FormData();
         formData.append("profilePicture", file, file.name);
         this.profileService.addProfilePicture(formData).subscribe({
