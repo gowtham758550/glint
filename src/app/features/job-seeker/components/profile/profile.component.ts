@@ -1,4 +1,4 @@
-import { formatDate } from "@angular/common";
+import { DatePipe, formatDate } from "@angular/common";
 import { Component, OnInit } from "@angular/core";
 import { FormGroup, Validators, FormArray, FormBuilder } from "@angular/forms";
 import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
@@ -139,10 +139,12 @@ export class ProfileComponent implements OnInit {
   action!: string;
   editableId!: number;
   editableEducation: any;
-
+  startDate: any;
+  endDate: any;
 
 
   imageOutput?: NgxCroppedEvent;
+
 
   constructor(
     private formBuilder: FormBuilder,
@@ -154,11 +156,17 @@ export class ProfileComponent implements OnInit {
     private educationService: EducationService,
     private experienceService: ExperienceService,
     private jobSeekerService: JobSeekerService,
-    private authService: AuthService
+    private authService: AuthService,
+    private datePipe: DatePipe
   ) { }
 
   ngOnInit(): void {
     this.getProfilePicture();
+    this.getJobSeekerProfile();
+    this.email = this.authService.getEmail(this.accessToken);
+    this.getEducationList();
+    this.getExperienceList();
+    this.getJobSeeker();
   }
 
   ngAfterViewInit(): void { }
@@ -217,11 +225,14 @@ export class ProfileComponent implements OnInit {
       this.authService.getUserId(
         this.localStorage.getItem('accessToken')
       )).subscribe((res: any) => {
+        res.dateOfBirth = this.datePipe.transform(res.dateOfBirth, 'dd-MM-yyyy');
+        console.log(res.dateOfBirth)
         console.log(res)
         this.jobSeekerArray = res
       });
   }
   //-----------------------Get JobSeeker Profile using ID Api Call ---------------------------------
+  dob: any;
   getJobSeekerProfile() {
     this.jobSeekerService.getUserById(
       this.authService.getUserId(
@@ -231,6 +242,7 @@ export class ProfileComponent implements OnInit {
         this.jobSeekerArray = res;
         console.log(this.jobSeekerArray);
         this.jobSeekerProfile = res;
+        this.dob = this.datePipe.transform(res.dateOfBirth, 'dd-MM-yyyy');
         this.profileForm = this.formBuilder.group({
           firstName: [res.firstName, [Validators.required]],
           lastName: [res.lastName, [Validators.required]],

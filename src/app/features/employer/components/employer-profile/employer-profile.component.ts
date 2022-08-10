@@ -14,13 +14,12 @@ import { DatePipe } from '@angular/common'
 @Component({
   selector: 'app-employer-profile',
   templateUrl: 'employer-profile.component.html',
-  styles: [
-  ]
+  styleUrls: ['employer-profile.component.css']
 })
 export class EmployerProfileComponent implements OnInit {
   profileForm!: FormGroup;
-  jobSeekerArray: any = [];
-  email!:string;
+  employerArray: any = [];
+  email!: string;
   accessToken = this.localStorage.getItem('accessToken');
   profileFields: FormField[] = [
     {
@@ -54,7 +53,7 @@ export class EmployerProfileComponent implements OnInit {
       class: ['w']
     },
     {
-      type: 'input',
+      type: 'textarea',
       label: 'About',
       formControlName: 'about',
       class: ['w'],
@@ -80,29 +79,29 @@ export class EmployerProfileComponent implements OnInit {
   }
   getEmployer() {
     this.employerService.getEmployerById().subscribe((res: any) => {
-        console.log(res)
-        this.jobSeekerArray = res
-      });
+      res.dateOfBirth = this.datePipe.transform(res.dateOfBirth, 'dd-MM-yyyy');
+      // res.dateOfBirth = this.dob;
+      console.log(res.dateOfBirth)
+      this.employerArray = res
+    });
   }
-  dob:any;
+  dob: any;
   employerProfile() {
-    this.employerService.getEmployerById().subscribe((res:any)=>
-      {
-        console.log(res);
-        this.jobSeekerArray = res;
-        console.log(this.jobSeekerArray);
-        this.jobSeekerProfile = res;
-        this.dob=this.datePipe.transform(res.dateOfBirth,'dd-MM-yyyy');
-        console.log(this.dob)
-        this.profileForm = this.formBuilder.group({
-          companyName: [res.companyName, [Validators.required]],
-          firstName: [res.firstName, [Validators.required]],
-          lastName: [res.lastName, [Validators.required]],
-          contactNumber: [res.contactNumber, [Validators.required]],
-          dateOfBirth: [formatDate(this.dob, 'yyyy-MM-dd', 'en')],
-          about: [res.about, [Validators.required]],
-        });
-      })
+    this.employerService.getEmployerById().subscribe((res: any) => {
+      console.log(res);
+      this.employerArray = res;
+      console.log(this.employerArray);
+      this.jobSeekerProfile = res;
+      this.dob = this.datePipe.transform(res.dateOfBirth, 'dd-MM-yyyy');
+      this.profileForm = this.formBuilder.group({
+        companyName: [res.companyName, [Validators.required]],
+        firstName: [res.firstName, [Validators.required]],
+        lastName: [res.lastName, [Validators.required]],
+        contactNumber: [res.contactNumber, [Validators.required]],
+        dateOfBirth: [formatDate(res.dateOfBirth, 'yyyy-MM-dd', 'en')],
+        about: [res.about, [Validators.required]],
+      });
+    })
   }
 
   constructor(private modalService: NgbModal,
@@ -116,6 +115,7 @@ export class EmployerProfileComponent implements OnInit {
   ngOnInit(): void {
     this.email = this.authService.getEmail(this.accessToken);
     this.employerProfile();
+    this.getEmployer();
   }
 
 }

@@ -1,3 +1,4 @@
+<div style="padding-top: 100px;"></div>
 <div class="d-flex justify-content-center align-items-center h-100">
     <div class="flex-grow-1">
         <!-- Profile Image -->
@@ -17,7 +18,7 @@
                 <div class="card-body p-4 text-black">
                     <div class="flex">
                         <div class="flex">
-                            <p class="lead fw-normal mb-1 float-start">{{jobSeekerArray.firstName}}
+                            <p class="lead fw-normal fs-4 mb-1 float-start">{{jobSeekerArray.firstName}}
                                 {{jobSeekerArray.lastName}}</p>
                             <div class="float-end">
                                 <button class="btn btn-rounded">
@@ -25,17 +26,26 @@
                                 </button>
                             </div>
                             <span class="clearfix"></span>
-                            <p class="fw-200 mb-1">{{jobSeekerArray.about}}</p>
-                            <p class="fw-200 mb-1">{{jobSeekerArray.location}}</p>
+                            <p class="fw-200 fs-6 mb-1">{{jobSeekerArray.about}}</p>
+                            <p class="fw-200 fs-6 mb-1">{{jobSeekerArray.location}}</p>
                             <span class="clearfix"></span>
-                            <p><i class="p-2 pi pi-envelope"></i>Email : {{email}}</p>
-                            <p><i class="p-2 pi pi-calendar"></i>DateOfBirth :
-                                {{jobSeekerArray.dateOfBirth}}</p>
+
+                            <p>
+                                <span><i class="p-2 pi pi-envelope"></i></span>
+                                <span class="ms-2">Email : {{email}}</span>
+                            </p>
+                            <p>
+                                <span><i class="p-2 pi pi-calendar"></i></span>
+                                <span class="ms-2">Date Of Birth :
+                                    {{jobSeekerArray.dateOfBirth}}</span>
+                            </p>
 
                         </div>
                     </div>
                 </div>
             </form>
+        </div>
+        <div class="p-2"></div>
             <!-- Education Details -->
             <div class="card p-4" style="margin-top:0%">
                 <div class="d-flex">
@@ -64,8 +74,8 @@
                                 {{education.courseName}}
                             </div>
                             <div class="text-muted">
-                                {{education.startDate}} -
-                                {{education.completionDate}}
+                                {{education.startDate | date}} -
+                                {{education.completionDate | date}}
                             </div>
                         </div>
                         <div class="ps-2 pt-3">
@@ -86,7 +96,7 @@
             <div class="card p-4" style="margin-top:0%">
                 <div class="d-flex">
                     <div class="flex-grow-1 fs-4">
-                        Experience
+                       Experience
                     </div>
                     <div>
                         <button class="btn btn-rounded" (click)="addExperience(experienceModal)">
@@ -108,7 +118,7 @@
                                 {{experience.designation}}
                             </div>
                             <div class="text-muted">
-                                Experience:
+                                Year(s) of Experience:
                                 {{experience.yearOfExperience}}
                             </div>
                         </div>
