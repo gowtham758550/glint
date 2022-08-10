@@ -4,7 +4,8 @@
 
 export const environment = {
   production: false,
-  host: 'http://localhost:5197'
+  host: 'http://localhost:5197',
+  sas_token: 'sp=r&st=2022-08-08T08:47:59Z&se=2022-08-31T16:47:59Z&sv=2021-06-08&sr=c&sig=v6LQ26d0VQJFwbLxxtONeQ%2FmxsyaVuSI2ubimxIlW9k%3D'
 };
 
 /*

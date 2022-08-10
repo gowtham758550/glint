@@ -1,14 +1,23 @@
-import { formatDate } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
-import { FormGroup, Validators, FormArray, FormBuilder } from '@angular/forms';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { ToastrService } from 'ngx-toastr';
-import { FormField } from 'src/app/data/models/form-field.model';
-import { AuthService } from 'src/app/data/services/auth.service';
-import { EducationService } from 'src/app/data/services/education.service';
-import { ExperienceService } from 'src/app/data/services/experience.service';
-import { JobSeekerService } from 'src/app/data/services/job-seeker.service';
-import { LocalStorage } from 'src/app/data/services/local-storage.service';
+import {
+  AfterViewInit,
+  Component,
+  EventEmitter,
+  OnInit,
+  Output,
+  ViewChild,
+} from "@angular/core";
+import { FormGroup, Validators, FormArray, FormBuilder } from "@angular/forms";
+import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
+import { NgxCroppedEvent, NgxPhotoEditorService } from "ngx-photo-editor";
+import { ToastrService } from "ngx-toastr";
+import { delay } from "rxjs";
+import { FormField } from "src/app/data/models/form-field.model";
+import { ProfilePicture } from "src/app/data/models/profile-picture.model";
+import { BlobService } from "src/app/data/services/blob.service";
+import { JobSeekerService } from "src/app/data/services/job-seeker.service";
+import { LocalStorage } from "src/app/data/services/local-storage.service";
+import { environment } from "src/environments/environment";
+import { NgxCroppedEvent, NgxPhotoEditorService } from "ngx-photo-editor";
 
 @Component({
   selector: 'app-profile',
@@ -109,10 +118,10 @@ export class ProfileComponent implements OnInit {
       class: ['w']
     },
     {
-      type: 'input',
-      label: 'Designation',
-      formControlName: 'designation',
-      class: ['w']
+      type: "input",
+      label: "Designation",
+      formControlName: "designation",
+      class: ["w"],
     },
     {
       type: 'number',
@@ -137,23 +146,55 @@ export class ProfileComponent implements OnInit {
 
 
 
+  imageOutput?: NgxCroppedEvent;
+
   constructor(
     private formBuilder: FormBuilder,
-    private localStorage: LocalStorage,
-    private jobSeekerService: JobSeekerService,
     private modalService: NgbModal,
     private toastr: ToastrService,
-    private authService: AuthService,
-    private educationService: EducationService,
-    private experienceService: ExperienceService
-  ) { }
+    private profileService: BlobService,
+    private imageService: NgxPhotoEditorService
+  ) {}
 
   ngOnInit(): void {
-    this.getJobSeekerProfile();
-    this.email = this.authService.getEmail(this.accessToken);
-    this.getEducationList();
-    this.getExperienceList();
+    this.getProfilePicture();
+  }
 
+  ngAfterViewInit(): void {}
+
+  openFileTrigger(component: HTMLElement) {
+    component.click();
+  }
+  updateProfilePicture($event: any) {
+    this.imageService
+      .open($event, {
+        aspectRatio: 4 / 3,
+        autoCropArea: 1,
+      })
+      .subscribe((data) => {
+        this.output = data;
+        let file: any = this.output.file;
+        let formData: FormData = new FormData();
+        formData.append("profilePicture", file, file.name);
+        this.profileService.addProfilePicture(formData).subscribe({
+          next: (_data) => {
+            console.log("success");
+            this.getProfilePicture();
+          },
+          error: (error) => {
+            console.log(error);
+          },
+        });
+      });
+  }
+
+  getProfilePicture() {
+    this.profileService.getProfilePicture().subscribe({
+      next: (data: any) => {
+        let res = data.url;
+        this.imageUrl = res + "?" + environment.sas_token;
+      },
+    });
   }
   //-----------------------Get Education List Api Call ---------------------------------
   getEducationList() {
@@ -211,7 +252,7 @@ export class ProfileComponent implements OnInit {
   }
 
   addEducation(ref: any) {
-    this.action = 'Add';
+    this.action = "Add";
     this.educationForm = this.getEducation();
 
     this.getEducationList()
@@ -219,7 +260,7 @@ export class ProfileComponent implements OnInit {
   }
 
   editEducation(ref: any, id: number) {
-    this.action = 'Update';
+    this.action = "Update";
     this.editableId = id;
     this.educationForm = this.getEducation()
     this.educationService.getEducationById(id).subscribe(res => {
@@ -266,7 +307,7 @@ export class ProfileComponent implements OnInit {
       console.log(this.educationToEdit)
       this.educationService.updateEducationById(this.editableId, this.educationToEdit).subscribe(res => { console.log(res); this.getEducationList() })
       this.educationDetails.controls[this.editableId] = this.educationForm;
-      this.toastr.success('Education updated');
+      this.toastr.success("Education updated", "Success");
     }
     this.modalService.dismissAll();
   }
@@ -347,9 +388,13 @@ export class ProfileComponent implements OnInit {
 
        //--------------------------------------- update profile method------------------------------------------------
   updateProfile(ref: any) {
-    this.action = 'Update';
+    // this.jobSeekerService.updateProfile(this.profileForm.value)
+    //   .subscribe({
+    //     next: res => console.log(res)
+    //   });
+    this.action = "Update";
     console.log(this.action);
-    this.modalService.open(ref).result.then((result) => { })
+    this.modalService.open(ref).result.then((result) => {});
   }
   executeProfileAction() {
     if (this.action == 'Update') {
@@ -363,5 +408,4 @@ export class ProfileComponent implements OnInit {
     }
     this.modalService.dismissAll();
   }
-  //-------------------------------------------------------------------------------------------------------------------
 }

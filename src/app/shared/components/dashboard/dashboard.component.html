@@ -12,15 +12,13 @@
                     </span>
                 </a>
             </div>
-            
-            <li *ngFor="let item of sidebarItems"
-                class="pt-3">
+
+            <li *ngFor="let item of sidebarItems" class="pt-3">
                 <ng-container [ngSwitch]="item.type">
                     <!-- menu item -->
                     <ng-template [ngSwitchCase]="'menu-item'">
                         <a [routerLink]="item.routeTo">
-                            <i class="pi pt-1 fs-4 ps-4 pe-3"
-                                [ngClass]="item.icon">
+                            <i class="pi pt-1 fs-4 ps-4 pe-3" [ngClass]="item.icon">
                             </i>
                             <span class="nav-text fs-4 ps-3">
                                 {{item.label}}
@@ -31,8 +29,7 @@
                     <!-- accordion -->
                     <ng-template [ngSwitchCase]="'accordion'">
                         <a class="w-100">
-                            <i class="pi pt-1 fs-4 ps-4 pe-3"
-                                [ngClass]="item.icon">
+                            <i class="pi pt-1 fs-4 ps-4 pe-3" [ngClass]="item.icon">
                             </i>
                             <span class="nav-item fs-4 ps-3">
                                 {{item.label}}
@@ -41,8 +38,7 @@
                         <ul class="text-white">
                             <li *ngFor="let children of item.children">
                                 <a class="w-100">
-                                    <i class="pi pt-1 fs-6 ps-4 pe-3"
-                                        [ngClass]="children.icon">
+                                    <i class="pi pt-1 fs-6 ps-4 pe-3" [ngClass]="children.icon">
                                     </i>
                                     <span class="nav-item fs-5 ps-3">
                                         {{children.label}}
@@ -116,18 +112,15 @@
     <div class="card card-shadow">
         <!-- profile -->
         <div class="dropdown text-end p-3">
-            <button class="btn border border-dark rounded-pill"
-                type="button"
-                id="profile"
-                data-bs-toggle="dropdown">
-              <i class="pi pi-user"></i>
+            <button class="btn border border-dark rounded-pill" type="button" id="profile" data-bs-toggle="dropdown"
+                (click)="getProfilePicture()">
+                <i class="pi pi-user"></i>
             </button>
-            <div class="dropdown-menu p-4"
-                aria-labelledby="profile">
+            <div class="dropdown-menu p-4" aria-labelledby="profile">
                 <div class="text-center">
                     <div>
                         <button class="btn border-none border-dark rounded-pill fs-1">
-                            <i class="pi pi-user fs-1"></i>
+                            <img [src]="imageUrl" alt="profile picture" style="border-radius: 50%; width:70px; height:70px;" routerLink="/job-seeker/profile">
                         </button>
                     </div>
                     <div class="fw-bold">
@@ -142,8 +135,7 @@
                         </button>
                     </div>
                     <hr>
-                    <button class="btn border-dark"
-                        (click)="logout()">
+                    <button class="btn border-dark" (click)="logout()">
                         <!-- <i class="pi pi-sign-out px-2"></i> -->
                         Logout
                     </button>
