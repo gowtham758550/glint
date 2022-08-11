@@ -25,6 +25,9 @@ import { AccountSettingsComponent } from './components/account-settings/account-
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { NgxPhotoEditorModule } from "ngx-photo-editor";
 import { MyJobsComponent } from './components/my-jobs/my-jobs.component';
+import { PasswordModule } from "primeng/password";
+import { DividerModule } from "primeng/divider";
+import {TooltipModule} from 'primeng/tooltip';
 
 
 @NgModule({
@@ -37,7 +40,8 @@ import { MyJobsComponent } from './components/my-jobs/my-jobs.component';
     SearchComponent,
     ProfileComponent,
     AccountSettingsComponent,
-    DashboardComponent
+    DashboardComponent,
+    MyJobsComponent
   ],
   imports: [
     CommonModule,
@@ -53,7 +57,11 @@ import { MyJobsComponent } from './components/my-jobs/my-jobs.component';
     AccordionModule,
     CheckboxModule,
     SkeletonModule,
-    NgxPhotoEditorModule
+    NgxPhotoEditorModule,
+    DividerModule,
+    TimelineModule,
+    PasswordModule,
+    TooltipModule
   ]
 })
 export class JobSeekerModule { }

@@ -57,6 +57,10 @@ export class AuthService {
     const claims: any = jwtDecode(accessToken);
     return claims['Email'];
   }
+  getUserName(accessToken:string){
+    const claims: any = jwtDecode(accessToken);
+    return claims['UserName'];
+  }
 
   deleteProfile(){
     return this.httpClient.delete(`${this.host}/delete`, {responseType: 'text'});

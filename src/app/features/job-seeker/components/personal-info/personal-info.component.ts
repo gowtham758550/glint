@@ -9,6 +9,9 @@ import { EducationService } from 'src/app/data/services/education.service';
 import { Education } from 'src/app/data/models/education.model';
 import { ExperienceService } from 'src/app/data/services/experience.service';
 import { Router } from '@angular/router';
+import { NgxPhotoEditorService } from 'ngx-photo-editor';
+import { BlobService } from 'src/app/data/services/blob.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-personal-info',
@@ -129,6 +132,8 @@ export class PersonalInfoComponent implements OnInit {
   experienceDetails = new FormArray<FormGroup>([]);
   action!: string;
   editableId!: number;
+  isImageLoaded = true;
+  imageUrl: string="https://cdn-icons-png.flaticon.com/512/1077/1077012.png?w=360";
 
   constructor(
     private formBuilder: FormBuilder,
@@ -138,10 +143,50 @@ export class PersonalInfoComponent implements OnInit {
     private toastr: ToastrService,
     private educationService: EducationService,
     private experienceService: ExperienceService,
-    private router: Router
+    private router: Router,
+    private profileService: BlobService,
+    private imageService: NgxPhotoEditorService,
   ) { }
 
   ngOnInit(): void {
+    this.getProfilePicture();
+  }
+  openFileTrigger(component: HTMLElement) {
+    console.log("hfjhfjfghjg")
+    component.click();
+  }
+  updateProfilePicture($event: any) {
+    this.imageService
+      .open($event, {
+        aspectRatio: 4 / 3,
+        autoCropArea: 1,
+      })
+      .subscribe((data:any) => {
+        // this.output = data;
+        let file: any = data.file;
+        let formData: FormData = new FormData();
+        formData.append("profilePicture", file, file.name);
+        this.profileService.addProfilePicture(formData).subscribe({
+          next: (_data) => {
+            console.log("success");
+            this.getProfilePicture();
+          },
+          error: (error) => {
+            console.log(error);
+          },
+        });
+      });
+  }
+
+  getProfilePicture() {
+    this.isImageLoaded = false;
+    this.profileService.getProfilePicture().subscribe({
+      next: (data: any) => {
+        let res = data.url;
+        this.imageUrl = res + "?" + environment.sas_token;
+        this.isImageLoaded = true;
+      },
+    });
   }
 
   // education operations

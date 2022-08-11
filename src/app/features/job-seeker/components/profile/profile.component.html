@@ -9,10 +9,11 @@
                 <div class="ms-4 mt-5 d-flex flex-column" style="width: 200px;">
                     <ng-container *ngIf="isImageLoaded; then image; else imageLoader"></ng-container>
                     <ng-template #imageLoader>
-                        <p-skeleton shape="circle" size="8rem"></p-skeleton>
+                        <img [src]="imageUrl" class="pointer rounded-circle" style="width: 150px; height: 150px;"
+                        (click)="openFileTrigger(fileTigger)" pTooltip="Update Profile picture">
                     </ng-template>
                     <ng-template #image>
-                        <img [src]="imageUrl" class="rounded-circle" style="width: 150px; height: 150px;"
+                        <img [src]="imageUrl" class="pointer rounded-circle" style="width: 150px; height: 150px;"
                             (click)="openFileTrigger(fileTigger)">
                     </ng-template>
 

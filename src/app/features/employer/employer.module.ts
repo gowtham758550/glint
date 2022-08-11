@@ -23,7 +23,8 @@ import { DialogModule } from 'primeng/dialog';
 import { EmployerProfileComponent } from './components/employer-profile/employer-profile.component';
 import { DatePipe } from '@angular/common';
 import { JobSeekerProfileComponent } from './components/job-seeker-profile/job-seeker-profile.component'
-
+import { DividerModule } from "primeng/divider";
+import { PasswordModule } from "primeng/password";
 import { NgxPhotoEditorModule } from 'ngx-photo-editor';
 
 
@@ -54,7 +55,9 @@ import { NgxPhotoEditorModule } from 'ngx-photo-editor';
     TableModule,
     NgxPhotoEditorModule,
     SkeletonModule,
-    KnobModule
+    KnobModule,
+    DividerModule,
+    PasswordModule
   ],
   providers: [DatePipe]
 })

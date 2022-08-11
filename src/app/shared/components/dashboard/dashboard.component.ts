@@ -15,9 +15,11 @@ export class DashboardComponent implements OnInit {
   @Input()
   sidebarItems!: SidebarItems[];
   
+  email!:string;
+  userName!:string
 
   showSidebar: boolean = true;
-  imageUrl!: string;
+  imageUrl: string="https://cdn-icons-png.flaticon.com/512/1077/1077012.png?w=360";
 
   constructor(
     private authService: AuthService,
@@ -27,7 +29,11 @@ export class DashboardComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    const jwtdata=this.localStorage.getItem('accessToken');
+    this.userName = this.authService.getUserName(jwtdata);
+    this.email=this.authService.getEmail(jwtdata)
     this.getProfilePicture();
+
   }
 
   toggleSidebarVisibility() {

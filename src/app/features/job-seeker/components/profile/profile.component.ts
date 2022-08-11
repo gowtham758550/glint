@@ -27,7 +27,7 @@ export class ProfileComponent implements OnInit {
   educationInfo: any;
   educationToEdit: any;
   experienceInfo: any;
-  imageUrl!: string;
+  imageUrl: string="https://cdn-icons-png.flaticon.com/512/1077/1077012.png?w=360";
   experienceToEdit: any;
   experienceArray: any = [];
   editableExperience: any;

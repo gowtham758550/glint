@@ -3,6 +3,20 @@
         Personal details
     </h2>
     <hr>
+    <div class="ms-4 ml-5 d-flex mx-auto" style="width: 200px;">
+        <ng-container *ngIf="isImageLoaded; then image; else imageLoader"></ng-container>
+        <ng-template #imageLoader>
+            <img [src]="imageUrl" class="pointer rounded-circle" style="width: 150px; height: 150px; margin-left:50%"
+                (click)="openFileTrigger(fileTigger)" pTooltip="Update Profile picture">
+        </ng-template>
+        <ng-template #image>
+            <img [src]="imageUrl" class="pointer rounded-circle" style="width: 150px; height: 150px; margin-left:50%"
+                (click)="openFileTrigger(fileTigger)" pTooltip="Update Profile picture">
+        </ng-template>
+
+    </div>
+    <input type="file" (change)="updateProfilePicture($event)" accept=".png,.jpg,.jpeg"
+        style="display: none;" #fileTigger>
     <!-- profile form -->
     <app-form [formFields]="profileFields"
         [formGroup]="profileForm">
