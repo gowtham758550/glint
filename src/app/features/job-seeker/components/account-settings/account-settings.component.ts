@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrService } from 'ngx-toastr';
@@ -25,7 +25,7 @@ export class AccountSettingsComponent implements OnInit {
   action!: string;
   editableId!: number;
   displayMaximizable!: boolean;
-  showButton=true;
+  showButton = true;
 
   emailFields: FormField[] = [
     {
@@ -35,10 +35,14 @@ export class AccountSettingsComponent implements OnInit {
       class: ['w'],
     },
   ]
-  passwordForm: FormField[] = [
+  passwordForm: FormGroup = new FormGroup({
+    currentPassword: new FormControl(''),
+    newPassword: new FormControl(''),
+  })
+  passwordFields: FormField[] = [
     {
       type: 'password',
-      label: 'Current Password',
+      label: 'CurrentPassword',
       formControlName: 'currentPassword',
       class: ['w'],
     },
@@ -85,13 +89,34 @@ export class AccountSettingsComponent implements OnInit {
     });
 
   }
-  checkPassword(newPassword:string){
-    if(newPassword!=undefined){
-    if(newPassword=== this.currentPassword){
+  onSubmit(password: any) {
+    console.log(password.value)
+  }
+  checkNewPassword(newPassword: string) {
+    console.log(newPassword);
+    if (newPassword === this.currentPassword) {
       this.toastr.warning("Current Password and New Password cannot be same")
-      this.showButton=false;
+      this.showButton = false;
+    }
+    else if (newPassword === "" || this.currentPassword === "") {
+      this.showButton = false;
+    }
+    else {
+      this.showButton = true;
     }
   }
+  checkCurrentPassword(currentPassword: string) {
+    console.log(this.newPassword)
+    if (currentPassword === "" || this.newPassword === "") {
+      this.showButton = false;
+    }
+    else if (currentPassword === this.newPassword) {
+      this.toastr.warning("Current Password and New Password cannot be same")
+      this.showButton = false;
+    }
+    else {
+      this.showButton = true;
+    }
   }
   // -----------------  Update email actions --------------------------------------------------
 
@@ -105,7 +130,7 @@ export class AccountSettingsComponent implements OnInit {
     this.jobseekerservice.changeEmail(updatedEmail)
       .subscribe({
         next: () =>
-          this.toastr.success('Email updated. Verify your email and Login', 'Success')
+          this.toastr.success('Email updated. Verify your email and Login')
       });
     this.authService.logout();
     this.router.navigateByUrl("/login");
@@ -121,7 +146,7 @@ export class AccountSettingsComponent implements OnInit {
   showtoastrmessage() {
     this.authService.deleteProfile().subscribe(res => console.log(res))
     this.displayMaximizable = false;
-    this.toastr.success('Account deleted', 'Success');
+    this.toastr.success('Account deleted');
   }
   // --------------------------------------------------------------------------------//
 
