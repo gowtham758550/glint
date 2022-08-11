@@ -9,6 +9,7 @@ import { AuthService } from 'src/app/data/services/auth.service';
 import { JobSeekerService } from 'src/app/data/services/job-seeker.service';
 import { LocalStorage } from 'src/app/data/services/local-storage.service';
 
+
 @Component({
   selector: 'app-account-settings',
   templateUrl: './account-settings.component.html',
@@ -101,6 +102,9 @@ export class AccountSettingsComponent implements OnInit {
     else if (newPassword === "" || this.currentPassword === "") {
       this.showButton = false;
     }
+    else if(newPassword.length<8){
+
+    }
     else {
       this.showButton = true;
     }
@@ -120,22 +124,22 @@ export class AccountSettingsComponent implements OnInit {
   }
   // -----------------  Update email actions --------------------------------------------------
 
-  updateEmail(ref: any) {
+  updateEmail() {
     this.action = 'Update';
-    this.emailForm.controls['Email'].setValue(this.Email)
-    this.modalService.open(ref).result.then((result) => { })
-  }
-  executeEmailAction() {
-    const updatedEmail = this.emailForm.controls["Email"].value;
+    // this.emailForm.controls['Email'].setValue(this.Email)
+    const updatedEmail = this.Email;
+    console.log(updatedEmail)
     this.jobseekerservice.changeEmail(updatedEmail)
       .subscribe({
-        next: () =>
+        next: () => {
           this.toastr.success('Email updated. Verify your email and Login')
+          this.authService.logout();
+          this.router.navigateByUrl("/login");
+          this.modalService.dismissAll();
+        }
       });
-    this.authService.logout();
-    this.router.navigateByUrl("/login");
-    this.modalService.dismissAll();
   }
+
 
   // ------------------------- Delete Profile dialog box -----------------------------//
 
@@ -144,9 +148,12 @@ export class AccountSettingsComponent implements OnInit {
     this.displayMaximizable = true;
   }
   showtoastrmessage() {
-    this.authService.deleteProfile().subscribe(res => console.log(res))
-    this.displayMaximizable = false;
-    this.toastr.success('Account deleted');
+    this.authService.deleteProfile().subscribe(res => {
+      this.displayMaximizable = false;
+      this.authService.logout();
+      this.toastr.success('Account deleted');
+    })
+
   }
   // --------------------------------------------------------------------------------//
 

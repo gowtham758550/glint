@@ -23,6 +23,8 @@ import { AccountSettingsComponent } from './components/account-settings/account-
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { NgxPhotoEditorModule } from 'ngx-photo-editor';
 import { AppliedJobsComponent } from './components/applied-jobs/applied-jobs.component';
+import { PasswordModule } from "primeng/password";
+import { DividerModule } from "primeng/divider";
 
 
 @NgModule({
@@ -52,7 +54,9 @@ import { AppliedJobsComponent } from './components/applied-jobs/applied-jobs.com
     AccordionModule,
     CheckboxModule,
     SkeletonModule,
-    NgxPhotoEditorModule
+    NgxPhotoEditorModule,
+    DividerModule,
+    PasswordModule
   ]
 })
 export class JobSeekerModule { }
