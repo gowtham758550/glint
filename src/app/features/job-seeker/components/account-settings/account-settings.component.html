@@ -16,11 +16,11 @@
             Change Password
         </div>
         <hr>
-        <label for="currentPassword"> Current Password</label>
-        <input class="w-50 btn-rounded text-muted" type="password" placeholder="Current Password" [(ngModel)]="currentPassword" required>
+        <label class="form-label"> Current Password</label>
+        <input class="form-control w-50" type="password" placeholder="Current Password" [(ngModel)]="currentPassword" required>
         <br>
         <label for="NewPassword"> New Password</label>
-        <input class="align-center w-50 btn-rounded" type="password" placeholder="New Password" [(ngModel)]="newPassword" (ngModelChange)="checkSame($event)" required>
+        <input class=" form-control w-50" type="password" placeholder="New Password" [(ngModel)]="newPassword" (ngModelChange)="checkPassword($event)" required>
         <br>
         <button class="btn btn primary bg-dark text-white float-end w-50" [disabled]="!showButton || newPassword===undefined || currentPassword===undefined" (click)="changePassword(currentPassword, newPassword)">
             Change Password

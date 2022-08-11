@@ -85,10 +85,10 @@ export class AccountSettingsComponent implements OnInit {
     });
 
   }
-  checkSame(newPassword:string){
-    console.log(this.currentPassword);
+  checkPassword(newPassword:string){
     if(newPassword!=undefined){
     if(newPassword=== this.currentPassword){
+      this.toastr.warning("Current Password and New Password cannot be same")
       this.showButton=false;
     }
   }
