@@ -12,7 +12,7 @@ import { VerifyComponent } from './components/verify/verify.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { JobInfoComponent } from 'src/app/shared/components/job-info/job-info.component';
 import { LoginComponent } from 'src/app/core/components/login/login.component';
-import { AppliedJobsComponent } from './components/applied-jobs/applied-jobs.component';
+import { MyJobsComponent } from './components/my-jobs/my-jobs.component';
 
 const routes: Routes = [
   {
@@ -47,6 +47,10 @@ const routes: Routes = [
         component: DashboardComponent
       },
       {
+        path: 'my-jobs',
+        component: MyJobsComponent
+      },
+      {
         path: 'job/:postJobDetailId',
         component: JobInfoComponent
       },
@@ -60,7 +64,7 @@ const routes: Routes = [
       },
       {
         path:'applied-jobs',
-        component: AppliedJobsComponent
+        component: MyJobsComponent
       }
     ]
   },

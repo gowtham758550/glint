@@ -88,18 +88,19 @@
                         </th> -->
                     </tr>
                 </ng-template>
-                <ng-template pTemplate="body" let-job>
-                    <tr class="pointer">
-                        <td>{{job.fullName}}</td>
-                        <td>{{job.email}}</td>
+                <ng-template pTemplate="body" let-appliers>
+                    <tr class="pointer"
+                        [routerLink]="'/employer/job-seeker/profile/' + appliers.userName">
+                        <td>{{appliers.fullName}}</td>
+                        <td>{{appliers.email}}</td>
                         <td>
                             <span class="status"
-                                [ngClass]="job.status == 'Pending' ? 'status-pending' : 'status-success'">
-                                {{job.status}}
+                                [ngClass]="appliers.status == 'Pending' ? 'status-pending' : 'status-success'">
+                                {{appliers.status}}
                             </span>
                         </td>
-                        <td>{{job.gender}}</td>
-                        <td>{{job.dateOfBirth | date: 'short' }}</td>
+                        <td>{{appliers.gender}}</td>
+                        <td>{{appliers.dateOfBirth | date: 'short' }}</td>
                         <!-- <td>
                             <button class="btn border-none"
                                 [routerLink]="'/employer/job/' + job.postJobDetailId">

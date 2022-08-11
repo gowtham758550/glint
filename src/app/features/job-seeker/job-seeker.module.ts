@@ -7,6 +7,8 @@ import { ButtonModule } from 'primeng/button';
 import { MessagesModule } from 'primeng/messages';
 import { CheckboxModule } from 'primeng/checkbox';
 import { SkeletonModule } from 'primeng/skeleton';
+import { TimelineModule } from 'primeng/timeline';
+import { CardModule } from 'primeng/card';
 
 import { JobSeekerRoutingModule } from './job-seeker-routing.module';
 import { RegisterComponent } from './components/register/register.component';
@@ -21,10 +23,8 @@ import { SearchComponent } from './components/search/search.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { AccountSettingsComponent } from './components/account-settings/account-settings.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
-import { NgxPhotoEditorModule } from 'ngx-photo-editor';
-import { AppliedJobsComponent } from './components/applied-jobs/applied-jobs.component';
-import { PasswordModule } from "primeng/password";
-import { DividerModule } from "primeng/divider";
+import { NgxPhotoEditorModule } from "ngx-photo-editor";
+import { MyJobsComponent } from './components/my-jobs/my-jobs.component';
 
 
 @NgModule({
@@ -37,8 +37,7 @@ import { DividerModule } from "primeng/divider";
     SearchComponent,
     ProfileComponent,
     AccountSettingsComponent,
-    DashboardComponent,
-    AppliedJobsComponent
+    DashboardComponent
   ],
   imports: [
     CommonModule,
@@ -54,9 +53,7 @@ import { DividerModule } from "primeng/divider";
     AccordionModule,
     CheckboxModule,
     SkeletonModule,
-    NgxPhotoEditorModule,
-    DividerModule,
-    PasswordModule
+    NgxPhotoEditorModule
   ]
 })
 export class JobSeekerModule { }

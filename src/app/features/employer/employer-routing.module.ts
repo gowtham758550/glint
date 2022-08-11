@@ -15,6 +15,7 @@ import { ViewJobComponent } from './components/view-job/view-job.component';
 import { AccountSettingsEmployerComponent } from './components/account-settings-employer/account-settings-employer.component';
 import { EmployerProfileComponent } from './components/employer-profile/employer-profile.component';
 import { LoginComponent } from 'src/app/core/components/login/login.component';
+import { JobSeekerProfileComponent } from './components/job-seeker-profile/job-seeker-profile.component';
 
 const routes: Routes = [
   {
@@ -71,6 +72,10 @@ const routes: Routes = [
       {
         path: 'profile',
         component: EmployerProfileComponent
+      },
+      {
+        path: 'job-seeker/profile/:id',
+        component: JobSeekerProfileComponent
       }
     ]
   },

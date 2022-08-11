@@ -3,6 +3,7 @@ import { Router } from "@angular/router";
 import { SidebarItems } from "src/app/data/models/sidebar-items.model";
 import { AuthService } from "src/app/data/services/auth.service";
 import { BlobService } from "src/app/data/services/blob.service";
+import { LocalStorage } from "src/app/data/services/local-storage.service";
 import { environment } from "src/environments/environment";
 
 @Component({
@@ -21,7 +22,8 @@ export class DashboardComponent implements OnInit {
   constructor(
     private authService: AuthService,
     private profileService: BlobService,
-    private router: Router
+    private router: Router,
+    private localStorage: LocalStorage
   ) {}
 
   ngOnInit(): void {
@@ -37,8 +39,6 @@ export class DashboardComponent implements OnInit {
     this.router.navigateByUrl("/");
   }
 
-
-
   getProfilePicture() {
     this.profileService.getProfilePicture().subscribe({
       next: (data: any) => {
@@ -46,5 +46,12 @@ export class DashboardComponent implements OnInit {
         this.imageUrl = res + "?" + environment.sas_token;
       },
     });
+  }
+
+  routeToProfile() {
+    const accessToken = this.localStorage.getItem('accessToken');
+    const role = this.authService.getRole(accessToken);
+    if (role == 'JobSeeker') this.router.navigateByUrl('/job-seeker/profile');
+    else if (role == 'Employer') this.router.navigateByUrl('/employer/profile');
   }
 }
