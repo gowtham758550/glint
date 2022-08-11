@@ -13,8 +13,7 @@ import { LocalStorage } from 'src/app/data/services/local-storage.service';
 @Component({
   selector: 'app-account-settings-employer',
   templateUrl: 'account-settings-employer.component.html',
-  styles: [
-  ]
+  styleUrls: ['account-settings-employer.component.css']
 })
 export class AccountSettingsEmployerComponent implements OnInit {
   jwt: string = '';
@@ -26,6 +25,7 @@ export class AccountSettingsEmployerComponent implements OnInit {
   action!: string;
   editableId!: number;
   displayMaximizable!: boolean;
+  showButton: boolean = true;
 
   emailFields: FormField[] = [
     {
@@ -66,19 +66,48 @@ export class AccountSettingsEmployerComponent implements OnInit {
 
         this.toastr.success('Password changed successfully', 'Success');
         this.authService.logout();
-        setTimeout(() => this.router.navigateByUrl('employer/login'), 1000);
+        this.router.navigateByUrl("/login");
       }
     });
+
+  }
+  onSubmit(password: any) {
+    console.log(password.value)
+  }
+  checkNewPassword(newPassword: string) {
+    console.log(newPassword);
+    if (newPassword === this.currentPassword) {
+      this.toastr.warning("Current Password and New Password cannot be same")
+      this.showButton = false;
+    }
+    else if (newPassword === "" || this.currentPassword === "") {
+      this.showButton = false;
+    }
+    else if (newPassword.length < 8) {
+
+    }
+    else {
+      this.showButton = true;
+    }
+  }
+  checkCurrentPassword(currentPassword: string) {
+    console.log(this.newPassword)
+    if (currentPassword === "" || this.newPassword === "") {
+      this.showButton = false;
+    }
+    else if (currentPassword === this.newPassword) {
+      this.toastr.warning("Current Password and New Password cannot be same")
+      this.showButton = false;
+    }
+    else {
+      this.showButton = true;
+    }
   }
 
   // -----------------  Update email actions --------------------------------------------------
 
-  updateEmail(ref: any) {
+  updateEmail() {
     this.action = 'Update';
-    console.log(this.action);
-    this.modalService.open(ref).result.then((result) => { })
-  }
-  executeEmailAction() {
     const updatedEmail = this.emailForm.controls["Email"].value;
     this.employerService.changeEmail(updatedEmail)
       .subscribe({
@@ -88,10 +117,7 @@ export class AccountSettingsEmployerComponent implements OnInit {
           this.router.navigateByUrl("employer/login");
         }
       });
-
-    this.modalService.dismissAll();
   }
-
   // ------------------------- Delete Profile dialog box -----------------------------//
 
 
@@ -101,7 +127,8 @@ export class AccountSettingsEmployerComponent implements OnInit {
   showtoastrmessage() {
     this.authService.deleteProfile().subscribe(res => console.log(res))
     this.displayMaximizable = false;
-    this.toastr.success('Account deleted', 'Success');
+    this.authService.logout();
+    this.toastr.success('Account deleted');
   }
   // --------------------------------------------------------------------------------//
 

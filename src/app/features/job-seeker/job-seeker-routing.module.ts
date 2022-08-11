@@ -61,6 +61,10 @@ const routes: Routes = [
       {
         path:'account-settings',
         component: AccountSettingsComponent
+      },
+      {
+        path:'applied-jobs',
+        component: MyJobsComponent
       }
     ]
   },

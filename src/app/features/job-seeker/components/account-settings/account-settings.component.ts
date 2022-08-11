@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrService } from 'ngx-toastr';
@@ -8,6 +8,7 @@ import { FormField } from 'src/app/data/models/form-field.model';
 import { AuthService } from 'src/app/data/services/auth.service';
 import { JobSeekerService } from 'src/app/data/services/job-seeker.service';
 import { LocalStorage } from 'src/app/data/services/local-storage.service';
+
 
 @Component({
   selector: 'app-account-settings',
@@ -25,12 +26,31 @@ export class AccountSettingsComponent implements OnInit {
   action!: string;
   editableId!: number;
   displayMaximizable!: boolean;
+  showButton = true;
 
   emailFields: FormField[] = [
     {
       type: 'input',
       label: 'Email',
       formControlName: 'Email',
+      class: ['w'],
+    },
+  ]
+  passwordForm: FormGroup = new FormGroup({
+    currentPassword: new FormControl(''),
+    newPassword: new FormControl(''),
+  })
+  passwordFields: FormField[] = [
+    {
+      type: 'password',
+      label: 'CurrentPassword',
+      formControlName: 'currentPassword',
+      class: ['w'],
+    },
+    {
+      type: 'password',
+      label: 'New Password',
+      formControlName: 'newPassword',
       class: ['w'],
     },
   ]
@@ -64,31 +84,62 @@ export class AccountSettingsComponent implements OnInit {
       next: () => {
 
         this.toastr.success('Password changed successfully', 'Success');
-        setTimeout(() => this.router.navigateByUrl('job-seeker/signup'), 1000);
+        this.authService.logout();
+        this.router.navigateByUrl("/login");
       }
     });
-    this.authService.logout();
-    this.router.navigateByUrl("/login");
-  }
 
+  }
+  onSubmit(password: any) {
+    console.log(password.value)
+  }
+  checkNewPassword(newPassword: string) {
+    console.log(newPassword);
+    if (newPassword === this.currentPassword) {
+      this.toastr.warning("Current Password and New Password cannot be same")
+      this.showButton = false;
+    }
+    else if (newPassword === "" || this.currentPassword === "") {
+      this.showButton = false;
+    }
+    else if(newPassword.length<8){
+
+    }
+    else {
+      this.showButton = true;
+    }
+  }
+  checkCurrentPassword(currentPassword: string) {
+    console.log(this.newPassword)
+    if (currentPassword === "" || this.newPassword === "") {
+      this.showButton = false;
+    }
+    else if (currentPassword === this.newPassword) {
+      this.toastr.warning("Current Password and New Password cannot be same")
+      this.showButton = false;
+    }
+    else {
+      this.showButton = true;
+    }
+  }
   // -----------------  Update email actions --------------------------------------------------
 
-  updateEmail(ref: any) {
+  updateEmail() {
     this.action = 'Update';
-    console.log(this.action);
-    this.modalService.open(ref).result.then((result) => { })
-  }
-  executeEmailAction() {
-    const updatedEmail = this.emailForm.controls["Email"].value;
+    // this.emailForm.controls['Email'].setValue(this.Email)
+    const updatedEmail = this.Email;
+    console.log(updatedEmail)
     this.jobseekerservice.changeEmail(updatedEmail)
       .subscribe({
-        next: () =>
-          this.toastr.success('Email updated. Verify your email and Login', 'Success')
+        next: () => {
+          this.toastr.success('Email updated. Verify your email and Login')
+          this.authService.logout();
+          this.router.navigateByUrl("/login");
+          this.modalService.dismissAll();
+        }
       });
-    this.authService.logout();
-    this.router.navigateByUrl("/login");
-    this.modalService.dismissAll();
   }
+
 
   // ------------------------- Delete Profile dialog box -----------------------------//
 
@@ -97,9 +148,12 @@ export class AccountSettingsComponent implements OnInit {
     this.displayMaximizable = true;
   }
   showtoastrmessage() {
-    this.authService.deleteProfile().subscribe(res => console.log(res))
-    this.displayMaximizable = false;
-    this.toastr.success('Account deleted', 'Success');
+    this.authService.deleteProfile().subscribe(res => {
+      this.displayMaximizable = false;
+      this.authService.logout();
+      this.toastr.success('Account deleted');
+    })
+
   }
   // --------------------------------------------------------------------------------//
 

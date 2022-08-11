@@ -20,11 +20,13 @@ import { environment } from "src/environments/environment";
   styles: [],
 })
 export class EmployerProfileComponent implements OnInit {
+  isImageLoaded = false;
   imageUrl!: string;
+  defaultImageUrl: string = "https://cdn-icons-png.flaticon.com/512/1077/1077012.png?w=360";
+
   profileForm!: FormGroup;
   employerArray: any = [];
-  jobSeekerArray: any = [];
-  email!:  string;
+  email!: string;
   accessToken = this.localStorage.getItem("accessToken");
   profileFields: FormField[] = [
     {
@@ -75,7 +77,8 @@ export class EmployerProfileComponent implements OnInit {
         aspectRatio: 4 / 3,
         autoCropArea: 1,
       })
-      .subscribe((data) => {
+      .subscribe((data: any) => {
+        // this.output = data;
         let file: any = data.file;
         let formData: FormData = new FormData();
         formData.append("profilePicture", file, file.name);
@@ -92,17 +95,21 @@ export class EmployerProfileComponent implements OnInit {
   }
 
   getProfilePicture() {
+    this.isImageLoaded = false;
     this.profileService.getProfilePicture().subscribe({
       next: (data: any) => {
         let res = data.url;
         this.imageUrl = res + "?" + environment.sas_token;
+        this.isImageLoaded = true;
+        return this.imageUrl
       },
-    });
+    }
+    );
   }
   updateProfile(ref: any) {
     this.action = "Update";
     console.log(this.action);
-    this.modalService.open(ref).result.then((result) => {});
+    this.modalService.open(ref).result.then((result) => { });
   }
   executeProfileAction() {
     if (this.action == "Update") {
@@ -130,8 +137,8 @@ export class EmployerProfileComponent implements OnInit {
   employerProfile() {
     this.employerService.getEmployerById().subscribe((res: any) => {
       console.log(res);
-      this.jobSeekerArray = res;
-      console.log(this.jobSeekerArray);
+      this.employerArray = res;
+      console.log(this.employerArray);
       this.jobSeekerProfile = res;
       this.dob = this.datePipe.transform(res.dateOfBirth, "dd-MM-yyyy");
       console.log(this.dob);
@@ -156,7 +163,7 @@ export class EmployerProfileComponent implements OnInit {
     private datePipe: DatePipe,
     private profileService: BlobService,
     private imageService: NgxPhotoEditorService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.email = this.authService.getEmail(this.accessToken);

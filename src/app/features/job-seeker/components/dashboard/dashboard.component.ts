@@ -38,10 +38,7 @@ export class DashboardComponent implements OnInit {
 
   applyFilters() {
     if (this.filteredExperience.length > 0 || this.filteredLocations.length > 0) {
-      this.filteredJobs = this.allJobs.filter(job => {
-        const experience = job.experienceNeeded > 0 ? 'Experienced' : 'Fresher';
-        return this.filteredExperience.includes(experience) && this.filteredLocations.includes(job.location);
-      })
+      
     } else {
       this.filteredJobs = this.allJobs;
     }

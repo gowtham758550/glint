@@ -2,8 +2,8 @@ import { DatePipe, formatDate } from "@angular/common";
 import { Component, OnInit } from "@angular/core";
 import { FormGroup, Validators, FormArray, FormBuilder } from "@angular/forms";
 import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
-import { NgxPhotoEditorService } from "ngx-photo-editor";
-import { NgxCroppedEvent } from "ngx-photo-editor/lib/ngx-photo-editor.component";
+import { NgxPhotoEditorService } from 'ngx-photo-editor';
+import { NgxCroppedEvent } from 'ngx-photo-editor/lib/ngx-photo-editor.component';
 import { ToastrService } from "ngx-toastr";
 import { FormField } from "src/app/data/models/form-field.model";
 import { AuthService } from "src/app/data/services/auth.service";
@@ -27,7 +27,7 @@ export class ProfileComponent implements OnInit {
   educationInfo: any;
   educationToEdit: any;
   experienceInfo: any;
-  imageUrl!: string;
+  imageUrl: string="https://cdn-icons-png.flaticon.com/512/1077/1077012.png?w=360";
   experienceToEdit: any;
   experienceArray: any = [];
   editableExperience: any;
@@ -120,15 +120,21 @@ export class ProfileComponent implements OnInit {
       class: ["w"],
     },
     {
-      type: 'number',
-      label: 'Year of in this company',
-      formControlName: 'yearOfExperience',
+      type: 'date',
+      label: 'Start Date',
+      formControlName: 'startDate',
+      class: ['w']
+    },
+    {
+      type: 'date',
+      label: 'End Date',
+      formControlName: 'toDate',
       class: ['w']
     },
     {
       type: 'number',
-      label: 'Previous Salary',
-      formControlName: 'previousSalary',
+      label: 'Salary',
+      formControlName: 'salary',
       class: ['w']
     }
   ]
@@ -180,7 +186,7 @@ export class ProfileComponent implements OnInit {
         aspectRatio: 4 / 3,
         autoCropArea: 1,
       })
-      .subscribe((data) => {
+      .subscribe((data:any) => {
         // this.output = data;
         let file: any = data.file;
         let formData: FormData = new FormData();
@@ -218,6 +224,7 @@ export class ProfileComponent implements OnInit {
   getExperienceList() {
     this.experienceInfo = this.experienceService.getExperience().subscribe(res => {
       this.experienceArray = res;
+      console.log(this.experienceArray)
     });
   }
   //-----------------------Get JobSeeker Detail Api Call ---------------------------------
@@ -233,7 +240,7 @@ export class ProfileComponent implements OnInit {
         this.jobSeekerArray = res
       });
   }
-  //-----------------------Get JobSeeker Profile using ID Api Call ---------------------------------
+  //-----------------------Get JobSeeker Profile using ID(Api Call) ---------------------------------
   dob: any;
   getJobSeekerProfile() {
     this.jobSeekerService.getUserById(
@@ -252,6 +259,8 @@ export class ProfileComponent implements OnInit {
           dateOfBirth: [formatDate(res.dateOfBirth, 'yyyy-MM-dd', 'en')],
           location: [res.location, Validators.required],
           about: ['Software Engineer'],
+
+          
         });
       });
   }
@@ -332,8 +341,9 @@ export class ProfileComponent implements OnInit {
     return this.formBuilder.group({
       previousCompanyName: ['', Validators.required],
       designation: ['', Validators.required],
-      yearOfExperience: [''],
-      previousSalary: [''],
+      startDate: [''],
+      toDate: [''],
+      salary: [''],
     })
   }
 
@@ -354,16 +364,14 @@ export class ProfileComponent implements OnInit {
     this.experienceService.getExperienceById(id).subscribe(res => {
       this.editableExperience = res;
 
-      console.log(res.previousCompanyName);
+      console.log(res);
       this.experienceForm.controls['previousCompanyName'].setValue(res.previousCompanyName);
       this.experienceForm.controls['designation'].setValue(res.designation)
-      this.experienceForm.controls['yearOfExperience'].setValue(res.yearOfExperience)
-      this.experienceForm.controls['previousSalary'].setValue(res.previousSalary)
+      this.experienceForm.controls['startDate'].setValue(formatDate(res.startDate, 'yyyy-MM-dd', 'en'))
+      this.experienceForm.controls['toDate'].setValue(formatDate(res.toDate, 'yyyy-MM-dd', 'en'))
+      this.experienceForm.controls['salary'].setValue(res.salary)
     }
     );
-
-    console.log("***********" + this.experienceForm.value)
-
     this.modalService.open(ref).result.then(result => { });
   }
 
@@ -390,8 +398,9 @@ export class ProfileComponent implements OnInit {
         "experienceDetailId": this.editableExperienceId,
         "previousCompanyName": this.experienceForm.value.previousCompanyName,
         "designation": this.experienceForm.value.designation,
-        "yearOfExperience": this.experienceForm.value.yearOfExperience,
-        "previousSalary": this.experienceForm.value.previousSalary
+        "startDate": this.experienceForm.value.startDate,
+        "toDate": this.experienceForm.value.toDate,
+        "salary": this.experienceForm.value.salary
       }
       console.log(this.experienceToEdit)
       this.experienceService.updateExperienceById(this.editableExperienceId, this.experienceToEdit).subscribe(res => { console.log(res); this.getExperienceList() })
@@ -403,10 +412,6 @@ export class ProfileComponent implements OnInit {
 
   //--------------------------------------- update profile method------------------------------------------------
   updateProfile(ref: any) {
-    // this.jobSeekerService.updateProfile(this.profileForm.value)
-    //   .subscribe({
-    //     next: res => console.log(res)
-    //   });
     this.action = "Update";
     console.log(this.action);
     this.modalService.open(ref).result.then((result) => { });
