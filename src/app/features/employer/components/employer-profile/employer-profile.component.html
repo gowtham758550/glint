@@ -3,11 +3,23 @@
         <!-- Profile Image -->
         <div class="card">
             <div class="rounded-top text-white d-flex flex-row" style="background-color: #05292a; height:200px;">
-                <div class="ms-4 mt-5 d-flex flex-column" style="width: 200px;">
-                    <img [src]="imageUrl" class="rounded-circle mt-5 mt-4 mb-2" style="width: 150px;">
+                <div class="ms-4 ml-5 d-flex mx-auto" style="width: 200px;">
+                    <ng-container *ngIf="isImageLoaded; then image; else imageLoader"></ng-container>
+                    <ng-template #imageLoader>
+                        <img [src]="defaultImageUrl" class="pointer rounded-circle border"
+                            style="width: 150px; height: 150px;" (click)="openFileTrigger(fileTigger)"
+                            pTooltip="Update Profile picture">
+                    </ng-template>
+                    <ng-template #image>
+                        <img [src]="imageUrl" class="pointer rounded-circle"
+                            style="width: 150px; height: 150px;" (click)="openFileTrigger(fileTigger)"
+                            pTooltip="Update Profile picture">
+                    </ng-template>
+
                 </div>
                 <input type="file" (change)="updateProfilePicture($event)" accept=".png,.jpg,.jpeg"
                     style="display: none;" #fileTigger>
+
             </div>
             <br>
             <!-- Profile Details -->

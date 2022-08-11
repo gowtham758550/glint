@@ -6,14 +6,14 @@
         <!-- Profile Image -->
         <div class="card">
             <div class="rounded-top text-white d-flex flex-row" style="background-color: #05292a; height:200px;">
-                <div class="ms-4 mt-5 d-flex flex-column" style="width: 200px;">
+                <div class="ms-4 mt-5 d-flex flex-column" style="width: 200px; top:50%">
                     <ng-container *ngIf="isImageLoaded; then image; else imageLoader"></ng-container>
                     <ng-template #imageLoader>
-                        <img [src]="imageUrl" class="pointer rounded-circle" style="width: 150px; height: 150px;"
+                        <img [src]="imageUrl" class="pointer rounded-circle col px-md-5" style="width: 150px; height: 150px;"
                         (click)="openFileTrigger(fileTigger)" pTooltip="Update Profile picture">
                     </ng-template>
                     <ng-template #image>
-                        <img [src]="imageUrl" class="pointer rounded-circle" style="width: 150px; height: 150px;"
+                        <img [src]="imageUrl" class="pointer rounded-circle" style="width: 150px; height: 9000px;"
                             (click)="openFileTrigger(fileTigger)">
                     </ng-template>
 

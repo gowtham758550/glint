@@ -26,6 +26,8 @@ import { JobSeekerProfileComponent } from './components/job-seeker-profile/job-s
 import { DividerModule } from "primeng/divider";
 import { PasswordModule } from "primeng/password";
 import { NgxPhotoEditorModule } from 'ngx-photo-editor';
+import {TooltipModule} from 'primeng/tooltip';
+
 
 
 @NgModule({
@@ -57,7 +59,8 @@ import { NgxPhotoEditorModule } from 'ngx-photo-editor';
     SkeletonModule,
     KnobModule,
     DividerModule,
-    PasswordModule
+    PasswordModule,
+    TooltipModule
   ],
   providers: [DatePipe]
 })
