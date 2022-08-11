@@ -19,29 +19,12 @@ export class CompanyDetailComponent implements OnInit {
     lastName: [this.localStorage.getItem('lastName'), [Validators.required]],
     // dateOfBirth: ['', Validators.required],
     companyName: ['', Validators.required],
-    about: ['', Validators.required]
+    about: ['', Validators.required],
+    contactNumber: ['', [Validators.required, Validators.minLength(10)]],
+    companyWebsite: ['', [Validators.required]],
+    address: ['', Validators.required]
   })
   profileFields: FormField[] = [
-    // {
-    //   type: 'input',
-    //   label: 'First name',
-    //   formControlName: 'firstName',
-    //   class: ['w'],
-    //   disabled: true
-    // },
-    // {
-    //   type: 'input',
-    //   label: 'Last name',
-    //   formControlName: 'lastName',
-    //   class: ['w'],
-    //   disabled: true
-    // },
-    // {
-    //   type: 'date',
-    //   label: 'Date of Birth',
-    //   formControlName: 'dateOfBirth',
-    //   class: ['w']
-    // },
     {
       type: 'input',
       label: 'Company name',
@@ -52,6 +35,24 @@ export class CompanyDetailComponent implements OnInit {
       type: 'textarea',
       label: 'About company',
       formControlName: 'about',
+      class: ['w']
+    },
+    {
+      type: 'tel',
+      label: 'Contact number',
+      formControlName: 'contactNumber',
+      class: ['w']
+    },
+    {
+      type: 'url',
+      label: 'Company website',
+      formControlName: 'companyWebsite',
+      class: ['w']
+    },
+    {
+      type: 'textarea',
+      label: 'Address',
+      formControlName: 'address',
       class: ['w']
     },
     {

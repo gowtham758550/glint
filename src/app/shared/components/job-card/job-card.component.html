@@ -1,24 +1,8 @@
 <div class="pointer"
     [routerLink]="'/job-seeker/job/' + job.postJobDetailId">
     <div class="p-4 card card-shadow">
-        <div class="d-flex justify-content-between">
-            <div class="fs-3 fw-bold">
-                {{job.jobTitle}}
-            </div>
-            <div>
-                <ng-container *ngIf="isApplied; then applied; else notApplied">
-                </ng-container>
-                <ng-template #applied>
-                    <button class="btn bg-dark text-white rounded-pill" [disabled]="isApplied">
-                        Applied
-                    </button>
-                </ng-template>
-                <ng-template #notApplied>
-                    <button class="btn bg-dark text-white rounded-pill" (click)="applyForJob()">
-                        Apply
-                    </button>
-                </ng-template>
-            </div>
+        <div class="fs-3 fw-bold">
+            {{job.jobTitle}}
         </div>
         <div class="fs-5">
             <i class="pi pi-building"></i>

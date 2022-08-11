@@ -23,6 +23,7 @@ export class EmployerProfileComponent implements OnInit {
   imageUrl!: string;
   profileForm!: FormGroup;
   employerArray: any = [];
+  jobSeekerArray: any = [];
   email!:  string;
   accessToken = this.localStorage.getItem("accessToken");
   profileFields: FormField[] = [

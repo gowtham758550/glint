@@ -2,7 +2,7 @@
     <div class="flex-grow-1">
         <!-- Profile Image -->
         <div class="card">
-            <div class="rounded-top text-white d-flex flex-row" style="background-color: #05292a; height:200px;">
+            <div class="rounded-top text-secondary d-flex flex-row" style="background-color: #05292a; height:200px;">
                 <div class="ms-4 mt-5 d-flex flex-column" style="width: 200px;">
                     <img [src]="imageUrl" class="rounded-circle mt-5 mt-4 mb-2" style="width: 150px;">
                 </div>
@@ -77,7 +77,7 @@
     </div>
     <hr>
     <div class="text-end pb-3 pe-3">
-        <button class="btn bg-dark text-white" style="border-radius: 13px;" [disabled]="!profileForm.valid"
+        <button class="btn bg-dark text-secondary" style="border-radius: 13px;" [disabled]="!profileForm.valid"
             (click)="executeProfileAction()">
             {{action}}
         </button>

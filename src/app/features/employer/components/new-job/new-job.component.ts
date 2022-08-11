@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { FormField } from 'src/app/data/models/form-field.model';
+import { DataService } from 'src/app/data/services/data.service';
 import { JobService } from 'src/app/data/services/job.service';
 
 @Component({
@@ -86,10 +87,25 @@ export class NewJobComponent implements OnInit {
     private formBuilder: FormBuilder,
     private jobService: JobService,
     private toastr: ToastrService,
-    private router: Router
+    private router: Router,
+    private dataService: DataService
   ) { }
 
   ngOnInit(): void {
+    // this.getCategories()
+    // this.getQualifications();
+  }
+
+  getCategories() {
+    this.dataService.getCategories().subscribe({
+      next: categries => console.log(categries)
+    });
+  }
+
+  getQualifications() {
+    this.dataService.getQualifications().subscribe({
+      next: qualifications => console.log(qualifications)
+    })
   }
 
   createJob() {
@@ -101,4 +117,5 @@ export class NewJobComponent implements OnInit {
       }
     });
   }
+  
 }

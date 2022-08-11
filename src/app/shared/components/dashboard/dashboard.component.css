@@ -46,10 +46,7 @@ display:block;
 width:250px;
 }
 
-.fixed {
-    position: fixed;
-    z-index: 1;
-}
+
 
 .main-menu li>a {
 position:relative;

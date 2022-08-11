@@ -2,8 +2,9 @@
 @import '~ngx-toastr/toastr';
 
 :root {
-    --primary: #ff0038;
-    --secondary: #fef5f8;
+    /* --primary: #ff0038; */
+    --primary: #9d00d6;
+    --secondary: #fff;
     --warning: #ffb31d;
     --dark: #171b34;
     --success: #8cffa7;
@@ -19,7 +20,7 @@
 
 .bg-success {
     background-color: var(--success) !important;
-    color: var(--success);
+    color: var(--dark);
 }
 
 .bg-dark {
@@ -136,4 +137,35 @@
 
 .scrollable {
     overflow-y: scroll;
+}
+
+.profile {
+    height: 30px;
+    width: 30px;
+    border-radius: 15px;
+}
+
+.h-100-vh {
+    height: 100vh;
+}
+
+/* sidebar */
+.side-nav-item {
+    color: #aeaeb4;
+}
+
+.side-nav-item:hover {
+    color: var(--secondary);
+}
+
+.spacer {
+    flex: 1 1
+}
+
+.fixed {
+    position: fixed;
+    z-index: 1;
+}
+
+.sidebar {
 }

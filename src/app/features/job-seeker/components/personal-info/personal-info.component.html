@@ -17,7 +17,7 @@
             <div>
                 <button class="btn btn-rounded" 
                     (click)="addEducation(educationModal)">
-                    <i class="pi pi-plus text-primary"></i>
+                    <i class="pi pi-plus text-dark"></i>
                 </button>
             </div>
         </div>
@@ -66,7 +66,7 @@
             <div>
                 <button class="btn btn-rounded"
                     (click)="addExperience(experienceModal)">
-                    <i class="pi pi-plus text-primary"></i>
+                    <i class="pi pi-plus text-dark"></i>
                 </button>
             </div>
         </div>
@@ -131,7 +131,7 @@
     </div>
     <hr>
     <div class="text-end pb-3 pe-3">
-        <button class="btn bg-dark text-white"
+        <button class="btn bg-dark text-secondary"
             style="border-radius: 13px;"
             [disabled]="!educationForm.valid"
             (click)="executeEducationAction()">
@@ -156,7 +156,7 @@
     </div>
     <hr>
     <div class="text-end pb-3 pe-3">
-        <button class="btn bg-dark text-white"
+        <button class="btn bg-dark text-secondary"
             style="border-radius: 13px;"
             [disabled]="!experienceForm.valid"
             (click)="executeExperienceAction()">

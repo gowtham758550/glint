@@ -9,24 +9,29 @@ import { SidebarItems } from 'src/app/data/models/sidebar-items.model';
 })
 export class HomeComponent implements OnInit {
 
-  sidebarItems: SidebarItems[] = [
-    {
-      type: 'menu-item',
-      label: 'Dashboard',
-      routeTo: '/employer/dashboard',
-      icon: 'pi-home'
-    },
-    {
-      type: 'menu-item',
-      label: 'Jobs',
-      icon: 'pi-briefcase',
-      routeTo: '/employer/jobs'
-    }
-  ]
+  // sidebarItems: SidebarItems[] = [
+  //   {
+  //     type: 'menu-item',
+  //     label: 'Dashboard',
+  //     routeTo: '/employer/dashboard',
+  //     icon: 'pi-home'
+  //   },
+  //   {
+  //     type: 'menu-item',
+  //     label: 'Jobs',
+  //     icon: 'pi-briefcase',
+  //     routeTo: '/employer/jobs'
+  //   }
+  // ]
+  sideBarVisibility = true;
 
   constructor() { }
 
   ngOnInit(): void {
+  }
+
+  toggleSideBar() {
+    this.sideBarVisibility = !this.sideBarVisibility;
   }
 
 }

@@ -5,7 +5,7 @@ import { LandingPageComponent } from "./components/landing-page/landing-page.com
 import { LoginComponent } from "./components/login/login.component";
 import { ResetPasswordComponent } from "./components/reset-password/reset-password.component";
 import { UserVerificationComponent } from "./components/user-verification/user-verification.component";
-import { AuthGuard } from "./guards/auth.guard";
+import { AuthGuard } from 'src/app/core/guards/auth.guard';
 
 const routes: Routes = [
     { 

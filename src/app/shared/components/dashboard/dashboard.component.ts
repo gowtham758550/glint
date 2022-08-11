@@ -14,6 +14,8 @@ import { environment } from "src/environments/environment";
 export class DashboardComponent implements OnInit {
   @Input()
   sidebarItems!: SidebarItems[];
+  accessToken!: string;
+  role!: string;
   
 
   showSidebar: boolean = true;
@@ -27,6 +29,8 @@ export class DashboardComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    const accessToken = this.localStorage.getItem('accessToken');
+    this.role = this.authService.getRole(accessToken);
     this.getProfilePicture();
   }
 
@@ -49,9 +53,12 @@ export class DashboardComponent implements OnInit {
   }
 
   routeToProfile() {
-    const accessToken = this.localStorage.getItem('accessToken');
-    const role = this.authService.getRole(accessToken);
-    if (role == 'JobSeeker') this.router.navigateByUrl('/job-seeker/profile');
-    else if (role == 'Employer') this.router.navigateByUrl('/employer/profile');
+    if (this.role == 'JobSeeker') this.router.navigateByUrl('/job-seeker/profile');
+    else if (this.role == 'Employer') this.router.navigateByUrl('/employer/profile');
+  }
+
+  routeToSettings() {
+    if (this.role == 'JobSeeker') this.router.navigateByUrl('/job-seeker/account-settings');
+    else if (this.role == 'Employer') this.router.navigateByUrl('/employer/account-settings');
   }
 }
