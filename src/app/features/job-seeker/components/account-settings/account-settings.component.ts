@@ -97,7 +97,7 @@ export class AccountSettingsComponent implements OnInit {
 
   updateEmail(ref: any) {
     this.action = 'Update';
-    console.log(this.action);
+    this.emailForm.controls['Email'].setValue(this.Email)
     this.modalService.open(ref).result.then((result) => { })
   }
   executeEmailAction() {
