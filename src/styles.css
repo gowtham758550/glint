@@ -191,7 +191,7 @@
 }
 
 .dropdown-content a:hover {
-    border-radius: 4%;
+    /* border-radius: 4%; */
     background-color: rgb(244, 241, 241);
 }
 
