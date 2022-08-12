@@ -4,11 +4,12 @@ import { SearchBar } from 'src/app/data/models/search-bar.model';
 import { Option } from 'src/app/data/models/options.model';
 import { Router } from '@angular/router';
 import { FilterService } from 'src/app/data/services/filter.service';
+import { JobService } from 'src/app/data/services/job.service';
 
 @Component({
   selector: 'app-landing-page',
   templateUrl: './landing-page.component.html',
-  styleUrls: []
+  styleUrls: ['./landing-page.component.css']
 })
 export class LandingPageComponent implements OnInit {
 
@@ -16,6 +17,33 @@ export class LandingPageComponent implements OnInit {
   totalJobCount!: number;
   totalCompanyCount!: number;
   jobSeekerCount!: number;
+  location: Option[] = [
+    {
+      value: 0,
+      label: 'Select location'
+    },
+    {
+      value: 1,
+      label: 'Bangalore'
+    },
+    {
+      value: 2,
+      label: 'Chennai'
+    },
+    {
+      value: 3,
+      label: 'Coimbatore'
+    },
+    {
+      value: 4,
+      label: 'Kolkata'
+    },
+    {
+      value: 5,
+      label: 'Mumbai'
+    }
+  ]
+  isLocationPlaceholder = true;
   experience: Option[] = [
     {
       value: 0,
@@ -30,40 +58,28 @@ export class LandingPageComponent implements OnInit {
       label: 'Experienced'
     }
   ];
-  searchBarData: SearchBar[] = [
-    {
-      label: 'Enter designation',
-      type: 'input',
-      formControlName: 'designation'
-    },
-    {
-      label: 'Select experience',
-      type: 'select',
-      options: this.experience,
-      formControlName: 'experience'
-    },
-    {
-      label: 'Enter location',
-      type: 'input',
-      formControlName: 'location'
-    }
-  ];
+  isExperiencePlaceholder = true;
   searchBarForm: FormGroup = this.formBuilder.group({
     designation: '',
     experience: 0,
-    location: ''
+    location: 0
   })
 
   constructor(
     private formBuilder: FormBuilder,
     private router: Router,
-    private filterService: FilterService
+    private filterService: FilterService,
+    private jobService: JobService
   ) { }
 
   ngOnInit(): void {
     this.getTotalJobCount();
     this.getEmployerCount();
     this.getJobSeekerCount();
+  }
+
+  getDesignations() {
+    this.jobService.getAllJob().subscribe();
   }
 
   getTotalJobCount() {
@@ -84,12 +100,22 @@ export class LandingPageComponent implements OnInit {
     })
   }
 
-  receiveSearchData() {
+  search() {
     console.log(this.searchBarForm.value);
     this.router.navigate(
-      ['search'],
+      ['/job-seeker/dashboard'],
       { queryParams: this.searchBarForm.value }
     )
+  }
+
+  onLocationChange(event: any) {
+    if (event.target.value == 0) this.isLocationPlaceholder = true;
+    else this.isLocationPlaceholder = false;
+  }
+
+  onExperienceChnage(event: any) {
+    if (event.target.value == 0) this.isExperiencePlaceholder = true;
+    else this.isExperiencePlaceholder = false;
   }
 
 }
