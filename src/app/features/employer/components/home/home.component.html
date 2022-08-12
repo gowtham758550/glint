@@ -11,7 +11,7 @@
                 <app-logo [class]="'text-secondary'"></app-logo>
             </div>
     
-            <div class="pt-3">
+            <div class="pt-3 d-flex flex-column">
                 <div class="pe-3 py-2 side-nav-item pointer"
                     routerLink="/employer/dashboard"
                     routerLinkActive="text-secondary"
@@ -37,6 +37,12 @@
                     routerLinkActive="text-secondary">
                     <i class="pi pi-cog"></i>
                     Account Settings
+                </div>
+                <div class="pe-3 py-2 side-nav-item pointer"
+                    (click)="logout()"
+                    routerLinkActive="text-secondary">
+                    <i class="pi pi-sign-out"></i>
+                    Logout
                 </div>
             </div>
         </div>

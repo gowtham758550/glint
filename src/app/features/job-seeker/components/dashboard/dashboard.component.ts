@@ -36,17 +36,28 @@ export class DashboardComponent implements OnInit {
   getJobs() {
     this.activatedRoute.queryParams.subscribe((params:any) => {
       console.log(params)
-      this.filteredExperience.push(Experience[params.experience]);
-      this.filteredLocations.push(Location[params.location]);
-      this.searchText = params.designation
-      const filters = `location==${this.filteredLocations.toString()}&PageSize=10`
-      // const filters = `jobTitle==${params.designation},location==${this.filteredLocations.toString()},experience==${this.filteredExperience.toString()}&PageSize=10`
-      this.filterService.getAllJobs(filters).subscribe({
-        next: data => {
-          this.allJobs = data;
-          this.isLoaded = true;
-        }
-      });
+      if (Object.keys(params).length !== 0) {
+        this.filteredExperience.push(Experience[params.experience]);
+        this.filteredLocations.push(Location[params.location]);
+        this.searchText = params.designation
+        const filters = `location==${this.filteredLocations.toString()}&PageSize=10`
+        // const filters = `jobTitle==${params.designation},location==${this.filteredLocations.toString()},experience==${this.filteredExperience.toString()}&PageSize=10`
+        this.filterService.getAllJobs(filters).subscribe({
+          next: data => {
+            this.allJobs = data;
+            this.isLoaded = true;
+          }
+        });
+      } else {
+        const filters = "";
+        // const filters = `jobTitle==${params.designation},location==${this.filteredLocations.toString()},experience==${this.filteredExperience.toString()}&PageSize=10`
+        this.filterService.getAllJobs(filters).subscribe({
+          next: data => {
+            this.allJobs = data;
+            this.isLoaded = true;
+          }
+        });
+      }
     })
   }
 
