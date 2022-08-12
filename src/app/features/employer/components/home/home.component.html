@@ -4,7 +4,7 @@
 
     <!-- sidebar -->
     <div class="sidebar"
-        style="width: 200px;"
+        style="width: 230px;"
         *ngIf="sideBarVisibility">
         <div class="fixed bg-dark p-4 text-secondary h-100-vh">
             <div>
@@ -25,6 +25,18 @@
                     routerLinkActive="text-secondary">
                     <i class="pi pi-briefcase"></i>
                     Jobs
+                </div>
+                <div class="pe-3 py-2 side-nav-item pointer"
+                    routerLink="/employer/profile"
+                    routerLinkActive="text-secondary">
+                    <i class="pi pi-user"></i>
+                    Profile
+                </div>
+                <div class="pe-3 py-2 side-nav-item pointer"
+                    routerLink="/employer/account-settings"
+                    routerLinkActive="text-secondary">
+                    <i class="pi pi-cog"></i>
+                    Account Settings
                 </div>
             </div>
         </div>

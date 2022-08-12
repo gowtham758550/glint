@@ -5,7 +5,6 @@ import { SearchBar } from 'src/app/data/models/search-bar.model';
 @Component({
   selector: 'app-search-bar',
   templateUrl: './search-bar.component.html',
-  styleUrls: ['./search-bar.component.css'],
 })
 export class SearchBarComponent implements OnInit {
 

@@ -1,5 +1,6 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
+import { Params } from "@angular/router";
 import { Observable } from "rxjs";
 import { environment } from "src/environments/environment";
 import { Appliers } from "../models/appliers.model";
@@ -20,8 +21,8 @@ export class FilterService {
         return this.httpClient.get<Appliers[]>(`${this.host}/applied_job_list/get/${postJobId}`);
     }
 
-    getAllJobs(): Observable<Job[]> {
-        return this.httpClient.get<Job[]>(`${this.host}/post_job_list/get`);
+    getAllJobs(filters: string): Observable<Job[]> {
+        return this.httpClient.get<Job[]>(`${this.host}/post_job_list/get?filters=${filters}`);
     }
 
     getPostJobCount(): Observable<number> {
