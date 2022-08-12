@@ -2,8 +2,9 @@
 @import '~ngx-toastr/toastr';
 
 :root {
-    --primary: #ff0038;
-    --secondary: #fef5f8;
+    /* --primary: #ff0038; */
+    --primary: #9d00d6;
+    --secondary: #fff;
     --warning: #ffb31d;
     --dark: #171b34;
     --success: #8cffa7;
@@ -19,7 +20,7 @@
 
 .bg-success {
     background-color: var(--success) !important;
-    color: var(--success);
+    color: var(--dark);
 }
 
 .bg-dark {
@@ -136,4 +137,62 @@
 
 .scrollable {
     overflow-y: scroll;
+}
+
+.profile {
+    height: 30px;
+    width: 30px;
+    border-radius: 15px;
+}
+
+.h-100-vh {
+    height: 100vh;
+}
+
+/* sidebar */
+.side-nav-item {
+    color: #aeaeb4;
+}
+
+.side-nav-item:hover {
+    color: var(--secondary);
+}
+
+.spacer {
+    flex: 1 1
+}
+
+.fixed {
+    position: fixed;
+    z-index: 1;
+}
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #fff;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    border-radius: 1rem;
+    z-index: 1;
+}
+
+.dropdown-content a {
+    color: var(--dark);
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+.dropdown-content a:hover {
+    background-color: var(--secondary);
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
 }

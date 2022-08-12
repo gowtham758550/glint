@@ -4,6 +4,7 @@ import { ButtonModule } from 'primeng/button';
 import { TableModule } from 'primeng/table';
 import { SkeletonModule } from 'primeng/skeleton';
 import { KnobModule } from 'primeng/knob';
+import { ChartModule } from 'primeng/chart';
 
 import { EmployerRoutingModule } from './employer-routing.module';
 import { RegisterComponent } from './components/register/register.component';

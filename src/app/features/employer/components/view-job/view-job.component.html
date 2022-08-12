@@ -1,14 +1,104 @@
 <div>
-    <div>
-        <app-job-info></app-job-info>
-    </div>
-    
-    <div>
+    <ng-container *ngIf="isJobInfoLoaded; then jobInfo; else jobInfoLoader"></ng-container>
 
-        <ng-container *ngIf="isLoaded; then data; else loader"></ng-container>
+    <ng-template #jobInfoLoader>
+        <!-- job info loader -->
+        <div class="card p-4">
+            <div class="d-flex justify-content-between">
+                <p-skeleton width="15rem" height="1.5rem" styleClass="mb-2"></p-skeleton>
+                <div class="d-flex">
+                    <p-skeleton width="5rem" height="2.5rem" styleClass="mb-2 rounded-pill"></p-skeleton>
+                    <span class="pe-3"></span>
+                    <p-skeleton width="5rem" height="2.5rem" styleClass="mb-2 rounded-pill"></p-skeleton>
+                </div>
+            </div>
+            <span class="d-flex">
+                <p-skeleton width="5rem" styleClass="mb-2"></p-skeleton>
+                <p-skeleton width="5rem" styleClass="mb-2"></p-skeleton>
+            </span>
+            <p-skeleton width="6rem" styleClass="mb-2"></p-skeleton>
+        </div>
+        <div class="pt-4"></div>
+        <div class="card p-4">
+            <p-skeleton width="14rem" height="1.5rem" styleClass="mb-2"></p-skeleton>
+            <p-skeleton width="100%" height="1rem" styleClass="mb-2"></p-skeleton>
+            <p-skeleton width="100%" height="1rem" styleClass="mb-2"></p-skeleton>
+            <p-skeleton width="100%" height="1rem" styleClass="mb-2"></p-skeleton>
+            <p-skeleton width="39%" height="1rem" styleClass="mb-2"></p-skeleton>
+            <span class="pt-4"></span>
+            <p-skeleton width="10rem" height="1.5rem" styleClass="mb-2"></p-skeleton>
+            <p-skeleton width="100%" height="1rem" styleClass="mb-2"></p-skeleton>
+            <p-skeleton width="100%" height="1rem" styleClass="mb-2"></p-skeleton>
+            <p-skeleton width="100%" height="1rem" styleClass="mb-2"></p-skeleton>
+            <p-skeleton width="79%" height="1rem" styleClass="mb-2"></p-skeleton>
+        </div>
+    </ng-template>
+    <ng-template #jobInfo>
+        <!-- job info -->
+        <div class="card p-4">
+            <div class="d-flex justify-content-between">
+                <div class="fs-3 fw-bold">
+                    {{job.jobTitle}}
+                </div>
+                <!-- action buttons -->
+                <div class="text-end">
+                    <button class="btn border-none text-dark rounded-pill border border-dark"
+                        (click)="routeToEdit()">
+                        <i class="pi pi-pencil"></i>
+                        Edit
+                    </button>
+                    <span class="pe-3"></span>
+                    <button class="btn border-none text-danger rounded-pill border border-danger"
+                        (click)="deleteJob()">
+                        <i class="pi pi-trash"></i>
+                        Delete
+                    </button>
+                </div>
+            </div>
+            <div class="fs-6 d-flex flex-wrap">
+                <div class="pe-3">
+                    <i class="pi pi-map-marker"></i>
+                    {{job.location}}
+                </div>
+                <div class="text-success">
+                    <i class="pi pi-clock"></i>
+                    22 hours ago
+                </div>
+            </div>
+        
+            <div class="pt-2 d-flex flex-wrap">
+                <div class="pe-3">
+                    <i class="pi pi-briefcase"></i>
+                    {{job.jobType}}
+                </div>
+                <div>
+                    <i class="pi pi-wallet"></i>
+                    {{job.salary | currency: 'INR'}}
+                    CTC
+                </div>
+            </div>
+        </div>
+        <div class="pt-4"></div>
+        <div class="card p-4">
+            <div class="fs-3 fw-bold">
+                About the job
+            </div>
+            <div class="fs-5 fw-bold pt-4">
+                Job Description
+            </div>
+            <div class="fs-6">
+                {{job.description}}
+            </div>
+        </div>
+    </ng-template>
 
+    <div class="pt-4">
+        <h1 class="fw-bold">
+            List of applied candidates
+        </h1>
+        <ng-container *ngIf="isAppliersTableLoaded; then appliersDataTable; else appliersLoader"></ng-container>
         <!-- loader -->
-        <ng-template #loader>
+        <ng-template #appliersLoader>
             <p-table responsiveLayout="scroll">
                 <ng-template pTemplate="header">
                     <tr>
@@ -57,63 +147,66 @@
                 </ng-template>
             </p-table>
         </ng-template>
-
-        <ng-template #data>
-            <p-table [value]="appliers"
-                responsiveLayout="scroll">
-                <ng-template pTemplate="header">
-                    <tr>
-                        <th pSortableColumn="fullName">
-                            Full name
-                            <p-sortIcon field="fullName"></p-sortIcon>
-                        </th>
-                        <th pSortableColumn="email">
-                            Email
-                            <p-sortIcon field="email"></p-sortIcon>
-                        </th>
-                        <th pSortableColumn="status">
-                            Status
-                            <p-sortIcon field="status"></p-sortIcon>
-                        </th>
-                        <th pSortableColumn="gender">
-                            Gender
-                            <p-sortIcon field="gender"></p-sortIcon>
-                        </th>
-                        <th pSortableColumn="dateOfBirth">
-                            DOB
-                            <p-sortIcon field="dateOfBirth"></p-sortIcon>
-                        </th>
-                        <!-- <th>
-                            Actions
-                        </th> -->
-                    </tr>
-                </ng-template>
-                <ng-template pTemplate="body" let-appliers>
-                    <tr class="pointer"
-                        [routerLink]="'/employer/job-seeker/profile/' + appliers.userName">
-                        <td>{{appliers.fullName}}</td>
-                        <td>{{appliers.email}}</td>
-                        <td>
-                            <span class="status"
-                                [ngClass]="appliers.status == 'Pending' ? 'status-pending' : 'status-success'">
-                                {{appliers.status}}
-                            </span>
-                        </td>
-                        <td>{{appliers.gender}}</td>
-                        <td>{{appliers.dateOfBirth | date: 'short' }}</td>
-                        <!-- <td>
-                            <button class="btn border-none"
-                                [routerLink]="'/employer/job/' + job.postJobDetailId">
-                                <i class="pi pi-eye"></i>
-                            </button>
-                            <button class="btn border-none"
-                                [routerLink]="'/employer/job/edit/' + job.postJobDetailId">
-                                <i class="pi pi-pencil"></i>
-                            </button>
-                        </td> -->
-                    </tr>
-                </ng-template>
-            </p-table>
+        <ng-template #appliersDataTable>
+            <ng-container *ngIf="appliers.length > 0; then applierDataTable; else noAppliers"></ng-container>
+            <ng-template #noAppliers>
+                <div class="card p-3 text-center">
+                    <p>No candidates applied for this job at this moment :(</p>
+                </div>
+            </ng-template>
+            <ng-template #applierDataTable>
+                <p-table [value]="appliers"
+                    responsiveLayout="scroll">
+                    <ng-template pTemplate="header">
+                        <tr>
+                            <th pSortableColumn="fullName">
+                                Full name
+                                <p-sortIcon field="fullName"></p-sortIcon>
+                            </th>
+                            <th pSortableColumn="email">
+                                Email
+                                <p-sortIcon field="email"></p-sortIcon>
+                            </th>
+                            <th pSortableColumn="status">
+                                Status
+                                <p-sortIcon field="status"></p-sortIcon>
+                            </th>
+                            <th pSortableColumn="gender">
+                                Gender
+                                <p-sortIcon field="gender"></p-sortIcon>
+                            </th>
+                            <th pSortableColumn="dateOfBirth">
+                                DOB
+                                <p-sortIcon field="dateOfBirth"></p-sortIcon>
+                            </th>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="body" let-applier>
+                        <tr class="pointer"
+                            [routerLink]="'/employer/job-seeker/profile/' + applier.userName">
+                            <td>
+                                <span>
+                                    <img [src]="applier.profilePicture + '?' + sas_token"
+                                        alt=""
+                                        class="profile">
+                                </span>
+                                <span class="ps-2">
+                                    {{applier.fullName}}
+                                </span>
+                            </td>
+                            <td>{{applier.email}}</td>
+                            <td>
+                                <span class="status"
+                                    [ngClass]="applier.status == 'Pending' ? 'status-pending' : 'status-success'">
+                                    {{applier.status}}
+                                </span>
+                            </td>
+                            <td>{{applier.gender}}</td>
+                            <td>{{applier.dateOfBirth | date: 'short' }}</td>
+                        </tr>
+                    </ng-template>
+                </p-table>
+            </ng-template>
         </ng-template>
     </div>
 </div>

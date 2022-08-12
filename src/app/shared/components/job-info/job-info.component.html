@@ -1,6 +1,6 @@
 
 <div class="text-end p-2">
-    <button class="btn border-none text-primary rounded-pill border border-danger"
+    <button class="btn border-none text-danger rounded-pill border border-danger"
         *ngIf="!isJobSeeker"
         (click)="deleteJob()">
         <i class="pi pi-trash"></i>
@@ -39,12 +39,12 @@
         <ng-container *ngIf="isApplied; then applied; else notApplied">
         </ng-container>
         <ng-template #applied>
-            <button class="btn bg-dark text-white rounded-pill" [disabled]="isApplied">
+            <button class="btn bg-dark text-secondary rounded-pill" [disabled]="isApplied">
                 Applied
             </button>
         </ng-template>
         <ng-template #notApplied>
-            <button class="btn bg-dark text-white rounded-pill" (click)="applyForJob()">
+            <button class="btn bg-dark text-secondary rounded-pill" (click)="applyForJob()">
                 Apply
             </button>
         </ng-template>

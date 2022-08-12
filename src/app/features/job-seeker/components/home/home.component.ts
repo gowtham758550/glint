@@ -9,44 +9,29 @@ import { SidebarItems } from 'src/app/data/models/sidebar-items.model';
 })
 export class HomeComponent implements OnInit {
 
-  sidebarItems: SidebarItems[] = [
-    {
-      type: 'menu-item',
-      label: 'Dashboard',
-      routeTo: '/job-seeker/dashboard',
-      icon: 'pi-search'
-    },
-    {
-      type: 'menu-item',
-      label: 'My Jobs',
-      routeTo: '/job-seeker/my-jobs',
-      icon: 'pi-briefcase'
-    },
-    {
-      type: 'menu-item',
-      label: 'Profile',
-      routeTo: '/job-seeker/profile',
-      icon: 'pi-user'
-    },
-    {
-      type: 'menu-item',
-      label: 'Manage Account',
-      routeTo: '/job-seeker/account-settings',
-      icon: 'pi-cog'
-    },
-    {
-      type: 'menu-item',
-      label: 'Applied Jobs',
-      routeTo: '/job-seeker/applied-jobs',
-      icon: 'pi-briefcase'
-    },
-
-
-  ]
+  // sidebarItems: SidebarItems[] = [
+  //   {
+  //     type: 'menu-item',
+  //     label: 'Dashboard',
+  //     routeTo: '/job-seeker/dashboard',
+  //     icon: 'pi-search'
+  //   },
+  //   {
+  //     type: 'menu-item',
+  //     label: 'My Jobs',
+  //     routeTo: '/job-seeker/my-jobs',
+  //     icon: 'pi-briefcase'
+  //   }
+  // ]
+  sideBarVisibility = true;
 
   constructor() { }
 
   ngOnInit(): void {
+  }
+
+  toggleSideBar() {
+    this.sideBarVisibility = !this.sideBarVisibility;
   }
   
 
