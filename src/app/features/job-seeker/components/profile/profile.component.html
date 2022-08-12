@@ -1,20 +1,18 @@
-<i class="bi bi-clipboard2-check"></i>
-
-<div style="padding-top: 100px;"></div>
 <div class="d-flex justify-content-center align-items-center h-100">
     <div class="flex-grow-1">
         <!-- Profile Image -->
         <div class="card">
-            <div class="rounded-top text-white d-flex flex-row" style="background-color: #05292a; height:200px;">
-                <div class="ms-4 mt-5 d-flex flex-column" style="width: 200px; top:50%">
+            <div class="rounded-top text-white d-flex flex-row" style="background-color: #05292a; height:170px;">
+                <div class="ms-4 mt-5 d-flex flex-column" style="width: 200px;">
                     <ng-container *ngIf="isImageLoaded; then image; else imageLoader"></ng-container>
                     <ng-template #imageLoader>
-                        <img [src]="imageUrl" class="pointer rounded-circle col px-md-5" style="width: 150px; height: 150px;"
-                        (click)="openFileTrigger(fileTigger)" pTooltip="Update Profile picture">
+                        <img [src]="imageUrl" class="rounded-circle img-fluid img-thumbnail mt-4 mb-2 pointer"
+                            style="width: 150px; height: 300px;" (click)="openFileTrigger(fileTigger)"
+                            pTooltip="Update Profile picture">
                     </ng-template>
                     <ng-template #image>
-                        <img [src]="imageUrl" class="pointer rounded-circle" style="width: 150px; height: 9000px;"
-                            (click)="openFileTrigger(fileTigger)">
+                        <img [src]="imageUrl" class="rounded-circle mt-5 img-fluid img-thumbnail mt-4 mb-2 pointer"
+                            style="width: 150px; height:300px;" (click)="openFileTrigger(fileTigger)">
                     </ng-template>
 
                 </div>
@@ -24,7 +22,7 @@
             <br>
             <!-- Profile Details -->
             <form [formGroup]="profileForm">
-                <div class="card-body p-4 text-black">
+                <div class="card-body text-black">
                     <div class="flex">
                         <div class="flex">
                             <p class="lead fw-normal fs-4 mb-1 float-start">{{jobSeekerArray.firstName}}
