@@ -23,4 +23,16 @@ export class FilterService {
     getAllJobs(): Observable<Job[]> {
         return this.httpClient.get<Job[]>(`${this.host}/post_job_list/get`);
     }
+
+    getPostJobCount(): Observable<number> {
+        return this.httpClient.get<number>(`${this.host}/post_job_count/get`);
+    }
+
+    getEmployerCount(): Observable<number> {
+        return this.httpClient.get<number>(`${this.host}/employer_count/get`);
+    }
+
+    getJobSeekerCount(): Observable<number> {
+        return this.httpClient.get<number>(`${this.host}/job_seeker_count/get`);
+    }
 }

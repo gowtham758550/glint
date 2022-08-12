@@ -1,18 +1,18 @@
 <!-- inspiration - https://dribbble.com/shots/15794174-Chakri-Job-Portal-Landing-page-v2/attachments/7604296?mode=media -->
 
 <div class="main">
-    <div class="d-flex justify-content-between px-5 pt-2 pb-2" style="background-color: #f4f6ff;">
+    <div class="d-flex justify-content-between px-5 pt-2 pb-2 bg-dark">
         <div class="flex-grow-1">
-            <app-logo></app-logo>
+            <app-logo [class]="'text-white'"></app-logo>
         </div>
         <div class="pe-3 pt-2">
-            <button class="border border-dark fw-bold btn border-none text-dark bg-secondary rounded-pill"
+            <button class="fw-bold btn border-none text-dark bg-secondary rounded-pill"
                 routerLink="/login">
                     Login
             </button>
         </div>
         <div class="pe-3 pt-2">
-            <button class="border btn border-none text-secondary bg-primary rounded-pill"
+            <button class="btn border-none text-secondary bg-primary rounded-pill"
                 routerLink="/job-seeker/signup">
                     Register
             </button>
@@ -23,7 +23,7 @@
                 For employers
                 <i class="pi pi-angle-down"></i>
             </button>
-            <div class="dropdown-content border border-rounded">
+            <div class="dropdown-content">
                 <a routerLink="/login">
                     Login
                     <!-- <i class="pi pi-sign-in"></i> -->
@@ -45,9 +45,13 @@
                     <img src="assets/job.svg" height="40px" width="40px" alt="">
                     {{totalJobCount}} Job
                 </div>
-                <div>
+                <div class="pe-4">
                     <img src="assets/company.png" height="40px" width="40px" alt="">
                     {{totalCompanyCount}} Companies
+                </div>
+                <div>
+                    <img src="assets/job-seeker.jpg" height="40px" width="40px" alt="">
+                    {{jobSeekerCount}} Job Seekers
                 </div>
             </div>
 

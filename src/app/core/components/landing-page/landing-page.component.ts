@@ -3,17 +3,19 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { SearchBar } from 'src/app/data/models/search-bar.model';
 import { Option } from 'src/app/data/models/options.model';
 import { Router } from '@angular/router';
+import { FilterService } from 'src/app/data/services/filter.service';
 
 @Component({
   selector: 'app-landing-page',
   templateUrl: './landing-page.component.html',
-  styleUrls: ['./landing-page.component.css']
+  styleUrls: []
 })
 export class LandingPageComponent implements OnInit {
 
   isLoggedIn!: boolean;
   totalJobCount!: number;
   totalCompanyCount!: number;
+  jobSeekerCount!: number;
   experience: Option[] = [
     {
       value: 0,
@@ -55,12 +57,31 @@ export class LandingPageComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private router: Router,
+    private filterService: FilterService
   ) { }
 
   ngOnInit(): void {
-    // this.isLoggedIn = this.authGuard.canActivate();
-    this.totalJobCount = 43;
-    this.totalCompanyCount = 12;
+    this.getTotalJobCount();
+    this.getEmployerCount();
+    this.getJobSeekerCount();
+  }
+
+  getTotalJobCount() {
+    this.filterService.getPostJobCount().subscribe({
+      next: data => this.totalJobCount = data
+    });
+  }
+
+  getEmployerCount() {
+    this.filterService.getEmployerCount().subscribe({
+      next: data => this.totalCompanyCount = data
+    });
+  }
+
+  getJobSeekerCount() {
+    this.filterService.getJobSeekerCount().subscribe({
+      next: data => this.jobSeekerCount = data
+    })
   }
 
   receiveSearchData() {

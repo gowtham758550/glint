@@ -1,9 +1,22 @@
+<div class="pb-4">
+    <div class="col-12 md:col-4">
+        <div class="p-inputgroup">
+            <input type="text"
+            [(ngModel)]="searchText"
+                class="form-control"
+                style="width: 50vh;"
+                placeholder="Search jobs">         
+            <span class="p-inputgroup-addon pointer"><i class="pi pi-search"></i></span>
+        </div>
+    </div>
+</div>
+
 <div class="d-flex justify-content-start">
     <ng-container *ngIf="isLoaded; then data; else loader">
     </ng-container>
     <ng-template #loader>
         <div class="flex-grow-1">
-            <div class="card card-shadow p-5">
+            <div class="card card-shadow p-4">
                 <p-skeleton width="10rem" height="2rem" styleClass="mb-2"></p-skeleton>
                 <p-skeleton width="15rem" styleClass="mb-2"></p-skeleton>
                 <p-skeleton width="8rem" styleClass="mb-2"></p-skeleton>

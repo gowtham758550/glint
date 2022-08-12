@@ -17,6 +17,7 @@ export class DashboardComponent implements OnInit {
   experiences = ['Experienced', 'Fresher']
   filteredLocations: string[] = [];
   filteredExperience: string[] = [];
+  searchText!: string;
 
   constructor(
     private filterService: FilterService
@@ -48,5 +49,9 @@ export class DashboardComponent implements OnInit {
   clearFilters() {
     this.filteredExperience = [];
     this.filteredLocations = [];
+  }
+
+  search() {
+    
   }
 }
