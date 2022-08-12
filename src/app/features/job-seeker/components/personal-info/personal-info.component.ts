@@ -149,7 +149,6 @@ export class PersonalInfoComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.getProfilePicture();
   }
   openFileTrigger(component: HTMLElement) {
     component.click();
