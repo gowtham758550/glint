@@ -28,6 +28,7 @@ import { DividerModule } from "primeng/divider";
 import { PasswordModule } from "primeng/password";
 import { NgxPhotoEditorModule } from 'ngx-photo-editor';
 import {TooltipModule} from 'primeng/tooltip';
+import { JobSeekerService } from 'src/app/data/services/job-seeker.service';
 
 
 
@@ -63,6 +64,6 @@ import {TooltipModule} from 'primeng/tooltip';
     PasswordModule,
     TooltipModule
   ],
-  providers: [DatePipe]
+  providers: [DatePipe, JobSeekerService]
 })
 export class EmployerModule { }
