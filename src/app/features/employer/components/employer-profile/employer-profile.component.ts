@@ -169,5 +169,6 @@ export class EmployerProfileComponent implements OnInit {
     this.email = this.authService.getEmail(this.accessToken);
     this.employerProfile();
     this.getEmployer();
+    this.getProfilePicture();
   }
 }
