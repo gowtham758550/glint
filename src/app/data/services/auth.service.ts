@@ -12,8 +12,6 @@ import { Role } from '../enums/role.enum';
 export class AuthService {
 
   host = `${environment.host}/auth`;
-  accessToken = this.localStorage.getItem('accessToken');
-  claims: any = jwtDecode(this.accessToken);
 
   constructor(
     private httpClient: HttpClient,
@@ -52,14 +50,20 @@ export class AuthService {
   }
 
   getRole(): Role {
-    return this.claims['http://schemas.microsoft.com/ws/2008/06/identity/claims/role'];
+    const token: any = this.localStorage.getItem('accessToken');
+    const claims: any = jwtDecode(token);
+    return claims['http://schemas.microsoft.com/ws/2008/06/identity/claims/role'];
   }
 
   getEmail() {
-    return this.claims['Email'];
+    const token: any = this.localStorage.getItem('accessToken');
+    const claims: any = jwtDecode(token);
+    return claims['Email'];
   }
   getUserName() {
-    return this.claims['UserName'];
+    const token: any = this.localStorage.getItem('accessToken');
+    const claims: any = jwtDecode(token);
+    return claims['UserName'];
   }
 
   deleteProfile(){

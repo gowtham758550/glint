@@ -8,6 +8,7 @@ import { MessagesModule } from 'primeng/messages';
 import { CheckboxModule } from 'primeng/checkbox';
 import { SkeletonModule } from 'primeng/skeleton';
 import { TimelineModule } from 'primeng/timeline';
+import { CardModule } from 'primeng/card';
 
 import { JobSeekerRoutingModule } from './job-seeker-routing.module';
 import { RegisterComponent } from './components/register/register.component';
@@ -25,7 +26,7 @@ import { NgxPhotoEditorModule } from "ngx-photo-editor";
 import { MyJobsComponent } from './components/my-jobs/my-jobs.component';
 import { PasswordModule } from "primeng/password";
 import { DividerModule } from "primeng/divider";
-import {TooltipModule} from 'primeng/tooltip';
+import { TooltipModule } from 'primeng/tooltip';
 import { JobsComponent } from './components/jobs/jobs.component';
 
 
@@ -60,7 +61,8 @@ import { JobsComponent } from './components/jobs/jobs.component';
     DividerModule,
     TimelineModule,
     PasswordModule,
-    TooltipModule
+    TooltipModule,
+    CardModule
   ]
 })
 export class JobSeekerModule { }

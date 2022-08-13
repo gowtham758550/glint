@@ -15,6 +15,7 @@ export class MyJobsComponent implements OnInit {
   myJobs!: AppliedJob[];
   sasToken = environment.profile_sas_token;
   isTimeline = false;
+  isAppliedJobLoaded = false;
   events1: any;
   events2: any;
 
@@ -36,7 +37,10 @@ export class MyJobsComponent implements OnInit {
 
   getMyJobs() {
     this.appliedJobService.getAppliedJobs().subscribe({
-      next: data => this.myJobs = data
+      next: data => {
+        this.myJobs = data;
+        this.isAppliedJobLoaded = true;
+      }
     })
   }
 
