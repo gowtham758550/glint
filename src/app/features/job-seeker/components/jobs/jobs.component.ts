@@ -9,8 +9,7 @@ import { FilterService } from 'src/app/data/services/filter.service';
 @Component({
   selector: 'app-job-seeker-jobs',
   templateUrl: './jobs.component.html', 
-  styles: [
-  ]
+  styleUrls: ['./jobs.component.css']
 })
 export class JobsComponent implements OnInit {
 

@@ -43,9 +43,12 @@
                     <label for="currentPassword" class="col-sm-4
                   col-form-label form-label">Current password</label>
 
-                    <div class="col-md-8 col-12">
-                        <input class="form-control" type="password" placeholder="Current Password"
-                            [(ngModel)]="currentPassword" (ngModelChange)="checkCurrentPassword($event)" required>
+                    <div class="col-md-8 col-12 h-50">
+                        <p-password  type="password" placeholder="Current Password" [(ngModel)]="currentPassword"
+                            (ngModelChange)="checkCurrentPassword($event)" [toggleMask]="true" [feedback]="false"
+                            required>
+                        </p-password>
+
 
                     </div>
                 </div>
@@ -54,8 +57,9 @@
                     <label for="currentNewPassword" class="col-sm-4
                   col-form-label form-label">New password</label>
 
-                    <div class="col-md-8 col-12">
-                        <p-password placeholder="New Password" [(ngModel)]="newPassword" (ngModelChange)="checkNewPassword($event)">
+                    <div class="col-md-8 col-12 h-50">
+                        <p-password placeholder="New Password" [(ngModel)]="newPassword"
+                            (ngModelChange)="checkNewPassword($event)" [toggleMask]="true">
                             <p-divider></p-divider>
                         </p-password>
                         <!-- <input class=" form-control" type="password" placeholder="New Password"
@@ -81,7 +85,7 @@
                             (click)="changePassword(currentPassword, newPassword)">
                             Change Password
                         </button>
-                       
+
                     </div>
 
                 </div>

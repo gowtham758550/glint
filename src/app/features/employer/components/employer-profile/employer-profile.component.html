@@ -1,30 +1,29 @@
 <div class="d-flex justify-content-center align-items-center h-100">
     <div class="flex-grow-1">
         <!-- Profile Image -->
-        <div class="card">
-            <div class="rounded-top text-white d-flex flex-row" style="background-color: #05292a; height:200px;">
-                <div class="ms-4 ml-5 pt-4 d-flex mx-auto" style="width: 200px;">
-                    <ng-container *ngIf="isImageLoaded; then image; else imageLoader"></ng-container>
-                    <ng-template #imageLoader>
-                        <img [src]="defaultImageUrl" class="pointer rounded-circle border"
-                            style="width: 150px; height: 150px;" (click)="openFileTrigger(fileTigger)"
-                            pTooltip="Update Profile picture">
-                    </ng-template>
-                    <ng-template #image>
-                        <img [src]="imageUrl" class="pointer rounded-circle"
-                            style="width: 150px; height: 150px;" (click)="openFileTrigger(fileTigger)"
-                            pTooltip="Update Profile picture">
-                    </ng-template>
+        <div class="card shadow">
+            <div class="div">
+                <img id="coverpicture" class="rounded-top text-white d-flex flex-row" [src]="backgroundImage"
+                    (click)="openCoverPictureTrigger(coverPicture)" pTooltip="Update Cover picture">
+                <ng-container *ngIf="isImageLoaded; then image; else imageLoader"></ng-container>
+                <ng-template #imageLoader>
+                    <img id="innerimage" [src]="imageUrl" class="rounded-circle img-fluid img-thumbnail pointer"
+                        (click)="openFileTrigger(fileTigger)" pTooltip="Update Profile picture">
+                </ng-template>
+                <ng-template #image>
+                    <img id="innerimage" [src]="imageUrl" class=" rounded-circle mt-5 img-fluid img-thumbnail pointer"
+                        (click)="openFileTrigger(fileTigger)" pTooltip="Update Profile picture">
+                </ng-template>
 
-                </div>
                 <input type="file" (change)="updateProfilePicture($event)" accept=".png,.jpg,.jpeg"
                     style="display: none;" #fileTigger>
-
+                <input type="file" (change)="updateCoverPicture($event)" accept=".png,.jpg,.jpeg" style="display: none;"
+                    #coverPicture>
             </div>
             <br>
             <!-- Profile Details -->
             <form [formGroup]="profileForm">
-                <div class="card-body p-4 text-black">
+                <div class="card-body p-4 text-black" style="left:10px; top:25px;">
                     <div class="flex">
                         <div class="flex">
                             <p class="lead fw-normal mb-1 float-start">{{employerArray.companyName}}
@@ -63,7 +62,7 @@
     </div>
 </div>
 <div class="p-3"></div>
-<div class="card p-4" style="margin-top:0%">
+<div class="card shadow p-4" style="margin-top:0%">
     <div class="d-flex">
         <div class="flex-grow-1 fs-4">
             About
@@ -71,7 +70,7 @@
     </div>
     <hr>
     <div class="d-flex">
-        <div class="flex-grow-1 fs-5">
+        <div class="flex-grow-1 fw-normal">
             {{employerArray.about}}
         </div>
     </div>
@@ -89,7 +88,7 @@
     </div>
     <hr>
     <div class="text-end pb-3 pe-3">
-        <button class="btn bg-dark text-secondary" style="border-radius: 13px;" [disabled]="!profileForm.valid"
+        <button class="btn bg-dark text-white" style="border-radius: 13px;" [disabled]="!profileForm.valid"
             (click)="executeProfileAction()">
             {{action}}
         </button>
