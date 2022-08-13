@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { SidebarItems } from 'src/app/data/models/sidebar-items.model';
+import { RouteConstants } from 'src/app/data/enums/constatnts/route.constants';
+import { SideNavItem } from 'src/app/data/models/sidenav-item.model';
 import { AuthService } from 'src/app/data/services/auth.service';
 
 @Component({
@@ -11,25 +12,24 @@ import { AuthService } from 'src/app/data/services/auth.service';
 })
 export class HomeComponent implements OnInit {
 
-  // sidebarItems: SidebarItems[] = [
-  //   {
-  //     type: 'menu-item',
-  //     label: 'Dashboard',
-  //     routeTo: '/job-seeker/dashboard',
-  //     icon: 'pi-search'
-  //   },
-  //   {
-  //     type: 'menu-item',
-  //     label: 'My Jobs',
-  //     routeTo: '/job-seeker/my-jobs',
-  //     icon: 'pi-briefcase'
-  //   }
-  // ]
+  routeConstants = RouteConstants;
+  sideNavItems: SideNavItem[] = [
+    {
+      label: 'Home',
+      routeTo: this.routeConstants.jobSeekerHome,
+      icon: 'pi-home'
+    },
+    {
+      label: 'My Jobs',
+      routeTo: this.routeConstants.jobSeekerMyJobs,
+      icon: 'pi-briefcase'
+    }
+  ]
   sideBarVisibility = true;
 
   constructor(
     private authService: AuthService,
-    private router: Router
+    private router: Router,
   ) { }
 
   ngOnInit(): void {

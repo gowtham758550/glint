@@ -9,30 +9,40 @@
         <ng-container></ng-container>
         <div class="d-flex">
             <div class="flex-grow-1">
-                <div class="pt-3 d-flex justify-content-start">
-                    <div class="pt-3">
-                        <img src="../../../../../assets/company.png"
-                            height="50px"
-                            width="50px">
+                <!-- ng-containe -->
+                <ng-container *ngFor="let job of myJobs; let i = index">
+                    <div class="pt-3 d-flex justify-content-start pointer"
+                        (click)="getTimeline(i)">
+                        <div class="pt-3">
+                            <img [src]="job.companyProfilePicture + '?' + sasToken"
+                                height="50px"
+                                width="50px"
+                                style="border-radius: 25px;">
+                        </div>
+                        <div class="ps-4 d-flex flex-column flex-grow-1">
+                            <div class="fs-3 fw-bold">
+                                {{job.jobTitle}}
+                                <span>
+                                    <a [routerLink]="'/job-seeker/job/' + job.postJobDetailId">
+                                        <i class="pi pi-link"></i>
+                                    </a>
+                                </span>
+                            </div>
+                            <div class="fs-5">
+                                {{job.companyName}}
+                            </div>
+                            <div class="text-muted">
+                                {{job.location}}
+                            </div>
+                            <div class="text-muted">
+                                {{job.appliedOn | date }}
+                            </div>
+                        </div>
                     </div>
-                    <div class="ps-4 d-flex flex-column flex-grow-1">
-                        <div class="fs-3 fw-bold">
-                            Software Engineer
-                        </div>
-                        <div class="fs-5">
-                            Kovai.co
-                        </div>
-                        <div class="text-muted">
-                            Coimbatore
-                        </div>
-                        <div class="text-muted">
-                            Applied 3 days ago
-                        </div>
-                    </div>
-                </div>
+                </ng-container>
             </div>
             <div class="pe-3"></div>
-            <div class="card p-3">
+            <div class="card p-3" *ngIf="isTimeline">
                 <h5>Customized</h5>
                 <p-timeline [value]="events1" align="alternate" styleClass="customized-timeline">
                     <ng-template pTemplate="marker" let-event>

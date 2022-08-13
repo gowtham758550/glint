@@ -1,17 +1,17 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { filter } from 'rxjs';
+import { Location } from 'src/app/data/enums/location.enum';
 import { Experience } from 'src/app/data/models/experience.enum';
 import { Job } from 'src/app/data/models/job.model';
-import { Location } from 'src/app/data/models/location.enum';
 import { FilterService } from 'src/app/data/services/filter.service';
 
 @Component({
-  selector: 'app-dashboard-job-seeker',
-  templateUrl: './dashboard.component.html', 
-  styleUrls:['./dashboard.component.css']
+  selector: 'app-job-seeker-jobs',
+  templateUrl: './jobs.component.html', 
+  styleUrls: ['./jobs.component.css']
 })
-export class DashboardComponent implements OnInit {
+export class JobsComponent implements OnInit {
 
   isLoaded = false;
   allJobs!: Job[];

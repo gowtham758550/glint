@@ -1,4 +1,4 @@
-import { Status } from "./status.enum"
+import { Status } from "../enums/status.enum"
 
 export interface Appliers {
     fullName: string
