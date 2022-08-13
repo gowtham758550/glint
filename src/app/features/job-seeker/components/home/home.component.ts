@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { SidebarItems } from 'src/app/data/models/sidebar-items.model';
+import { AuthService } from 'src/app/data/services/auth.service';
 
 @Component({
   selector: 'app-home',
@@ -25,13 +27,21 @@ export class HomeComponent implements OnInit {
   // ]
   sideBarVisibility = true;
 
-  constructor() { }
+  constructor(
+    private authService: AuthService,
+    private router: Router
+  ) { }
 
   ngOnInit(): void {
   }
 
   toggleSideBar() {
     this.sideBarVisibility = !this.sideBarVisibility;
+  }
+
+  logout() {
+    this.authService.logout();
+    this.router.navigateByUrl('/login');
   }
   
 

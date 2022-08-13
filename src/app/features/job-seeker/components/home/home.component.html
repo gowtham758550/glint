@@ -4,7 +4,7 @@
 
     <!-- sidebar -->
     <div class="sidebar"
-        style="width: 200px;"
+        style="width: 230px;"
         *ngIf="sideBarVisibility">
         <div class="fixed bg-dark p-4 text-secondary h-100-vh">
             <div>
@@ -25,6 +25,24 @@
                     routerLinkActive="text-secondary">
                     <i class="pi pi-briefcase"></i>
                     My Jobs
+                </div>
+                <div class="pe-3 py-2 side-nav-item pointer"
+                    routerLink="/job-seeker/profile"
+                    routerLinkActive="text-secondary">
+                    <i class="pi pi-user"></i>
+                    Profile
+                </div>
+                <div class="pe-3 py-2 side-nav-item pointer"
+                    routerLink="/job-seeker/account-settings"
+                    routerLinkActive="text-secondary">
+                    <i class="pi pi-cog"></i>
+                    Account Settings
+                </div>
+                <div class="pe-3 py-2 side-nav-item pointer"
+                    routerLink="/employer/account-settings"
+                    routerLinkActive="text-secondary">
+                    <i class="pi pi-sign-out"></i>
+                    Logout
                 </div>
             </div>
         </div>
@@ -67,7 +85,7 @@
                         >
                         <i class="pi pi-user"></i>
                     </button>
-                    <div class="dropdown-menu p-4" aria-labelledby="profile">
+                    <!-- <div class="dropdown-menu p-4" aria-labelledby="profile">
                         <div class="text-center">
                             <div>
                                 <button class="btn border-none border-dark rounded-pill fs-1">
@@ -84,12 +102,13 @@
                                 </button>
                             </div>
                             <hr>
-                            <button class="btn border-dark">
+                            <button class="btn border-dark"
+                                (click)="logout()">
                                 Logout
                                 <i class="pi pi-sign-out px-2"></i>
                             </button>
                         </div>
-                    </div>
+                    </div> -->
                 </div>
                 </div>
             </div>

@@ -23,7 +23,7 @@
                 For employers
                 <i class="pi pi-angle-down"></i>
             </button>
-            <div class="dropdown-content">
+            <div class="dropdown-content card">
                 <a routerLink="/login">
                     Login
                     <!-- <i class="pi pi-sign-in"></i> -->
@@ -34,7 +34,7 @@
     </div>
     
 
-    <div class="vh-100 pt-5">
+    <div class="pt-5">
         <div class="text-center">
             <div class="pt-4"></div>
             <p class="fw-bold">It's simple and smart</p>
@@ -56,9 +56,73 @@
             </div>
 
             <div class="pt-5"></div>
-            <app-search-bar [form]="searchBarForm"
-                [searchBarData]="searchBarData"
-                (dataEmitter)="receiveSearchData()"></app-search-bar>
+
+            <div class="d-flex justify-content-center">
+                <form [formGroup]="searchBarForm">
+                    <div class="card">
+                        <div class="d-flex justify-content-center p-2">
+
+                            <!-- search icon -->
+                            <div class="pt-2">
+                                <button pButton 
+                                    pRipple 
+                                    type="button"
+                                    [disabled]="true"
+                                    icon="pi pi-search"
+                                    class="p-button-rounded p-button-text mr-2 mb-2">
+                                </button>
+                            </div>
+
+                            <!-- designation -->
+                            <input type="text"
+                                pInputText
+                                formControlName="designation"
+                                class="border-0 input"
+                                placeholder="Search designation">
+
+                            <!-- experience -->
+                            <div class="pe-4 d-flex">
+                                <select class="input bg-white pe-5"
+                                    [ngClass]="isExperiencePlaceholder ? 'text-muted': 'text-dark'"
+                                    formControlName="experience"
+                                    (change)="onExperienceChnage($event)">
+                                    <option *ngFor="let option of experience; let i = index"
+                                        [value]="option.value"
+                                        class="text-dark bg-white"
+                                        [disabled]="i == 0">   
+                                    {{option.label}}
+                                </option>
+                                </select>
+                            </div>
+
+                            <!-- location -->
+                            <div class="pe-4 d-flex">
+                                <select class="input bg-white pe-5"
+                                    [ngClass]="isLocationPlaceholder ? 'text-muted': 'text-dark'"
+                                    formControlName="location"
+                                    (change)="onLocationChange($event)">
+                                    <option *ngFor="let option of location; let i = index"
+                                        [value]="option.value"
+                                        class="text-dark bg-white"
+                                        [disabled]="i == 0">   
+                                    {{option.label}}
+                                </option>
+                                </select>
+                            </div>
+
+
+                            <button pButton
+                                class="p-button-raised p-button-rounded px-4 fs-4 bg-dark text-secondary"
+                                type="button"
+                                (click)="search()">
+                                    <i class="pi pi-search pe-3"></i>
+                                    Search
+                            </button>
+
+                        </div>
+                    </div>
+                </form>
+            </div>
         </div>
     </div>
 </div>

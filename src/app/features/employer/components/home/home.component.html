@@ -4,14 +4,14 @@
 
     <!-- sidebar -->
     <div class="sidebar"
-        style="width: 200px;"
+        style="width: 230px;"
         *ngIf="sideBarVisibility">
         <div class="fixed bg-dark p-4 text-secondary h-100-vh">
             <div>
                 <app-logo [class]="'text-secondary'"></app-logo>
             </div>
     
-            <div class="pt-3">
+            <div class="pt-3 d-flex flex-column">
                 <div class="pe-3 py-2 side-nav-item pointer"
                     routerLink="/employer/dashboard"
                     routerLinkActive="text-secondary"
@@ -25,6 +25,24 @@
                     routerLinkActive="text-secondary">
                     <i class="pi pi-briefcase"></i>
                     Jobs
+                </div>
+                <div class="pe-3 py-2 side-nav-item pointer"
+                    routerLink="/employer/profile"
+                    routerLinkActive="text-secondary">
+                    <i class="pi pi-user"></i>
+                    Profile
+                </div>
+                <div class="pe-3 py-2 side-nav-item pointer"
+                    routerLink="/employer/account-settings"
+                    routerLinkActive="text-secondary">
+                    <i class="pi pi-cog"></i>
+                    Account Settings
+                </div>
+                <div class="pe-3 py-2 side-nav-item pointer"
+                    (click)="logout()"
+                    routerLinkActive="text-secondary">
+                    <i class="pi pi-sign-out"></i>
+                    Logout
                 </div>
             </div>
         </div>
@@ -67,7 +85,7 @@
                         >
                         <i class="pi pi-user"></i>
                     </button>
-                    <div class="dropdown-content p-4" aria-labelledby="profile">
+                    <!-- <div class="dropdown-content p-4" aria-labelledby="profile">
                         <div class="text-center">
                             <div>
                                 <button class="btn border-none border-dark rounded-pill fs-1">
@@ -89,7 +107,7 @@
                                 <i class="pi pi-sign-out px-2"></i>
                             </button>
                         </div>
-                    </div>
+                    </div> -->
                 </div>
                 </div>
             </div>

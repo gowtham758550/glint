@@ -18,7 +18,7 @@ export class DashboardComponent implements OnInit {
   role!: string;
   
   email!:string;
-  userName!:string
+  userName!:string;
 
   showSidebar: boolean = true;
   imageUrl: string="https://cdn-icons-png.flaticon.com/512/1077/1077012.png?w=360";
