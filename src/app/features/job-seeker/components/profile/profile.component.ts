@@ -21,7 +21,6 @@ import { environment } from "src/environments/environment";
 })
 export class ProfileComponent implements OnInit {
   email!: string;
-  accessToken = this.localStorage.getItem('accessToken');
   jobSeekerProfile: any = {};
   profileForm!: FormGroup;
   educationInfo: any;
@@ -169,7 +168,7 @@ export class ProfileComponent implements OnInit {
   ngOnInit(): void {
     this.getProfilePicture();
     this.getJobSeekerProfile();
-    this.email = this.authService.getEmail(this.accessToken);
+    this.email = this.authService.getEmail();
     this.getEducationList();
     this.getExperienceList();
     this.getJobSeeker();

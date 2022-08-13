@@ -4,6 +4,7 @@ import { environment } from 'src/environments/environment';
 import { Observable } from 'rxjs';
 import jwtDecode from "jwt-decode";
 import { LocalStorage } from './local-storage.service';
+import { Role } from '../enums/role.enum';
 
 @Injectable({
   providedIn: 'root'
@@ -11,6 +12,8 @@ import { LocalStorage } from './local-storage.service';
 export class AuthService {
 
   host = `${environment.host}/auth`;
+  accessToken = this.localStorage.getItem('accessToken');
+  claims: any = jwtDecode(this.accessToken);
 
   constructor(
     private httpClient: HttpClient,
@@ -48,18 +51,15 @@ export class AuthService {
     return claims['UserID']
   }
 
-  getRole(accessToken: string) {
-    const claims: any = jwtDecode(accessToken);
-    return claims['http://schemas.microsoft.com/ws/2008/06/identity/claims/role'];
+  getRole(): Role {
+    return this.claims['http://schemas.microsoft.com/ws/2008/06/identity/claims/role'];
   }
 
-  getEmail(accessToken: string) {
-    const claims: any = jwtDecode(accessToken);
-    return claims['Email'];
+  getEmail() {
+    return this.claims['Email'];
   }
-  getUserName(accessToken:string){
-    const claims: any = jwtDecode(accessToken);
-    return claims['UserName'];
+  getUserName() {
+    return this.claims['UserName'];
   }
 
   deleteProfile(){

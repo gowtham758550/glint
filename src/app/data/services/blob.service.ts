@@ -1,8 +1,9 @@
 import { JsonPipe } from "@angular/common";
 import { HttpClient, HttpParams } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { map } from "rxjs";
+import { map, Observable } from "rxjs";
 import { environment } from "src/environments/environment";
+import { ProfilePictureResponse } from "../models/profile-picture-response.model";
 
 @Injectable({
   providedIn: "root",
@@ -11,8 +12,8 @@ export class BlobService {
   host = `${environment.host}/profile_picture`;
   constructor(private httpClient: HttpClient) {}
 
-  getProfilePicture() {
-    return this.httpClient.get(`${this.host}/get`);
+  getProfilePicture(): Observable<ProfilePictureResponse> {
+    return this.httpClient.get<ProfilePictureResponse>(`${this.host}/get`);
   }
 
   addProfilePicture(profile: FormData) {

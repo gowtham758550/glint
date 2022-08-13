@@ -67,8 +67,7 @@ export class AccountSettingsComponent implements OnInit {
 
   ngOnInit(): void {
     this.primengConfig.ripple = true;
-    const accessToken = this.localStorageService.getItem('accessToken');
-    this.Email = this.authService.getEmail(accessToken);
+    this.Email = this.authService.getEmail();
     console.log(this.Email)
     this.emailForm = this.formBuilder.group({
       Email: [this.Email, [Validators.required]],

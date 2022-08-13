@@ -9,26 +9,24 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { StepsModule } from 'primeng/steps';
 
 import { StepperComponent } from './components/stepper/stepper.component';
-import { SearchBarComponent } from './components/search-bar/search-bar.component';
 import { FormComponent } from './components/form/form.component';
 import { LogoComponent } from './components/logo/logo.component';
-import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { SignupComponent } from './components/signup/signup.component';
 import { VerifyComponent } from './components/verify/verify.component';
 import { JobCardComponent } from './components/job-card/job-card.component';
 import { JobInfoComponent } from './components/job-info/job-info.component';
+import { LayoutComponent } from './components/layout/layout.component';
 
 @NgModule({
   declarations: [
-    SearchBarComponent,
     FormComponent,
     LogoComponent,
     StepperComponent,
-    DashboardComponent,
     SignupComponent,
     VerifyComponent,
     JobCardComponent,
     JobInfoComponent,
+    LayoutComponent,
   ],
   imports: [
     CommonModule,
@@ -42,15 +40,14 @@ import { JobInfoComponent } from './components/job-info/job-info.component';
     StepsModule,
   ],
   exports: [
-    SearchBarComponent,
     FormComponent,
     LogoComponent,
     StepperComponent,
-    DashboardComponent,
     SignupComponent,
     VerifyComponent,
     JobCardComponent,
     JobInfoComponent,
+    LayoutComponent
   ]
 })
 export class SharedModule { }

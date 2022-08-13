@@ -1,17 +1,21 @@
 <div>
-    <div class="text-end p-3">
-        <button class="btn border-none border-dark bg-primary rounded-fill text-secondary p-2"
-            [routerLink]="'/employer/job/new'">
-            <i class="pi pi-plus-circle"></i>
-            Create Job
-        </button>
-    </div>
 
     <!-- jobs table -->
     <div class="card">
-        <h1 class="fw-bold p-2">
-            All Jobs
-        </h1>
+        <div class="d-flex justify-content-between">
+            <div>
+                <h1 class="fw-bold p-2">
+                    All Jobs
+                </h1>
+            </div>
+            <div class="p-3">
+                <button class="btn border-none border-dark bg-primary rounded-fill text-secondary p-2"
+                    [routerLink]="'/employer/job/new'">
+                    <i class="pi pi-plus-circle"></i>
+                    Create Job
+                </button>
+            </div>
+        </div>
 
         <ng-container *ngIf="isLoaded; then data; else loader"></ng-container>
 
