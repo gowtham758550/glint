@@ -75,7 +75,7 @@ export class LoginComponent implements OnInit {
         this.localStorage.setItem('accessToken', dataObject.jwt);
         const role = this.authService.getRole();
         if (role == 'JobSeeker') this.router.navigateByUrl(this.routeConstants.jobSeekerHome);
-        else if (role == 'Employer') this.router.navigateByUrl('/employer/dashboard');
+        else if (role == 'Employer') this.router.navigateByUrl(this.routeConstants.employerDashboard);
       }
     });
   }
