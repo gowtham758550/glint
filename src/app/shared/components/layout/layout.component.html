@@ -72,15 +72,15 @@
                             <!-- dropdown content-->
                             <div class="dropdown-menu"
                                 aria-labelledby="profile-menu">
-                                <div class="pointer p-2">
+                                <div class="pointer p-2" (click)="routeToProfile()">
                                     <i class="pi pi-user"></i>
                                     Profile
                                 </div>
-                                <div class="pointer p-2">
+                                <div class="pointer p-2" (click)="routeToAccountSettings()">
                                     <i class="pi pi-cog"></i>
                                     Account Settings
                                 </div>
-                                <div class="pointer p-2">
+                                <div class="pointer p-2" (click)="logout()">
                                     <i class="pi pi-sign-out"></i>
                                     Logout
                                 </div>
