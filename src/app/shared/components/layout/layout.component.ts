@@ -83,11 +83,7 @@ export class LayoutComponent implements OnInit {
 
   logout() {
     this.localStorage.removeItem('accessToken');
-    if (this.role == this.roleEnum.jobSeeker) {
-      this.router.navigateByUrl(this.routeConstants.login);
-    } else if (this.role == this.roleEnum.employer) {
-      this.router.navigateByUrl(this.routeConstants.login);
-    }
+    this.router.navigateByUrl(this.routeConstants.login);
   }
 
 }
