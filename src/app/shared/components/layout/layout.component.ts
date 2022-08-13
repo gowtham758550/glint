@@ -5,6 +5,7 @@ import { Role } from 'src/app/data/enums/role.enum';
 import { SideNavItem } from 'src/app/data/models/sidenav-item.model';
 import { AuthService } from 'src/app/data/services/auth.service';
 import { BlobService } from 'src/app/data/services/blob.service';
+import { LocalStorage } from 'src/app/data/services/local-storage.service';
 import { environment } from 'src/environments/environment';
 
 @Component({
@@ -29,7 +30,8 @@ export class LayoutComponent implements OnInit {
   constructor(
     private profileService: BlobService,
     private authService: AuthService,
-    private router: Router
+    private router: Router,
+    private localStorage: LocalStorage
   ) { }
 
   ngOnInit(): void {
@@ -79,6 +81,13 @@ export class LayoutComponent implements OnInit {
     }
   }
 
-  logout() { }
+  logout() {
+    this.localStorage.removeItem('accessToken');
+    if (this.role == this.roleEnum.jobSeeker) {
+      this.router.navigateByUrl(this.routeConstants.login);
+    } else if (this.role == this.roleEnum.employer) {
+      this.router.navigateByUrl(this.routeConstants.login);
+    }
+  }
 
 }
