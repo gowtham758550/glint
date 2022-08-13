@@ -1,5 +1,5 @@
 import { DatePipe, formatDate } from "@angular/common";
-import { Component, OnInit } from "@angular/core";
+import { Component, ComponentFactoryResolver, OnInit } from "@angular/core";
 import { FormGroup, Validators, FormArray, FormBuilder } from "@angular/forms";
 import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
 import { NgxPhotoEditorService } from 'ngx-photo-editor';
@@ -20,6 +20,7 @@ import { environment } from "src/environments/environment";
   styleUrls: ['profile.component.css']
 })
 export class ProfileComponent implements OnInit {
+  backgroundImage: string = "..//assets/defaultCoverPicture.jpg";
   email!: string;
   accessToken = this.localStorage.getItem('accessToken');
   jobSeekerProfile: any = {};
@@ -27,12 +28,14 @@ export class ProfileComponent implements OnInit {
   educationInfo: any;
   educationToEdit: any;
   experienceInfo: any;
-  imageUrl: string="https://cdn-icons-png.flaticon.com/512/1077/1077012.png?w=360";
+  imageUrl: string = "..//assets/defaultProfilePicture.png";
   experienceToEdit: any;
   experienceArray: any = [];
   editableExperience: any;
   editableExperienceId!: number;
   jobSeekerArray: any;
+  isCoverclick:boolean=true;
+
   profileFields: FormField[] = [
     {
       type: 'input',
@@ -64,13 +67,6 @@ export class ProfileComponent implements OnInit {
       formControlName: 'dateOfBirth',
       class: ['w']
     }
-    // },
-    // {
-    //   type: 'input',
-    //   label: 'Designation',
-    //   formControlName: 'Designation',
-    //   class: ['w']
-    // }
   ]
   educationForm!: FormGroup;
   educationFields: FormField[] = [
@@ -167,9 +163,10 @@ export class ProfileComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.getProfilePicture();
-    this.getJobSeekerProfile();
     this.email = this.authService.getEmail(this.accessToken);
+    this.getProfilePicture();
+    this.getCoverPicture();
+    this.getJobSeekerProfile();
     this.getEducationList();
     this.getExperienceList();
     this.getJobSeeker();
@@ -180,13 +177,19 @@ export class ProfileComponent implements OnInit {
   openFileTrigger(component: HTMLElement) {
     component.click();
   }
+  openCoverPictureTrigger(component: HTMLElement){
+    component.click();
+    this.isCoverclick=false;
+  }
+
+  // --------------------------------------- Profile Picture Operations-------------------------------------
   updateProfilePicture($event: any) {
     this.imageService
       .open($event, {
         aspectRatio: 4 / 3,
         autoCropArea: 1,
       })
-      .subscribe((data:any) => {
+      .subscribe((data: any) => {
         // this.output = data;
         let file: any = data.file;
         let formData: FormData = new FormData();
@@ -213,13 +216,52 @@ export class ProfileComponent implements OnInit {
       },
     });
   }
-  //-----------------------Get Education List Api Call ---------------------------------
+
+  // --------------------------------------updateCoverPicture---------------------------------
+  updateCoverPicture($event: any) {
+    this.imageService
+      .open($event, {
+        resizeToWidth: 5000,
+        aspectRatio: 4 / 3,
+        autoCropArea: 1,
+      })
+      .subscribe((data: any) => {
+        // this.output = data;
+        let file: any = data.file;
+        let formData: FormData = new FormData();
+        formData.append("coverPicture", file, file.name);
+        this.profileService.addCoverPicture(formData).subscribe({
+          next: (_data) => {
+            console.log("success");
+            this.getCoverPicture();
+          },
+          error: (error) => {
+            console.log(error);
+          },
+        });
+      });
+  }
+
+  getCoverPicture() {
+    // this.isImageLoaded = false;
+    this.profileService.getCoverPicture().subscribe({
+      next: (data: any) => {
+        let res = data.url;
+        this.backgroundImage = res + "?" + environment.cover_sas_token;
+        // this.isImageLoaded = true;
+      },
+    });
+  }
+
+
+
+  //----------------------- Get Education List Api Call ---------------------------------
   getEducationList() {
     this.educationInfo = this.educationService.getEducation().subscribe(res => {
       this.educationArray = res;
     });
   }
-  //-----------------------Get Experience List Api Call ---------------------------------
+  //----------------------- Get Experience List Api Call ---------------------------------
 
   getExperienceList() {
     this.experienceInfo = this.experienceService.getExperience().subscribe(res => {
@@ -260,7 +302,7 @@ export class ProfileComponent implements OnInit {
           location: [res.location, Validators.required],
           about: ['Software Engineer'],
 
-          
+
         });
       });
   }

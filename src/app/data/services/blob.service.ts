@@ -8,11 +8,12 @@ import { environment } from "src/environments/environment";
   providedIn: "root",
 })
 export class BlobService {
-  host = `${environment.host}/profile_picture`;
-  constructor(private httpClient: HttpClient) {}
+  profilePictureHost = `${environment.host}/profile_picture`;
+  coverPictureHost= `${environment.host}/cover_picture`;
+  constructor(private httpClient: HttpClient) { }
 
   getProfilePicture() {
-    return this.httpClient.get(`${this.host}/get`);
+    return this.httpClient.get(`${this.profilePictureHost}/get`);
   }
 
   addProfilePicture(profile: FormData) {
@@ -23,10 +24,32 @@ export class BlobService {
       reportProgress: true,
     };
 
-    return this.httpClient.post(`${this.host}/add`, profile, options);
+    return this.httpClient.post(`${this.profilePictureHost}/add`, profile, options);
   }
 
   deleteProfilePicture() {
-    return this.httpClient.delete(`${this.host}/delete`);
+    return this.httpClient.delete(`${this.profilePictureHost}/delete`);
   }
+
+  getCoverPicture() {
+    return this.httpClient.get(`${this.coverPictureHost}/get`);
+  }
+
+  addCoverPicture(coverPicture: FormData) {
+    let params = new HttpParams();
+
+    const options = {
+      params: params,
+      reportProgress: true,
+    };
+
+    return this.httpClient.post(`${this.coverPictureHost}/add`, coverPicture, options);
+  }
+
+  deleteCoverPicture() {
+    return this.httpClient.delete(`${this.coverPictureHost}/delete`);
+  }
+
+
+
 }

@@ -20,10 +20,14 @@ export class SignupComponent implements OnInit {
     firstName: ['', Validators.required],
     lastName: ['', Validators.required],
     email: ['', [Validators.required, Validators.email]],
-    password: ['', [Validators.required, Validators.minLength(8)]],
+    password: ['', [Validators.required, 
+      Validators.minLength(8) , 
+      Validators.pattern(new RegExp("(?=.*[0-9])")),
+      Validators.pattern(new RegExp("(?=.*[A-Z])")),
+      Validators.pattern(new RegExp("(?=.*[a-z])"))]],
     confirmPassword: ['', [Validators.required, Validators.minLength(8)]]
   },
-  {validator: this.passwordValidator}
+    { validator: this.passwordValidator }
   );
   registerationFields: FormField[] = [
     // {
@@ -59,11 +63,13 @@ export class SignupComponent implements OnInit {
       type: 'password',
       label: 'Password',
       formControlName: 'password',
+      hintMessage: 'Password should should be atleast 8 characters!',
       class: ['w']
     },
     {
-      type: 'password',
+      type: 'confirmPassword',
       label: 'Confirm password',
+      hintMessage: 'Password mismatch!',
       formControlName: 'confirmPassword',
       class: ['w']
     },
@@ -86,7 +92,7 @@ export class SignupComponent implements OnInit {
 
   receiveFormData() {
     console.log(this.registerationForm.value);
-    this.authService.signup({...this.registerationForm.value, ...{authRole: this.role}})
+    this.authService.signup({ ...this.registerationForm.value, ...{ authRole: this.role } })
       .subscribe({
         next: (data) => {
           console.log(data);
@@ -102,6 +108,6 @@ export class SignupComponent implements OnInit {
   }
 
   passwordValidator(form: FormGroup) {
-      return form.controls['password'].value === form.controls['confirmPassword'].value ? null : {'mismatch': true};
+    return form.controls['password'].value === form.controls['confirmPassword'].value ? null : { 'mismatch': true };
   }
 }
