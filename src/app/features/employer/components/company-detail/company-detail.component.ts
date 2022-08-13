@@ -107,7 +107,7 @@ export class CompanyDetailComponent implements OnInit {
     this.profileService.getProfilePicture().subscribe({
       next: (data: any) => {
         let res = data.url;
-        this.imageUrl = res + "?" + environment.sas_token;
+        this.imageUrl = res + "?" + environment.profile_sas_token;
         this.isImageLoaded = true;
       },
     });
