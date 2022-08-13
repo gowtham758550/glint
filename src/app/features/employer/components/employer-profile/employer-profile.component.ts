@@ -17,7 +17,7 @@ import { environment } from "src/environments/environment";
 @Component({
   selector: "app-employer-profile",
   templateUrl: "employer-profile.component.html",
-  styles: [],
+  styleUrls: ['employer-profile.component.css'],
 })
 export class EmployerProfileComponent implements OnInit {
   backgroundImage: string = "/assets/defaultCoverPicture.jpg";

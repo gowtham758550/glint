@@ -2,8 +2,19 @@ div {
     position: relative;
 }
 
-.inner-image {
+#innerimage {
+    width: 150px;
+    height: 150px;
     position: absolute;
     top: 20px;
     left: 30px;
+}
+
+#coverpicture {
+    height: 170px;
+    width: 100%;
+    cursor: pointer;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-blend-mode: darken;
 }
