@@ -1,26 +1,33 @@
 <div class="d-flex justify-content-center align-items-center h-100">
     <div class="flex-grow-1">
         <!-- Profile Image -->
-        <div class="card">
-            <div class="rounded-top text-white d-flex flex-row" style="background-color: #05292a; height:170px;">
-                    <ng-container *ngIf="isImageLoaded; then image; else imageLoader"></ng-container>
-                    <ng-template #imageLoader>
-                        <img [src]="imageUrl" class="rounded-circle img-fluid img-thumbnail pointer"
-                        style="width: 150px; height:150px; margin-left: 2%; margin-top:4%" (click)="openFileTrigger(fileTigger)"
-                            pTooltip="Update Profile picture">
-                    </ng-template>
-                    <ng-template #image>
-                        <img [src]="imageUrl" class="rounded-circle mt-5 img-fluid img-thumbnail pointer"
-                        style="width: 150px; height:150px; margin-left: 2%; margin-top:4%" (click)="openFileTrigger(fileTigger)">
-                    </ng-template>
+        <div class="card shadow">
+            <div class="div">
+                <img class="rounded-top text-white d-flex flex-row"
+                    style="height:170px; width:100%; cursor: pointer; background-repeat: no-repeat; background-size:cover;background-blend-mode: darken;"
+                    [src]="backgroundImage" (click)="openCoverPictureTrigger(coverPicture)"
+                    pTooltip="Update Cover picture">
+                <ng-container *ngIf="isImageLoaded; then image; else imageLoader"></ng-container>
+                <ng-template #imageLoader>
+                    <img [src]="imageUrl" class="rounded-circle img-fluid img-thumbnail pointer"
+                        style="width: 150px; height:150px;position: absolute;top: 20px;left: 30px;"
+                        (click)="openFileTrigger(fileTigger)" pTooltip="Update Profile picture">
+                </ng-template>
+                <ng-template #image>
+                    <img [src]="imageUrl" class=" rounded-circle mt-5 img-fluid img-thumbnail pointer"
+                        style="width: 150px; height:150px;  position: absolute;top: 20px;left: 30px;"
+                        (click)="openFileTrigger(fileTigger)" pTooltip="Update Profile picture">
+                </ng-template>
 
                 <input type="file" (change)="updateProfilePicture($event)" accept=".png,.jpg,.jpeg"
                     style="display: none;" #fileTigger>
+                <input type="file" (change)="updateCoverPicture($event)" accept=".png,.jpg,.jpeg" style="display: none;"
+                    #coverPicture>
             </div>
             <br>
             <!-- Profile Details -->
             <form [formGroup]="profileForm">
-                <div class="card-body p-4 text-black">
+                <div class="card-body p-4 text-black" style="left:10px; top:25px;">
                     <div class="flex">
                         <div class="flex">
                             <p class="lead fw-normal mb-1 float-start">{{employerArray.companyName}}
@@ -59,7 +66,7 @@
     </div>
 </div>
 <div class="p-3"></div>
-<div class="card p-4" style="margin-top:0%">
+<div class="card shadow p-4" style="margin-top:0%">
     <div class="d-flex">
         <div class="flex-grow-1 fs-4">
             About

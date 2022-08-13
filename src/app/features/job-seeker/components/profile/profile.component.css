@@ -1,0 +1,9 @@
+div {
+    position: relative;
+  }
+  
+  .inner-image {
+    position: absolute;
+    top: 25px;
+    left: 30px;
+  }

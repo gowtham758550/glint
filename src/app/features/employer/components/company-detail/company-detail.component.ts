@@ -97,10 +97,7 @@ export class CompanyDetailComponent implements OnInit {
           next: (_data) => {
             console.log("success");
             this.getProfilePicture();
-          },
-          error: (error) => {
-            console.log(error);
-          },
+          }
         });
       });
   }

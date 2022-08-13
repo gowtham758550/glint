@@ -5,8 +5,7 @@ import { FilterService } from 'src/app/data/services/filter.service';
 @Component({
   selector: 'app-dashboard-job-seeker',
   templateUrl: './dashboard.component.html', 
-  styles: [
-  ]
+  styleUrls:['./dashboard.component.css']
 })
 export class DashboardComponent implements OnInit {
 

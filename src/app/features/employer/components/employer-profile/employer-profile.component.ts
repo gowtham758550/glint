@@ -20,9 +20,9 @@ import { environment } from "src/environments/environment";
   styles: [],
 })
 export class EmployerProfileComponent implements OnInit {
+  backgroundImage: string = "/assets/defaultCoverPicture.jpg";
   isImageLoaded = false;
-  imageUrl!: string;
-  defaultImageUrl: string = "https://cdn-icons-png.flaticon.com/512/1077/1077012.png?w=360";
+  imageUrl: string = "/assets/defaultProfilePicture.png";
 
   profileForm!: FormGroup;
   employerArray: any = [];
@@ -71,6 +71,9 @@ export class EmployerProfileComponent implements OnInit {
   openFileTrigger(component: HTMLElement) {
     component.click();
   }
+  openCoverPictureTrigger(component: HTMLElement){
+    component.click();
+  }
   updateProfilePicture($event: any) {
     this.imageService
       .open($event, {
@@ -101,11 +104,47 @@ export class EmployerProfileComponent implements OnInit {
         let res = data.url;
         this.imageUrl = res + "?" + environment.sas_token;
         this.isImageLoaded = true;
-        return this.imageUrl
       },
     }
     );
   }
+
+  // -----------------------------------------Cover Picture-----------------------------------------
+  updateCoverPicture($event: any) {
+    this.imageService
+      .open($event, {
+        resizeToWidth: 5000,
+        aspectRatio: 4 / 3,
+        autoCropArea: 1,
+      })
+      .subscribe((data: any) => {
+        // this.output = data;
+        let file: any = data.file;
+        let formData: FormData = new FormData();
+        formData.append("coverPicture", file, file.name);
+        this.profileService.addCoverPicture(formData).subscribe({
+          next: (_data) => {
+            console.log("success");
+            this.getCoverPicture();
+          },
+          error: (error) => {
+            console.log(error);
+          },
+        });
+      });
+  }
+
+  getCoverPicture() {
+    // this.isImageLoaded = false;
+    this.profileService.getCoverPicture().subscribe({
+      next: (data: any) => {
+        let res = data.url;
+        this.backgroundImage = res + "?" + environment.cover_sas_token;
+        // this.isImageLoaded = true;
+      },
+    });
+  }
+  // ----------------------------------------Update Profile operation----------------------------------
   updateProfile(ref: any) {
     this.action = "Update";
     console.log(this.action);
@@ -170,5 +209,6 @@ export class EmployerProfileComponent implements OnInit {
     this.employerProfile();
     this.getEmployer();
     this.getProfilePicture();
+    this.getCoverPicture();
   }
 }
