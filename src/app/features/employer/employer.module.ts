@@ -29,6 +29,8 @@ import { PasswordModule } from "primeng/password";
 import { NgxPhotoEditorModule } from 'ngx-photo-editor';
 import {TooltipModule} from 'primeng/tooltip';
 import { JobSeekerService } from 'src/app/data/services/job-seeker.service';
+import { BadgeModule } from "primeng/badge";
+import { JobCardsComponent } from './components/job-cards/job-cards.component';
 // import { AllApplicantsComponent } from './components/all-applicants/all-applicants.component';
 
 
@@ -48,6 +50,7 @@ import { JobSeekerService } from 'src/app/data/services/job-seeker.service';
     AccountSettingsEmployerComponent,
     EmployerProfileComponent,
     JobSeekerProfileComponent,
+    JobCardsComponent,
     
   ],
   imports: [
@@ -64,7 +67,8 @@ import { JobSeekerService } from 'src/app/data/services/job-seeker.service';
     KnobModule,
     DividerModule,
     PasswordModule,
-    TooltipModule
+    TooltipModule,
+    BadgeModule
   ],
   providers: [DatePipe, JobSeekerService]
 })

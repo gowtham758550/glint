@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { BlobService } from 'src/app/data/services/blob.service';
 import { EducationService } from 'src/app/data/services/education.service';
+import { ExperienceService } from 'src/app/data/services/experience.service';
 import { JobSeekerService } from 'src/app/data/services/job-seeker.service';
 import { environment } from 'src/environments/environment';
 
@@ -20,7 +21,8 @@ export class JobSeekerProfileComponent implements OnInit {
   constructor(private route: ActivatedRoute,
     private jobSeekerService: JobSeekerService,
     private blobService: BlobService,
-    private educationService: EducationService) { }
+    private educationService: EducationService,
+    private experienceService: ExperienceService) { }
 
   ngOnInit() {
     this.getJobSeekerbyId();
@@ -42,7 +44,10 @@ export class JobSeekerProfileComponent implements OnInit {
     })
   }
   getEducationDetail(){
-    this.educationService.getEducation().subscribe(res=>console.log(res));
+    this.educationService.getEducationByUserId(this.id).subscribe(res=>console.log(res));
+  }
+  getExperienceDetail(){
+    this.experienceService.getEducationByUserId(this.id).subscribe(res=>console.log(res));
   }
 
 

@@ -24,6 +24,10 @@ export class ExperienceService {
     getExperienceById(id: number) {
         return this.httpClient.get<any>(`${this.host}/get/${id}`);
     }
+    getEducationByUserId(id: number){
+        return this.httpClient.get<any>(`${this.host}/get_by_user_id/${id}`);
+
+    }
     updateExperienceById(id: number, updatedExperienceDetail:any) {
         return this.httpClient.put(`${this.host}/update_by_id`,updatedExperienceDetail,{ responseType: 'text' })
     }

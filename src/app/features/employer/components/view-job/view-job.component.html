@@ -34,6 +34,23 @@
         </div>
     </ng-template>
     <ng-template #jobInfo>
+        <div class="row">
+        <div class="col-xl-6 col-lg-12 col-md-12 col-12 mb-6">
+            <div class="card card-shadow w-100 p-4 d-flex justify-content-between">
+            <h5 style="text-align:center">Total Applicants</h5>
+            <p-knob style="text-align:center" [(ngModel)]="totalApplicants" valueColor="SlateGray" rangeColor="MediumTurquoise" [readonly]="true" [size]="200">
+            </p-knob>
+        </div>
+        </div>
+        <div class="col-xl-6 col-lg-12 col-md-12 col-12 mb-6">
+            <div  class="card card-shadow w-100 p-4 d-flex justify-content-between">
+            <h5 style="text-align:center">Shortlisted Candidates</h5>
+            <p-knob style="text-align:center" [(ngModel)]="totalApplicants" valueColor="SlateGray" rangeColor="MediumTurquoise" [readonly]="true" [size]="200">
+            </p-knob>
+        </div>
+        </div>
+    </div>
+    <div class="p-2"></div>
         <!-- job info -->
         <div class="card shadow p-4">
             <div class="d-flex justify-content-between">
@@ -41,27 +58,6 @@
                     {{job.jobTitle}}
                 </h5>
                 <!-- action buttons -->
-                <div class="text-end">
-                    <p class="btn border-none bg-dark text-white rounded-pill border border-dark" style="cursor:none">
-                    Total Applicants : {{totalApplicants}}
-                    </p>
-                    
-                    <p class="btn border-none bg-dark text-white rounded-pill border border-dark" style="cursor:none">
-                        Shortlisted Applicants : {{totalApplicants}}
-                        </p>
-                    
-                    <!-- <button class="btn border-none bg-dark text-white rounded-pill border border-dark"
-                        (click)="routeToEdit()">
-                        <i class="pi pi-pencil"></i>
-                        Edit
-                    </button>
-                    <span class="pe-3"></span>
-                    <button class="btn border-none bg-danger text-white rounded-pill border border-danger"
-                        (click)="deleteJob()">
-                        <i class="pi pi-trash"></i>
-                        Delete
-                    </button> -->
-                </div>
             </div>
             <div class="fs-6 d-flex flex-wrap">
                 <div class="pe-3">
