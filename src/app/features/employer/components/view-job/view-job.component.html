@@ -42,7 +42,15 @@
                 </h5>
                 <!-- action buttons -->
                 <div class="text-end">
-                    <button class="btn border-none bg-dark text-white rounded-pill border border-dark"
+                    <p class="btn border-none bg-dark text-white rounded-pill border border-dark" style="cursor:none">
+                    Total Applicants : {{totalApplicants}}
+                    </p>
+                    
+                    <p class="btn border-none bg-dark text-white rounded-pill border border-dark" style="cursor:none">
+                        Shortlisted Applicants : {{totalApplicants}}
+                        </p>
+                    
+                    <!-- <button class="btn border-none bg-dark text-white rounded-pill border border-dark"
                         (click)="routeToEdit()">
                         <i class="pi pi-pencil"></i>
                         Edit
@@ -52,7 +60,7 @@
                         (click)="deleteJob()">
                         <i class="pi pi-trash"></i>
                         Delete
-                    </button>
+                    </button> -->
                 </div>
             </div>
             <div class="fs-6 d-flex flex-wrap">

@@ -20,6 +20,7 @@ export class ViewJobComponent implements OnInit {
   sas_token = environment.sas_token;
   appliers!: Appliers[];
   job!: Job;
+  totalApplicants!:number;
 
   constructor(
     private filterService: FilterService,
@@ -33,6 +34,7 @@ export class ViewJobComponent implements OnInit {
   ngOnInit(): void {
     this.getJob();
     this.getJobAppliers();
+    this.getjobSeekerCountByJobId()
   }
 
   getJobAppliers() {
@@ -71,5 +73,9 @@ export class ViewJobComponent implements OnInit {
         this.toastr.success(`${this.job.jobTitle} deleted successfully`);
       }
     });
+  }
+
+  getjobSeekerCountByJobId(){
+    this.filterService.getJobSeekerCountByJobId(this.postJobDetailId).subscribe(res=>this.totalApplicants=res)
   }
 }

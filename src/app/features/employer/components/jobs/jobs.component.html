@@ -1,6 +1,6 @@
 <div>
     <div class="text-end p-3">
-        <button class="btn border-none border-dark bg-primary rounded-fill text-secondary p-2"
+        <button class="btn border-none border-dark bg-dark rounded-fill text-secondary p-2"
             [routerLink]="'/employer/job/new'">
             <i class="pi pi-plus-circle"></i>
             Create Job
@@ -94,7 +94,7 @@
             <ng-template #allJobs>
                 <p-table [value]="jobs" responsiveLayout="scroll">
                     <ng-template pTemplate="header">
-                        <div class="dashboard-title">
+                        <div class="dashboard-title" style="width:520%">
                             <h4 class="mb-0 h5">All Jobs</h4>
                         </div>
                         <tr>

@@ -29,6 +29,7 @@ import { PasswordModule } from "primeng/password";
 import { NgxPhotoEditorModule } from 'ngx-photo-editor';
 import {TooltipModule} from 'primeng/tooltip';
 import { JobSeekerService } from 'src/app/data/services/job-seeker.service';
+// import { AllApplicantsComponent } from './components/all-applicants/all-applicants.component';
 
 
 
@@ -47,6 +48,7 @@ import { JobSeekerService } from 'src/app/data/services/job-seeker.service';
     AccountSettingsEmployerComponent,
     EmployerProfileComponent,
     JobSeekerProfileComponent,
+    
   ],
   imports: [
     CommonModule,

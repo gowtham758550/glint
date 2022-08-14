@@ -5,11 +5,12 @@
 
             <!-- title -->
             <ng-template [ngSwitchCase]="'title'">
-                <h4 class="py-3" [ngClass]="field.class">
+                <h4 [ngClass]="field.class" style="text-align:center">
                     {{field.label}}
                 </h4>
+                <hr>
             </ng-template>
-
+            
             <!-- input:text -->
             <ng-template [ngSwitchCase]="'input'">
                 <div class="mb-3">
