@@ -56,7 +56,7 @@ export class LayoutComponent implements OnInit {
   getProfilePicture() {
     this.profileService.getProfilePicture().subscribe({
       next: res => {
-        this.profilePictureSource = `${res.url}?${environment.sas_token}`;
+        this.profilePictureSource = `${res.url}?${environment.profile_sas_token}`;
       }
     });
   }

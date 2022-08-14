@@ -13,7 +13,7 @@ import { environment } from 'src/environments/environment';
 export class MyJobsComponent implements OnInit {
 
   myJobs!: AppliedJob[];
-  sasToken = environment.sas_token;
+  sasToken = environment.profile_sas_token;
   isTimeline = false;
   isAppliedJobLoaded = false;
   events1: any;

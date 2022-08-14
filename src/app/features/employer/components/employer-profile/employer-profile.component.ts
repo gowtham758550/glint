@@ -17,7 +17,7 @@ import { environment } from "src/environments/environment";
 @Component({
   selector: "app-employer-profile",
   templateUrl: "employer-profile.component.html",
-  styleUrls: ['employer-profile.component.css'],
+  styleUrls: ["employer-profile.component.css"],
 })
 export class EmployerProfileComponent implements OnInit {
   backgroundImage: string = "/assets/defaultCoverPicture.jpg";
@@ -60,28 +60,31 @@ export class EmployerProfileComponent implements OnInit {
       class: ["w"],
     },
     {
-      type: 'textarea',
-      label: 'About',
-      formControlName: 'about',
-      class: ['w'],
-    },]
+      type: "textarea",
+      label: "About",
+      formControlName: "about",
+      class: ["w"],
+    },
+  ];
   action!: string;
   jobSeekerProfile: any;
 
   openFileTrigger(component: HTMLElement) {
     component.click();
   }
-  openCoverPictureTrigger(component: HTMLElement){
+  openCoverPictureTrigger(component: HTMLElement) {
     component.click();
   }
   updateProfilePicture($event: any) {
     this.imageService
       .open($event, {
-        aspectRatio: 4 / 3,
+        aspectRatio: 1 / 1,
+        autoCrop: true,
         autoCropArea: 1,
+        roundCropper: true,
+        viewMode: 1,
       })
       .subscribe((data: any) => {
-        // this.output = data;
         let file: any = data.file;
         let formData: FormData = new FormData();
         formData.append("profilePicture", file, file.name);
@@ -102,23 +105,22 @@ export class EmployerProfileComponent implements OnInit {
     this.profileService.getProfilePicture().subscribe({
       next: (data: any) => {
         let res = data.url;
-        this.imageUrl = res + "?" + environment.sas_token;
+        this.imageUrl = res + "?" + environment.profile_sas_token;
         this.isImageLoaded = true;
       },
-    }
-    );
+    });
   }
 
   // -----------------------------------------Cover Picture-----------------------------------------
   updateCoverPicture($event: any) {
     this.imageService
       .open($event, {
-        resizeToWidth: 5000,
-        aspectRatio: 4 / 3,
+        aspectRatio: 20 / 4,
+        autoCrop: true,
         autoCropArea: 1,
+        viewMode: 1,
       })
       .subscribe((data: any) => {
-        // this.output = data;
         let file: any = data.file;
         let formData: FormData = new FormData();
         formData.append("coverPicture", file, file.name);
@@ -148,7 +150,7 @@ export class EmployerProfileComponent implements OnInit {
   updateProfile(ref: any) {
     this.action = "Update";
     console.log(this.action);
-    this.modalService.open(ref).result.then((result) => { });
+    this.modalService.open(ref).result.then((result) => {});
   }
   executeProfileAction() {
     if (this.action == "Update") {
@@ -166,10 +168,10 @@ export class EmployerProfileComponent implements OnInit {
   }
   getEmployer() {
     this.employerService.getEmployerById().subscribe((res: any) => {
-      res.dateOfBirth = this.datePipe.transform(res.dateOfBirth, 'dd-MM-yyyy');
+      res.dateOfBirth = this.datePipe.transform(res.dateOfBirth, "dd-MM-yyyy");
       // res.dateOfBirth = this.dob;
-      console.log(res.dateOfBirth)
-      this.employerArray = res
+      console.log(res.dateOfBirth);
+      this.employerArray = res;
     });
   }
   dob: any;
@@ -202,7 +204,7 @@ export class EmployerProfileComponent implements OnInit {
     private datePipe: DatePipe,
     private profileService: BlobService,
     private imageService: NgxPhotoEditorService
-  ) { }
+  ) {}
 
   ngOnInit(): void {
     this.email = this.authService.getEmail();

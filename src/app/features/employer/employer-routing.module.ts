@@ -16,6 +16,7 @@ import { AccountSettingsEmployerComponent } from './components/account-settings-
 import { EmployerProfileComponent } from './components/employer-profile/employer-profile.component';
 import { LoginComponent } from 'src/app/core/components/login/login.component';
 import { JobSeekerProfileComponent } from './components/job-seeker-profile/job-seeker-profile.component';
+import { JobCardsComponent } from './components/job-cards/job-cards.component';
 
 const routes: Routes = [
   {
@@ -76,6 +77,10 @@ const routes: Routes = [
       {
         path: 'job-seeker/profile/:id',
         component: JobSeekerProfileComponent
+      },
+      {
+        path: 'view-applicants',
+        component: JobCardsComponent
       }
     ]
   },

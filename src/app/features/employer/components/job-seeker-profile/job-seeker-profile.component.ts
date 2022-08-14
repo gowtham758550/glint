@@ -16,6 +16,7 @@ export class JobSeekerProfileComponent implements OnInit {
   id:any;
   imageUrl!:string;
   isImageLoaded!:boolean;
+  jobSeekerProfile!:any;
   educationArray:number[]=[1];
   experienceArray:number[]=[1];
   constructor(private route: ActivatedRoute,
@@ -32,13 +33,13 @@ export class JobSeekerProfileComponent implements OnInit {
   getJobSeekerbyId(){
     this.id = this.route.snapshot.paramMap.get('id');
     console.log(this.id);
-    this.jobSeekerService.getUserById(this.id).subscribe(res=> console.log(res))
+    this.jobSeekerService.getUserById(this.id).subscribe(res=> this.jobSeekerProfile=res)
   }
   getProfilePicture(){
     this.blobService.getProfilePicture().subscribe({
       next: (data: any) => {
         let res = data.url;
-        this.imageUrl = res + "?" + environment.sas_token;
+        this.imageUrl = res + "?" + environment.profile_sas_token;
         this.isImageLoaded = true;
       },
     })

@@ -17,7 +17,7 @@ export class ViewJobComponent implements OnInit {
   isJobInfoLoaded = false;
   isAppliersTableLoaded = false;
   postJobDetailId = this.activatedRoute.snapshot.params['postJobDetailId'];;
-  sas_token = environment.sas_token;
+  sas_token = environment.profile_sas_token;
   appliers!: Appliers[];
   job!: Job;
   totalApplicants!:number;

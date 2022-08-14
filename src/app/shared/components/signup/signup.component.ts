@@ -30,6 +30,11 @@ export class SignupComponent implements OnInit {
     { validator: this.passwordValidator }
   );
   registerationFields: FormField[] = [
+    // {
+    //   type: 'title',
+    //   label: 'Signup',
+    //   class: ['fw-bold']
+    // },
     {
       type: 'input',
       label: 'First Name',
