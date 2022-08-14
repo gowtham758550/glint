@@ -23,7 +23,7 @@
                 For employers
                 <i class="pi pi-angle-down"></i>
             </button>
-            <div class="dropdown-content card">
+            <div class="dropdown-content">
                 <a routerLink="/login">
                     Login
                     <!-- <i class="pi pi-sign-in"></i> -->
@@ -78,7 +78,16 @@
                                 pInputText
                                 formControlName="designation"
                                 class="border-0 input"
+                                list="designation-datalist"
                                 placeholder="Search designation">
+                            <datalist id="designation-datalist"
+                                class="datalist">
+                                <ng-container *ngFor="let designation of designations">
+                                    <option [value]="designation">
+                                        {{designation}}
+                                    </option>
+                                </ng-container>
+                            </datalist>
 
                             <!-- experience -->
                             <div class="pe-4 d-flex">

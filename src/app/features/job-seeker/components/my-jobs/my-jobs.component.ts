@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { PrimeIcons } from 'primeng/api';
+import { AppliedJob } from 'src/app/data/models/applied-job.model';
 import { AppliedJobService } from 'src/app/data/services/applied-job.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-my-jobs',
@@ -10,8 +12,11 @@ import { AppliedJobService } from 'src/app/data/services/applied-job.service';
 })
 export class MyJobsComponent implements OnInit {
 
+  myJobs!: AppliedJob[];
+  sasToken = environment.sas_token;
+  isTimeline = false;
+  isAppliedJobLoaded = false;
   events1: any;
-  
   events2: any;
 
   constructor(
@@ -32,8 +37,15 @@ export class MyJobsComponent implements OnInit {
 
   getMyJobs() {
     this.appliedJobService.getAppliedJobs().subscribe({
-      next: data => console.log(data)
+      next: data => {
+        this.myJobs = data;
+        this.isAppliedJobLoaded = true;
+      }
     })
+  }
+
+  getTimeline(index: number) {
+    this.isTimeline = true;
   }
 
 }

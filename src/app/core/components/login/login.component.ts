@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { RouteConstants } from 'src/app/data/enums/constatnts/route.constants';
 import { FormField } from 'src/app/data/models/form-field.model';
 import { AuthService } from 'src/app/data/services/auth.service';
 import { LocalStorage } from 'src/app/data/services/local-storage.service';
@@ -14,6 +15,7 @@ import { LocalStorage } from 'src/app/data/services/local-storage.service';
 })
 export class LoginComponent implements OnInit {
 
+  routeConstants = RouteConstants;
   loginForm: FormGroup = this.formBuilder.group({
     userName_or_Email: ['', [Validators.required]],
     password: ['', [Validators.required]]
@@ -71,9 +73,9 @@ export class LoginComponent implements OnInit {
         this.toastr.success('Logged in successfully');
         const dataObject = JSON.parse(JSON.stringify(data));
         this.localStorage.setItem('accessToken', dataObject.jwt);
-        const role = this.authService.getRole(dataObject.jwt);
-        if (role == 'JobSeeker') this.router.navigateByUrl('/job-seeker/dashboard');
-        else if (role == 'Employer') this.router.navigateByUrl('/employer/dashboard');
+        const role = this.authService.getRole();
+        if (role == 'JobSeeker') this.router.navigateByUrl(this.routeConstants.jobSeekerHome);
+        else if (role == 'Employer') this.router.navigateByUrl(this.routeConstants.employerDashboard);
       }
     });
   }

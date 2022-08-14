@@ -22,12 +22,12 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { SearchComponent } from './components/search/search.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { AccountSettingsComponent } from './components/account-settings/account-settings.component';
-import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { NgxPhotoEditorModule } from "ngx-photo-editor";
 import { MyJobsComponent } from './components/my-jobs/my-jobs.component';
 import { PasswordModule } from "primeng/password";
 import { DividerModule } from "primeng/divider";
-import {TooltipModule} from 'primeng/tooltip';
+import { TooltipModule } from 'primeng/tooltip';
+import { JobsComponent } from './components/jobs/jobs.component';
 
 
 @NgModule({
@@ -40,8 +40,8 @@ import {TooltipModule} from 'primeng/tooltip';
     SearchComponent,
     ProfileComponent,
     AccountSettingsComponent,
-    DashboardComponent,
-    MyJobsComponent
+    MyJobsComponent,
+    JobsComponent
   ],
   imports: [
     CommonModule,
@@ -61,7 +61,8 @@ import {TooltipModule} from 'primeng/tooltip';
     DividerModule,
     TimelineModule,
     PasswordModule,
-    TooltipModule
+    TooltipModule,
+    CardModule
   ]
 })
 export class JobSeekerModule { }

@@ -23,7 +23,6 @@ export class JobInfoComponent implements OnInit, AfterContentInit {
   constructor(
     private jobService: JobService,
     private activatedRoute: ActivatedRoute,
-    private localStorage: LocalStorage,
     private authService: AuthService,
     private router: Router,
     private toastr: ToastrService,
@@ -33,9 +32,8 @@ export class JobInfoComponent implements OnInit, AfterContentInit {
 
   ngOnInit(): void {
     const postJobDetailId = this.activatedRoute.snapshot.params['postJobDetailId']
-    const accessToken = this.localStorage.getItem('accessToken');
     this.getJobById();
-    const role = this.authService.getRole(accessToken);
+    const role = this.authService.getRole();
     if (role == 'Employer') this.isJobSeeker = false;
     else if (role == 'JobSeeker') {
       this.isJobSeeker = true;

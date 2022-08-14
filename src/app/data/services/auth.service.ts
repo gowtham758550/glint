@@ -4,6 +4,7 @@ import { environment } from 'src/environments/environment';
 import { Observable } from 'rxjs';
 import jwtDecode from "jwt-decode";
 import { LocalStorage } from './local-storage.service';
+import { Role } from '../enums/role.enum';
 
 @Injectable({
   providedIn: 'root'
@@ -48,17 +49,20 @@ export class AuthService {
     return claims['UserID']
   }
 
-  getRole(accessToken: string) {
-    const claims: any = jwtDecode(accessToken);
+  getRole(): Role {
+    const token: any = this.localStorage.getItem('accessToken');
+    const claims: any = jwtDecode(token);
     return claims['http://schemas.microsoft.com/ws/2008/06/identity/claims/role'];
   }
 
-  getEmail(accessToken: string) {
-    const claims: any = jwtDecode(accessToken);
+  getEmail() {
+    const token: any = this.localStorage.getItem('accessToken');
+    const claims: any = jwtDecode(token);
     return claims['Email'];
   }
-  getUserName(accessToken:string){
-    const claims: any = jwtDecode(accessToken);
+  getUserName() {
+    const token: any = this.localStorage.getItem('accessToken');
+    const claims: any = jwtDecode(token);
     return claims['UserName'];
   }
 

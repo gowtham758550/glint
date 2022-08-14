@@ -205,7 +205,7 @@ export class EmployerProfileComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.email = this.authService.getEmail(this.accessToken);
+    this.email = this.authService.getEmail();
     this.employerProfile();
     this.getEmployer();
     this.getProfilePicture();

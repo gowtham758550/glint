@@ -37,19 +37,17 @@ export class AccountSettingsEmployerComponent implements OnInit {
   ]
 
   constructor(private formBuilder: FormBuilder,
-    private modalService: NgbModal,
     private toastr: ToastrService,
     private primengConfig: PrimeNGConfig,
     private employerService: EmployerService,
     private router: Router,
     private authService: AuthService,
-    private localStorageService: LocalStorage) {
+    ) {
   }
 
   ngOnInit(): void {
     this.primengConfig.ripple = true;
-    const accessToken = this.localStorageService.getItem('accessToken');
-    this.Email = this.authService.getEmail(accessToken);
+    this.Email = this.authService.getEmail();
     console.log(this.Email)
     this.emailForm = this.formBuilder.group({
       Email: [this.Email, [Validators.required]],

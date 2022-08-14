@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { SearchBar } from 'src/app/data/models/search-bar.model';
 import { Option } from 'src/app/data/models/options.model';
 import { Router } from '@angular/router';
 import { FilterService } from 'src/app/data/services/filter.service';
@@ -17,6 +16,7 @@ export class LandingPageComponent implements OnInit {
   totalJobCount!: number;
   totalCompanyCount!: number;
   jobSeekerCount!: number;
+  designations = this.jobService.jobs;
   location: Option[] = [
     {
       value: 0,

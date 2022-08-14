@@ -1,6 +1,7 @@
 import { Injectable } from "@angular/core";
 import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot, UrlTree } from "@angular/router";
 import { Observable } from "rxjs";
+import { RouteConstants } from "src/app/data/enums/constatnts/route.constants";
 import { AuthService } from "src/app/data/services/auth.service";
 import { LocalStorage } from "src/app/data/services/local-storage.service";
 
@@ -8,6 +9,8 @@ import { LocalStorage } from "src/app/data/services/local-storage.service";
     providedIn: 'root'
 })
 export class AuthGuard implements CanActivate {
+
+    routeConstants = RouteConstants;
     
     constructor(
         private localStorage: LocalStorage,
@@ -17,11 +20,10 @@ export class AuthGuard implements CanActivate {
 
     canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean | UrlTree | Observable<boolean | UrlTree> | Promise<boolean | UrlTree> {
         const accessToken:string = this.localStorage.getItem('accessToken');
-        console.log(accessToken);
         if (accessToken) {
-            const role = (this.authService.getRole(accessToken));
-            if (role == 'Employer') this.router.navigateByUrl('/employer/dashboard');
-            else if (role == 'JobSeeker') this.router.navigateByUrl('/job-seeker/dashboard');
+            const role = (this.authService.getRole());
+            if (role == 'Employer') this.router.navigateByUrl(this.routeConstants.employerDashboard);
+            else if (role == 'JobSeeker') this.router.navigateByUrl(this.routeConstants.jobSeekerHome);
             else this.router.navigateByUrl('/');
             return false;
         }
