@@ -78,7 +78,7 @@ export class JobsComponent implements OnInit {
     this.filteredExperience.forEach((e: any) => {
       updatedParams.append('experience', Experience[e]);
     })
-    console.log(updatedParams);
+    console.log(updatedParams.getAll('experience'));
     this.router.navigate(
       [],
       {
