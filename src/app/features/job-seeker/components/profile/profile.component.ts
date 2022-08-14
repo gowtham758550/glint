@@ -38,8 +38,10 @@ export class ProfileComponent implements OnInit {
   jobSeekerArray: any;
   isCoverclick: boolean = true;
   preferredJobArray: any = [];
-  skillArray:any=[];
+  skillArray: any = [];
   newPreferredJob!: string;
+  isSkillAdded: boolean = true;
+  isPreferredJobAdded: boolean = true;
 
   preferredJobFields: FormField[] = [
     {
@@ -183,7 +185,7 @@ export class ProfileComponent implements OnInit {
     private authService: AuthService,
     private datePipe: DatePipe,
     private preferredJobService: PreferredJobService,
-    private skillService:SkillsService,
+    private skillService: SkillsService,
   ) { }
 
   ngOnInit(): void {
@@ -505,7 +507,7 @@ export class ProfileComponent implements OnInit {
   // Modal Add job
   addjob(ref: any) {
     this.action = 'Add',
-    console.log(this.action)
+      console.log(this.action)
     this.preferredJobForm = this.getjob();
 
     this.modalService.open(ref).result.then(result => { });
@@ -530,9 +532,23 @@ export class ProfileComponent implements OnInit {
   }
   executePreferredJobAction() {
     if (this.action == 'Add') {
-      this.preferredJobService.addPreferredJob([{ jobTitle:  this.preferredJobForm.value.preferredJobTitle}]).subscribe(res => this.getPreferredJob());
-      this.toastr.success('Job added');
-      this.modalService.dismissAll();
+      this.preferredJobService.getPreferredJob().subscribe(res => {
+        for (var i = 0; i < res.length; i++) {
+          if (res[i].jobTitle === this.preferredJobForm.value.preferredJobTitle) {
+            this.isPreferredJobAdded = false;
+            break;
+          }
+        }
+        if (this.isPreferredJobAdded) {
+          this.preferredJobService.addPreferredJob([{ jobTitle: this.preferredJobForm.value.preferredJobTitle }]).subscribe(res => this.getPreferredJob());
+          this.toastr.success('Job added');
+          this.modalService.dismissAll();
+        }
+        else {
+          this.toastr.warning('Job already added');
+          this.modalService.dismissAll();
+        }
+      });
     }
   }
 
@@ -546,7 +562,7 @@ export class ProfileComponent implements OnInit {
   // Modal Add job
   addskill(ref: any) {
     this.action = 'Add',
-    console.log(this.action)
+      console.log(this.action)
     this.skillForm = this.getskill();
     this.modalService.open(ref).result.then(result => { });
   }
@@ -569,9 +585,28 @@ export class ProfileComponent implements OnInit {
   }
   executeSkillAction() {
     if (this.action == 'Add') {
-      this.skillService.addSkills([{ skillTitle:  this.skillForm.value.skillTitle}]).subscribe(res => this.getSkill());
-      this.toastr.success('Skill added');
-      this.modalService.dismissAll();
+      this.skillService.getSkills().subscribe(res => {
+        console.log(this.skillForm.value.skillTitle)
+        for (var i = 0; i < res.length; i++) {
+          console.log(res[i].skillTitle)
+          if (res[i].skillTitle === this.skillForm.value.skillTitle) {
+            console.log(this.skillForm.value.skillTitle)
+            this.isSkillAdded = false;
+            break;
+          }
+        }
+        if (this.isSkillAdded) {
+          this.skillService.addSkills([{ skillTitle: this.skillForm.value.skillTitle }]).subscribe(res => this.getSkill());
+          this.toastr.success('Skill added');
+          this.modalService.dismissAll();
+        }
+        else {
+          this.toastr.warning('Skill already added!');
+          this.modalService.dismissAll();
+        }
+      });
+
+
     }
   }
 

@@ -12,7 +12,7 @@ export class PreferredJobService {
   constructor(private httpClient:HttpClient) { }
 
   getPreferredJob(){
-    return this.httpClient.get(`${this.host}/get`);
+    return this.httpClient.get<any>(`${this.host}/get`);
   }
   addPreferredJob(preferredJobList: object[]){
     return this.httpClient.post(`${this.host}/add`, preferredJobList);

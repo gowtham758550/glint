@@ -12,7 +12,7 @@ export class SkillsService {
   constructor(private httpClient:HttpClient) { }
 
   getSkills(){
-    return this.httpClient.get(`${this.host}/get`);
+    return this.httpClient.get<any>(`${this.host}/get`);
   }
   addSkills(skillList: object[]){
     return this.httpClient.post(`${this.host}/add`, skillList);
