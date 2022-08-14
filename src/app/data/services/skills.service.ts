@@ -5,22 +5,22 @@ import { environment } from 'src/environments/environment';
 @Injectable({
   providedIn: 'root'
 })
-export class PreferredJobService {
-  
-  host = `${environment.host}/preferred_job`;
+export class SkillsService {
+
+  host = `${environment.host}/skill`;
 
   constructor(private httpClient:HttpClient) { }
 
-  getPreferredJob(){
+  getSkills(){
     return this.httpClient.get<any>(`${this.host}/get`);
   }
-  addPreferredJob(preferredJobList: object[]){
-    return this.httpClient.post(`${this.host}/add`, preferredJobList);
+  addSkills(skillList: object[]){
+    return this.httpClient.post(`${this.host}/add`, skillList);
   }
-  deletePreferredJobbyId(id:number){
+  deleteSkillbyId(id:number){
     return this.httpClient.delete(`${this.host}/delete/${id}`);
   }
-  deletePreferredJob(){
+  deleteSkill(){
     return this.httpClient.delete(`${this.host}/delete`);
   }
 }

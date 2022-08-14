@@ -50,7 +50,7 @@
                             <p>
                                 <span><i class="p-2 pi pi-calendar"></i></span>
                                 <span class="ms-2">Date Of Birth :
-                                    {{jobSeekerArray.dateOfBirth}}</span>
+                                    {{jobSeekerArray.dateOfBirth | date}}</span>
                             </p>
 
                         </div>
@@ -63,6 +63,7 @@
         <div class="py-6">
             <!-- row -->
             <div class="row">
+                <!-- EducationCard  -->
                 <div class="col-xl-6 col-lg-12 col-md-12 col-12 mb-6">
                     <!-- card -->
                     <div class="card shadow">
@@ -121,6 +122,7 @@
                         </div>
                     </div>
                 </div>
+                <!-- Experience card -->
                 <div class="col-xl-6 col-lg-12 col-md-12 col-12 mb-6">
                     <!-- card -->
                     <div class="card shadow">
@@ -177,7 +179,7 @@
             </div>
 
             <div class="p-2"></div>
-
+            <!-- Preferred Job Card -->
             <div class="row">
                 <div class="col-xl-6 col-lg-12 col-md-12 col-12 mb-6">
                     <!-- card -->
@@ -203,7 +205,34 @@
 
                     </div>
                 </div>
+            
+            <!-- Skills Card -->
+                <div class="col-xl-6 col-lg-12 col-md-12 col-12 mb-6">
+                    <!-- card -->
+                    <div class="card shadow">
+                        <!-- card body -->
+                        <div class="card-body">
+                            <!-- card title -->
+                            <div class="flex-grow-1 fs-4">
+                                <h4 class="card-title">Skills
+                                <button class="btn btn-rounded float-end">
+                                    <i class="pi pi-plus" (click)="addskill(SkillModal)"></i>
+                                </button></h4>
+                                <hr>
+                            </div>
+                            <div class="flex-grow-1 fs-4" *ngFor="let skill of skillArray"
+                                style="margin-left:5%;top:10%; display:flex;">
+
+                                <p-chip [removable]="true" separator=","
+                                    (onRemove)="deleteSkill(skill.skillId)">{{skill.skillTitle}}
+                                </p-chip>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
             </div>
+            <!------------------------------------------------------------------------------------------->
             <ng-template #educationModal let-modal>
                 <div class="modal-header">
                     <h4 class="modal-title" id="modal-basic-title">
@@ -280,6 +309,46 @@
                 <div class="text-end pb-3 pe-3">
                     <button class="btn bg-dark text-white" style="border-radius: 13px;"
                         [disabled]="!preferredJobForm.valid" (click)="executePreferredJobAction()">
+                        {{action}}
+                    </button>
+                </div>
+            </ng-template>
+            <ng-template #PreferredJobModal let-modal>
+                <div class="modal-header">
+                    <h4 class="modal-title" id="modal-basic-title">
+                        {{action}} Interested Job
+                    </h4>
+                    <button type="button" class="btn-close" aria-label="Close"
+                        (click)="modal.dismiss('Cross click')"></button>
+                </div>
+                <div class="modal-body d-flex justify-content-center">
+                    <app-form [formGroup]="preferredJobForm" [formFields]="preferredJobFields">
+                    </app-form>
+                </div>
+                <hr>
+                <div class="text-end pb-3 pe-3">
+                    <button class="btn bg-dark text-white" style="border-radius: 13px;"
+                        [disabled]="!skillForm.valid" (click)="executeSkillAction()">
+                        {{action}}
+                    </button>
+                </div>
+            </ng-template>
+            <ng-template #SkillModal let-modal>
+                <div class="modal-header">
+                    <h4 class="modal-title" id="modal-basic-title">
+                        {{action}} Skills
+                    </h4>
+                    <button type="button" class="btn-close" aria-label="Close"
+                        (click)="modal.dismiss('Cross click')"></button>
+                </div>
+                <div class="modal-body d-flex justify-content-center">
+                    <app-form [formGroup]="skillForm" [formFields]="skillFields">
+                    </app-form>
+                </div>
+                <hr>
+                <div class="text-end pb-3 pe-3">
+                    <button class="btn bg-dark text-white" style="border-radius: 13px;"
+                        [disabled]="!skillForm.valid" (click)="executeSkillAction()">
                         {{action}}
                     </button>
                 </div>

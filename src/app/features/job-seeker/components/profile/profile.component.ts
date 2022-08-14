@@ -1,10 +1,12 @@
 import { DatePipe, formatDate } from "@angular/common";
-import { Component, OnInit } from "@angular/core";
+import { Component, ComponentFactoryResolver, OnInit } from "@angular/core";
 import { FormGroup, Validators, FormArray, FormBuilder } from "@angular/forms";
 import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
 import { NgxPhotoEditorService } from 'ngx-photo-editor';
+import { NgxCroppedEvent } from 'ngx-photo-editor/lib/ngx-photo-editor.component';
 import { ToastrService } from "ngx-toastr";
 import { FormField } from "src/app/data/models/form-field.model";
+import { preferred_job } from "src/app/data/models/preferred-job";
 import { AuthService } from "src/app/data/services/auth.service";
 import { BlobService } from "src/app/data/services/blob.service";
 import { EducationService } from "src/app/data/services/education.service";
@@ -12,6 +14,7 @@ import { ExperienceService } from "src/app/data/services/experience.service";
 import { JobSeekerService } from "src/app/data/services/job-seeker.service";
 import { LocalStorage } from "src/app/data/services/local-storage.service";
 import { PreferredJobService } from "src/app/data/services/preferred-job.service";
+import { SkillsService } from "src/app/data/services/skills.service";
 import { environment } from "src/environments/environment";
 
 @Component({
@@ -20,14 +23,14 @@ import { environment } from "src/environments/environment";
   styleUrls: ['profile.component.css']
 })
 export class ProfileComponent implements OnInit {
-  backgroundImage: string = "..//assets/defaultCoverPicture.jpg";
+  backgroundImage: string = "/assets/defaultCoverPicture.jpg";
   email!: string;
   jobSeekerProfile: any = {};
   profileForm!: FormGroup;
   educationInfo: any;
   educationToEdit: any;
   experienceInfo: any;
-  imageUrl: string = "..//assets/defaultProfilePicture.png";
+  imageUrl: string = "/assets/defaultProfilePicture.png";
   experienceToEdit: any;
   experienceArray: any = [];
   editableExperience: any;
@@ -35,13 +38,24 @@ export class ProfileComponent implements OnInit {
   jobSeekerArray: any;
   isCoverclick: boolean = true;
   preferredJobArray: any = [];
+  skillArray: any = [];
   newPreferredJob!: string;
+  isSkillAdded: boolean = true;
+  isPreferredJobAdded: boolean = true;
 
   preferredJobFields: FormField[] = [
     {
       type: 'input',
       label: 'Enter Job Title',
       formControlName: 'preferredJobTitle',
+      class: ['w'],
+    },
+  ]
+  skillFields: FormField[] = [
+    {
+      type: 'input',
+      label: 'Enter your skill',
+      formControlName: 'skillTitle',
       class: ['w'],
     },
   ]
@@ -170,7 +184,8 @@ export class ProfileComponent implements OnInit {
     private jobSeekerService: JobSeekerService,
     private authService: AuthService,
     private datePipe: DatePipe,
-    private preferredJobService: PreferredJobService
+    private preferredJobService: PreferredJobService,
+    private skillService: SkillsService,
   ) { }
 
   ngOnInit(): void {
@@ -182,6 +197,7 @@ export class ProfileComponent implements OnInit {
     this.getExperienceList();
     this.getJobSeeker();
     this.getPreferredJob();
+    this.getSkill();
   }
 
   ngAfterViewInit(): void { }
@@ -481,7 +497,7 @@ export class ProfileComponent implements OnInit {
     }
     this.modalService.dismissAll();
   }
-  // -----------------------------------Preferred Job operations-------------------------------------
+  // ----------------------------------- Preferred Job operations  -------------------------------------
   preferredJobForm!: FormGroup;
   getjob(): FormGroup {
     return this.formBuilder.group({
@@ -491,7 +507,7 @@ export class ProfileComponent implements OnInit {
   // Modal Add job
   addjob(ref: any) {
     this.action = 'Add',
-    console.log(this.action)
+      console.log(this.action)
     this.preferredJobForm = this.getjob();
 
     this.modalService.open(ref).result.then(result => { });
@@ -516,10 +532,83 @@ export class ProfileComponent implements OnInit {
   }
   executePreferredJobAction() {
     if (this.action == 'Add') {
-      this.preferredJobService.addPreferredJob([{ jobTitle:  this.preferredJobForm.value.preferredJobTitle}]).subscribe(res => this.getPreferredJob());
-      this.toastr.success('Job added');
-      this.modalService.dismissAll();
+      this.preferredJobService.getPreferredJob().subscribe((res:any) => {
+        for (var i = 0; i < res.length; i++) {
+          if (res[i].jobTitle === this.preferredJobForm.value.preferredJobTitle) {
+            this.isPreferredJobAdded = false;
+            break;
+          }
+        }
+        if (this.isPreferredJobAdded) {
+          this.preferredJobService.addPreferredJob([{ jobTitle: this.preferredJobForm.value.preferredJobTitle }]).subscribe(res => this.getPreferredJob());
+          this.toastr.success('Job added');
+          this.modalService.dismissAll();
+        }
+        else {
+          this.toastr.warning('Job already added');
+          this.modalService.dismissAll();
+        }
+      });
     }
   }
+
+  // ------------------------------------------- Skills Operation -------------------------------------------
+  skillForm!: FormGroup;
+  getskill(): FormGroup {
+    return this.formBuilder.group({
+      skillTitle: ['', Validators.required],
+    })
+  }
+  // Modal Add job
+  addskill(ref: any) {
+    this.action = 'Add',
+      console.log(this.action)
+    this.skillForm = this.getskill();
+    this.modalService.open(ref).result.then(result => { });
+  }
+  getSkill() {
+    this.skillService.getSkills().subscribe(res => {
+      this.skillArray = res;
+      console.log(res)
+    });
+  }
+  deleteSkill(jobId: number) {
+    console.log(jobId)
+    this.skillService.deleteSkillbyId(jobId).subscribe(res => {
+      console.log(res);
+    });
+    console.log(jobId);
+  }
+  addSkill(jobToAdd: any) {
+    console.log(jobToAdd);
+    this.skillService.addSkills([{ skillTitle: jobToAdd.skillTitle }]).subscribe(res => this.getSkill());
+  }
+  executeSkillAction() {
+    if (this.action == 'Add') {
+      this.skillService.getSkills().subscribe(res => {
+        console.log(this.skillForm.value.skillTitle)
+        for (var i = 0; i < res.length; i++) {
+          console.log(res[i].skillTitle)
+          if (res[i].skillTitle === this.skillForm.value.skillTitle) {
+            console.log(this.skillForm.value.skillTitle)
+            this.isSkillAdded = false;
+            break;
+          }
+        }
+        if (this.isSkillAdded) {
+          this.skillService.addSkills([{ skillTitle: this.skillForm.value.skillTitle }]).subscribe(res => this.getSkill());
+          this.toastr.success('Skill added');
+          this.modalService.dismissAll();
+        }
+        else {
+          this.toastr.warning('Skill already added!');
+          this.modalService.dismissAll();
+        }
+      });
+
+
+    }
+  }
+
 
 }
