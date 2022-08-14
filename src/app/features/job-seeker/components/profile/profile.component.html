@@ -5,18 +5,18 @@
             <div class="div">
                 <img class="rounded-top text-white d-flex flex-row"
                     style="height:170px; width:100%; cursor: pointer; background-repeat: no-repeat; background-size: cover; background-blend-mode: darken;"
-                    [src]="backgroundImage" (click)="isCoverclick &&  openCoverPictureTrigger(coverPicture)"
-                    pTooltip="Update Cover picture">
+                    [src]="backgroundImage" (click)="openFileTrigger(coverPicture)"
+                    pTooltip="Update Cover picture" tooltipPosition="bottom">
                 <ng-container *ngIf="isImageLoaded; then image; else imageLoader"></ng-container>
                 <ng-template #imageLoader>
                     <img [src]="imageUrl" class="inner-image rounded-circle img-fluid img-thumbnail pointer"
                         style="width: 150px; height:150px;  margin-left: 2%; margin-top:4%;"
-                        (click)="!isCoverclick && openFileTrigger(fileTigger)" pTooltip="Update Profile picture">
+                        (click)="openFileTrigger(fileTigger)" pTooltip="Update Profile picture">
                 </ng-template>
                 <ng-template #image>
                     <img [src]="imageUrl" class="inner-image rounded-circle img-fluid img-thumbnail pointer"
                         style="width: 150px; height:150px; margin-left: 2%; margin-top:4%;"
-                        (click)="!isCoverclick && openFileTrigger(fileTigger)" pTooltip="Update Profile picture">
+                        (click)="openFileTrigger(fileTigger)" pTooltip="Update Profile picture">
                 </ng-template>
                 <input type="file" (change)="updateProfilePicture($event)" accept=".png,.jpg,.jpeg"
                     style="display: none;" #fileTigger>
@@ -177,6 +177,33 @@
             </div>
 
             <div class="p-2"></div>
+
+            <div class="row">
+                <div class="col-xl-6 col-lg-12 col-md-12 col-12 mb-6">
+                    <!-- card -->
+                    <div class="card shadow">
+                        <!-- card body -->
+                        <div class="card-body">
+                            <!-- card title -->
+                            <div class="flex-grow-1 fs-4">
+                                <h4 class="card-title">Preferred Job
+                                <button class="btn btn-rounded float-end">
+                                    <i class="pi pi-plus" (click)="addjob(PreferredJobModal)"></i>
+                                </button></h4>
+                                <hr>
+                            </div>
+                            <div class="flex-grow-1 fs-4" *ngFor="let preferredJob of preferredJobArray"
+                                style="margin-left:5%;top:10%">
+
+                                <p-chip [removable]="true" separator=","
+                                    (onRemove)="deleteJob(preferredJob.preferredJobId)">{{preferredJob.jobTitle}}
+                                </p-chip>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
             <ng-template #educationModal let-modal>
                 <div class="modal-header">
                     <h4 class="modal-title" id="modal-basic-title">
@@ -233,6 +260,26 @@
                 <div class="text-end pb-3 pe-3">
                     <button class="btn bg-dark text-white" style="border-radius: 13px;" [disabled]="!profileForm.valid"
                         (click)="executeProfileAction()">
+                        {{action}}
+                    </button>
+                </div>
+            </ng-template>
+            <ng-template #PreferredJobModal let-modal>
+                <div class="modal-header">
+                    <h4 class="modal-title" id="modal-basic-title">
+                        {{action}} Interested Job
+                    </h4>
+                    <button type="button" class="btn-close" aria-label="Close"
+                        (click)="modal.dismiss('Cross click')"></button>
+                </div>
+                <div class="modal-body d-flex justify-content-center">
+                    <app-form [formGroup]="preferredJobForm" [formFields]="preferredJobFields">
+                    </app-form>
+                </div>
+                <hr>
+                <div class="text-end pb-3 pe-3">
+                    <button class="btn bg-dark text-white" style="border-radius: 13px;"
+                        [disabled]="!preferredJobForm.valid" (click)="executePreferredJobAction()">
                         {{action}}
                     </button>
                 </div>
