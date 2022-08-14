@@ -84,7 +84,9 @@
                                 class="datalist">
                                 <ng-container *ngFor="let designation of designations">
                                     <option [value]="designation">
-                                        {{designation}}
+                                        <span style="text-transform: capitalize;">
+                                            {{designation}}
+                                        </span>
                                     </option>
                                 </ng-container>
                             </datalist>

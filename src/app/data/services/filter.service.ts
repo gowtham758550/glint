@@ -25,6 +25,10 @@ export class FilterService {
         return this.httpClient.get<Job[]>(`${this.host}/post_job_list/get?filters=${filters}`);
     }
 
+    getNonAppliedJobs(filters: string): Observable<Job[]> {
+        return this.httpClient.get<Job[]>(`${this.host}/post_job_list/get_non_applied_job?filters=${filters}`);
+    }
+
     getPostJobCount(): Observable<number> {
         return this.httpClient.get<number>(`${this.host}/post_job_count/get`);
     }

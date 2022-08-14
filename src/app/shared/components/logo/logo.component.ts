@@ -1,9 +1,12 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { RouteConstants } from 'src/app/data/enums/constatnts/route.constants';
 
 @Component({
   selector: 'app-logo',
   template: `
-    <h1 [ngClass]="class">
+    <h1 [ngClass]="class"
+      class="pointer"
+      [routerLink]="routeConstants.landingPage">
       Gl<span class="text-warning">i</span>nt
       <span>
         <i class="pi pi-briefcase fs-3"
@@ -19,6 +22,8 @@ export class LogoComponent implements OnInit {
 
   @Input()
   class!: string;
+
+  routeConstants = RouteConstants;
 
   constructor() { }
 
