@@ -186,7 +186,7 @@ export class EmployerProfileComponent implements OnInit {
         firstName: [res.firstName, [Validators.required]],
         lastName: [res.lastName, [Validators.required]],
         contactNumber: [res.contactNumber, [Validators.required]],
-        dateOfBirth: [formatDate(this.dob, "yyyy-MM-dd", "en")],
+        dateOfBirth: [formatDate(res.dateOfBirth, "yyyy-MM-dd", "en")],
         about: [res.about, [Validators.required]],
       });
     });
