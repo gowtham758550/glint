@@ -14,6 +14,7 @@ import { ExperienceService } from "src/app/data/services/experience.service";
 import { JobSeekerService } from "src/app/data/services/job-seeker.service";
 import { LocalStorage } from "src/app/data/services/local-storage.service";
 import { PreferredJobService } from "src/app/data/services/preferred-job.service";
+import { SkillsService } from "src/app/data/services/skills.service";
 import { environment } from "src/environments/environment";
 
 @Component({
@@ -37,6 +38,7 @@ export class ProfileComponent implements OnInit {
   jobSeekerArray: any;
   isCoverclick: boolean = true;
   preferredJobArray: any = [];
+  skillArray:any=[];
   newPreferredJob!: string;
 
   preferredJobFields: FormField[] = [
@@ -44,6 +46,14 @@ export class ProfileComponent implements OnInit {
       type: 'input',
       label: 'Enter Job Title',
       formControlName: 'preferredJobTitle',
+      class: ['w'],
+    },
+  ]
+  skillFields: FormField[] = [
+    {
+      type: 'input',
+      label: 'Enter your skill',
+      formControlName: 'skillTitle',
       class: ['w'],
     },
   ]
@@ -172,7 +182,8 @@ export class ProfileComponent implements OnInit {
     private jobSeekerService: JobSeekerService,
     private authService: AuthService,
     private datePipe: DatePipe,
-    private preferredJobService: PreferredJobService
+    private preferredJobService: PreferredJobService,
+    private skillService:SkillsService,
   ) { }
 
   ngOnInit(): void {
@@ -184,6 +195,7 @@ export class ProfileComponent implements OnInit {
     this.getExperienceList();
     this.getJobSeeker();
     this.getPreferredJob();
+    this.getSkill();
   }
 
   ngAfterViewInit(): void { }
@@ -483,7 +495,7 @@ export class ProfileComponent implements OnInit {
     }
     this.modalService.dismissAll();
   }
-  // -----------------------------------Preferred Job operations-------------------------------------
+  // ----------------------------------- Preferred Job operations  -------------------------------------
   preferredJobForm!: FormGroup;
   getjob(): FormGroup {
     return this.formBuilder.group({
@@ -523,5 +535,45 @@ export class ProfileComponent implements OnInit {
       this.modalService.dismissAll();
     }
   }
+
+  // ------------------------------------------- Skills Operation -------------------------------------------
+  skillForm!: FormGroup;
+  getskill(): FormGroup {
+    return this.formBuilder.group({
+      skillTitle: ['', Validators.required],
+    })
+  }
+  // Modal Add job
+  addskill(ref: any) {
+    this.action = 'Add',
+    console.log(this.action)
+    this.skillForm = this.getskill();
+    this.modalService.open(ref).result.then(result => { });
+  }
+  getSkill() {
+    this.skillService.getSkills().subscribe(res => {
+      this.skillArray = res;
+      console.log(res)
+    });
+  }
+  deleteSkill(jobId: number) {
+    console.log(jobId)
+    this.skillService.deleteSkillbyId(jobId).subscribe(res => {
+      console.log(res);
+    });
+    console.log(jobId);
+  }
+  addSkill(jobToAdd: any) {
+    console.log(jobToAdd);
+    this.skillService.addSkills([{ skillTitle: jobToAdd.skillTitle }]).subscribe(res => this.getSkill());
+  }
+  executeSkillAction() {
+    if (this.action == 'Add') {
+      this.skillService.addSkills([{ skillTitle:  this.skillForm.value.skillTitle}]).subscribe(res => this.getSkill());
+      this.toastr.success('Skill added');
+      this.modalService.dismissAll();
+    }
+  }
+
 
 }
