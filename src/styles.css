@@ -1,5 +1,6 @@
 /* You can add global styles to this file, and also import other style files */
 @import '~ngx-toastr/toastr';
+@import 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css';
 
 :root {
     /* --primary: #ff0038; */
@@ -205,4 +206,13 @@
 
 .dropdown:hover .dropdown-content {
     display: block;
+}
+.dashboard-title {
+    padding: 20px 30px;
+    border: 1px solid #ededed;
+    /* border-top-left-radius: 10px;
+    border-top-right-radius: 10px; */
+    background-color: #f8f9fa;
+    width: 350%;
+    background-size: cover;
 }

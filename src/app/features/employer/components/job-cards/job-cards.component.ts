@@ -1,15 +1,14 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Route, Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Job } from 'src/app/data/models/job.model';
 import { JobService } from 'src/app/data/services/job.service';
 
 @Component({
-  selector: 'app-jobs',
-  templateUrl: './jobs.component.html',
-  styleUrls:['./jobs.component.css']
+  selector: 'app-job-cards',
+  templateUrl: 'job-cards.component.html'
 })
-export class JobsComponent implements OnInit {
+export class JobCardsComponent implements OnInit {
 
   jobs: Job[] = [];
   isLoaded = false;
@@ -51,4 +50,5 @@ export class JobsComponent implements OnInit {
       }
     });
   }
+
 }

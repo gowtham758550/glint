@@ -3,7 +3,7 @@
 
     <ng-template #jobInfoLoader>
         <!-- job info loader -->
-        <div class="card p-4">
+        <div class="card shadow p-4">
             <div class="d-flex justify-content-between">
                 <p-skeleton width="15rem" height="1.5rem" styleClass="mb-2"></p-skeleton>
                 <div class="d-flex">
@@ -19,7 +19,7 @@
             <p-skeleton width="6rem" styleClass="mb-2"></p-skeleton>
         </div>
         <div class="pt-4"></div>
-        <div class="card p-4">
+        <div class="card shadow p-4">
             <p-skeleton width="14rem" height="1.5rem" styleClass="mb-2"></p-skeleton>
             <p-skeleton width="100%" height="1rem" styleClass="mb-2"></p-skeleton>
             <p-skeleton width="100%" height="1rem" styleClass="mb-2"></p-skeleton>
@@ -34,26 +34,30 @@
         </div>
     </ng-template>
     <ng-template #jobInfo>
+        <div class="row">
+        <div class="col-xl-6 col-lg-12 col-md-12 col-12 mb-6">
+            <div class="card card-shadow w-100 p-4 d-flex justify-content-between">
+            <h5 style="text-align:center">Total Applicants</h5>
+            <p-knob style="text-align:center" [(ngModel)]="totalApplicants" valueColor="SlateGray" rangeColor="MediumTurquoise" [readonly]="true" [size]="200">
+            </p-knob>
+        </div>
+        </div>
+        <div class="col-xl-6 col-lg-12 col-md-12 col-12 mb-6">
+            <div  class="card card-shadow w-100 p-4 d-flex justify-content-between">
+            <h5 style="text-align:center">Shortlisted Candidates</h5>
+            <p-knob style="text-align:center" [(ngModel)]="totalApplicants" valueColor="SlateGray" rangeColor="MediumTurquoise" [readonly]="true" [size]="200">
+            </p-knob>
+        </div>
+        </div>
+    </div>
+    <div class="p-2"></div>
         <!-- job info -->
-        <div class="card p-4">
+        <div class="card shadow p-4">
             <div class="d-flex justify-content-between">
-                <div class="fs-3 fw-bold">
+                <h5>
                     {{job.jobTitle}}
-                </div>
+                </h5>
                 <!-- action buttons -->
-                <div class="text-end">
-                    <button class="btn border-none text-dark rounded-pill border border-dark"
-                        (click)="routeToEdit()">
-                        <i class="pi pi-pencil"></i>
-                        Edit
-                    </button>
-                    <span class="pe-3"></span>
-                    <button class="btn border-none text-danger rounded-pill border border-danger"
-                        (click)="deleteJob()">
-                        <i class="pi pi-trash"></i>
-                        Delete
-                    </button>
-                </div>
             </div>
             <div class="fs-6 d-flex flex-wrap">
                 <div class="pe-3">
@@ -65,7 +69,7 @@
                     22 hours ago
                 </div>
             </div>
-        
+
             <div class="pt-2 d-flex flex-wrap">
                 <div class="pe-3">
                     <i class="pi pi-briefcase"></i>
@@ -79,27 +83,27 @@
             </div>
         </div>
         <div class="pt-4"></div>
-        <div class="card p-4">
-            <div class="fs-3 fw-bold">
-                About the job
+        <div class="card shadow p-4" style="margin-top:0%">
+            <div class="d-flex">
+                <h5 class="flex-grow-1">
+                    Job Description
+                </h5>
             </div>
-            <div class="fs-5 fw-bold pt-4">
-                Job Description
-            </div>
-            <div class="fs-6">
-                {{job.description}}
+            <hr>
+            <div class="d-flex">
+                <div class="flex-grow-1 fw-normal">
+                    {{job.description}}
+                </div>
             </div>
         </div>
     </ng-template>
 
     <div class="pt-4">
-        <h1 class="fw-bold">
-            List of applied candidates
-        </h1>
+
         <ng-container *ngIf="isAppliersTableLoaded; then appliersDataTable; else appliersLoader"></ng-container>
         <!-- loader -->
         <ng-template #appliersLoader>
-            <p-table responsiveLayout="scroll">
+            <p-table responsiveLayout="scroll" class="card card-shadow">
                 <ng-template pTemplate="header">
                     <tr>
                         <th>
@@ -124,30 +128,60 @@
                         </th>
                     </tr>
                     <tr>
-                        <td><p-skeleton height="2rem"></p-skeleton></td>
-                        <td><p-skeleton height="2rem"></p-skeleton></td>
-                        <td><p-skeleton height="2rem"></p-skeleton></td>
-                        <td><p-skeleton height="2rem"></p-skeleton></td>
-                        <td><p-skeleton height="2rem"></p-skeleton></td>
+                        <td>
+                            <p-skeleton height="2rem"></p-skeleton>
+                        </td>
+                        <td>
+                            <p-skeleton height="2rem"></p-skeleton>
+                        </td>
+                        <td>
+                            <p-skeleton height="2rem"></p-skeleton>
+                        </td>
+                        <td>
+                            <p-skeleton height="2rem"></p-skeleton>
+                        </td>
+                        <td>
+                            <p-skeleton height="2rem"></p-skeleton>
+                        </td>
                     </tr>
                     <tr>
-                        <td><p-skeleton height="2rem"></p-skeleton></td>
-                        <td><p-skeleton height="2rem"></p-skeleton></td>
-                        <td><p-skeleton height="2rem"></p-skeleton></td>
-                        <td><p-skeleton height="2rem"></p-skeleton></td>
-                        <td><p-skeleton height="2rem"></p-skeleton></td>
+                        <td>
+                            <p-skeleton height="2rem"></p-skeleton>
+                        </td>
+                        <td>
+                            <p-skeleton height="2rem"></p-skeleton>
+                        </td>
+                        <td>
+                            <p-skeleton height="2rem"></p-skeleton>
+                        </td>
+                        <td>
+                            <p-skeleton height="2rem"></p-skeleton>
+                        </td>
+                        <td>
+                            <p-skeleton height="2rem"></p-skeleton>
+                        </td>
                     </tr>
                     <tr>
-                        <td><p-skeleton height="2rem"></p-skeleton></td>
-                        <td><p-skeleton height="2rem"></p-skeleton></td>
-                        <td><p-skeleton height="2rem"></p-skeleton></td>
-                        <td><p-skeleton height="2rem"></p-skeleton></td>
-                        <td><p-skeleton height="2rem"></p-skeleton></td>
+                        <td>
+                            <p-skeleton height="2rem"></p-skeleton>
+                        </td>
+                        <td>
+                            <p-skeleton height="2rem"></p-skeleton>
+                        </td>
+                        <td>
+                            <p-skeleton height="2rem"></p-skeleton>
+                        </td>
+                        <td>
+                            <p-skeleton height="2rem"></p-skeleton>
+                        </td>
+                        <td>
+                            <p-skeleton height="2rem"></p-skeleton>
+                        </td>
                     </tr>
                 </ng-template>
             </p-table>
         </ng-template>
-        <ng-template #appliersDataTable>
+        <ng-template #appliersDataTable class="card card-shadow">
             <ng-container *ngIf="appliers.length > 0; then applierDataTable; else noAppliers"></ng-container>
             <ng-template #noAppliers>
                 <div class="card p-3 text-center">
@@ -155,9 +189,11 @@
                 </div>
             </ng-template>
             <ng-template #applierDataTable>
-                <p-table [value]="appliers"
-                    responsiveLayout="scroll">
+                <p-table [value]="appliers" responsiveLayout="scroll" class="card card-shadow">
                     <ng-template pTemplate="header">
+                        <div class="dashboard-title">
+                            <h4 class="mb-0 h5"> Applied candidates</h4>
+                        </div>
                         <tr>
                             <th pSortableColumn="fullName">
                                 Full name
@@ -182,13 +218,10 @@
                         </tr>
                     </ng-template>
                     <ng-template pTemplate="body" let-applier>
-                        <tr class="pointer"
-                            [routerLink]="'/employer/job-seeker/profile/' + applier.userName">
+                        <tr class="pointer" (click)="getJobSeekerProfileById(applier.id)">
                             <td>
                                 <span>
-                                    <img [src]="applier.profilePicture + '?' + sas_token"
-                                        alt=""
-                                        class="profile">
+                                    <img [src]="applier.profilePicture + '?' + sas_token" alt="" class="profile">
                                 </span>
                                 <span class="ps-2">
                                     {{applier.fullName}}
@@ -202,7 +235,7 @@
                                 </span>
                             </td>
                             <td>{{applier.gender}}</td>
-                            <td>{{applier.dateOfBirth | date: 'short' }}</td>
+                            <td>{{applier.dateOfBirth | date }}</td>
                         </tr>
                     </ng-template>
                 </p-table>

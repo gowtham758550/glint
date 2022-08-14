@@ -1023,11 +1023,11 @@ export class JobService {
     }
 
     updateJob(jobDetails: Job) {
-        return this.httpClient.put(`${this.employerHost}/update`, jobDetails);
+        return this.httpClient.put(`${this.employerHost}/update`, jobDetails,  {responseType:'text'});
     }
 
     deleteJob(jobId: number) {
-        return this.httpClient.delete(`${this.employerHost}/delete/${jobId}`);
+        return this.httpClient.delete(`${this.employerHost}/delete/${jobId}`, {responseType:'text'});
     } 
 
     getAllJob(): Observable<Job[]> {

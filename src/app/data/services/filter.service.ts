@@ -36,4 +36,7 @@ export class FilterService {
     getJobSeekerCount(): Observable<number> {
         return this.httpClient.get<number>(`${this.host}/job_seeker_count/get`);
     }
+    getJobSeekerCountByJobId(id:number): Observable<number> {
+        return this.httpClient.get<number>(`${this.host}/job_seeker_count/get/${id}`);
+    }
 }

@@ -113,7 +113,7 @@ export class EditJobComponent implements OnInit {
     this.jobService.updateJob(updatedJob).subscribe({
       next: data => {
         this.toastr.success('Job updated successfully');
-        this.router.navigateByUrl(`/employer/job/${this.postJobDetailId}`);
+        this.router.navigateByUrl(`/employer/jobs`);
       }
     });
   }
