@@ -1,5 +1,5 @@
 <div>
-<<<<<<<<< Temporary merge branch 1
+
 
     <!-- jobs table -->
     <div class="card">
@@ -10,7 +10,7 @@
                 </h1>
             </div>
             <div class="p-3">
-                <button class="btn border-none border-dark bg-primary rounded-fill text-secondary p-2"
+                <button class="btn bg-dark border-none border-dark bg-primary rounded-fill text-secondary p-2"
                     [routerLink]="'/employer/job/new'">
                     <i class="pi pi-plus-circle"></i>
                     Create Job
@@ -18,145 +18,140 @@
             </div>
         </div>
 
-=========
-    <div class="text-end p-3">
-        <button class="btn border-none border-dark bg-dark rounded-fill text-secondary p-2"
-            [routerLink]="'/employer/job/new'">
-            <i class="pi pi-plus-circle"></i>
-            Create Job
-        </button>
-    </div>
+        <!-- jobs table -->
+        <div class="card">
 
-    <!-- jobs table -->
-    <div class="card">
->>>>>>>>> Temporary merge branch 2
-        <ng-container *ngIf="isLoaded; then data; else loader"></ng-container>
+            <ng-container *ngIf="isLoaded; then data; else loader"></ng-container>
 
-        <!-- loader -->
-        <ng-template #loader>
-            <p-table responsiveLayout="scroll">
-                <ng-template pTemplate="header">
-                    <tr>
-                        <th>
-                            Job Title
-                            <p-sortIcon></p-sortIcon>
-                        </th>
-                        <th>
-                            Location
-                            <p-sortIcon></p-sortIcon>
-                        </th>
-                        <th>
-                            Created date
-                            <p-sortIcon></p-sortIcon>
-                        </th>
-                        <th>
-                            Salary
-                            <p-sortIcon></p-sortIcon>
-                        </th>
-                    </tr>
-                    <tr>
-                        <td>
-                            <p-skeleton height="2rem"></p-skeleton>
-                        </td>
-                        <td>
-                            <p-skeleton height="2rem"></p-skeleton>
-                        </td>
-                        <td>
-                            <p-skeleton height="2rem"></p-skeleton>
-                        </td>
-                        <td>
-                            <p-skeleton height="2rem"></p-skeleton>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <p-skeleton height="2rem"></p-skeleton>
-                        </td>
-                        <td>
-                            <p-skeleton height="2rem"></p-skeleton>
-                        </td>
-                        <td>
-                            <p-skeleton height="2rem"></p-skeleton>
-                        </td>
-                        <td>
-                            <p-skeleton height="2rem"></p-skeleton>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <p-skeleton height="2rem"></p-skeleton>
-                        </td>
-                        <td>
-                            <p-skeleton height="2rem"></p-skeleton>
-                        </td>
-                        <td>
-                            <p-skeleton height="2rem"></p-skeleton>
-                        </td>
-                        <td>
-                            <p-skeleton height="2rem"></p-skeleton>
-                        </td>
-                    </tr>
-                </ng-template>
-            </p-table>
-        </ng-template>
-
-        <!-- data -->
-        <ng-template #data>
-            <ng-container *ngIf="jobs.length > 0; then allJobs; else noJob"></ng-container>
-            <ng-template #noJob>
-                <div class="card p-3 text-center">
-                    <p>You don't created any job. Create a job
-                        <a routerLink="/employer/job/new" class="text-decoration-none">
-                            here
-                        </a>
-                    </p>
-                </div>
-            </ng-template>
-            <ng-template #allJobs>
-                <p-table [value]="jobs" responsiveLayout="scroll">
+            <!-- loader -->
+            <ng-template #loader>
+                <p-table responsiveLayout="scroll">
                     <ng-template pTemplate="header">
-                        <div class="dashboard-title" style="width:520%">
-                            <h4 class="mb-0 h5">All Jobs</h4>
-                        </div>
                         <tr>
-                            <th pSortableColumn="jobTitle">
+                            <th>
                                 Job Title
-                                <p-sortIcon field="jobTitle"></p-sortIcon>
-                            </th>
-                            <th pSortableColumn="location">
-                                Location
-                                <p-sortIcon field="location"></p-sortIcon>
-                            </th>
-                            <th pSortableColumn="createdDate">
-                                Created date
-                                <p-sortIcon field="createdDate"></p-sortIcon>
-                            </th>
-                            <th pSortableColumn="salary">
-                                Salary
-                                <p-sortIcon field="salary"></p-sortIcon>
+                                <p-sortIcon></p-sortIcon>
                             </th>
                             <th>
-                                Actions
+                                Location
+                                <p-sortIcon></p-sortIcon>
+                            </th>
+                            <th>
+                                Created date
+                                <p-sortIcon></p-sortIcon>
+                            </th>
+                            <th>
+                                Salary
+                                <p-sortIcon></p-sortIcon>
                             </th>
                         </tr>
-                    </ng-template>
-                    <ng-template pTemplate="body" let-job>
-                        <tr class="pointer">
-                            <td>{{job.jobTitle}}</td>
-                            <td>{{job.location}}</td>
-                            <td>{{job.createdDate | date}}</td>
-                            <td>{{job.salary | currency: 'INR'}}</td>
+                        <tr>
                             <td>
-                                <ul class="action-list flex">
-                                    <li><a [routerLink]="'/employer/job/' + job.postJobDetailId" pTooltip="View Job" tooltipPosition="bottom"><span class="pi pi-eye"></span></a></li>
-                                    <li><a (click)="routeToEdit(job.postJobDetailId)" pTooltip="Edit Job" tooltipPosition="bottom"><span class="pi pi-pencil"></span></a></li>
-                                    <li><a (click)="deleteJob(job.postJobDetailId, job.jobTitle)" pTooltip="Delete Job" tooltipPosition="bottom"><span class="pi pi-trash"></span></a></li>
-                                </ul>
+                                <p-skeleton height="2rem"></p-skeleton>
+                            </td>
+                            <td>
+                                <p-skeleton height="2rem"></p-skeleton>
+                            </td>
+                            <td>
+                                <p-skeleton height="2rem"></p-skeleton>
+                            </td>
+                            <td>
+                                <p-skeleton height="2rem"></p-skeleton>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <p-skeleton height="2rem"></p-skeleton>
+                            </td>
+                            <td>
+                                <p-skeleton height="2rem"></p-skeleton>
+                            </td>
+                            <td>
+                                <p-skeleton height="2rem"></p-skeleton>
+                            </td>
+                            <td>
+                                <p-skeleton height="2rem"></p-skeleton>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <p-skeleton height="2rem"></p-skeleton>
+                            </td>
+                            <td>
+                                <p-skeleton height="2rem"></p-skeleton>
+                            </td>
+                            <td>
+                                <p-skeleton height="2rem"></p-skeleton>
+                            </td>
+                            <td>
+                                <p-skeleton height="2rem"></p-skeleton>
                             </td>
                         </tr>
                     </ng-template>
                 </p-table>
             </ng-template>
-        </ng-template>
+
+            <!-- data -->
+            <ng-template #data>
+                <ng-container *ngIf="jobs.length > 0; then allJobs; else noJob"></ng-container>
+                <ng-template #noJob>
+                    <div class="card p-3 text-center">
+                        <p>You don't created any job. Create a job
+                            <a routerLink="/employer/job/new" class="text-decoration-none">
+                                here
+                            </a>
+                        </p>
+                    </div>
+                </ng-template>
+                <ng-template #allJobs>
+                    <p-table [value]="jobs" responsiveLayout="scroll">
+                        <ng-template pTemplate="header">
+                            <div class="dashboard-title" style="width:402%">
+                                <h4 class="mb-0 h5">All Jobs</h4>
+                            </div>
+                            <tr>
+                                <th pSortableColumn="jobTitle">
+                                    Job Title
+                                    <p-sortIcon field="jobTitle"></p-sortIcon>
+                                </th>
+                                <th pSortableColumn="location">
+                                    Location
+                                    <p-sortIcon field="location"></p-sortIcon>
+                                </th>
+                                <th pSortableColumn="createdDate">
+                                    Created date
+                                    <p-sortIcon field="createdDate"></p-sortIcon>
+                                </th>
+                                <th pSortableColumn="salary">
+                                    Salary
+                                    <p-sortIcon field="salary"></p-sortIcon>
+                                </th>
+                                <th>
+                                    Actions
+                                </th>
+                            </tr>
+                        </ng-template>
+                        <ng-template pTemplate="body" let-job>
+                            <tr class="pointer" [routerLink]="'/employer/job/' + job.postJobDetailId">
+                                <td>{{job.jobTitle}}</td>
+                                <td>{{job.location}}</td>
+                                <td>{{job.createdDate | date}}</td>
+                                <td>{{job.salary | currency: 'INR'}}</td>
+                                <td>
+                                    <ul class="action-list flex">
+                                        <li><a [routerLink]="'/employer/job/' + job.postJobDetailId" pTooltip="View Job"
+                                                tooltipPosition="bottom"><span class="pi pi-eye"></span></a></li>
+                                        <li><a (click)="routeToEdit(job.postJobDetailId)" pTooltip="Edit Job"
+                                                tooltipPosition="bottom"><span class="pi pi-pencil"></span></a></li>
+                                        <li><a (click)="deleteJob(job.postJobDetailId, job.jobTitle)"
+                                                pTooltip="Delete Job" tooltipPosition="bottom"><span
+                                                    class="pi pi-trash"></span></a></li>
+                                    </ul>
+                                </td>
+                            </tr>
+                        </ng-template>
+                    </p-table>
+                </ng-template>
+            </ng-template>
+        </div>
     </div>
-</div>

@@ -6,12 +6,14 @@ import { NgxPhotoEditorService } from 'ngx-photo-editor';
 import { NgxCroppedEvent } from 'ngx-photo-editor/lib/ngx-photo-editor.component';
 import { ToastrService } from "ngx-toastr";
 import { FormField } from "src/app/data/models/form-field.model";
+import { preferred_job } from "src/app/data/models/preferred-job";
 import { AuthService } from "src/app/data/services/auth.service";
 import { BlobService } from "src/app/data/services/blob.service";
 import { EducationService } from "src/app/data/services/education.service";
 import { ExperienceService } from "src/app/data/services/experience.service";
 import { JobSeekerService } from "src/app/data/services/job-seeker.service";
 import { LocalStorage } from "src/app/data/services/local-storage.service";
+import { PreferredJobService } from "src/app/data/services/preferred-job.service";
 import { environment } from "src/environments/environment";
 
 @Component({
@@ -33,7 +35,18 @@ export class ProfileComponent implements OnInit {
   editableExperience: any;
   editableExperienceId!: number;
   jobSeekerArray: any;
-  isCoverclick:boolean=true;
+  isCoverclick: boolean = true;
+  preferredJobArray: any = [];
+  newPreferredJob!: string;
+
+  preferredJobFields: FormField[] = [
+    {
+      type: 'input',
+      label: 'Enter Job Title',
+      formControlName: 'preferredJobTitle',
+      class: ['w'],
+    },
+  ]
 
   profileFields: FormField[] = [
     {
@@ -158,7 +171,8 @@ export class ProfileComponent implements OnInit {
     private experienceService: ExperienceService,
     private jobSeekerService: JobSeekerService,
     private authService: AuthService,
-    private datePipe: DatePipe
+    private datePipe: DatePipe,
+    private preferredJobService: PreferredJobService
   ) { }
 
   ngOnInit(): void {
@@ -169,6 +183,7 @@ export class ProfileComponent implements OnInit {
     this.getEducationList();
     this.getExperienceList();
     this.getJobSeeker();
+    this.getPreferredJob();
   }
 
   ngAfterViewInit(): void { }
@@ -176,9 +191,8 @@ export class ProfileComponent implements OnInit {
   openFileTrigger(component: HTMLElement) {
     component.click();
   }
-  openCoverPictureTrigger(component: HTMLElement){
+  openCoverPictureTrigger(component: HTMLElement) {
     component.click();
-    this.isCoverclick=false;
   }
 
   // --------------------------------------- Profile Picture Operations-------------------------------------
@@ -469,4 +483,45 @@ export class ProfileComponent implements OnInit {
     }
     this.modalService.dismissAll();
   }
+  // -----------------------------------Preferred Job operations-------------------------------------
+  preferredJobForm!: FormGroup;
+  getjob(): FormGroup {
+    return this.formBuilder.group({
+      preferredJobTitle: ['', Validators.required],
+    })
+  }
+  // Modal Add job
+  addjob(ref: any) {
+    this.action = 'Add',
+    console.log(this.action)
+    this.preferredJobForm = this.getjob();
+
+    this.modalService.open(ref).result.then(result => { });
+  }
+
+  getPreferredJob() {
+    this.preferredJobService.getPreferredJob().subscribe(res => {
+      this.preferredJobArray = res;
+      console.log(res)
+    });
+
+  }
+  deleteJob(jobId: number) {
+    console.log(this.preferredJobArray)
+    this.preferredJobService.deletePreferredJobbyId(jobId).subscribe(res => console.log(res));
+    console.log(jobId);
+  }
+  addJob(jobToAdd: any) {
+    console.log(jobToAdd);
+    this.preferredJobService.addPreferredJob([{ jobTitle: jobToAdd.preferredJobTitle }]).subscribe(res => this.getPreferredJob());
+
+  }
+  executePreferredJobAction() {
+    if (this.action == 'Add') {
+      this.preferredJobService.addPreferredJob([{ jobTitle:  this.preferredJobForm.value.preferredJobTitle}]).subscribe(res => this.getPreferredJob());
+      this.toastr.success('Job added');
+      this.modalService.dismissAll();
+    }
+  }
+
 }

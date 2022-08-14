@@ -27,6 +27,8 @@ import { MyJobsComponent } from './components/my-jobs/my-jobs.component';
 import { PasswordModule } from "primeng/password";
 import { DividerModule } from "primeng/divider";
 import { TooltipModule } from 'primeng/tooltip';
+import { ChipModule } from 'primeng/chip';
+import { ChipsModule } from 'primeng/chips';
 import { JobsComponent } from './components/jobs/jobs.component';
 
 
@@ -62,7 +64,9 @@ import { JobsComponent } from './components/jobs/jobs.component';
     TimelineModule,
     PasswordModule,
     TooltipModule,
-    CardModule
+    CardModule,
+    ChipsModule,
+    ChipModule
   ]
 })
 export class JobSeekerModule { }

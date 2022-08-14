@@ -7,3 +7,9 @@ div {
     top: 25px;
     left: 30px;
   }
+  :host ::ng-deep .p-chip.custom-chip {
+    background-color: rgb(115, 130, 174);
+    height: auto;
+    width:auto;
+    color: var(--primary-color-text);
+}
