@@ -15,9 +15,8 @@ export class MyJobsComponent implements OnInit {
   myJobs!: AppliedJob[];
   sasToken = environment.profile_sas_token;
   isTimeline = false;
-  isAppliedJobLoaded = false;
-  events1: any;
-  events2: any;
+  isAppliedJobLoaded = true;
+  jobTimeline: any
 
   constructor(
     private appliedJobService: AppliedJobService
@@ -25,14 +24,6 @@ export class MyJobsComponent implements OnInit {
   
   ngOnInit() {
     this.getMyJobs();
-    this.events1 = [
-        {status: 'Ordered', date: '15/10/2020 10:30', icon: PrimeIcons.BOOK, color: '#9C27B0', info: 'Applied on ' },
-        {status: 'Processing', date: '15/10/2020 14:00', icon: PrimeIcons.COG, color: '#673AB7', info: 'Rejected on '},
-    ];
-
-    this.events2 = [
-        "2020", "2021", "2022", "2023"
-    ];
   }
 
   getMyJobs() {
@@ -46,6 +37,10 @@ export class MyJobsComponent implements OnInit {
 
   getTimeline(index: number) {
     this.isTimeline = true;
+    this.jobTimeline = [
+        {jobTitle: this.myJobs[index].jobTitle, status: 'Applied', date: this.myJobs[index].appliedOn, icon: PrimeIcons.BOOK },
+        {status: this.myJobs[index].jobStatus, date: this.myJobs[index].modifiedOn, icon: PrimeIcons.CLOCK},
+    ];
   }
 
 }

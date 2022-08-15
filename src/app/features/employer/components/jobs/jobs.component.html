@@ -1,6 +1,5 @@
 <div>
 
-
     <!-- jobs table -->
     <div class="card">
         <div class="d-flex justify-content-between">
@@ -16,6 +15,18 @@
                     Create Job
                 </button>
             </div>
+        </div>
+        <div class="m-2"> 
+            <button class="btn bg-danger text-white me-2" 
+                (click)="exportPdf()">
+                Export as PDF
+                <i class="pi pi-file-pdf"></i>
+            </button>
+            <button class="btn bg-success text-dark" 
+                (click)="exportPdf()">
+                Export as Excel
+                <i class="pi pi-file-excel"></i>
+            </button>
         </div>
 
         <!-- jobs table -->
