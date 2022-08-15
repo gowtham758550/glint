@@ -534,6 +534,8 @@ export class ProfileComponent implements OnInit {
     if (this.action == 'Add') {
       this.preferredJobService.getPreferredJob().subscribe((res:any) => {
         for (var i = 0; i < res.length; i++) {
+          console.log(res[i].jobTitle);
+          // console.log()
           if (res[i].jobTitle === this.preferredJobForm.value.preferredJobTitle) {
             this.isPreferredJobAdded = false;
             break;
@@ -545,6 +547,7 @@ export class ProfileComponent implements OnInit {
           this.modalService.dismissAll();
         }
         else {
+          this.isPreferredJobAdded = true;
           this.toastr.warning('Job already added');
           this.modalService.dismissAll();
         }
@@ -601,6 +604,7 @@ export class ProfileComponent implements OnInit {
           this.modalService.dismissAll();
         }
         else {
+          this.isSkillAdded = true;
           this.toastr.warning('Skill already added!');
           this.modalService.dismissAll();
         }
