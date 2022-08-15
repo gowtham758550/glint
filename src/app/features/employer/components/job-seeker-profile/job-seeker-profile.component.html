@@ -7,6 +7,10 @@
                     <div>
                         <img [src]="currentApplier.profilePicture+ '?'+ sas_token" alt="profile pic" height="150px"
                             width="150px" class="rounded-pill">
+                        <div class="p-4"></div>
+                        <button class="btn btn-primary rounded-pill bg-dark"
+                            (click)="getResumebyId(currentApplier.id)">Download Resume
+                        </button>
                     </div>
                     <div class="ps-5">
                         <div>
@@ -62,11 +66,10 @@
                             <div class="d-flex pt-1 justify-content-start">
                                 <button class="btn btn-primary rounded-pill bg-dark h-50 w-100">Shortlist</button>
                                 <div class="p-1"></div>
-                                <button class="btn btn-primary rounded-pill h-50 bg-dark" (click)="getResumebyId(currentApplier.id)">Download Resume
-                                </button>
+
                                 <div class="p-1"></div>
                                 <button class="btn btn-danger rounded-pill h-50 w-100"> Decline</button>
-                               
+
                             </div>
                         </div>
                     </div>
@@ -95,96 +98,96 @@
             </div>
         </div>
     </div>
-        <div class="p-2"></div>
-        <div class="row">
-            <div class="col-xl-6 col-lg-12 col-md-12 col-12">
-                <!-- card -->
-                <div class="card card-shadow h-100">
-                    <!-- card body -->
-                    <div class="card-body h-100">
-                        <!-- card title -->
-                        <div class="flex-grow-1 fs-normal">
-                            <h4 class="card-title">Education</h4>
-                        </div>
-                        <hr>
-                        <div class="d-flex justify-content-center align-items-center" id="main"
-                            *ngIf="educationArray.length==0">
-                            <img class="mr-3 pr-3 align-top border-right inline-block align-content-center"
-                                src="https://cdn.dribbble.com/users/1753953/screenshots/3818675/animasi-emptystate.gif"
-                                style="height:150px; width: 150px;">
-                            <div class="inline-block align-middle">
-                                <h2 class="font-weight-normal lead" id="desc">No Education added</h2>
-                            </div>
-                        </div>
-                        <ng-container *ngFor="let education of educationArray; let id=index;">
-                            <div class="col-lg-12 mb-1-9 mb-lg-2-5">
-                                <div class="p-1-6">
-                                    <div class="vertical-timeline">
-                                        <div class="d-block d-sm-flex justify-content-between mb-1-9">
-                                            <div class="left-side">
-                                                <h6 class=" fs-normal">{{education.universityName}}</h6>
-                                                <span class="text-primary  fs-normal">{{education.startDate|date}} -
-                                                    {{education.completionDate|date}}</span>
-                                            </div>
-                                            <div class="right-side">
-                                                <h6 class=" fs-normal">{{education.courseName}}</h6>
-                                            </div>
-
-                                        </div>
-                                        <br>
-                                    </div>
-                                </div>
-                            </div>
-
-                        </ng-container>
+    <div class="p-2"></div>
+    <div class="row">
+        <div class="col-xl-6 col-lg-12 col-md-12 col-12">
+            <!-- card -->
+            <div class="card card-shadow h-100">
+                <!-- card body -->
+                <div class="card-body h-100">
+                    <!-- card title -->
+                    <div class="flex-grow-1 fs-normal">
+                        <h4 class="card-title">Education</h4>
                     </div>
-                </div>
-
-            </div>
-            <div class="col-xl-6 col-lg-12 col-md-12 col-12  h-100" style="height: 50vh">
-                <!-- card -->
-                <div class="card card-shadow">
-                    <!-- card body -->
-                    <div class="card-body">
-                        <!-- card title -->
-                        <div class="flex-grow-1 fs-normal">
-                            <h4 class="card-title">Experience</h4>
+                    <hr>
+                    <div class="d-flex justify-content-center align-items-center" id="main"
+                        *ngIf="educationArray.length==0">
+                        <img class="mr-3 pr-3 align-top border-right inline-block align-content-center"
+                            src="https://cdn.dribbble.com/users/1753953/screenshots/3818675/animasi-emptystate.gif"
+                            style="height:150px; width: 150px;">
+                        <div class="inline-block align-middle">
+                            <h2 class="font-weight-normal lead" id="desc">No Education added</h2>
                         </div>
-                        <hr>
-                        <div class="d-flex justify-content-center align-items-center" id="main"
-                            *ngIf="experienceArray.length==0">
-                            <img class="mr-3 pr-3 align-top border-right inline-block align-content-center"
-                                src="https://cdn.dribbble.com/users/1753953/screenshots/3818675/animasi-emptystate.gif"
-                                style="height:150px; width: 150px;">
-                            <div class="inline-block align-middle">
-                                <h2 class="font-weight-normal lead" id="desc">No Experience added</h2>
-                            </div>
-                        </div>
-                        <ng-container *ngFor="let experience of experienceArray; let id=index;">
-                            <div class="col-lg-12 mb-1-9 mb-lg-2-5">
-                                <div class="p-1-6">
-                                    <div class="vertical-timeline">
-                                        <div class="d-block d-sm-flex justify-content-between mb-1-9">
-                                            <div class="left-side">
-                                                <h6 class=" fs-normal">{{experience.previousCompanyName}}</h6>
-                                                <span class="text-primary  fs-normal">{{experience.startDate|date}} -
-                                                    {{experience.toDate|date}}</span>
-                                            </div>
-                                            <div class="right-side">
-                                                <h6 class=" fs-normal">{{experience.designation}}</h6>
-                                            </div>
-
+                    </div>
+                    <ng-container *ngFor="let education of educationArray; let id=index;">
+                        <div class="col-lg-12 mb-1-9 mb-lg-2-5">
+                            <div class="p-1-6">
+                                <div class="vertical-timeline">
+                                    <div class="d-block d-sm-flex justify-content-between mb-1-9">
+                                        <div class="left-side">
+                                            <h6 class=" fs-normal">{{education.universityName}}</h6>
+                                            <span class="text-primary  fs-normal">{{education.startDate|date}} -
+                                                {{education.completionDate|date}}</span>
                                         </div>
-                                        <br>
+                                        <div class="right-side">
+                                            <h6 class=" fs-normal">{{education.courseName}}</h6>
+                                        </div>
 
                                     </div>
+                                    <br>
                                 </div>
                             </div>
+                        </div>
 
-                        </ng-container>
-                    </div>
+                    </ng-container>
                 </div>
-
             </div>
+
+        </div>
+        <div class="col-xl-6 col-lg-12 col-md-12 col-12  h-100" style="height: 50vh">
+            <!-- card -->
+            <div class="card card-shadow">
+                <!-- card body -->
+                <div class="card-body">
+                    <!-- card title -->
+                    <div class="flex-grow-1 fs-normal">
+                        <h4 class="card-title">Experience</h4>
+                    </div>
+                    <hr>
+                    <div class="d-flex justify-content-center align-items-center" id="main"
+                        *ngIf="experienceArray.length==0">
+                        <img class="mr-3 pr-3 align-top border-right inline-block align-content-center"
+                            src="https://cdn.dribbble.com/users/1753953/screenshots/3818675/animasi-emptystate.gif"
+                            style="height:150px; width: 150px;">
+                        <div class="inline-block align-middle">
+                            <h2 class="font-weight-normal lead" id="desc">No Experience added</h2>
+                        </div>
+                    </div>
+                    <ng-container *ngFor="let experience of experienceArray; let id=index;">
+                        <div class="col-lg-12 mb-1-9 mb-lg-2-5">
+                            <div class="p-1-6">
+                                <div class="vertical-timeline">
+                                    <div class="d-block d-sm-flex justify-content-between mb-1-9">
+                                        <div class="left-side">
+                                            <h6 class=" fs-normal">{{experience.previousCompanyName}}</h6>
+                                            <span class="text-primary  fs-normal">{{experience.startDate|date}} -
+                                                {{experience.toDate|date}}</span>
+                                        </div>
+                                        <div class="right-side">
+                                            <h6 class=" fs-normal">{{experience.designation}}</h6>
+                                        </div>
+
+                                    </div>
+                                    <br>
+
+                                </div>
+                            </div>
+                        </div>
+
+                    </ng-container>
+                </div>
+            </div>
+
         </div>
     </div>
+</div>
