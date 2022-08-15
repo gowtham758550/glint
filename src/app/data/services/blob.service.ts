@@ -11,7 +11,10 @@ import { ProfilePictureResponse } from "../models/profile-picture-response.model
 export class BlobService {
   profilePictureHost = `${environment.host}/profile_picture`;
   coverPictureHost= `${environment.host}/cover_picture`;
+  resumeHost=`${environment.host}/resume`;
   constructor(private httpClient: HttpClient) { }
+
+  // -----------------------------Profile Picture Service-----------------------------------------
 
   getProfilePicture(): Observable<ProfilePictureResponse> {
     return this.httpClient.get<ProfilePictureResponse>(`${this.profilePictureHost}/get`);
@@ -32,6 +35,8 @@ export class BlobService {
     return this.httpClient.delete(`${this.profilePictureHost}/delete`);
   }
 
+  // -------------------------------Cover Picture Service-----------------------------------
+
   getCoverPicture() {
     return this.httpClient.get(`${this.coverPictureHost}/get`);
   }
@@ -49,6 +54,31 @@ export class BlobService {
 
   deleteCoverPicture() {
     return this.httpClient.delete(`${this.coverPictureHost}/delete`);
+  }
+
+  //  -----------------------------Resume Service------------------------------------------
+  getResume(): Observable<any> {
+    return this.httpClient.get<any>(`${this.resumeHost}/get`);
+  }
+
+  getResumebyId(id: number){
+    return this.httpClient.get<any>(`${this.resumeHost}/get_by_user_id/${id}`);
+  }
+
+  addResume(resume: FormData) {
+    let params = new HttpParams();
+
+    const options = {
+      params: params,
+      reportProgress: true,
+    };
+    console.log(resume);
+
+    return this.httpClient.post(`${this.resumeHost}/add`, resume, options);
+  }
+
+  deleteResume() {
+    return this.httpClient.delete(`${this.resumeHost}/delete`);
   }
 
 

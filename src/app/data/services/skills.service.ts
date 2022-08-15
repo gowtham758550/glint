@@ -23,4 +23,7 @@ export class SkillsService {
   deleteSkill(){
     return this.httpClient.delete(`${this.host}/delete`);
   }
+  getSkillsByUserId(id:number){
+ return this.httpClient.get(`${this.host}/get_by_user_id/${id}`)
+  }
 }
