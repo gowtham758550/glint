@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { SearchBar } from 'src/app/data/models/search-bar.model';
 import { Option } from 'src/app/data/models/options.model';
 import { Router } from '@angular/router';
 import { FilterService } from 'src/app/data/services/filter.service';
 import { JobService } from 'src/app/data/services/job.service';
+import { RouteConstants } from 'src/app/data/enums/constatnts/route.constants';
 
 @Component({
   selector: 'app-landing-page',
@@ -13,10 +13,12 @@ import { JobService } from 'src/app/data/services/job.service';
 })
 export class LandingPageComponent implements OnInit {
 
+  routeConstants = RouteConstants;
   isLoggedIn!: boolean;
   totalJobCount!: number;
   totalCompanyCount!: number;
   jobSeekerCount!: number;
+  designations = this.jobService.jobs;
   location: Option[] = [
     {
       value: 0,
@@ -103,7 +105,7 @@ export class LandingPageComponent implements OnInit {
   search() {
     console.log(this.searchBarForm.value);
     this.router.navigate(
-      ['/job-seeker/dashboard'],
+      [this.routeConstants.jobSeekerHome],
       { queryParams: this.searchBarForm.value }
     )
   }
