@@ -9,7 +9,7 @@ import { CheckboxModule } from 'primeng/checkbox';
 import { SkeletonModule } from 'primeng/skeleton';
 import { TimelineModule } from 'primeng/timeline';
 import { CardModule } from 'primeng/card';
-
+import  {  PdfViewerModule  }  from  'ng2-pdf-viewer';
 import { JobSeekerRoutingModule } from './job-seeker-routing.module';
 import { RegisterComponent } from './components/register/register.component';
 import { SharedModule } from 'src/app/shared/shared.module';
@@ -66,7 +66,8 @@ import { JobsComponent } from './components/jobs/jobs.component';
     TooltipModule,
     CardModule,
     ChipsModule,
-    ChipModule
+    ChipModule,
+    PdfViewerModule
   ]
 })
 export class JobSeekerModule { }
