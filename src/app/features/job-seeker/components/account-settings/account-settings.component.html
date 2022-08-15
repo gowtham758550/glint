@@ -1,0 +1,148 @@
+<div class="row mb-8">
+    <div class="col-xl-3 col-lg-4 col-md-12 col-12">
+        <div class="mb-4 mb-lg-0">
+            <h4 class="mb-1">General Setting</h4>
+            <p class="mb-0 fs-5 text-muted">Profile Configuration settings</p>
+        </div>
+
+    </div>
+
+    <div class="col-xl-9 col-lg-8 col-md-12 col-12">
+        <!-- card -->
+        <div class="card shadow p-3 mb-5 bg-white rounded">
+            <!-- card body -->
+            <div class="card-body">
+                <div class="mb-6">
+                    <h5 class="mb-1">Change Email</h5>
+
+                </div>
+                <div class="mb-3 row">
+                    <label for="Email" class="col-sm-4
+                        col-form-label form-label">Email</label>
+
+                    <div class="col-md-8 col-12 h-50">
+                        <input type="text" class="form-control" value="{{Email}}" [(ngModel)]="Email">
+                        <!-- <button class="btn btn-primary bg-dark w-50 mx-auto" (click)="updateEmail()">Update Email</button> -->
+                        <!-- <p>{{Email}}<button class="btn border-none float-end" (click)="updateEmail(emailModal)">
+                                <i class="pi pi-pencil"></i>
+                            </button></p> -->
+                    </div>
+                    <div class="offset-md-4 col-md-8 col-12 mt-4">
+                        <button class="ps-2 btn btn-primary bg-dark w-50 mx-auto" (click)="updateEmail()">Update
+                            Email</button>
+                    </div>
+                </div>
+
+                <div class="mb-6 mt-6">
+                    <h5 class="mb-1">Change your password</h5>
+
+                </div>
+
+                <!-- row -->
+                <div class="mb-3 row">
+                    <label for="currentPassword" class="col-sm-4
+                  col-form-label form-label">Current password</label>
+
+                    <div class="col-md-8 col-12">
+                        <p-password type="password" placeholder="Current Password"
+                            [(ngModel)]="currentPassword" (ngModelChange)="checkCurrentPassword($event)" [toggleMask]="true" [feedback]="false" required>
+                        </p-password>
+
+                    </div>
+                </div>
+                <!-- row -->
+                <div class="mb-3 row">
+                    <label for="currentNewPassword" class="col-sm-4
+                  col-form-label form-label">New password</label>
+
+                    <div class="col-md-8 col-12">
+                        <p-password placeholder="New Password" [(ngModel)]="newPassword" (ngModelChange)="checkNewPassword($event)" [toggleMask]="true">
+                            <p-divider></p-divider>
+                        </p-password>
+                        <!-- <input class=" form-control" type="password" placeholder="New Password"
+                            [(ngModel)]="newPassword" (ngModelChange)="checkNewPassword($event)" required> -->
+
+                    </div>
+
+                </div>
+                <!-- row -->
+                <div class="row align-items-center">
+                    <!-- list -->
+                    <div class="offset-md-4 col-md-8 col-12 mt-4">
+                        <h6 class="mb-1">Password requirements:</h6>
+                        <p>Ensure that these requirements are met:</p>
+                        <ul>
+                            <li> Minimum 8 characters required </li>
+                            <li>At least one lowercase character</li>
+                            <li>At least one uppercase character</li>
+                            <li>At least one numeric</li>
+                        </ul>
+                        <button class="ps-2 btn btn-primary bg-dark w-50 mx-auto"
+                            [disabled]="!showButton || newPassword===undefined || currentPassword===undefined"
+                            (click)="changePassword(currentPassword, newPassword)">
+                            Change Password
+                        </button>
+                       
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-xl-3 col-lg-4 col-md-12 col-12">
+        <!-- <div class="mb-4 mb-lg-0"> -->
+        <h4 class="mb-1">Delete Account</h4>
+        <p class="mb-0 fs-normal text-muted">Delete your account permanently</p>
+        <!-- </div> -->
+
+    </div>
+
+    <div class="col-xl-9 col-lg-8 col-md-12 col-12">
+        <!-- card -->
+
+        <div class="card shadow p-3 mb-5 bg-white rounded">
+            <!-- card body -->
+            <div class="card-body">
+                <!-- text -->
+                <p> Once you delete your account, there is no going back. Please be certain.</p>
+                <button class="btn btn-danger bg-danger text-white mx-auto" (click)="showMaximizableDialog()">Delete
+                    Account</button>
+                <p-dialog header="Confirmation to delete" [(visible)]="displayMaximizable" [modal]="true"
+                    [style]="{width: '50vw'}" [maximizable]="true" [draggable]="false" [resizable]="false">
+                    <p>Are you sure you want to delete your account?</p>
+                    <ng-template pTemplate="footer">
+                        <p-button (click)="displayMaximizable=false" label="NO" styleClass="p-button-danger">
+                        </p-button>
+                        <p-button (click)="showtoastrmessage()" routerLink="/" label="YES"
+                            styleClass="p-button-success">
+                        </p-button>
+                    </ng-template>
+                </p-dialog>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+<!-- <ng-template #emailModal let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">
+            Change Email
+        </h4>
+        <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+    </div>
+    <div class="modal-body d-flex justify-content-center">
+        <app-form [formGroup]="emailForm" [formFields]="emailFields">
+        </app-form>
+    </div>
+    <hr>
+    <div class="text-end pb-3 pe-3">
+        <button class="btn bg-dark text-white" style="border-radius: 13px;" [disabled]="!emailForm.valid"
+            (click)="executeEmailAction()">
+            {{action}}
+        </button>
+    </div>
+</ng-template> -->

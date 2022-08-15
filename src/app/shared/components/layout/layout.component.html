@@ -1,0 +1,113 @@
+
+
+<div class="d-flex justify-content-start">
+
+    <!-- sidebar -->
+    <div class="sidebar"
+        *ngIf="sideBarVisibility">
+        <div class="fixed bg-dark p-4 text-secondary h-100-vh">
+            <div>
+                <app-logo></app-logo>
+            </div>
+            
+            <div class="pt-3">
+                <ng-container *ngFor="let item of sideNavItems">
+                    <div class="pe-3 py-2 side-nav-item pointer"
+                        [routerLink]="item.routeTo"
+                        routerLinkActive="text-secondary"
+                        >
+                        <i class="pi" [ngClass]="item.icon"></i>
+                        {{item.label}}
+                    </div>
+                </ng-container>
+            </div>
+        </div>
+    </div>
+
+    <!-- navbar and content -->
+    <div class="flex-grow-1">
+
+        <!-- navbar -->
+        <nav class="navbar navbar-expand-lg navbar-light"
+            [ngClass]="sideBarVisibility ? 'bg-light' : 'bg-dark text-secondary'">
+            <div class="container-fluid">
+                <button class="btn border-none"
+                (click)="toggleSideBar()"
+                [ngClass]="sideBarVisibility ? '' : 'text-white'">
+                <!-- hamburger -->
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-list" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z"/>
+                    </svg>
+                </button> 
+
+                <app-logo *ngIf="!sideBarVisibility"></app-logo>
+
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#nav-item" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="nav-item">
+                    <span class="spacer"></span>
+
+                    <div class="pe-2">
+                        <button class="btn border-none mt-1">
+                            <i class="pi pi-bell"
+                                [ngClass]="sideBarVisibility ? '' : 'text-secondary'">
+                            </i>
+                        </button>
+                    </div>
+
+                    <div class="pe-4 pointer d-flex">
+                        <div class="dropdown">
+                            <button class=""
+                                id="profile-menu"
+                                class="btn border-none"
+                                data-bs-toggle="dropdown">
+                                    <img [src]="profilePictureSource" alt=""
+                                    height="40px"
+                                    width="40px"
+                                    class="mt-1"
+                                    style="border-radius: 20px;"
+                                    >
+                            </button>
+                            <!-- dropdown content-->
+                            <div class="dropdown-menu"
+                                aria-labelledby="profile-menu">
+                                <div class="pointer p-2" (click)="routeToProfile()">
+                                    <i class="pi pi-user"></i>
+                                    Profile
+                                </div>
+                                <div class="pointer p-2" (click)="routeToAccountSettings()">
+                                    <i class="pi pi-cog"></i>
+                                    Account Settings
+                                </div>
+                                <div class="pointer p-2" (click)="logout()">
+                                    <i class="pi pi-sign-out"></i>
+                                    Logout
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="d-flex flex-column"
+                            (click)="routeToProfile()">
+                            <div>
+                                <span class="text-muted">
+                                    @{{userName}}
+                                </span>
+                            </div>
+                            <div>
+                                <span class="fw-bold">
+                                    {{email}}
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </nav>
+
+        <!-- content -->
+        <div class="container my-3">
+            <ng-content></ng-content>
+        </div>
+    </div>
+</div>

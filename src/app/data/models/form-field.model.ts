@@ -10,4 +10,5 @@ export interface FormField {
     customError?: string,
     routeTo?: string,
     disabled?: boolean
+    datalist?: string[]
 }

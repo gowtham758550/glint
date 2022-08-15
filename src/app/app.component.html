@@ -1,11 +1,14 @@
-<ng-container *ngFor="let route of routes">
-    <a [routerLink]="route.routeTo" class="px-2">
-        {{route.value}}
-    </a>
+<ng-container *ngIf="visibility">
+    <ng-container *ngFor="let route of routes">
+        <a [routerLink]="route.routeTo" class="px-2">
+            {{route.value}}
+        </a>
+    </ng-container>
+    <input type="checkbox" [(ngModel)]="visibility">
+    <br>
 </ng-container>
-<br>
-
-<ng-container *ngIf="isLoading | async; then blur; else normal">
+<!-- 
+<ng-container *ngIf="(isLoading | async); then blur; else normal">
 </ng-container>
 
 <ng-template #blur>
@@ -21,6 +24,11 @@
 </ng-template>
 
 
-<div class="progress-spinner" *ngIf="isLoading | async">
+<div class="progress-spinner" *ngIf="(isLoading | async)">
     <img src="../assets/breath-glint.svg" class="progress-spinner">
+</div> -->
+
+
+<div>
+    <router-outlet></router-outlet>
 </div>

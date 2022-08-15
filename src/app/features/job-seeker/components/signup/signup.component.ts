@@ -4,7 +4,7 @@ import { Component, OnInit } from '@angular/core';
 @Component({
   selector: 'app-signup-job-seeker',
   template: `
-    <app-signup></app-signup>
+    <app-signup [role]="'JobSeeker'"></app-signup>
   `,
   styles: [
   ]

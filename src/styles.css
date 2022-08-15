@@ -1,13 +1,14 @@
 /* You can add global styles to this file, and also import other style files */
 @import '~ngx-toastr/toastr';
+@import 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css';
 
 :root {
-    /* --primary: #191f40; */
-    --primary: #0d1126;
-    --secondary: #bf8c80;
-    --info: #7a9fbf;
-    --success: #155724;
-    /* --secondary: #60b193; */
+    /* --primary: #ff0038; */
+    --primary: #9d00d6;
+    --secondary: #7289da;
+    --warning: #ffb31d;
+    --dark: #171b34;
+    --success: #8cffa7;
 }
 
 .bg-primary {
@@ -19,23 +20,50 @@
 }
 
 .bg-success {
-    background-color: #d4edda !important;
-    color: var(--success);
+    background-color: var(--success) !important;
+    color: var(--dark);
+}
+
+.bg-dark {
+    background-color: var(--dark) !important;
+}
+
+.bg-warning {
+    background-color: var(--warning) !important;
+}
+
+.text-primary {
+    color: var(--primary) !important;
+}
+
+.text-secondary {
+    color: var(--secondary) !important;
+}
+
+.text-dark {
+    color: var(--dark) !important;
+}
+
+.text-warning {
+    color: var(--warning) !important;
 }
 
 .main {
-    background-image: linear-gradient(to right bottom, #bf8c80, #c08a97, #b18fae, #9797bd, #7a9fbf);
+    /* background-image: linear-gradient(to right bottom, #171b34, #51485e, #8b7c8d, #c5b6bf, #fef5f8); */
+    background-color: var(--secondary);
+    color: var(--dark) !important;
 }
+
+/* width */
 
 .w {
     width: 450px;
 }
 
-
 .card-shadow {
-    -webkit-box-shadow: 14px 10px 5px -1px rgba(0,0,0,0.75);
-    -moz-box-shadow: 14px 10px 5px -1px rgba(0,0,0,0.75);
-    box-shadow: 14px 10px 5px -1px rgba(0,0,0,0.75);
+    /* -webkit-box-shadow: 1px -2px 24px 2px #5C5C5C;
+    -moz-box-shadow: 1px -2px 24px 2px #5C5C5C; */
+    box-shadow: 0 0.3rem 1rem rgba(0,0,0,0.4);
     border-radius: 10px;
 }
 
@@ -79,4 +107,129 @@
 
 .blur {
     filter: blur(4px);
+}
+
+.border-none {
+    border-style: none;
+}
+
+.vl {
+    border-left: 2px solid #aeaeb4;
+}
+
+.status {
+    padding: 2px;
+    border-radius: 2px;
+    font-size: smaller;
+}
+
+.status-pending {
+    background-color: var(--primary);
+    color: var(--secondary);
+}
+
+.status-success {
+    background-color: var(--success);
+    color: var(--dark);
+}
+
+.pointer {
+    cursor: pointer;
+}
+
+.scrollable {
+    overflow-y: scroll;
+}
+
+.profile {
+    height: 30px;
+    width: 30px;
+    border-radius: 15px;
+}
+
+.h-100-vh {
+    height: 100vh;
+}
+
+/* sidebar */
+
+.sidebar {
+    width: 23vh;
+}
+
+.side-nav-item {
+    color: #aeaeb4;
+}
+
+.side-nav-item:hover {
+    color: var(--secondary);
+}
+
+.spacer {
+    flex: 1 1;
+}
+
+.fixed {
+    position: fixed;
+    z-index: 1;
+}
+
+
+/* dropdown on hover */
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-content {
+    margin-top: 10px;
+    display: none;
+    position: absolute;
+    background-color: #fff;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    /* border-radius: 1rem; */
+    z-index: 1;
+}
+
+.dropdown-content a {
+    color: var(--dark);
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+.dropdown-content a:hover {
+    /* border-radius: 4%; */
+    background-color: rgb(244, 241, 241);
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+.dashboard-title {
+    padding: 20px 30px;
+    border: 1px solid #ededed;
+    /* border-top-left-radius: 10px;
+    border-top-right-radius: 10px; */
+    background-color: #f8f9fa;
+    width: 350%;
+    background-size: cover;
+}
+
+.datalist {
+    position: absolute;
+    background-color: white;
+    border: 1px solid blue;
+    border-radius: 0 0 5px 5px;
+    border-top: none;
+    font-family: sans-serif;
+    width: 350px;
+    padding: 5px;
+    max-height: 10rem;
+    overflow-y: auto
+}
+
+.option {
+    text-transform: capitalize;
 }

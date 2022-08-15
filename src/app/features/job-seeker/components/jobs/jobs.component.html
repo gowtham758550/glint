@@ -1,0 +1,123 @@
+<div class="pb-4">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="search-1">
+                <i class='ms-2 pi pi-search text-dark'></i>
+                <input class="border border-radius w-100" type="text" [(ngModel)]="searchText" placeholder="Search Jobs">
+                <button (click)="applyFilters()">
+                    Search
+                </button>
+            </div>
+
+        </div>
+    </div>
+    <!-- <div class="col-12 md:col-4">
+        <div class="p-inputgroup">
+            <input type="text" [(ngModel)]="searchText" class="form-control" style="width: 50vh;"
+                placeholder="Search jobs">
+            <span class="p-inputgroup-addon pointer"><i class="pi pi-search"></i></span>
+        </div>
+    </div> -->
+</div>
+
+<div class="d-flex justify-content-start">
+    <ng-container *ngIf="isLoaded; then data; else loader">
+    </ng-container>
+    <ng-template #loader>
+        <div class="flex-grow-1">
+            <div class="card p-4">
+                <p-skeleton width="10rem" height="2rem" styleClass="mb-2"></p-skeleton>
+                <p-skeleton width="15rem" styleClass="mb-2"></p-skeleton>
+                <p-skeleton width="8rem" styleClass="mb-2"></p-skeleton>
+                <div class="d-flex gap-2">
+                    <p-skeleton height="1.5rem" width="7rem"></p-skeleton>
+                    <p-skeleton height="1.5rem" width="5rem"></p-skeleton>
+                </div>
+            </div>
+            <div class="pb-3"></div>
+            <div class="card p-5">
+                <p-skeleton width="10rem" height="2rem" styleClass="mb-2"></p-skeleton>
+                <p-skeleton width="15rem" styleClass="mb-2"></p-skeleton>
+                <p-skeleton width="8rem" styleClass="mb-2"></p-skeleton>
+                <div class="d-flex gap-2">
+                    <p-skeleton height="1.5rem" width="7rem"></p-skeleton>
+                    <p-skeleton height="1.5rem" width="5rem"></p-skeleton>
+                </div>
+            </div>
+            <div class="pb-3"></div>
+            <div class="card p-5">
+                <p-skeleton width="10rem" height="2rem" styleClass="mb-2"></p-skeleton>
+                <p-skeleton width="15rem" styleClass="mb-2"></p-skeleton>
+                <p-skeleton width="8rem" styleClass="mb-2"></p-skeleton>
+                <div class="d-flex gap-2">
+                    <p-skeleton height="1.5rem" width="7rem"></p-skeleton>
+                    <p-skeleton height="1.5rem" width="5rem"></p-skeleton>
+                </div>
+            </div>
+            <div class="pb-3"></div>
+        </div>
+    </ng-template>
+    <ng-template #data>
+        <div class="flex-grow-1">
+            <ng-container *ngFor="let job of allJobs">
+                <app-job-card [job]="job">
+                </app-job-card>
+            </ng-container>
+        </div>
+    </ng-template>
+
+    <div class="ps-3"></div>
+
+    <div class="flex-grow-1 d-flex justify-content-end">
+        <div class="card p-3" style="position: fixed; width: 25%;">
+            <div class="d-flex justify-content-between">
+                <div class="mt-2">
+                    <i class="pi pi-filter"></i>
+                    All Filters
+                </div>
+                <div>
+                    <a class="btn border-none btn-link" (click)="clearFilters()">
+                        clear all filters
+                    </a>
+                </div>
+            </div>
+
+            <div class="pt-3">
+                <p-accordion [multiple]="true">
+                    <!-- Experience filters -->
+                    <p-accordionTab header="Experience" [selected]="true">
+                        <ng-container *ngFor="let experience of experiences">
+                            <div class="pb-2">
+                                <p-checkbox [value]="experience" name="experience" [inputId]="experience"
+                                    [(ngModel)]="filteredExperience">
+                                </p-checkbox>
+                                <label class="ps-2 pointer" [for]="experience">
+                                    {{experience}}
+                                </label>
+                            </div>
+                        </ng-container>
+                    </p-accordionTab>
+
+                    <!-- location filters -->
+                    <p-accordionTab header="Location" [selected]="true">
+                        <ng-container *ngFor="let location of locations">
+                            <div class="pb-2">
+                                <p-checkbox [value]="location" [inputId]="location" [(ngModel)]="filteredLocations">
+                                </p-checkbox>
+                                <label class="ps-2 pointer" [for]="location">
+                                    {{location}}
+                                </label>
+                            </div>
+                        </ng-container>
+                    </p-accordionTab>
+                </p-accordion>
+            </div>
+
+            <div class="pt-3 text-end">
+                <button class="btn bg-dark text-white rounded-pill" (click)="applyFilters()">
+                    Apply filters
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

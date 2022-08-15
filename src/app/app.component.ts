@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { AfterContentChecked, AfterContentInit, AfterViewInit, ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { Subject } from 'rxjs';
 import { LoaderService } from './core/services/loader.service';
 
@@ -12,10 +12,11 @@ interface Route {
   templateUrl: './app.component.html',
   styles: []
 })
-export class AppComponent {
+export class AppComponent implements OnInit, AfterViewInit {
+
+  visibility: boolean = false;
   title = 'glint';
   isLoading!: Subject<boolean>;
-  a=true;
   routes: Route[] = [
     {
       value: 'landing page',
@@ -40,6 +41,22 @@ export class AppComponent {
     {
       value: 'dashboard 2',
       routeTo: '/job-seeker/dashboard'
+    },
+    {
+      value: 'search 2',
+      routeTo: '/search'
+    },
+    {
+      value: 'user-profile',
+      routeTo: '/job-seeker/dashboard/profile'
+    },
+    {
+      value: 'user-verification',
+      routeTo: '/user-verification'
+    },
+    {
+      value: 'account-settings',
+      routeTo: '/job-seeker/dashboard/account'
     }
   ]
   class = {
@@ -47,9 +64,16 @@ export class AppComponent {
   }
 
   constructor(
-    private loaderService: LoaderService
+    private loaderService: LoaderService,
+    private changeDetector: ChangeDetectorRef
   ) {
-    console.log(this.loaderService.isLoading);
-    this.isLoading = this.loaderService.isLoading;
+  }
+
+  ngOnInit(): void {
+    // this.isLoading = this.loaderService.isLoading;
+  }
+
+  ngAfterViewInit(): void {
+    // this.changeDetector.detectChanges();
   }
 }

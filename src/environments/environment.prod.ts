@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  host: 'http://localhost:7201'
+  host: 'https://glint-api.azurewebsites.net/'
 };

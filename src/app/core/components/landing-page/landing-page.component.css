@@ -1,0 +1,21 @@
+.input:focus {
+    box-shadow: none !important;
+    border-style: none;
+    outline: none;
+    color: #000;
+}
+
+.input {
+    border-style: none;
+    outline: none;
+    font-size: 1.2rem;
+    /* width: 200px; */
+}
+
+
+
+.card {
+    width: max-content;
+    box-shadow: 0 4px 12px rgb(86 141 187 / 12%);
+    border-radius: 100px;
+}   
