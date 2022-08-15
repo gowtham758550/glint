@@ -35,22 +35,24 @@
     </ng-template>
     <ng-template #jobInfo>
         <div class="row">
-        <div class="col-xl-6 col-lg-12 col-md-12 col-12 mb-6">
-            <div class="card card-shadow w-100 p-4 d-flex justify-content-between">
-            <h5 style="text-align:center">Total Applicants</h5>
-            <p-knob style="text-align:center" [(ngModel)]="totalApplicants" valueColor="SlateGray" rangeColor="MediumTurquoise" [readonly]="true" [size]="200">
-            </p-knob>
+            <div class="col-xl-6 col-lg-12 col-md-12 col-12 mb-6">
+                <div class="card card-shadow w-100 p-4 d-flex justify-content-between">
+                    <h5 style="text-align:center">Total Applicants</h5>
+                    <p-knob style="text-align:center" [(ngModel)]="totalApplicants" valueColor="SlateGray"
+                        rangeColor="MediumTurquoise" [readonly]="true" [size]="200">
+                    </p-knob>
+                </div>
+            </div>
+            <div class="col-xl-6 col-lg-12 col-md-12 col-12 mb-6">
+                <div class="card card-shadow w-100 p-4 d-flex justify-content-between">
+                    <h5 style="text-align:center">Shortlisted Candidates</h5>
+                    <p-knob style="text-align:center" [(ngModel)]="totalApplicants" valueColor="SlateGray"
+                        rangeColor="MediumTurquoise" [readonly]="true" [size]="200">
+                    </p-knob>
+                </div>
+            </div>
         </div>
-        </div>
-        <div class="col-xl-6 col-lg-12 col-md-12 col-12 mb-6">
-            <div  class="card card-shadow w-100 p-4 d-flex justify-content-between">
-            <h5 style="text-align:center">Shortlisted Candidates</h5>
-            <p-knob style="text-align:center" [(ngModel)]="totalApplicants" valueColor="SlateGray" rangeColor="MediumTurquoise" [readonly]="true" [size]="200">
-            </p-knob>
-        </div>
-        </div>
-    </div>
-    <div class="p-2"></div>
+        <div class="p-2"></div>
         <!-- job info -->
         <div class="card shadow p-4">
             <div class="d-flex justify-content-between">

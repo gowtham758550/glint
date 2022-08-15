@@ -24,7 +24,7 @@ export class ExperienceService {
     getExperienceById(id: number) {
         return this.httpClient.get<any>(`${this.host}/get/${id}`);
     }
-    getEducationByUserId(id: number){
+    getExperienceByUserId(id: number){
         return this.httpClient.get<any>(`${this.host}/get_by_user_id/${id}`);
 
     }

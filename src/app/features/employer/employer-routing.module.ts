@@ -75,7 +75,7 @@ const routes: Routes = [
         component: EmployerProfileComponent
       },
       {
-        path: 'job-seeker/profile/:id',
+        path: 'job-seeker/profile/:jobSeekerId/:jobId',
         component: JobSeekerProfileComponent
       },
       {
