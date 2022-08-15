@@ -1,5 +1,5 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { Option } from 'src/app/data/models/options.model';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { FormGroup } from '@angular/forms';
 import { SearchBar } from 'src/app/data/models/search-bar.model';
 
 @Component({
@@ -9,37 +9,12 @@ import { SearchBar } from 'src/app/data/models/search-bar.model';
 })
 export class SearchBarComponent implements OnInit {
 
-  // @Input()
-  // searchBarData!: SearchBar[];
-
-  searchBarData: SearchBar[] = [
-    {
-      label: 'Enter designation',
-      type: 'input'
-    },
-    {
-      label: 'Select experience',
-      type: 'select'
-    },
-    {
-      label: 'Enter location',
-      type: 'input'
-    }
-  ];
-  experience: Option[] = [
-    {
-      value: 0,
-      label: 'Select experience'
-    },
-    {
-        value: 1,
-        label: 'Fresher'
-    },
-    {
-      value: 2,
-      label: 'Experienced'
-    }
-  ];
+  @Input()
+  searchBarData!: SearchBar[];
+  @Input()
+  form!: FormGroup;
+  @Output()
+  dataEmitter = new EventEmitter();
   isFirstOption: boolean = true;
   
   constructor() { }
@@ -50,6 +25,10 @@ export class SearchBarComponent implements OnInit {
   selectOnChange(event: any) {
     if (event.target.value == 0) this.isFirstOption = true;
     else this.isFirstOption = false;
+  }
+
+  emitData() {
+    this.dataEmitter.emit();
   }
 
 }

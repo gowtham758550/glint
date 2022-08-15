@@ -1,0 +1,11 @@
+<div class="p-5">
+    <h2>
+        Company Details
+    </h2>
+    <hr>
+    
+    <app-form [formFields]="profileFields"
+        [formGroup]="profileForm"
+        (formEmitter)="recieveFormData()">
+    </app-form>
+</div>
