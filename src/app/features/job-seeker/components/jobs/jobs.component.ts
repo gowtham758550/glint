@@ -23,7 +23,7 @@ export class JobsComponent implements OnInit {
   experiences = ['Experienced', 'Fresher']
   filteredLocations: string[] = [];
   filteredExperience: string[] = [];
-  searchText!: string;
+  searchText: string = '';
 
   constructor(
     private filterService: FilterService,
@@ -41,9 +41,11 @@ export class JobsComponent implements OnInit {
     let filters: string[] = [];
     this.filteredLocations = [];
     this.filteredExperience = [];
+    console.log('started');
     this.activatedRoute.queryParams.subscribe((params: any) => {
       if (Object.keys(params).length != 0) {
-
+        filters.push(`jobTitle@=*${params.designation}`);
+        this.searchText = params.designation;
         // experience
         if (typeof params.experience == 'string' && params.experience != 0) {
           this.filteredExperience = [Experience[params.experience]];
@@ -84,28 +86,51 @@ export class JobsComponent implements OnInit {
   }
 
   applyFilters() {
+    this.router.navigateByUrl(this.routeConstants.jobSeekerHome);
+    this.isLoaded = false;
     console.log(this.filteredExperience, this.filteredLocations);
-    let updatedFilters = '';
+    let updatedParams = '';
+    let updatedFilter: string[] = [];
+    updatedParams += `designation=${this.searchText}&`
+    updatedFilter.push(`jobTitle@=*${this.searchText}`);
     if (this.filteredExperience.length > 0) {
+      let experienceCount: any = 0;
       this.filteredExperience.forEach((e: any) => {
-        updatedFilters += `experience=${Experience[e]}&`
+        experienceCount += Experience[e];
+        updatedParams += `experience=${Experience[e]}&`
       });
+      if (experienceCount == 1) {
+        updatedFilter.push(`experienceNeeded==0`);
+      } else if (experienceCount > 1) {
+        updatedFilter.push(`experienceNeeded>0`);
+      }
     }
     if (this.filteredLocations.length > 0) {
       this.filteredLocations.forEach((e: any) => {
-        updatedFilters += `location=${Location[e]}&`
+        updatedParams += `location=${Location[e]}&`
       });
     }
-    this.filteredExperience = [];
-    this.filteredLocations = [];
-    this.router.navigateByUrl(`${this.routeConstants.jobSeekerHome}?${updatedFilters.slice(0, -1)}`);
-    this.isLoaded = false;
-    this.getJobs();
+    this.router.navigateByUrl(`${this.routeConstants.jobSeekerHome}?${updatedParams.slice(0, -1)}`);
+
+    this.filterService.getNonAppliedJobs(updatedFilter.toString()).subscribe({
+      next: data => {
+        this.allJobs = data;
+        this.isLoaded = true;
+      }
+    });
   }
 
   clearFilters() {
+    this.isLoaded = false;
     this.filteredExperience = [];
     this.filteredLocations = [];
+    this.router.navigateByUrl(this.routeConstants.jobSeekerHome);
+    this.filterService.getNonAppliedJobs('').subscribe({
+      next: data => {
+        this.allJobs = data;
+        this.isLoaded = true;
+      }
+    });
   }
 
   search() {
