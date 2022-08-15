@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { PrimeIcons } from 'primeng/api';
+import { RouteConstants } from 'src/app/data/enums/constatnts/route.constants';
 import { AppliedJob } from 'src/app/data/models/applied-job.model';
 import { AppliedJobService } from 'src/app/data/services/applied-job.service';
 import { environment } from 'src/environments/environment';
@@ -12,10 +13,11 @@ import { environment } from 'src/environments/environment';
 })
 export class MyJobsComponent implements OnInit {
 
+  routeConstants = RouteConstants;
   myJobs!: AppliedJob[];
   sasToken = environment.profile_sas_token;
   isTimeline = false;
-  isAppliedJobLoaded = true;
+  isAppliedJobLoaded = false;
   jobTimeline: any
 
   constructor(

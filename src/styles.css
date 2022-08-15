@@ -5,7 +5,7 @@
 :root {
     /* --primary: #ff0038; */
     --primary: #9d00d6;
-    --secondary: #fff;
+    --secondary: #7289da;
     --warning: #ffb31d;
     --dark: #171b34;
     --success: #8cffa7;
@@ -154,7 +154,7 @@
 /* sidebar */
 
 .sidebar {
-    width: 22vh;
+    width: 23vh;
 }
 
 .side-nav-item {
@@ -166,7 +166,7 @@
 }
 
 .spacer {
-    flex: 1 1
+    flex: 1 1;
 }
 
 .fixed {
