@@ -229,3 +229,7 @@
     max-height: 10rem;
     overflow-y: auto
 }
+
+.option {
+    text-transform: capitalize;
+}

@@ -1,26 +1,45 @@
 <div class="container">
-    <div class="row mb-3">
-        <div class="d-flex gap-2">
-            <div class="card card-shadow p-4 col-3">
+    <div class="row mb-5">
+        <div class="d-flex gap-5 flex-wrap">
+
+            <!-- job count -->
+            <div class="card card-shadow p-4 flex-fill">
                 <div class="d-flex justify-content-between">
                     <div>
-                        Jobs
+                        <h3>Total Jobs</h3>
                     </div>
-                    <div>
-                        <i class="pi pi-briefcase"></i>
+                    <div class="mt-2">
+                        <i class="pi pi-briefcase bg-dark text-white px-2 py-1 rounded"></i>
                     </div>
                 </div>
                 <div class="fs-2 fw-bold">
                     22
                 </div>
             </div>
-            <div class="card card-shadow p-4 col-3">
+
+            <!-- application -->
+            <div class="card card-shadow p-4 flex-fill">
                 <div class="d-flex justify-content-between">
                     <div>
-                        Jobs
+                        <h3>Total Application</h3>
                     </div>
+                    <div class="mt-2">
+                        <i class="pi pi-book bg-dark text-white px-2 py-1 rounded"></i>
+                    </div>
+                </div>
+                <div class="fs-2 fw-bold">
+                    22
+                </div>
+            </div>
+
+            <!-- shortlisted -->
+            <div class="card card-shadow p-4 flex-fill">
+                <div class="d-flex justify-content-between">
                     <div>
-                        <i class="pi pi-briefcase"></i>
+                        <h3>Shortlisted</h3>
+                    </div>
+                    <div class="mt-2">
+                        <i class="pi pi-check-square bg-dark text-white px-2 py-1 rounded"></i>
                     </div>
                 </div>
                 <div class="fs-2 fw-bold">
@@ -29,43 +48,12 @@
             </div>
         </div>
     </div>
-
     <div class="row">
-        Diffrent
+        <div class="d-flex">
+            <div echarts [options]="barChartOptions" class="w-100"></div>
+            <div echarts [options]="pieChartOptions" class="w-100"></div>
+        </div>
     </div>
 
 </div>
 
-<!-- <div class="d-flex">
-    <div class="card card-shadow p-4 ">
-        <div class="d-flex justify-content-between">
-            <div>
-                Jobs
-            </div>
-            <div>
-                <i class="pi pi-briefcase"></i>
-            </div>
-        </div>
-        <div class="fs-2 fw-bold">
-            22
-        </div>
-    </div>
-    <div class="card card-shadow p-4 ">
-        <div class="d-flex justify-content-between">
-            <div>
-                Jobs
-            </div>
-            <div>
-                <i class="pi pi-briefcase"></i>
-            </div>
-        </div>
-        <div class="fs-2 fw-bold">
-            22
-        </div>
-    </div>
-</div> -->
-
-<!-- <div class="card">
-    <h5>Basic</h5>
-    <p-chart type="line" [data]="basicData" [options]="basicOptions"></p-chart>
-</div> -->

@@ -532,7 +532,7 @@ export class ProfileComponent implements OnInit {
   }
   executePreferredJobAction() {
     if (this.action == 'Add') {
-      this.preferredJobService.getPreferredJob().subscribe(res => {
+      this.preferredJobService.getPreferredJob().subscribe((res:any) => {
         for (var i = 0; i < res.length; i++) {
           if (res[i].jobTitle === this.preferredJobForm.value.preferredJobTitle) {
             this.isPreferredJobAdded = false;

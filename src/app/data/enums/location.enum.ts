@@ -1,7 +1,7 @@
 export enum Location {
     'Bangalore' = 1,
-    'Chennai',
     'Coimbatore',
+    'Chennai',
     'Kolkata',
     'Mumbai'
 }
