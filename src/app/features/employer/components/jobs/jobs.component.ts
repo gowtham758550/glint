@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Route, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { RouteConstants } from 'src/app/data/enums/constatnts/route.constants';
 import { Job } from 'src/app/data/models/job.model';
 import { JobService } from 'src/app/data/services/job.service';
 
@@ -11,6 +12,7 @@ import { JobService } from 'src/app/data/services/job.service';
 })
 export class JobsComponent implements OnInit {
 
+  routeConstants = RouteConstants;
   jobs: Job[] = [];
   isLoaded = false;
   postJobDetailId = this.activatedRoute.snapshot.params['postJobDetailId'];

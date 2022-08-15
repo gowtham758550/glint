@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { EChartsOption } from 'echarts';
 
 @Component({
   selector: 'app-dashboard-employer',
@@ -10,60 +11,95 @@ export class DashboardComponent implements OnInit {
 
   totalJobs!: number;
   totalHiring!: number;
-  basicData: any;
-  basicOptions: any;
+  barChartOptions: EChartsOption = {
+    title: {
+      text: 'Job Application Status'
+    },
+    tooltip: {
+      trigger: 'axis',
+      axisPointer: {
+        type: 'shadow'
+      }
+    },
+    legend: {},
+    grid: {
+      left: '3%',
+      right: '4%',
+      bottom: '3%',
+      containLabel: true
+    },
+    xAxis: {
+      type: 'value',
+      boundaryGap: [0, 0.01]
+    },
+    yAxis: {
+      type: 'category',
+      data: ['Tester', 'Developer', 'Engineering Manager', 'Customer Support']
+    },
+    series: [
+      {
+        name: 'Total Applicants',
+        type: 'bar',
+        data: [11, 32, 13, 22]
+      },
+      {
+        name: 'Shortlisted',
+        type: 'bar',
+        data: [6, 12, 3, 19]
+      }
+    ]
+  };
+  pieChartOptions: EChartsOption = {
+    title: {
+        text: 'All Jobs'
+    },
+    tooltip: {
+      trigger: 'item'
+    },
+    legend: {
+      top: '5%',
+      left: 'center'
+    },
+    series: [
+      {
+        name: 'All Jobs',
+        type: 'pie',
+        radius: ['40%', '70%'],
+        avoidLabelOverlap: false,
+        itemStyle: {
+          borderRadius: 10,
+          borderColor: '#fff',
+          borderWidth: 2
+        },
+        label: {
+          show: false,
+          position: 'center'
+        },
+        emphasis: {
+          label: {
+            show: true,
+            fontSize: '40',
+            fontWeight: 'bold'
+          }
+        },
+        labelLine: {
+          show: false
+        },
+        data: [
+          { value: 19, name: 'Customer Support' },
+          { value: 3, name: 'Engineering Manager' },
+          { value: 12, name: 'Developer' },
+          { value: 26, name: 'Tester' },
+        ]
+      }
+    ]
+  };
 
   constructor() { }
 
   ngOnInit(): void {
     this.totalJobs = 9;
     this.totalHiring = 41;
-    this.basicData = {
-      labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
-      datasets: [
-          {
-              label: 'First Dataset',
-              data: [65, 59, 80, 81, 56, 55, 40],
-              fill: false,
-              borderColor: '#42A5F5',
-              tension: .4
-          },
-          {
-              label: 'Second Dataset',
-              data: [28, 48, 40, 19, 86, 27, 90],
-              fill: false,
-              borderColor: '#FFA726',
-              tension: .4
-          }
-      ]
-    };
-    this.basicOptions = {
-      plugins: {
-          legend: {
-              labels: {
-                  color: '#495057'
-              }
-          }
-      },
-      scales: {
-          x: {
-              ticks: {
-                  color: '#495057'
-              },
-              grid: {
-                  color: '#ebedef'
-              }
-          },
-          y: {
-              ticks: {
-                  color: '#495057'
-              },
-              grid: {
-                  color: '#ebedef'
-              }
-          }
-      }
-  };
   }
 
 }
