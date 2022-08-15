@@ -4,7 +4,7 @@ import { ButtonModule } from 'primeng/button';
 import { TableModule } from 'primeng/table';
 import { SkeletonModule } from 'primeng/skeleton';
 import { KnobModule } from 'primeng/knob';
-import { ChartModule } from 'primeng/chart';
+import { NgxEchartsModule } from 'ngx-echarts';
 
 import { EmployerRoutingModule } from './employer-routing.module';
 import { RegisterComponent } from './components/register/register.component';
@@ -51,7 +51,6 @@ import { JobCardsComponent } from './components/job-cards/job-cards.component';
     EmployerProfileComponent,
     JobSeekerProfileComponent,
     JobCardsComponent,
-    
   ],
   imports: [
     CommonModule,
@@ -68,7 +67,10 @@ import { JobCardsComponent } from './components/job-cards/job-cards.component';
     DividerModule,
     PasswordModule,
     TooltipModule,
-    BadgeModule
+    BadgeModule,
+    NgxEchartsModule.forRoot({
+      echarts: () => import('echarts'),
+    }),
   ],
   providers: [DatePipe, JobSeekerService]
 })

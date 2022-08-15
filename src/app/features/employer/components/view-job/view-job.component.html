@@ -3,7 +3,7 @@
 
     <ng-template #jobInfoLoader>
         <!-- job info loader -->
-        <div class="card shadow p-4">
+        <div class="card p-4 mb-4">
             <div class="d-flex justify-content-between">
                 <p-skeleton width="15rem" height="1.5rem" styleClass="mb-2"></p-skeleton>
                 <div class="d-flex">
@@ -18,84 +18,89 @@
             </span>
             <p-skeleton width="6rem" styleClass="mb-2"></p-skeleton>
         </div>
-        <div class="pt-4"></div>
-        <div class="card shadow p-4">
+        <div class="card p-4">
             <p-skeleton width="14rem" height="1.5rem" styleClass="mb-2"></p-skeleton>
             <p-skeleton width="100%" height="1rem" styleClass="mb-2"></p-skeleton>
             <p-skeleton width="100%" height="1rem" styleClass="mb-2"></p-skeleton>
             <p-skeleton width="100%" height="1rem" styleClass="mb-2"></p-skeleton>
             <p-skeleton width="39%" height="1rem" styleClass="mb-2"></p-skeleton>
-            <span class="pt-4"></span>
-            <p-skeleton width="10rem" height="1.5rem" styleClass="mb-2"></p-skeleton>
-            <p-skeleton width="100%" height="1rem" styleClass="mb-2"></p-skeleton>
-            <p-skeleton width="100%" height="1rem" styleClass="mb-2"></p-skeleton>
-            <p-skeleton width="100%" height="1rem" styleClass="mb-2"></p-skeleton>
-            <p-skeleton width="79%" height="1rem" styleClass="mb-2"></p-skeleton>
         </div>
     </ng-template>
     <ng-template #jobInfo>
-        <div class="row">
-        <div class="col-xl-6 col-lg-12 col-md-12 col-12 mb-6">
-            <div class="card card-shadow w-100 p-4 d-flex justify-content-between">
-            <h5 style="text-align:center">Total Applicants</h5>
-            <p-knob style="text-align:center" [(ngModel)]="totalApplicants" valueColor="SlateGray" rangeColor="MediumTurquoise" [readonly]="true" [size]="200">
-            </p-knob>
-        </div>
-        </div>
-        <div class="col-xl-6 col-lg-12 col-md-12 col-12 mb-6">
-            <div  class="card card-shadow w-100 p-4 d-flex justify-content-between">
-            <h5 style="text-align:center">Shortlisted Candidates</h5>
-            <p-knob style="text-align:center" [(ngModel)]="totalApplicants" valueColor="SlateGray" rangeColor="MediumTurquoise" [readonly]="true" [size]="200">
-            </p-knob>
-        </div>
-        </div>
-    </div>
-    <div class="p-2"></div>
-        <!-- job info -->
-        <div class="card shadow p-4">
-            <div class="d-flex justify-content-between">
-                <h5>
-                    {{job.jobTitle}}
-                </h5>
-                <!-- action buttons -->
-            </div>
-            <div class="fs-6 d-flex flex-wrap">
-                <div class="pe-3">
-                    <i class="pi pi-map-marker"></i>
-                    {{job.location}}
+        <div class="d-flex justify-content-start">
+
+            <!-- flex item 1 - job info -->
+            <div class="flex-grow-1">
+                <div class="card p-4 mb-4">
+                    <div class="d-flex justify-content-between">
+                        <h5>
+                            {{job.jobTitle}}
+                        </h5>
+                        <!-- action buttons -->
+                    </div>
+                    <div class="fs-6 d-flex flex-wrap">
+                        <div class="pe-3">
+                            <i class="pi pi-map-marker"></i>
+                            {{job.location}}
+                        </div>
+                        <div class="text-success">
+                            <i class="pi pi-clock"></i>
+                            22 hours ago
+                        </div>
+                    </div>
+
+                    <div class="pt-2 d-flex flex-wrap">
+                        <div class="pe-3">
+                            <i class="pi pi-briefcase"></i>
+                            {{job.jobType}}
+                        </div>
+                        <div>
+                            <i class="pi pi-wallet"></i>
+                            {{job.salary | currency: 'INR'}}
+                            CTC
+                        </div>
+                    </div>
                 </div>
-                <div class="text-success">
-                    <i class="pi pi-clock"></i>
-                    22 hours ago
+                <div class="card p-4" style="margin-top:0%">
+                    <div class="d-flex">
+                        <h5 class="flex-grow-1">
+                            Job Description
+                        </h5>
+                    </div>
+                    <hr>
+                    <div class="d-flex">
+                        <div class="flex-grow-1 fw-normal">
+                            {{job.description}}
+                        </div>
+                    </div>
                 </div>
             </div>
 
-            <div class="pt-2 d-flex flex-wrap">
-                <div class="pe-3">
-                    <i class="pi pi-briefcase"></i>
-                    {{job.jobType}}
-                </div>
-                <div>
-                    <i class="pi pi-wallet"></i>
-                    {{job.salary | currency: 'INR'}}
-                    CTC
+
+            <!-- flex item 2 - job statistics -->
+            <div class="d-flex flex-column ms-4">
+                <div class="card w-100 p-4">
+                    <div class="d-flex justify-content-between gap-4">
+                        <div>
+                            Applied Candidates
+                        </div>
+                        <div class="text-white bg-dark px-2 py-1 rounded">
+                            <i class="pi pi-briefcase"></i>
+                        </div>
+                    </div>
+                    <div class="fs-2 fw-bold">
+                        22
+                    </div>
+                    <div class="text-muted">
+                        10 Shortlisted
+                    </div>
                 </div>
             </div>
+
         </div>
-        <div class="pt-4"></div>
-        <div class="card shadow p-4" style="margin-top:0%">
-            <div class="d-flex">
-                <h5 class="flex-grow-1">
-                    Job Description
-                </h5>
-            </div>
-            <hr>
-            <div class="d-flex">
-                <div class="flex-grow-1 fw-normal">
-                    {{job.description}}
-                </div>
-            </div>
-        </div>
+        <div class="p-2"></div>
+        <!-- job info -->
+
     </ng-template>
 
     <div class="pt-4">
@@ -103,8 +108,9 @@
         <ng-container *ngIf="isAppliersTableLoaded; then appliersDataTable; else appliersLoader"></ng-container>
         <!-- loader -->
         <ng-template #appliersLoader>
-            <p-table responsiveLayout="scroll" class="card card-shadow">
+            <p-table responsiveLayout="scroll" class="card">
                 <ng-template pTemplate="header">
+                    <h4 class="p-3 fw-bold">Applied candidates</h4>
                     <tr>
                         <th>
                             Full name
@@ -128,60 +134,30 @@
                         </th>
                     </tr>
                     <tr>
-                        <td>
-                            <p-skeleton height="2rem"></p-skeleton>
-                        </td>
-                        <td>
-                            <p-skeleton height="2rem"></p-skeleton>
-                        </td>
-                        <td>
-                            <p-skeleton height="2rem"></p-skeleton>
-                        </td>
-                        <td>
-                            <p-skeleton height="2rem"></p-skeleton>
-                        </td>
-                        <td>
-                            <p-skeleton height="2rem"></p-skeleton>
-                        </td>
+                        <td><p-skeleton height="2rem"></p-skeleton></td>
+                        <td><p-skeleton height="2rem"></p-skeleton></td>
+                        <td><p-skeleton height="2rem"></p-skeleton></td>
+                        <td><p-skeleton height="2rem"></p-skeleton></td>
+                        <td><p-skeleton height="2rem"></p-skeleton></td>
                     </tr>
                     <tr>
-                        <td>
-                            <p-skeleton height="2rem"></p-skeleton>
-                        </td>
-                        <td>
-                            <p-skeleton height="2rem"></p-skeleton>
-                        </td>
-                        <td>
-                            <p-skeleton height="2rem"></p-skeleton>
-                        </td>
-                        <td>
-                            <p-skeleton height="2rem"></p-skeleton>
-                        </td>
-                        <td>
-                            <p-skeleton height="2rem"></p-skeleton>
-                        </td>
+                        <td><p-skeleton height="2rem"></p-skeleton></td>
+                        <td><p-skeleton height="2rem"></p-skeleton></td>
+                        <td><p-skeleton height="2rem"></p-skeleton></td>
+                        <td><p-skeleton height="2rem"></p-skeleton></td>
+                        <td><p-skeleton height="2rem"></p-skeleton></td>
                     </tr>
                     <tr>
-                        <td>
-                            <p-skeleton height="2rem"></p-skeleton>
-                        </td>
-                        <td>
-                            <p-skeleton height="2rem"></p-skeleton>
-                        </td>
-                        <td>
-                            <p-skeleton height="2rem"></p-skeleton>
-                        </td>
-                        <td>
-                            <p-skeleton height="2rem"></p-skeleton>
-                        </td>
-                        <td>
-                            <p-skeleton height="2rem"></p-skeleton>
-                        </td>
+                        <td><p-skeleton height="2rem"></p-skeleton></td>
+                        <td><p-skeleton height="2rem"></p-skeleton></td>
+                        <td><p-skeleton height="2rem"></p-skeleton></td>
+                        <td><p-skeleton height="2rem"></p-skeleton></td>
+                        <td><p-skeleton height="2rem"></p-skeleton></td>
                     </tr>
                 </ng-template>
             </p-table>
         </ng-template>
-        <ng-template #appliersDataTable class="card card-shadow">
+        <ng-template #appliersDataTable class="card">
             <ng-container *ngIf="appliers.length > 0; then applierDataTable; else noAppliers"></ng-container>
             <ng-template #noAppliers>
                 <div class="card p-3 text-center">
@@ -189,11 +165,9 @@
                 </div>
             </ng-template>
             <ng-template #applierDataTable>
-                <p-table [value]="appliers" responsiveLayout="scroll" class="card card-shadow">
+                <p-table [value]="appliers" responsiveLayout="scroll" class="card">
                     <ng-template pTemplate="header">
-                        <div class="dashboard-title">
-                            <h4 class="mb-0 h5"> Applied candidates</h4>
-                        </div>
+                        <h4 class="p-3 fw-bold">Applied candidates</h4>
                         <tr>
                             <th pSortableColumn="fullName">
                                 Full name
@@ -229,7 +203,7 @@
                             </td>
                             <td>{{applier.email}}</td>
                             <td>
-                                <span class="status"
+                                <span class="bg-dark text-white fw-xsmall px-2 py-1 rounded"
                                     [ngClass]="applier.status == 'Pending' ? 'status-pending' : 'status-success'">
                                     {{applier.status}}
                                 </span>
