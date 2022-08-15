@@ -143,6 +143,7 @@ export class ProfileComponent implements OnInit {
   startDate: any;
   endDate: any;
   isImageLoaded = false;
+  isCoverImageLoaded = false;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -241,12 +242,12 @@ export class ProfileComponent implements OnInit {
   }
 
   getCoverPicture() {
-    // this.isImageLoaded = false;
+    this.isCoverImageLoaded = false;
     this.profileService.getCoverPicture().subscribe({
       next: (data: any) => {
         let res = data.url;
         this.backgroundImage = res + "?" + environment.cover_sas_token;
-        // this.isImageLoaded = true;
+        this.isCoverImageLoaded = true;
       },
     });
   }
