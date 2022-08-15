@@ -3,21 +3,33 @@
         Personal details
     </h2>
     <hr>
+    <div class="ms-4 ml-5 d-flex mx-auto" style="width: 200px;">
+        <ng-container *ngIf="isImageLoaded; then image; else imageLoader"></ng-container>
+        <ng-template #imageLoader>
+            <img [src]="imageUrl" class="pointer rounded-circle" style="width: 150px; height: 150px; margin-left:50%"
+                (click)="openFileTrigger(fileTigger)" pTooltip="Update Profile picture">
+        </ng-template>
+        <ng-template #image>
+            <img [src]="imageUrl" class="pointer rounded-circle" style="width: 150px; height: 150px; margin-left:50%"
+                (click)="openFileTrigger(fileTigger)" pTooltip="Update Profile picture">
+        </ng-template>
+
+    </div>
+    <input type="file" (change)="updateProfilePicture($event)" accept=".png,.jpg,.jpeg" style="display: none;"
+        #fileTigger>
     <!-- profile form -->
-    <app-form [formFields]="profileFields"
-        [formGroup]="profileForm">
+    <app-form [formFields]="profileFields" [formGroup]="profileForm">
     </app-form>
 
     <!-- education details -->
     <div class="card p-3">
         <div class="d-flex">
-            <div class="flex-grow-1 fs-3">
+            <div class="flex-grow-1 fs-5">
                 Education
             </div>
             <div>
-                <button class="btn btn-rounded" 
-                    (click)="addEducation(educationModal)">
-                    <i class="pi pi-plus text-primary"></i>
+                <button class="btn btn-rounded" (click)="addEducation(educationModal)">
+                    <i class="pi pi-plus text-dark"></i>
                 </button>
             </div>
         </div>
@@ -25,9 +37,7 @@
         <ng-container *ngFor="let education of educationDetails.controls; let id = index">
             <div class="pt-3 d-flex justify-content-start">
                 <div class="pt-3">
-                    <img src="assets/university.svg"
-                        height="50px"
-                        width="50px">
+                    <img src="assets/university.svg" height="50px" width="50px">
                 </div>
                 <div class="ps-4 d-flex flex-column flex-grow-1">
                     <!-- {{education.value | json}} -->
@@ -35,21 +45,19 @@
                         {{education.controls['universityName'].value}}
                     </div>
                     <div class="fs-5">
-                        {{education.controls['qualification'].value}} - 
+                        {{education.controls['qualification'].value}} -
                         {{education.controls['courseName'].value}}
                     </div>
                     <div class="text-muted">
-                        {{education.controls['startDate'].value}} - 
-                        {{education.controls['endDate'].value}}
+                        {{education.controls['startDate'].value}} -
+                        {{education.controls['completionDate'].value}}
                     </div>
                 </div>
                 <div class="ps-2 pt-3">
-                    <button class="btn btn-rounded"
-                        (click)="editEducation(educationModal, id)">
+                    <button class="btn btn-rounded" (click)="editEducation(educationModal, id)">
                         <i class="pi pi-pencil text-primary"></i>
                     </button>
-                    <button class="ps-2 btn btn-rounded-danger"
-                        (click)="deleteEducation(id)">
+                    <button class="ps-2 btn btn-rounded-danger" (click)="deleteEducation(id)">
                         <i class="pi pi-trash text-danger"></i>
                     </button>
                 </div>
@@ -60,13 +68,12 @@
     <!-- experience details -->
     <div class="card p-3">
         <div class="d-flex">
-            <div class="flex-grow-1 fs-3">
+            <div class="flex-grow-1 fs-5">
                 Experience
             </div>
             <div>
-                <button class="btn btn-rounded"
-                    (click)="addExperience(experienceModal)">
-                    <i class="pi pi-plus text-primary"></i>
+                <button class="btn btn-rounded" (click)="addExperience(experienceModal)">
+                    <i class="pi pi-plus text-dark"></i>
                 </button>
             </div>
         </div>
@@ -74,40 +81,82 @@
         <ng-container *ngFor="let experience of experienceDetails.controls; let id = index">
             <div class="pt-3 d-flex justify-content-start">
                 <div class="pt-3">
-                    <img src="../../../../../assets/company.png"
-                        height="50px"
-                        width="50px">
+                    <img src="../../../../../assets/company.png" height="50px" width="50px">
                 </div>
                 <div class="ps-4 d-flex flex-column flex-grow-1">
                     <div class="fs-3 fw-bold">
-                        {{experience.controls['companyName'].value}}
+                        {{experience.controls['previousCompanyName'].value}}
                     </div>
                     <div class="fs-5">
                         {{experience.controls['designation'].value}}
                     </div>
                     <div class="text-muted">
-                        Experience: 
-                        {{experience.controls['yearOfExperience'].value}} years
+                        Experience:
+                        {{experience.controls['yearOfExperience'].value}} year(s)
                     </div>
                 </div>
                 <div class="ps-2 pt-3">
-                    <button class="btn btn-rounded"
-                        (click)="editExperience(experienceModal, id)">
+                    <button class="btn btn-rounded" (click)="editExperience(experienceModal, id)">
                         <i class="pi pi-pencil text-primary"></i>
                     </button>
-                    <button class="ps-2 btn btn-rounded-danger"
-                        (click)="deleteExperience(id)">
+                    <button class="ps-2 btn btn-rounded-danger" (click)="deleteExperience(id)">
                         <i class="pi pi-trash text-danger"></i>
                     </button>
                 </div>
             </div>
         </ng-container>
     </div>
+    <div class="pt-3"></div>
+    <!-- Preferred Job -->
+    <div class="card shadow">
+        <!-- card body -->
+        <div class="card-body">
+            <!-- card title -->
+            <div class="flex-grow-1 fs-4">
+                <div class="card-title fs-5">Preferred Job
+                    <button class="btn btn-rounded float-end">
+                        <i class="pi pi-plus" (click)="addjob(PreferredJobModal)"></i>
+                    </button>
+                </div>
+                <hr>
+            </div>
+            <div class="flex-grow-1 fs-4" *ngFor="let preferredJob of preferredJobArray" style="margin-left:5%;top:10%">
+
+                <p-chip [removable]="true" separator="," (onRemove)="deleteJob(preferredJob.preferredJobId)">
+                    {{preferredJob.jobTitle}}
+                </p-chip>
+            </div>
+        </div>
+    </div>
+    <div class="pt-3"></div>
+
+    <!-- Skills Section -->
+
+    <div class="card shadow">
+        <!-- card body -->
+        <div class="card-body">
+            <!-- card title -->
+            <div class="flex-grow-1 fs-4">
+                <div class="card-title fs-5">Skills
+                    <button class="btn btn-rounded float-end">
+                        <i class="pi pi-plus" (click)="addskill(SkillModal)"></i>
+                    </button>
+                </div>
+                <hr>
+            </div>
+            <div class="flex-grow-1 fs-4" *ngFor="let skill of skillArray"
+                style="margin-left:5%;top:10%; display:flex;">
+
+                <p-chip [removable]="true" separator="," (onRemove)="deleteSkill(skill.skillId)">{{skill.skillTitle}}
+                </p-chip>
+            </div>
+        </div>
+
+    </div>
 
     <!-- end of profile -->
     <div class="text-end pt-3">
-        <button class="btn btn-primary bg-primary"
-            [disabled]="!profileForm.valid">
+        <button class="btn btn-primary bg-dark" [disabled]="!profileForm.valid" (click)="complete()">
             Complete
         </button>
     </div>
@@ -117,22 +166,18 @@
 <!-- Modals -->
 <ng-template #educationModal let-modal>
     <div class="modal-header">
-      <h4 class="modal-title" id="modal-basic-title">
-        {{action}} Education
-      </h4>
-      <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+        <h4 class="modal-title" id="modal-basic-title">
+            {{action}} Education
+        </h4>
+        <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
     </div>
     <div class="modal-body d-flex justify-content-center">
-      <app-form [formGroup]="educationForm"
-        [formFields]="educationFields"
-        >
-      </app-form>
+        <app-form [formGroup]="educationForm" [formFields]="educationFields">
+        </app-form>
     </div>
     <hr>
     <div class="text-end pb-3 pe-3">
-        <button class="btn bg-primary text-white"
-            style="border-radius: 13px;"
-            [disabled]="!educationForm.valid"
+        <button class="btn bg-dark text-white" style="border-radius: 13px;" [disabled]="!educationForm.valid"
             (click)="executeEducationAction()">
             {{action}}
         </button>
@@ -142,24 +187,61 @@
 
 <ng-template #experienceModal let-modal>
     <div class="modal-header">
-      <h4 class="modal-title" id="modal-basic-title">
-        {{action}} Experience
-      </h4>
-      <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+        <h4 class="modal-title" id="modal-basic-title">
+            {{action}} Experience
+        </h4>
+        <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
     </div>
     <div class="modal-body d-flex justify-content-center">
-      <app-form [formGroup]="experienceForm"
-        [formFields]="experienceFields"
-        >
-      </app-form>
+        <app-form [formGroup]="experienceForm" [formFields]="experienceFields">
+        </app-form>
     </div>
     <hr>
     <div class="text-end pb-3 pe-3">
-        <button class="btn bg-primary text-white"
-            style="border-radius: 13px;"
-            [disabled]="!experienceForm.valid"
+        <button class="btn bg-dark text-white" style="border-radius: 13px;" [disabled]="!experienceForm.valid"
             (click)="executeExperienceAction()">
             {{action}}
         </button>
     </div>
-  </ng-template>
+</ng-template>
+
+<ng-template #PreferredJobModal let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">
+            {{action}} Interested Job
+        </h4>
+        <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+    </div>
+    <div class="modal-body d-flex justify-content-center">
+        <app-form [formGroup]="preferredJobForm" [formFields]="preferredJobFields">
+        </app-form>
+    </div>
+    <hr>
+    <div class="text-end pb-3 pe-3">
+        <button class="btn bg-dark text-white" style="border-radius: 13px;" [disabled]="!preferredJobForm.valid"
+            (click)="executePreferredJobAction()">
+            {{action}}
+        </button>
+    </div>
+</ng-template>
+
+<ng-template #SkillModal let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">
+            {{action}} Skills
+        </h4>
+        <button type="button" class="btn-close" aria-label="Close"
+            (click)="modal.dismiss('Cross click')"></button>
+    </div>
+    <div class="modal-body d-flex justify-content-center">
+        <app-form [formGroup]="skillForm" [formFields]="skillFields">
+        </app-form>
+    </div>
+    <hr>
+    <div class="text-end pb-3 pe-3">
+        <button class="btn bg-dark text-white" style="border-radius: 13px;"
+            [disabled]="!skillForm.valid" (click)="executeSkillAction()">
+            {{action}}
+        </button>
+    </div>
+</ng-template>

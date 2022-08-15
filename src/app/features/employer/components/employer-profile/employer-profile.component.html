@@ -1,0 +1,96 @@
+<div class="d-flex justify-content-center align-items-center h-100">
+    <div class="flex-grow-1">
+        <!-- Profile Image -->
+        <div class="card shadow">
+            <div class="div">
+                <img id="coverpicture" class="rounded-top text-white d-flex flex-row" [src]="backgroundImage"
+                    (click)="openCoverPictureTrigger(coverPicture)" pTooltip="Update Cover picture">
+                <ng-container *ngIf="isImageLoaded; then image; else imageLoader"></ng-container>
+                <ng-template #imageLoader>
+                    <img id="innerimage" [src]="imageUrl" class="rounded-circle img-fluid img-thumbnail pointer"
+                        (click)="openFileTrigger(fileTigger)" pTooltip="Update Profile picture">
+                </ng-template>
+                <ng-template #image>
+                    <img id="innerimage" [src]="imageUrl" class=" rounded-circle mt-5 img-fluid img-thumbnail pointer"
+                        (click)="openFileTrigger(fileTigger)" pTooltip="Update Profile picture">
+                </ng-template>
+
+                <input type="file" (change)="updateProfilePicture($event)" accept=".png,.jpg,.jpeg"
+                    style="display: none;" #fileTigger>
+                <input type="file" (change)="updateCoverPicture($event)" accept=".png,.jpg,.jpeg" style="display: none;"
+                    #coverPicture>
+            </div>
+            <br>
+            <!-- Profile Details -->
+            <form [formGroup]="profileForm">
+                <div class="card-body p-4 text-black" style="left:10px; top:25px;">
+                    <div class="flex">
+                        <div class="flex">
+                            <p class="lead fw-normal mb-1 float-start">{{employerArray.companyName}}
+                            </p>
+                            <div class="float-end">
+                                <button class="btn btn-rounded">
+                                    <i class="pi pi-pencil" (click)="updateProfile(profileModal)"></i>
+                                </button>
+                            </div>
+                            <span class="clearfix"></span>
+                            <p class="fw-200 mb-1">{{employerArray.firstName}} {{employerArray.lastName}}</p>
+
+                            <span class="clearfix"></span>
+                            <p>
+                                <span><i class="p-2 pi pi-envelope"></i></span>
+                                <span class="ms-2">Email : {{email}}</span>
+                            </p>
+                            <span class="clearfix"></span>
+                            <p>
+                                <span><i class="p-2 pi pi-calendar"></i></span>
+                                <span class="ms-2">Date Of Birth :
+                                    {{employerArray.dateOfBirth}}</span>
+                            </p>
+                            <p>
+                                <span><i class="p-2 pi pi-phone"></i></span>
+                                <span class="ms-2">Contact Number :
+                                    {{employerArray.contactNumber}}</span>
+                            </p>
+
+
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<div class="p-3"></div>
+<div class="card shadow p-4" style="margin-top:0%">
+    <div class="d-flex">
+        <div class="flex-grow-1 fs-4">
+            About
+        </div>
+    </div>
+    <hr>
+    <div class="d-flex">
+        <div class="flex-grow-1 fw-normal">
+            {{employerArray.about}}
+        </div>
+    </div>
+</div>
+<ng-template #profileModal let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">
+            {{action}} Profile
+        </h4>
+        <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+    </div>
+    <div class="modal-body d-flex justify-content-center">
+        <app-form [formGroup]="profileForm" [formFields]="profileFields">
+        </app-form>
+    </div>
+    <hr>
+    <div class="text-end pb-3 pe-3">
+        <button class="btn bg-dark text-white" style="border-radius: 13px;" [disabled]="!profileForm.valid"
+            (click)="executeProfileAction()">
+            {{action}}
+        </button>
+    </div>
+</ng-template>

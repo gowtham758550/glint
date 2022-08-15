@@ -1,0 +1,30 @@
+<div class="pointer"
+    [routerLink]="'/job-seeker/job/' + job.postJobDetailId">
+    <div class="p-4 card">
+        <div class="fs-3 fw-bold">
+            {{job.jobTitle}}
+        </div>
+        <div class="fs-5">
+            <i class="pi pi-building"></i>
+            <span class="align-bottom">
+                company name
+            </span>
+        </div>
+        <div class="fs-6 text-muted">
+            <i class="pi pi-map-marker"></i>
+            {{job.location}}
+        </div>
+        <div class="pt-2">
+            <span class="badge badge-primary bg-secondary text-white">
+                <i class="pi pi-wallet"></i>
+                {{job.salary | currency: 'INR'}}
+            </span>
+            <span class="pe-2"></span>
+            <span class="badge badge-secondary bg-secondary">
+                <i class="pi pi-briefcase"></i>
+                {{job.jobType}}
+            </span>
+        </div>
+    </div>
+    <div class="pt-4"></div>
+</div>

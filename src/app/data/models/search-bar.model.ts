@@ -5,4 +5,5 @@ export interface SearchBar {
     options?: Option[]
     label: string
     formControlName: string
+    dataList?: string[]
 }

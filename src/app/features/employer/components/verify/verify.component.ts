@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 @Component({
   selector: 'app-verify-employer',
   template: `
-    <app-verify></app-verify>
+    <app-verify [role]="'Employer'"></app-verify>
   `,
   styles: [
   ]

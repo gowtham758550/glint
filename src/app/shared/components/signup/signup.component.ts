@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { FormField } from 'src/app/data/models/form-field.model';
@@ -12,15 +12,29 @@ import { LocalStorage } from 'src/app/data/services/local-storage.service';
 })
 export class SignupComponent implements OnInit {
 
+  @Input()
+  role!: string;
+
   registerationForm: FormGroup = this.formBuilder.group({
     userName: ['', Validators.required],
     firstName: ['', Validators.required],
     lastName: ['', Validators.required],
     email: ['', [Validators.required, Validators.email]],
-    password: ['', Validators.required],
-    confirmPassword: ['', Validators.required]
-  })
+    password: ['', [Validators.required, 
+      Validators.minLength(8) , 
+      Validators.pattern(new RegExp("(?=.*[0-9])")),
+      Validators.pattern(new RegExp("(?=.*[A-Z])")),
+      Validators.pattern(new RegExp("(?=.*[a-z])"))]],
+    confirmPassword: ['', [Validators.required, Validators.minLength(8)]]
+  },
+    { validator: this.passwordValidator }
+  );
   registerationFields: FormField[] = [
+    // {
+    //   type: 'title',
+    //   label: 'Signup',
+    //   class: ['fw-bold']
+    // },
     {
       type: 'input',
       label: 'First Name',
@@ -49,11 +63,13 @@ export class SignupComponent implements OnInit {
       type: 'password',
       label: 'Password',
       formControlName: 'password',
+      hintMessage: 'Password should should be atleast 8 characters!',
       class: ['w']
     },
     {
-      type: 'password',
+      type: 'confirmPassword',
       label: 'Confirm password',
+      hintMessage: 'Password mismatch!',
       formControlName: 'confirmPassword',
       class: ['w']
     },
@@ -76,16 +92,22 @@ export class SignupComponent implements OnInit {
 
   receiveFormData() {
     console.log(this.registerationForm.value);
-    this.authService.signup({...this.registerationForm.value, ...{authRole: "JobSeeker"}})
+    this.authService.signup({ ...this.registerationForm.value, ...{ authRole: this.role } })
       .subscribe({
-        next: () => {
+        next: (data) => {
+          console.log(data);
           this.localStorage.setItem('email', this.registerationForm.controls['email'].value);
           this.localStorage.setItem('firstName', this.registerationForm.controls['firstName'].value);
           this.localStorage.setItem('lastName', this.registerationForm.controls['lastName'].value);
-          this.router.navigateByUrl('/job-seeker/signup/verify-account')
+          if (this.role == 'JobSeeker') this.router.navigateByUrl('/job-seeker/signup/verify-account');
+          else this.router.navigateByUrl('/employer/signup/verify-account');
+          this.localStorage.setItem('accessToken', data.jwt);
         },
         error: err => console.log(err)
       });
-    
+  }
+
+  passwordValidator(form: FormGroup) {
+    return form.controls['password'].value === form.controls['confirmPassword'].value ? null : { 'mismatch': true };
   }
 }
