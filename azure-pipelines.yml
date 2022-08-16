@@ -11,6 +11,7 @@ trigger:
 pool:
   vmImage: ubuntu-latest
 
+
 steps:
 - task: NodeTool@0
   inputs:
@@ -35,3 +36,11 @@ steps:
     PathtoPublish: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip'
     ArtifactName: 'drop'
     publishLocation: 'Container'
+
+- task: AzureRmWebAppDeployment@4
+  inputs:
+    ConnectionType: 'AzureRM'
+    azureSubscription: 'Azure for Students (aad93904-5f7c-4d73-813e-2224e536b773)'
+    appType: 'webApp'
+    WebAppName: 'glint'
+    packageForLinux: '$(System.DefaultWorkingDirectory)/**/*.zip'
