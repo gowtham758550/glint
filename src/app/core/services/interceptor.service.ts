@@ -28,7 +28,12 @@ export class Interceptor implements HttpInterceptor {
                 catchError((error: HttpErrorResponse) => {
                     setTimeout(() => {
                         // this.loaderService.hide();
-                        this.toastr.error(error.error.title != undefined ? error.error.title : error.error, 'Error');
+                        let errorMessage;
+                        if (typeof error.error.title == 'string') errorMessage = error.error.title;
+                        else if (typeof error.error == 'string') errorMessage = error.error;
+                        else if (typeof error.error.error == 'string') errorMessage = error.error.error;
+                        else errorMessage = 'Unknow error'
+                        this.toastr.error(errorMessage);
                         console.log(error.error);
                     }, 1000)
                     return throwError(error);

@@ -192,7 +192,8 @@
                         </tr>
                     </ng-template>
                     <ng-template pTemplate="body" let-applier>
-                        <tr class="pointer" (click)="getJobSeekerProfileById(applier.id)">
+                        {{applier | json}}
+                        <tr class="pointer" (click)="getJobSeekerProfileById(applier.jobSeekerId, applier.appliedJobId)">
                             <td>
                                 <span>
                                     <img [src]="applier.profilePicture + '?' + sas_token" alt="" class="profile">

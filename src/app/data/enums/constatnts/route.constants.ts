@@ -18,5 +18,6 @@ export enum RouteConstants {
     employerDashboard = '/employer/dashboard',
     employerJobs = '/employer/jobs',
     employerAccountSettings = '/employer/account-settings',
-    employerNewJob = '/employer/job/new'
+    employerNewJob = '/employer/job/new',
+    employerJobSeekerProfile = '/employer/job-seeker/profile'
 }

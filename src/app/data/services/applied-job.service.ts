@@ -23,6 +23,14 @@ export class AppliedJobService {
         return this.httpClient.post(`${this.host}/add`, applyJobPayload);
     }
 
+    updateAppliedJobStatus(postJobId: number) {
+        const payload = {
+            appliedJobID: postJobId,
+            jobStatus: 'Shortlisted'
+        }
+        return this.httpClient.put(`${this.host}/update`, payload);
+    }
+
     getAppliedJobs(): Observable<AppliedJob[]> {
         return this.httpClient.get<AppliedJob[]>(`${this.host}/get`);
     }
