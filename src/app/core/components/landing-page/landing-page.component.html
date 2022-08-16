@@ -7,13 +7,13 @@
         </div>
         <div class="pe-3 pt-2">
             <button class="fw-bold btn border-none text-dark bg-white rounded-pill"
-                routerLink="/login">
+                [routerLink]="routeConstants.jobSeekerLogin">
                     Login
             </button>
         </div>
         <div class="pe-3 pt-2">
             <button class="btn border-none text-white bg-secondary rounded-pill"
-                routerLink="/job-seeker/signup">
+                [routerLink]="routeConstants.jobSeekerSignup">
                     Register
             </button>
         </div>
@@ -24,11 +24,13 @@
                 <i class="pi pi-angle-down"></i>
             </button>
             <div class="dropdown-content">
-                <a routerLink="/login">
+                <a [routerLink]="routeConstants.employerLogin">
                     Login
                     <!-- <i class="pi pi-sign-in"></i> -->
                 </a>
-                <a routerLink="/employer/signup">Register</a>
+                <a [routerLink]="routeConstants.employerSignup">
+                    Register
+                </a>
             </div>
         </div>
     </div>
