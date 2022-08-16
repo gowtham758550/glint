@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Role } from 'src/app/data/enums/role.enum';
 import { AuthService } from 'src/app/data/services/auth.service';
 import { LocalStorage } from 'src/app/data/services/local-storage.service';
 
@@ -26,15 +27,6 @@ export class VerifyComponent implements OnInit {
   ngOnInit(): void {
     this.email = this.localStorage.getItem('email');
     setTimeout(this.getVerificationStatus, 1000);
-    
-  }
-
-  next() {
-    if (this.isVerified) {
-      this.router.navigateByUrl('/job-seeker/signup/personal-information');
-    } else {
-      console.log(false);
-    }
   }
 
   getVerificationStatus() {
@@ -43,8 +35,9 @@ export class VerifyComponent implements OnInit {
     this.authService.isVerified(email)
       .subscribe({
         next: res => {
-          if (this.role == 'Employer') this.router.navigateByUrl('/employer/signup/company-detail');
-          else this.router.navigateByUrl('/job-seeker/signup/personal-information');
+          this.isVerified = true;
+          if (this.role == Role.employer) this.router.navigateByUrl('/employer/signup/company-detail');
+          else if (this.role == Role.jobSeeker) this.router.navigateByUrl('/job-seeker/signup/personal-information');
         }
       });
   }
