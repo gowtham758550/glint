@@ -43,4 +43,4 @@ steps:
     azureSubscription: 'Azure for Students (aad93904-5f7c-4d73-813e-2224e536b773)'
     appType: 'webApp'
     WebAppName: 'glint'
-    packageForLinux: '$(System.DefaultWorkingDirectory)/**/*.zip'
+    packageForLinux: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip'
