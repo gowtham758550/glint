@@ -1,0 +1,53 @@
+
+<div class="main vh-100 d-flex justify-content-center align-items-center bg-secondary">
+    <div class="d-flex pt-5">
+        <div class="card card-shadow d-flex flex-row">
+            <div class="p-3">
+                <img src="../../../../assets/employer-signup-2.webp" width="500px" height="400px" alt="">
+            </div>
+            <div class="p-4" style="width: 500px;">
+                <app-logo [class]="'text-dark'"></app-logo>
+                <hr>
+                <form [formGroup]="loginForm">
+                    <div class="mb-3">
+                        <label for="usernameOrMail">Username or Mail Address</label>
+                        <input type="text"
+                            class="form-control"
+                            formControlName="userName_or_Email"
+                            placeholder="username of mail address">
+                    </div>
+                    <div class="mb-3">
+                        <label for="password">Password</label>
+                        <input type="password"
+                        formControlName="password"
+                            class="form-control"
+                            placeholder="********">
+                    </div>
+                    <div class="mb-3 text-center">
+                        <button class="btn bg-dark rounded-pill text-white ps-5 pe-5"
+                            (click)="login()"
+                            [disabled]="!this.loginForm.valid">
+                            Login
+                        </button>
+                    </div>
+
+                    <div class="mb-3 d-flex justify-content-between">
+                        <div>
+                            <a [routerLink]="signupRoute">
+                                New to Glint? Create an account
+                            </a>
+                        </div>
+                        <div>
+                            <a [routerLink]="routeConstants.jobSeekerHome">
+                                Forgot password
+                            </a>
+                        </div>
+                    </div>
+                </form>
+                <!-- <app-form [formFields]="loginFields"
+                [formGroup]="loginForm"
+                (formEmitter)="recieveFormData()"></app-form> -->
+            </div>
+        </div>
+    </div>
+</div>

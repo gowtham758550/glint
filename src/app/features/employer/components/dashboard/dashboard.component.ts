@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { EChartsOption } from 'echarts';
+import { FilterService } from 'src/app/data/services/filter.service';
 
 @Component({
   selector: 'app-dashboard-employer',
@@ -11,6 +12,7 @@ export class DashboardComponent implements OnInit {
 
   totalJobs!: number;
   totalHiring!: number;
+  totalShortlisted!: number;
   barChartOptions: EChartsOption = {
     title: {
       text: 'Job Application Status'
@@ -95,11 +97,20 @@ export class DashboardComponent implements OnInit {
     ]
   };
 
-  constructor() { }
+  constructor(
+    private filterService: FilterService
+  ) { }
 
   ngOnInit(): void {
     this.totalJobs = 9;
     this.totalHiring = 41;
+  }
+
+  getTotalJobs() {
+    this.filterService.getPostJobCount()
+      .subscribe({
+        next: data => this.totalJobs = data
+      });
   }
 
 }

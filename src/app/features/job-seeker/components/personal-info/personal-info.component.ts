@@ -14,6 +14,7 @@ import { BlobService } from 'src/app/data/services/blob.service';
 import { environment } from 'src/environments/environment';
 import { PreferredJobService } from 'src/app/data/services/preferred-job.service';
 import { SkillsService } from 'src/app/data/services/skills.service';
+import { RouteConstants } from 'src/app/data/enums/constatnts/route.constants';
 
 @Component({
   selector: 'app-personal-info',
@@ -160,6 +161,7 @@ export class PersonalInfoComponent implements OnInit {
   editableId!: number;
   isImageLoaded = true;
   imageUrl: string = "https://cdn-icons-png.flaticon.com/512/1077/1077012.png?w=360";
+  routeConstants = RouteConstants;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -317,7 +319,7 @@ export class PersonalInfoComponent implements OnInit {
       next: data => console.log(data)
     });
     this.toastr.success("Registeration completed");
-    this.router.navigateByUrl('/job-seeker/dashboard');
+    this.router.navigateByUrl(this.routeConstants.jobSeekerHome);
   }
   // ----------------------------------- Preferred Job operations  -------------------------------------
   preferredJobForm!: FormGroup;

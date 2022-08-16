@@ -10,23 +10,30 @@ import { RegisterComponent } from './components/register/register.component';
 import { SignupComponent } from './components/signup/signup.component';
 import { VerifyComponent } from './components/verify/verify.component';
 import { JobInfoComponent } from 'src/app/shared/components/job-info/job-info.component';
-import { LoginComponent } from 'src/app/core/components/login/login.component';
 import { MyJobsComponent } from './components/my-jobs/my-jobs.component';
 import { JobsComponent } from './components/jobs/jobs.component';
+import { JobSeekerGuard } from 'src/app/core/guards/job-seeker.guard';
+import { LoginComponent } from './components/login/login.component';
+import { RouteConstants } from 'src/app/data/enums/constatnts/route.constants';
+
+const routeConstants = RouteConstants;
 
 const routes: Routes = [
   {
-    path:'login',
-    component:LoginComponent
+    path: 'job-seeker/login',
+    component: LoginComponent,
+    title: 'Employer Login | Glint'
+    // canActivate: [JobSeekerGuard]
   },
   {
     path: 'job-seeker/signup',
     component: RegisterComponent,
+    // canActivate: [JobSeekerGuard],
     children: [
       {
         path: '',
         component: SignupComponent,
-        canActivate: [AuthGuard]
+        // canActivate: [AuthGuard]
       },
       {
         path: 'personal-information',
@@ -41,6 +48,7 @@ const routes: Routes = [
   {
     path: 'job-seeker',
     component: HomeComponent,
+    // canActivate: [JobSeekerGuard],
     children: [
       {
         path: 'home',
@@ -68,16 +76,6 @@ const routes: Routes = [
       }
     ]
   },
-  // {
-  //   path: 'dashboard',
-  //   component: HomeComponent,
-  //   children: [
-  //     {
-  //       path: '',
-  //       component: SearchComponent
-  //     }
-  //   ]
-  // }
 ];
 
 @NgModule({
