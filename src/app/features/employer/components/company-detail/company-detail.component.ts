@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { NgxPhotoEditorService } from 'ngx-photo-editor';
 import { ToastrService } from 'ngx-toastr';
+import { RouteConstants } from 'src/app/data/enums/constatnts/route.constants';
 import { FormField } from 'src/app/data/models/form-field.model';
 import { BlobService } from 'src/app/data/services/blob.service';
 import { EmployerService } from 'src/app/data/services/employer.service';
@@ -17,7 +18,7 @@ import { environment } from 'src/environments/environment';
 })
 export class CompanyDetailComponent implements OnInit {
   isImageLoaded = true;
-  imageUrl: string = "https://cdn-icons-png.flaticon.com/512/1077/1077012.png?w=360";
+  imageUrl: string = "assets/company.png";
   profileForm: FormGroup = this.formBuilder.group({
     firstName: [this.localStorage.getItem('firstName'), [Validators.required]],
     lastName: [this.localStorage.getItem('lastName'), [Validators.required]],
@@ -77,7 +78,6 @@ export class CompanyDetailComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.getProfilePicture();
   }
   openFileTrigger(component: HTMLElement) {
     component.click();
@@ -119,7 +119,7 @@ export class CompanyDetailComponent implements OnInit {
       next: data => {
         this.localStorage.removeItem('accessToken')
         this.toastr.success('Registeration completed successfully');
-        this.router.navigateByUrl('/login');
+        this.router.navigateByUrl(RouteConstants.employerLogin);
       }
     });
   }

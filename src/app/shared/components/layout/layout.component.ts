@@ -19,7 +19,6 @@ export class LayoutComponent implements OnInit {
   @Input()
   sideNavItems!: SideNavItem[];
 
-  routeConstants = RouteConstants;
   roleEnum = Role;
   role!: Role;
   sideBarVisibility = true;
@@ -67,23 +66,27 @@ export class LayoutComponent implements OnInit {
 
   routeToProfile() {
     if (this.role == this.roleEnum.jobSeeker) {
-      this.router.navigateByUrl(this.routeConstants.jobSeekerProfile);
+      this.router.navigateByUrl(RouteConstants.jobSeekerProfile);
     } else if (this.role == this.roleEnum.employer)  {
-      this.router.navigateByUrl(this.routeConstants.employerProfile);
+      this.router.navigateByUrl(RouteConstants.employerProfile);
     }
   }
 
   routeToAccountSettings() {
     if (this.role == this.roleEnum.jobSeeker) {
-      this.router.navigateByUrl(this.routeConstants.jobSeekerAccountSettings);
+      this.router.navigateByUrl(RouteConstants.jobSeekerAccountSettings);
     } else if (this.role == this.roleEnum.employer) {
-      this.router.navigateByUrl(this.routeConstants.employerAccountSettings);
+      this.router.navigateByUrl(RouteConstants.employerAccountSettings);
     }
   }
 
   logout() {
     this.localStorage.removeItem('accessToken');
-    this.router.navigateByUrl(this.routeConstants.login);
+    if (this.role == Role.employer) {
+      this.router.navigateByUrl(RouteConstants.employerLogin);
+    } else if (this.role == Role.jobSeeker) {
+      this.router.navigateByUrl(RouteConstants.jobSeekerLogin);
+    }
   }
 
 }
