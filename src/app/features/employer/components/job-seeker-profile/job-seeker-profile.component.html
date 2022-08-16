@@ -1,78 +1,110 @@
 <div>
 
-    <div class="card card-shadow p-4">
-        <div class="d-flex justify-content-start">
-            <div>
-                <img src="/assets/defaultCoverPicture.jpg" alt="profile pic" height="300px" width="300px" class="rounded-pill">
-            </div>
-            <div class="ps-5">
-                <div>
-                    <!-- username -->
-                    <div class="text-muted">
-                       @username
+    <div class="row">
+        <div class="col-xl-6 col-lg-12 col-md-12 col-12">
+            <div class="card p-4">
+                <div class="d-flex justify-content-start">
+                    <div>
+                        <img [src]="currentApplier.profilePicture+ '?'+ sas_token" alt="profile pic" height="150px"
+                            width="150px" class="rounded-pill">
+                        <div class="p-4"></div>
+                        <button class="btn btn-primary rounded-pill bg-dark"
+                            (click)="getResumebyId(currentApplier.id)">Download Resume
+                        </button>
                     </div>
+                    <div class="ps-5">
+                        <div>
+                            <!-- username -->
+                            <div class="text-muted">
+                                @{{currentApplier.userName}}
+                            </div>
 
-                    <!-- name -->
-                    <div class="d-flex pt-1">
-                        <div class="fw-bold pe-3">
-                            Name:
-                        </div>
-                        <div class=" pe-3">
-                            {{jobSeekerProfile.firstName}}
-                            {{jobSeekerProfile.lastName}}
-                        </div>
-                    </div>
+                            <!-- name -->
+                            <div class="d-flex pt-1">
+                                <div class="fw-bold pe-3">
+                                    Name:
+                                </div>
+                                <div class=" pe-3">
+                                    {{currentApplier.fullName}}
+                                </div>
+                            </div>
 
-                    <!-- email -->
-                    <div class="d-flex pt-1">
-                        <div class="fw-bold pe-3">
-                            Email:
+                            <!-- email -->
+                            <div class="d-flex pt-1">
+                                <div class="fw-bold pe-3">
+                                    Email:
+                                </div>
+                                <div>
+                                    {{currentApplier.email}}
+                                </div>
+                            </div>
+                            <div class="d-flex pt-1">
+                                <div class="fw-bold pe-3">
+                                    Date Of Birth:
+                                </div>
+                                <div>
+                                    {{currentApplier.dateOfBirth | date}}
+                                </div>
+                            </div>
+                            <div class="d-flex pt-1">
+                                <div class="fw-bold pe-3">
+                                    Location:
+                                </div>
+                                <div>
+                                    {{jobSeekerProfile.location}}
+                                </div>
+                            </div>
+                            <div class="d-flex pt-1">
+                                <div class="fw-bold pe-3">
+                                    About:
+                                </div>
+                                <div>
+                                    {{jobSeekerProfile.about}}
+                                </div>
+                            </div>
+                            <div class="p-3"></div>
+                            <div class="d-flex pt-1 justify-content-start">
+                                <button class="btn btn-primary rounded-pill bg-dark h-50 w-100">Shortlist</button>
+                                <div class="p-1"></div>
+
+                                <div class="p-1"></div>
+                                <button class="btn btn-danger rounded-pill h-50 w-100"> Decline</button>
+
+                            </div>
                         </div>
-                        <div>
-                            Email
-                        </div>
-                    </div>
-                    <div class="d-flex pt-1">
-                        <div class="fw-bold pe-3">
-                            Date Of Birth:
-                        </div>
-                        <div>
-                            {{jobSeekerProfile.dateOfBirth | date}}
-                        </div>
-                    </div>
-                    <div class="d-flex pt-1">
-                        <div class="fw-bold pe-3">
-                            Location:
-                        </div>
-                        <div>
-                            {{jobSeekerProfile.location}}
-                        </div>
-                    </div>
-                    <div class="d-flex pt-1">
-                        <div class="fw-bold pe-3">
-                            About:
-                        </div>
-                        <div>
-                            {{jobSeekerProfile.about}}
-                        </div>
-                    </div>
-                    <div class="p-3"></div>
-                    <div class="d-flex pt-1">
-                        <button class="btn btn-primary rounded-pill bg-dark w-100">Shortlist</button>
-                        <div class="p-2"></div>
-                        <button class="btn btn-danger rounded-pill w-100"> Decline</button>
                     </div>
                 </div>
+            </div>
+        </div>
+        <div class="col-xl-6 col-lg-12 col-md-12 col-12">
+            <div class="card p-4">
+                <div class="justify-content-start">
+                    <div class=" fs-normal">
+                        <h4 class="card-title">Skills</h4>
+                    </div>
+                    <hr>
+                    <div class="clearfix"></div>
+                    <div *ngFor="let skill of skillArray; let id=index">
+
+                        <ul>
+                            <li>
+                                {{skill.skillTitle}}
+                            </li>
+                        </ul>
+
+                    </div>
+                </div>
+
             </div>
         </div>
     </div>
     <div class="p-2"></div>
     <div class="row">
-        <div class="col-xl-6 col-lg-12 col-md-12 col-12 mb-6">
+        <div class="col-xl-6 col-lg-12 col-md-12 col-12">
             <!-- card -->
-            <div class="card card-shadow">
+            <div class="card  h-100">
                 <!-- card body -->
-                <div class="card-body">
+                <div class="card-body h-100">
                     <!-- card title -->
                     <div class="flex-grow-1 fs-normal">
                         <h4 class="card-title">Education</h4>
@@ -93,35 +125,16 @@
                                 <div class="vertical-timeline">
                                     <div class="d-block d-sm-flex justify-content-between mb-1-9">
                                         <div class="left-side">
-                                            <h6 class=" fs-normal">Modern College</h6>
-                                            <span class="text-primary  fs-normal">1997 - 2001</span>
+                                            <h6 class=" fs-normal">{{education.universityName}}</h6>
+                                            <span class="text-primary  fs-normal">{{education.startDate|date}} -
+                                                {{education.completionDate|date}}</span>
                                         </div>
                                         <div class="right-side">
-                                            <h6 class=" fs-normal">Computer Science</h6>
+                                            <h6 class=" fs-normal">{{education.courseName}}</h6>
                                         </div>
 
                                     </div>
                                     <br>
-                                    <div class="d-block d-sm-flex justify-content-between mb-1-9">
-                                        <div class="left-side">
-                                            <h6 class=" fs-normal">Harvard University</h6>
-                                            <span class="text-primary ">2002 - 2004</span>
-                                        </div>
-                                        <div class="right-side">
-                                            <h6 class="fs-normal">Bachlors in Fine Arts</h6>
-                                        </div>
-                                    </div>
-                                    <br>
-                                    <div class="d-block d-sm-flex justify-content-between">
-                                        <div class="left-side">
-                                            <h6 class="fs-normal">Diploma In Fine Arts</h6>
-                                            <span class="text-primary ">2002 - 2004</span>
-                                        </div>
-                                        <div class="right-side">
-                                            <h6 class=" fs-normal">BBA at School of Design at University of Michigan
-                                            </h6>
-                                        </div>
-                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -131,9 +144,9 @@
             </div>
 
         </div>
-        <div class="col-xl-6 col-lg-12 col-md-12 col-12 mb-6">
+        <div class="col-xl-6 col-lg-12 col-md-12 col-12  h-100" style="height: 50vh">
             <!-- card -->
-            <div class="card card-shadow">
+            <div class="card ">
                 <!-- card body -->
                 <div class="card-body">
                     <!-- card title -->
@@ -156,35 +169,17 @@
                                 <div class="vertical-timeline">
                                     <div class="d-block d-sm-flex justify-content-between mb-1-9">
                                         <div class="left-side">
-                                            <h6 class=" fs-normal">Modern College</h6>
-                                            <span class="text-primary  fs-normal">1997 - 2001</span>
+                                            <h6 class=" fs-normal">{{experience.previousCompanyName}}</h6>
+                                            <span class="text-primary  fs-normal">{{experience.startDate|date}} -
+                                                {{experience.toDate|date}}</span>
                                         </div>
                                         <div class="right-side">
-                                            <h6 class=" fs-normal">Computer Science</h6>
+                                            <h6 class=" fs-normal">{{experience.designation}}</h6>
                                         </div>
 
                                     </div>
                                     <br>
-                                    <div class="d-block d-sm-flex justify-content-between mb-1-9">
-                                        <div class="left-side">
-                                            <h6 class=" fs-normal">Harvard University</h6>
-                                            <span class="text-primary ">2002 - 2004</span>
-                                        </div>
-                                        <div class="right-side">
-                                            <h6 class="fs-normal">Bachlors in Fine Arts</h6>
-                                        </div>
-                                    </div>
-                                    <br>
-                                    <div class="d-block d-sm-flex justify-content-between">
-                                        <div class="left-side">
-                                            <h6 class="fs-normal">Diploma In Fine Arts</h6>
-                                            <span class="text-primary ">2002 - 2004</span>
-                                        </div>
-                                        <div class="right-side">
-                                            <h6 class=" fs-normal">BBA at School of Design at University of Michigan
-                                            </h6>
-                                        </div>
-                                    </div>
+
                                 </div>
                             </div>
                         </div>

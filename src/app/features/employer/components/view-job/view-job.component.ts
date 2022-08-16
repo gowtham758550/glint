@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Appliers } from 'src/app/data/models/appliers.model';
@@ -48,7 +48,8 @@ export class ViewJobComponent implements OnInit {
   }
 
   getJobSeekerProfileById(id:number){
-    this.router.navigateByUrl('/employer/job-seeker/profile/' + id)
+    this.router.navigate(['employer/job-seeker/profile/',id, this.postJobDetailId])
+    // this.router.navigateByUrl('/employer/job-seeker/profile/' + id)
   }
 
   

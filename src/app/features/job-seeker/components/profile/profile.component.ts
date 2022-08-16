@@ -1,10 +1,12 @@
 import { DatePipe, formatDate } from "@angular/common";
+import { HttpHeaders } from "@angular/common/http";
 import { Component, ComponentFactoryResolver, OnInit } from "@angular/core";
 import { FormGroup, Validators, FormArray, FormBuilder } from "@angular/forms";
 import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
 import { NgxPhotoEditorService } from 'ngx-photo-editor';
 import { NgxCroppedEvent } from 'ngx-photo-editor/lib/ngx-photo-editor.component';
 import { ToastrService } from "ngx-toastr";
+import { map } from "rxjs";
 import { FormField } from "src/app/data/models/form-field.model";
 import { preferred_job } from "src/app/data/models/preferred-job";
 import { AuthService } from "src/app/data/services/auth.service";
@@ -42,6 +44,17 @@ export class ProfileComponent implements OnInit {
   newPreferredJob!: string;
   isSkillAdded: boolean = true;
   isPreferredJobAdded: boolean = true;
+  profileDetails!: FormGroup;
+  educationArray: any = [];
+  educationDetails = new FormArray<FormGroup>([]);
+  experienceDetails = new FormArray<FormGroup>([]);
+  action!: string;
+  editableId!: number;
+  editableEducation: any;
+  startDate: any;
+  endDate: any;
+  isImageLoaded = false;
+  resume!: any;
 
   preferredJobFields: FormField[] = [
     {
@@ -158,17 +171,7 @@ export class ProfileComponent implements OnInit {
       class: ['w']
     }
   ]
-  profileDetails!: FormGroup;
-  educationArray: any = [];
-  educationDetails = new FormArray<FormGroup>([]);
-  experienceDetails = new FormArray<FormGroup>([]);
-  action!: string;
-  editableId!: number;
-  editableEducation: any;
-  startDate: any;
-  endDate: any;
-  isImageLoaded = false;
-  isCoverImageLoaded = false;
+
 
 
 
@@ -187,6 +190,7 @@ export class ProfileComponent implements OnInit {
     private datePipe: DatePipe,
     private preferredJobService: PreferredJobService,
     private skillService: SkillsService,
+    private blobService: BlobService
   ) { }
 
   ngOnInit(): void {
@@ -281,6 +285,43 @@ export class ProfileComponent implements OnInit {
     });
   }
 
+  // -------------------------------Resume Operation-----------------------------------
+
+  uploadResume(event: any) {
+    let fileList: FileList = event.target.files;
+    console.log(fileList)
+    if (fileList.length > 0) {
+      let file: File = fileList[0];
+      console.log(file)
+      let formData: FormData = new FormData();
+      formData.append('resume', file, file.name);
+      console.log(formData);
+      this.profileService.addResume(formData).subscribe({
+        next: (_data) => {
+          console.log("success");
+          this.toastr.success("Resume uploaded successfully!")
+          //this.getResume();
+        },
+        error: (error) => {
+          console.log(error);
+        },
+      });
+    }
+  }
+
+
+  getResume() {
+    this.blobService.getResume().subscribe((res:any)=>{
+      console.log(res);
+      console.log(res.url);
+      var link = document.createElement('a');
+      link.href = res.url + "?" + environment.resume_sas_token;
+      link.click();
+      // window.open(link.href, '_blank');
+      window.URL.revokeObjectURL(link.href);
+
+    })
+  }
 
 
   //----------------------- Get Education List Api Call ---------------------------------
@@ -533,8 +574,10 @@ export class ProfileComponent implements OnInit {
   }
   executePreferredJobAction() {
     if (this.action == 'Add') {
-      this.preferredJobService.getPreferredJob().subscribe((res:any) => {
+      this.preferredJobService.getPreferredJob().subscribe((res: any) => {
         for (var i = 0; i < res.length; i++) {
+          console.log(res[i].jobTitle);
+          // console.log()
           if (res[i].jobTitle === this.preferredJobForm.value.preferredJobTitle) {
             this.isPreferredJobAdded = false;
             break;
@@ -546,6 +589,7 @@ export class ProfileComponent implements OnInit {
           this.modalService.dismissAll();
         }
         else {
+          this.isPreferredJobAdded = true;
           this.toastr.warning('Job already added');
           this.modalService.dismissAll();
         }
@@ -602,6 +646,7 @@ export class ProfileComponent implements OnInit {
           this.modalService.dismissAll();
         }
         else {
+          this.isSkillAdded = true;
           this.toastr.warning('Skill already added!');
           this.modalService.dismissAll();
         }

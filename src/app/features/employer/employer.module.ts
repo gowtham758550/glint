@@ -31,6 +31,7 @@ import {TooltipModule} from 'primeng/tooltip';
 import { JobSeekerService } from 'src/app/data/services/job-seeker.service';
 import { BadgeModule } from "primeng/badge";
 import { JobCardsComponent } from './components/job-cards/job-cards.component';
+import { LoginComponent } from './components/login/login.component';
 // import { AllApplicantsComponent } from './components/all-applicants/all-applicants.component';
 
 
@@ -51,6 +52,7 @@ import { JobCardsComponent } from './components/job-cards/job-cards.component';
     EmployerProfileComponent,
     JobSeekerProfileComponent,
     JobCardsComponent,
+    LoginComponent,
   ],
   imports: [
     CommonModule,

@@ -14,19 +14,21 @@ import { EditJobComponent } from './components/edit-job/edit-job.component';
 import { ViewJobComponent } from './components/view-job/view-job.component';
 import { AccountSettingsEmployerComponent } from './components/account-settings-employer/account-settings-employer.component';
 import { EmployerProfileComponent } from './components/employer-profile/employer-profile.component';
-import { LoginComponent } from 'src/app/core/components/login/login.component';
 import { JobSeekerProfileComponent } from './components/job-seeker-profile/job-seeker-profile.component';
 import { JobCardsComponent } from './components/job-cards/job-cards.component';
+import { EmployerGuard } from 'src/app/core/guards/employer.guard';
+import { LoginComponent } from './components/login/login.component';
 
 const routes: Routes = [
   {
     path: 'employer/signup',
     component: RegisterComponent,
+    // canActivate: [EmployerGuard],
     children: [
       {
         path: '',
         component: SignupComponent,
-        canActivate: [AuthGuard]
+        // canActivate: [AuthGuard]
       },
       {
         path: 'verify-account',
@@ -45,6 +47,7 @@ const routes: Routes = [
   {
     path: 'employer',
     component: HomeComponent,
+    canActivate: [EmployerGuard],
     children: [
       {
         path: 'dashboard',
@@ -75,7 +78,7 @@ const routes: Routes = [
         component: EmployerProfileComponent
       },
       {
-        path: 'job-seeker/profile/:id',
+        path: 'job-seeker/profile/:jobSeekerId/:jobId',
         component: JobSeekerProfileComponent
       },
       {

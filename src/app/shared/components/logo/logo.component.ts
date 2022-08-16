@@ -5,7 +5,7 @@ import { RouteConstants } from 'src/app/data/enums/constatnts/route.constants';
   selector: 'app-logo',
   template: `
     <h1 [ngClass]="class"
-      class="pointer"
+      class="pointer text-white"
       [routerLink]="routeConstants.landingPage">
       Gl<span class="text-warning">i</span>nt
       <span>

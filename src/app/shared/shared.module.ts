@@ -16,6 +16,7 @@ import { VerifyComponent } from './components/verify/verify.component';
 import { JobCardComponent } from './components/job-card/job-card.component';
 import { JobInfoComponent } from './components/job-info/job-info.component';
 import { LayoutComponent } from './components/layout/layout.component';
+import { LoginTemplateComponent } from './components/login-template/login-template.component';
 
 @NgModule({
   declarations: [
@@ -27,6 +28,7 @@ import { LayoutComponent } from './components/layout/layout.component';
     JobCardComponent,
     JobInfoComponent,
     LayoutComponent,
+    LoginTemplateComponent
   ],
   imports: [
     CommonModule,
@@ -47,7 +49,8 @@ import { LayoutComponent } from './components/layout/layout.component';
     VerifyComponent,
     JobCardComponent,
     JobInfoComponent,
-    LayoutComponent
+    LayoutComponent,
+    LoginTemplateComponent
   ]
 })
 export class SharedModule { }

@@ -58,12 +58,30 @@
         </div>
     </ng-template>
     <ng-template #data>
-        <div class="flex-grow-1">
-            <ng-container *ngFor="let job of allJobs">
-                <app-job-card [job]="job">
-                </app-job-card>
-            </ng-container>
-        </div>
+        <ng-container *ngIf="allJobs.length > 0; then jobCards; else jobCardPlaceholder"></ng-container>
+        <ng-template #jobCardPlaceholder>
+            <div class="d-flex flex-column">
+                <div>
+                    <p class="fw-bold text-center">
+                        no jobs available :(
+                    </p>
+                </div>
+                <!-- <div class="text-center">
+                    <img src="../../../../../assets/no-jobs.webp"
+                        height="400px"
+                        width="400px"
+                        class="rounded">
+                </div> -->
+            </div>
+        </ng-template>
+        <ng-template #jobCards>
+            <div class="flex-grow-1">
+                <ng-container *ngFor="let job of allJobs">
+                    <app-job-card [job]="job">
+                    </app-job-card>
+                </ng-container>
+            </div>
+        </ng-template>
     </ng-template>
 
     <div class="ps-3"></div>
@@ -114,7 +132,7 @@
             </div>
 
             <div class="pt-3 text-end">
-                <button class="btn bg-dark text-secondary rounded-pill" (click)="applyFilters()">
+                <button class="btn bg-dark text-white rounded-pill" (click)="applyFilters()">
                     Apply filters
                 </button>
             </div>

@@ -39,12 +39,12 @@
         <ng-container *ngIf="isApplied; then applied; else notApplied">
         </ng-container>
         <ng-template #applied>
-            <button class="btn bg-dark text-secondary rounded-pill" [disabled]="isApplied">
+            <button class="btn bg-dark text-white rounded-pill" [disabled]="isApplied">
                 Applied
             </button>
         </ng-template>
         <ng-template #notApplied>
-            <button class="btn bg-dark text-secondary rounded-pill" (click)="applyForJob()">
+            <button class="btn bg-dark text-white rounded-pill" (click)="applyForJob()">
                 Apply
             </button>
         </ng-template>

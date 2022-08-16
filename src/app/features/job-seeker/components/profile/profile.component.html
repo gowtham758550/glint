@@ -42,10 +42,22 @@
                         <div class="flex">
                             <p class="lead fw-normal fs-4 mb-1 float-start">{{jobSeekerArray.firstName}}
                                 {{jobSeekerArray.lastName}}</p>
-                            <div class="float-end">
+                            <div class="d-flex float-end">
                                 <button class="btn btn-rounded btn btn-outline-dark
-                                d-none d-md-block" (click)="updateProfile(profileModal)">Edit Profile
+                                d-none d-md-block bg-dark text-white" (click)="updateProfile(profileModal)">Edit Profile
                                 </button>
+                                <div class="p-1"></div>
+                                <button class="btn btn-rounded btn btn-outline-dark
+                                d-none d-md-block bg-dark text-white" (click)="openFileTrigger(resumeTigger)">Upload Resume
+                                </button>
+                                <div class="p-1"></div>
+                                <button class="btn btn-rounded btn btn-outline-dark
+                                d-none d-md-block bg-dark text-white" (click)="getResume()">Download Resume
+                                </button>
+                                <input type="file" (change)="uploadResume($event)" accept=".pdf" style="display: none;"
+                                    #resumeTigger>
+                                
+
                             </div>
                             <span class="clearfix"></span>
                             <p class="fw-200 fs-6 mb-1">{{jobSeekerArray.about}}</p>
@@ -198,9 +210,10 @@
                             <!-- card title -->
                             <div class="flex-grow-1 fs-4">
                                 <h4 class="card-title">Preferred Job
-                                <button class="btn btn-rounded float-end">
-                                    <i class="pi pi-plus" (click)="addjob(PreferredJobModal)"></i>
-                                </button></h4>
+                                    <button class="btn btn-rounded float-end">
+                                        <i class="pi pi-plus" (click)="addjob(PreferredJobModal)"></i>
+                                    </button>
+                                </h4>
                                 <hr>
                             </div>
                             <div class="flex-grow-1 fs-4" *ngFor="let preferredJob of preferredJobArray"
@@ -214,8 +227,8 @@
 
                     </div>
                 </div>
-            
-            <!-- Skills Card -->
+
+                <!-- Skills Card -->
                 <div class="col-xl-6 col-lg-12 col-md-12 col-12 mb-6">
                     <!-- card -->
                     <div class="card shadow">
@@ -224,16 +237,17 @@
                             <!-- card title -->
                             <div class="flex-grow-1 fs-4">
                                 <h4 class="card-title">Skills
-                                <button class="btn btn-rounded float-end">
-                                    <i class="pi pi-plus" (click)="addskill(SkillModal)"></i>
-                                </button></h4>
+                                    <button class="btn btn-rounded float-end">
+                                        <i class="pi pi-plus" (click)="addskill(SkillModal)"></i>
+                                    </button>
+                                </h4>
                                 <hr>
                             </div>
                             <div class="flex-grow-1 fs-4" *ngFor="let skill of skillArray"
                                 style="margin-left:5%;top:10%; display:flex;">
 
-                                <p-chip [removable]="true" separator=","
-                                    (onRemove)="deleteSkill(skill.skillId)">{{skill.skillTitle}}
+                                <p-chip [removable]="true" separator="," (onRemove)="deleteSkill(skill.skillId)">
+                                    {{skill.skillTitle}}
                                 </p-chip>
                             </div>
                         </div>
@@ -336,8 +350,8 @@
                 </div>
                 <hr>
                 <div class="text-end pb-3 pe-3">
-                    <button class="btn bg-dark text-white" style="border-radius: 13px;"
-                        [disabled]="!skillForm.valid" (click)="executeSkillAction()">
+                    <button class="btn bg-dark text-white" style="border-radius: 13px;" [disabled]="!skillForm.valid"
+                        (click)="executeSkillAction()">
                         {{action}}
                     </button>
                 </div>
@@ -356,8 +370,8 @@
                 </div>
                 <hr>
                 <div class="text-end pb-3 pe-3">
-                    <button class="btn bg-dark text-white" style="border-radius: 13px;"
-                        [disabled]="!skillForm.valid" (click)="executeSkillAction()">
+                    <button class="btn bg-dark text-white" style="border-radius: 13px;" [disabled]="!skillForm.valid"
+                        (click)="executeSkillAction()">
                         {{action}}
                     </button>
                 </div>
