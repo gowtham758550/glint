@@ -1,5 +1,5 @@
 <div>
-    
+
     <div class="card p-3">
         <div class="card-title fs-2 fw-bold">
             My Jobs
@@ -36,16 +36,24 @@
                         </div>
                     </div>
                 </ng-template>
-
+                <div class="d-flex justify-content-center align-items-center" id="main" *ngIf="myJobs.length==0">
+                    <img class="mr-3 pr-3 align-top border-right inline-block align-content-center"
+                        src="https://cdn.dribbble.com/users/1753953/screenshots/3818675/animasi-emptystate.gif"
+                        style="height:150px; width: 150px;">
+                    <div class="inline-block align-middle">
+                        <h2 class="font-weight-normal lead" id="desc">You have not applied for jobs yet!
+                            <a routerLink="/job-seeker/home" class="text-decoration-none">
+                                Apply now?
+                            </a>
+                        </h2>
+                    </div>
+                </div>
                 <ng-template #appliedJob>
                     <!-- ng-containe -->
                     <ng-container *ngFor="let job of myJobs; let i = index">
-                        <div class="pt-3 d-flex justify-content-start pointer"
-                            (click)="getTimeline(i)">
+                        <div class="pt-3 d-flex justify-content-start pointer" (click)="getTimeline(i)">
                             <div class="pt-3">
-                                <img [src]="job.companyProfilePicture + '?' + sasToken"
-                                    height="50px"
-                                    width="50px"
+                                <img [src]="job.companyProfilePicture + '?' + sasToken" height="50px" width="50px"
                                     style="border-radius: 25px;">
                             </div>
                             <div class="ps-4 d-flex flex-column flex-grow-1">
@@ -82,9 +90,12 @@
                     </ng-template>
                     <ng-template pTemplate="content" let-event>
                         <p-card [header]="event.status" [subheader]="event.date">
-                            <img *ngIf="event.image" [src]="'assets/showcase/images/demo/product/' + event.image" [alt]="event.name" width="200" class="shadow-2" />
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Inventore sed consequuntur error repudiandae numquam deserunt
-                                quisquam repellat libero asperiores earum nam nobis, culpa ratione quam perferendis esse, cupiditate neque quas!</p>
+                            <img *ngIf="event.image" [src]="'assets/showcase/images/demo/product/' + event.image"
+                                [alt]="event.name" width="200" class="shadow-2" />
+                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Inventore sed consequuntur
+                                error repudiandae numquam deserunt
+                                quisquam repellat libero asperiores earum nam nobis, culpa ratione quam perferendis
+                                esse, cupiditate neque quas!</p>
                             <button pButton label="Read more" class="p-button-text"></button>
                         </p-card>
                     </ng-template>

@@ -60,7 +60,7 @@
     <ng-template #data>
         <div class="flex-grow-1">
             <ng-container *ngFor="let job of allJobs">
-                <app-job-card [job]="job">
+                <app-job-card  [job]="job" [minimalJobs]="minimalJob">
                 </app-job-card>
             </ng-container>
         </div>

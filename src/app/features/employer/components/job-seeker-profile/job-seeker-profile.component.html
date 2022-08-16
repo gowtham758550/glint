@@ -83,6 +83,14 @@
                         <h4 class="card-title">Skills</h4>
                     </div>
                     <hr>
+                    <div class="d-flex justify-content-center align-items-center" id="main"
+                            *ngIf="skillArray.length==0">
+                            <img class="mr-3 pr-3 align-top border-right inline-block align-content-center"
+                                src="https://cdn.dribbble.com/users/1753953/screenshots/3818675/animasi-emptystate.gif"
+                                style="height:150px; width: 150px;">
+                            <div class="inline-block align-middle">
+                                <h2 class="font-weight-normal lead" id="desc">No Skills</h2>
+                            </div>
                     <div class="clearfix"></div>
                     <div *ngFor="let skill of skillArray; let id=index">
 

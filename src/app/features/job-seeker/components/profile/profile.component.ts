@@ -579,7 +579,7 @@ export class ProfileComponent implements OnInit {
         for (var i = 0; i < res.length; i++) {
           console.log(res[i].jobTitle);
           // console.log()
-          if (res[i].jobTitle === this.preferredJobForm.value.preferredJobTitle) {
+          if (res[i].jobTitle.toLowerCase() === this.preferredJobForm.value.preferredJobTitle.toLowerCase()) {
             this.isPreferredJobAdded = false;
             break;
           }

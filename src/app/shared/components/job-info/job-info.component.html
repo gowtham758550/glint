@@ -1,61 +1,68 @@
-
 <div class="text-end p-2">
-    <button class="btn border-none text-danger rounded-pill border border-danger"
-        *ngIf="!isJobSeeker"
+    <button class="btn border-none text-danger rounded-pill border border-danger" *ngIf="!isJobSeeker"
         (click)="deleteJob()">
         <i class="pi pi-trash"></i>
         Delete
     </button>
 </div>
 
-<div class="card p-4">
-    <div class="fs-3 fw-bold">
-        {{job.jobTitle}}
-    </div>
-    <div class="fs-6">
-        <span *ngIf="isJobSeeker">
-            <i class="pi pi-building"></i>
-            company name
-            .
-        </span>
-        <span>
-            <i class="pi pi-map-marker"></i>
-           {{job.location}}
-        </span>
-        .
-        <span class="text-success">
-            <i class="pi pi-clock"></i>
-            22 hours ago
-        </span>
-    </div>
+<div class="card p-4 d-flex">
+    <div class="d-flex justify-content-start">
+        <div>
+            <img class="img-fluid rounded-circle" [src]="currentJob.companyProfilePicture + '?' + profile_sas_token"
+                style="height:150px; width: 150px">
+        </div>
+        <div class="ps-5">
+            <div class="fs-3 fw-bold">
+                {{job.jobTitle}}
+            </div>
+           <div class="p-2"></div>
+            <div class="d-block fs-6">
+                <span *ngIf="isJobSeeker" class="me-2">
+                    <i class="pi pi-building"></i>
+                    {{currentJob.companyName}}
+                </span>
+                <span class="me-2">
+                    <i class="pi pi-map-marker pe-2"></i>
+                    {{job.location}}
+                </span>
 
-    <div class="pt-2">
-        <i class="pi pi-briefcase"></i>
-        {{job.jobType}}
-    </div>
+                <span class="me-2 text-success">
+                    <i class="pi pi-clock pe-2"></i>
+                    {{job.createdDate|date}}
+                </span>
 
-    <div class="pt-2"
-        *ngIf="isJobSeeker">
-        <ng-container *ngIf="isApplied; then applied; else notApplied">
-        </ng-container>
-        <ng-template #applied>
-            <button class="btn bg-dark text-secondary rounded-pill" [disabled]="isApplied">
-                Applied
-            </button>
-        </ng-template>
-        <ng-template #notApplied>
-            <button class="btn bg-dark text-secondary rounded-pill" (click)="applyForJob()">
-                Apply
-            </button>
-        </ng-template>
+            </div>
+
+            <div class="pt-2">
+                <i class="pi pi-briefcase pe-2"></i>
+                {{job.jobType}}
+            </div>
+
+            <div class="p-2" *ngIf="isJobSeeker">
+                <ng-container *ngIf="isApplied; then applied; else notApplied">
+                </ng-container>
+                <ng-template #applied>
+                    <button class="btn bg-dark text-secondary rounded-pill" [disabled]="isApplied">
+                        Applied
+                    </button>
+                </ng-template>
+                <ng-template #notApplied>
+                    <button class="btn bg-dark text-secondary rounded-pill " (click)="applyForJob()">
+                        Apply for Job
+                    </button>
+                </ng-template>
+            </div>
+        </div>
     </div>
 </div>
 <div class="pt-4"></div>
 <div class="card p-4">
-    <div class="fs-3 fw-bold">
+    <div class="fs-4 fw-bold">
         About the job
     </div>
-    <div class="fs-5 fw-bold">
+    <hr>
+    <div class="fs-4">
         Company Description
     </div>
     <div class="fs-6">
