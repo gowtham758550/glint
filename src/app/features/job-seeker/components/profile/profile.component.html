@@ -35,15 +35,15 @@
                                 {{jobSeekerArray.lastName}}</p>
                             <div class="d-flex float-end">
                                 <button class="btn btn-rounded btn btn-outline-dark
-                                d-none d-md-block" (click)="updateProfile(profileModal)">Edit Profile
+                                d-none d-md-block bg-dark text-white" (click)="updateProfile(profileModal)">Edit Profile
                                 </button>
                                 <div class="p-1"></div>
                                 <button class="btn btn-rounded btn btn-outline-dark
-                                d-none d-md-block" (click)="openFileTrigger(resumeTigger)">Upload Resume
+                                d-none d-md-block bg-dark text-white" (click)="openFileTrigger(resumeTigger)">Upload Resume
                                 </button>
                                 <div class="p-1"></div>
                                 <button class="btn btn-rounded btn btn-outline-dark
-                                d-none d-md-block" (click)="getResume()">Download Resume
+                                d-none d-md-block bg-dark text-white" (click)="getResume()">Download Resume
                                 </button>
                                 <input type="file" (change)="uploadResume($event)" accept=".pdf" style="display: none;"
                                     #resumeTigger>
