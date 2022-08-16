@@ -1,12 +1,10 @@
-import { HttpParams } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Location } from 'src/app/data/enums/location.enum';
-import { Experience } from 'src/app/data/enums/experience.enum';
+import { Experience } from 'src/app/data/models/experience.enum';
 import { Job } from 'src/app/data/models/job.model';
 import { FilterService } from 'src/app/data/services/filter.service';
 import { RouteConstants } from 'src/app/data/enums/constatnts/route.constants';
-import { filter } from 'rxjs';
 
 @Component({
   selector: 'app-job-seeker-jobs',

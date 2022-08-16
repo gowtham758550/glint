@@ -301,7 +301,7 @@ export class ProfileComponent implements OnInit {
         next: (_data) => {
           console.log("success");
           this.toastr.success("Resume uploaded successfully!")
-          this.getResume();
+          // this.getResume();
         },
         error: (error) => {
           console.log(error);
