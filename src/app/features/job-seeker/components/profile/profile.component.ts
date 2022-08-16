@@ -301,7 +301,7 @@ export class ProfileComponent implements OnInit {
         next: (_data) => {
           console.log("success");
           this.toastr.success("Resume uploaded successfully!")
-          this.getResume();
+          //this.getResume();
         },
         error: (error) => {
           console.log(error);
@@ -309,45 +309,19 @@ export class ProfileComponent implements OnInit {
       });
     }
   }
-  resume1: any;
-  // getResume() {
-  //   // this.isImageLoaded = false;
-  //   this.blobService.getResume().subscribe({
-  //     next: (data: any) => {
-  //       let res = data.url;
-  //       this.resume = res + "?" + environment.resume_sas_token;
-  //       this.resume1 =this.resume;
-  //     },
-  //   });
-  // }
-  // getResume() {
-  //   this.blobService.getResume()
-  //     .subscribe(
-  //       (data: any) => {
-  //         console.log(data.url)
-  //         this.resume = data.url;
-  //         var blob = new Blob([this.resume], { type: 'application/pdf' });
-  //         var url = window.URL.createObjectURL(blob);
-  //         var anchor = document.createElement("a");
-  //         anchor.download = "myfile.pdf";
-  //         anchor.href = url;
-  //         anchor.click();
-  //       }
 
-  //     );
-  // }
 
   getResume() {
-    this.blobService.getResume().pipe(map((data: any) => {
-      console.log(data.url);
+    this.blobService.getResume().subscribe((res:any)=>{
+      console.log(res);
+      console.log(res.url);
       var link = document.createElement('a');
-      link.href = data.url + "?" + environment.resume_sas_token;
+      link.href = res.url + "?" + environment.resume_sas_token;
       link.click();
-      window.open(link.href, '_blank');
+      // window.open(link.href, '_blank');
       window.URL.revokeObjectURL(link.href);
 
-    })).subscribe((result: any) => {
-    });
+    })
   }
 
 
