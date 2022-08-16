@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { FilterService } from 'src/app/data/services/filter.service';
 import { Appliers } from 'src/app/data/models/appliers.model';
@@ -8,7 +8,7 @@ import { ExperienceService } from 'src/app/data/services/experience.service';
 import { JobSeekerService } from 'src/app/data/services/job-seeker.service';
 import { environment } from 'src/environments/environment';
 import { SkillsService } from 'src/app/data/services/skills.service';
-import { map } from 'rxjs';
+import { AppliedJobService } from 'src/app/data/services/applied-job.service';
 
 @Component({
   selector: 'app-job-seeker-profile',
@@ -34,7 +34,9 @@ export class JobSeekerProfileComponent implements OnInit {
     private educationService: EducationService,
     private experienceService: ExperienceService,
     private filterService: FilterService,
-    private skillService: SkillsService) { }
+    private skillService: SkillsService,
+    private appliedJobService: AppliedJobService
+    ) { }
 
   ngOnInit() {
     this.getJobSeekerbyId();
@@ -51,8 +53,8 @@ export class JobSeekerProfileComponent implements OnInit {
         console.log(this.appliers)
         for (var i = 0; i < this.appliers.length; i++) {
           console.log(this.id)
-          console.log(this.appliers[i].id)
-          if (this.appliers[i].id == this.id) {
+          console.log(this.appliers[i].jobSeekerId)
+          if (this.appliers[i].jobSeekerId == this.id) {
             this.currentApplier = this.appliers[i];
             console.log(this.currentApplier)
             this.getSkillDetail(this.currentApplier);
@@ -65,7 +67,7 @@ export class JobSeekerProfileComponent implements OnInit {
   }
 
   getSkillDetail(currentApplier: Appliers){
-    this.skillService.getSkillsByUserId(currentApplier.id).subscribe(res=>this.skillArray=res)
+    this.skillService.getSkillsByUserId(currentApplier.jobSeekerId).subscribe(res=>this.skillArray=res)
   }
   getResumebyId(id:number){
     console.log(id)
@@ -99,6 +101,12 @@ export class JobSeekerProfileComponent implements OnInit {
   }
   getExperienceDetail() {
     this.experienceService.getExperienceByUserId(this.id).subscribe((res: any) => this.experienceArray = res);
+  }
+
+  shortlistCandidate() {
+    this.appliedJobService.updateAppliedJobStatus(this.postJobDetailId).subscribe({
+      next: data => console.log(data)
+    });
   }
 
 

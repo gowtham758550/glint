@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { RouteConstants } from 'src/app/data/enums/constatnts/route.constants';
 import { Appliers } from 'src/app/data/models/appliers.model';
 import { Job } from 'src/app/data/models/job.model';
 import { FilterService } from 'src/app/data/services/filter.service';
@@ -33,23 +34,22 @@ export class ViewJobComponent implements OnInit {
 
   ngOnInit(): void {
     this.getJob();
+    this.getjobSeekerCountByJobId();
     this.getJobAppliers();
-    this.getjobSeekerCountByJobId()
   }
 
   getJobAppliers() {
     this.filterService.getJobAppliers(this.postJobDetailId).subscribe({
       next: data => {
         this.appliers = data;
-        console.log(this.appliers)
+        console.log(data);
         this.isAppliersTableLoaded = true;
       }
     });
   }
 
-  getJobSeekerProfileById(id:number){
-    this.router.navigate(['employer/job-seeker/profile/',id, this.postJobDetailId])
-    // this.router.navigateByUrl('/employer/job-seeker/profile/' + id)
+  getJobSeekerProfileById(jobSeekerId:number, appliedJobId: number){
+    this.router.navigate(['employer/job-seeker/profile/',jobSeekerId, appliedJobId])
   }
 
   
