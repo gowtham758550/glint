@@ -27,17 +27,13 @@ export class JobCardComponent implements OnInit {
     private toastr: ToastrService,
     private filterService: FilterService
   ) {
+
+    
   }
 
   ngOnInit(): void {
-    // this.getIsApplied();
-    this.findJobfromMinimalJobs();
+    
   }
-  // ngOnChanges(changes: any) {
-  //   if (changes['minimalJob']) {
-  //      this.variableChange = changes['minimalJob'];
-  //   }
-  // }
 
   applyForJob() {
     if (this.job.postJobDetailId) {
@@ -55,15 +51,4 @@ export class JobCardComponent implements OnInit {
       next: (data: any) => this.isApplied = data.status
     });
   }
-  findJobfromMinimalJobs() {
-    console.log(this.variableChange)
-    console.log(this.minimalJobs)
-    // for(var i=0;i<this.minimalJobs.length;i++){
-    //   if(this.job.postJobDetailId=== this.minimalJobs[i].postJobDetailId){
-    //     this.currentJob=this.minimalJobs[i];
-    //     console.log(this.currentJob)
-    //   }
-    // }
-  }
-
 }

@@ -23,7 +23,7 @@ export class JobInfoComponent implements OnInit, AfterContentInit {
   isApplied!: boolean;
   currentJob!: any;
   today = new Date();
-  profile_sas_token= environment.profile_sas_token;
+  profile_sas_token = environment.profile_sas_token;
 
   constructor(
     private jobService: JobService,
@@ -33,7 +33,7 @@ export class JobInfoComponent implements OnInit, AfterContentInit {
     private toastr: ToastrService,
     private appliedJobService: AppliedJobService,
     private filterService: FilterService
-  ) { 
+  ) {
   }
 
   ngOnInit(): void {
@@ -46,10 +46,10 @@ export class JobInfoComponent implements OnInit, AfterContentInit {
     else if (role == 'JobSeeker') {
       this.isJobSeeker = true;
       this.appliedJobService.isApplied(postJobDetailId).subscribe({
-        next: (data: any) => {this.isApplied = data.status; console.log(data)}   
+        next: (data: any) => { this.isApplied = data.status; console.log(data) }
       })
     }
-  } 
+  }
 
   ngAfterContentInit(): void {
   }
@@ -58,22 +58,23 @@ export class JobInfoComponent implements OnInit, AfterContentInit {
     const postJobDetailId = this.activatedRoute.snapshot.params['postJobDetailId']
     this.jobId = postJobDetailId;
     this.jobService.getJobById(postJobDetailId).subscribe({
-      next: data => {this.job = data; console.log(this.job)}
+      next: data => { this.job = data; console.log(this.job) }
     });
-
   }
 
-  getJobMinimal(){
-    this.filterService.getJobMinimal().subscribe(res=> this.getjobfromJobMinimal(res))
+  getJobMinimal() {
+    this.filterService.getJobMinimal().subscribe(res => this.getjobfromJobMinimal(res))
   }
 
-  getjobfromJobMinimal(jobList: Job[]){
+  getjobfromJobMinimal(jobList: Job[]) {
     const postJobDetailId = this.activatedRoute.snapshot.params['postJobDetailId']
-    for(var i=0;i<jobList.length;i++){
+    console.log(jobList)
+    for (var i = 0; i < jobList.length; i++) {
       console.log(jobList[i].postJobDetailId)
-      if(jobList[i].postJobDetailId== postJobDetailId ){
+      if (jobList[i].postJobDetailId == postJobDetailId) {
         console.log(jobList[i])
-        this.currentJob=jobList[i];
+        this.currentJob = jobList[i];
+        console.log(this.currentJob)
         break;
       }
     }

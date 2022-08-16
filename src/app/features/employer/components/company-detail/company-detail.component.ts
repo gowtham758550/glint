@@ -17,7 +17,7 @@ import { environment } from 'src/environments/environment';
 })
 export class CompanyDetailComponent implements OnInit {
   isImageLoaded = true;
-  imageUrl: string = "https://cdn-icons-png.flaticon.com/512/1077/1077012.png?w=360";
+  imageUrl: string = "/assets/defaultProfilePicture.png";
   profileForm: FormGroup = this.formBuilder.group({
     firstName: [this.localStorage.getItem('firstName'), [Validators.required]],
     lastName: [this.localStorage.getItem('lastName'), [Validators.required]],
@@ -77,7 +77,8 @@ export class CompanyDetailComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.getProfilePicture();
+    // this.getProfilePicture();
+
   }
   openFileTrigger(component: HTMLElement) {
     component.click();
@@ -89,7 +90,7 @@ export class CompanyDetailComponent implements OnInit {
         autoCropArea: 1,
       })
       .subscribe((data: any) => {
-        // this.output = data;
+        console.log(data)
         let file: any = data.file;
         let formData: FormData = new FormData();
         formData.append("profilePicture", file, file.name);
@@ -97,7 +98,8 @@ export class CompanyDetailComponent implements OnInit {
           next: (_data) => {
             console.log("success");
             this.getProfilePicture();
-          }
+          },
+          
         });
       });
   }
@@ -109,6 +111,9 @@ export class CompanyDetailComponent implements OnInit {
         let res = data.url;
         this.imageUrl = res + "?" + environment.profile_sas_token;
         this.isImageLoaded = true;
+      },
+      error(err) {
+        
       },
     });
   }
