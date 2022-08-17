@@ -50,7 +50,7 @@ export class JobInfoComponent implements OnInit, AfterContentInit {
     const postJobDetailId = this.activatedRoute.snapshot.params['postJobDetailId']
     this.jobId = postJobDetailId;
     this.jobService.getJobById(postJobDetailId).subscribe({
-      next: data => this.job = data
+      next: data =>{ this.job = data; console.log(this.job)}
     });
   }
 

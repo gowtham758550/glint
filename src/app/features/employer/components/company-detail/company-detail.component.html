@@ -1,16 +1,16 @@
-<div class="p-5">
-    <h2>
+<div class="bg-grey p-3">
+    <h5 class="text-center text-dark" >
         Company Details
-    </h2>
+    </h5>
     <hr>
     <div class="ms-4 ml-5 d-flex mx-auto" style="width: 200px;">
         <ng-container *ngIf="isImageLoaded; then image; else imageLoader"></ng-container>
         <ng-template #imageLoader>
-            <img [src]="imageUrl" class="pointer rounded-circle" style="width: 150px; height: 150px; margin-left:50%"
+            <img [src]="imageUrl" class="pointer rounded-circle" style="width: 100px; height: 100px; margin-left:70%"
                 (click)="openFileTrigger(fileTigger)" pTooltip="Update Profile picture">
         </ng-template>
         <ng-template #image>
-            <img [src]="imageUrl" class="pointer rounded-circle" style="width: 150px; height: 150px; margin-left:50%"
+            <img [src]="imageUrl" class="pointer rounded-circle" style="width: 100px; height: 100px; margin-left:70%"
                 (click)="openFileTrigger(fileTigger)" pTooltip="Update Profile picture">
         </ng-template>
 

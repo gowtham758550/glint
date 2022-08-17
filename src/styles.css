@@ -9,6 +9,11 @@
     --warning: #ffb31d;
     --dark: #171b34;
     --success: #8cffa7;
+
+}
+
+body{
+background-color: rgba(243, 238, 238, 0.8)
 }
 
 .bg-primary {
@@ -232,4 +237,8 @@
 
 .option {
     text-transform: capitalize;
+}
+
+.bg-grey{
+    background-color: rgba(243, 238, 238, 0.8)
 }

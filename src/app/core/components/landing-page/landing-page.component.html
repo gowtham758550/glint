@@ -6,15 +6,13 @@
             <app-logo [class]="'text-white'"></app-logo>
         </div>
         <div class="pe-3 pt-2">
-            <button class="fw-bold btn border-none text-dark bg-secondary rounded-pill"
-                routerLink="/login">
-                    Login
+            <button class="fw-bold btn border-none text-dark bg-secondary rounded-pill" routerLink="/login">
+                Login
             </button>
         </div>
         <div class="pe-3 pt-2">
-            <button class="btn border-none text-secondary bg-primary rounded-pill"
-                routerLink="/job-seeker/signup">
-                    Register
+            <button class="btn border-none text-secondary bg-primary rounded-pill" routerLink="/job-seeker/signup">
+                Register
             </button>
         </div>
         <div class="vr"></div>
@@ -32,56 +30,31 @@
             </div>
         </div>
     </div>
-    
 
-    <div class="pt-5">
-        <div class="text-center">
+
+    <div class="pt-5" style="background-color: rgba(243, 238, 238, 0.8)">
+        <div class="text-center" style="background-color: rgba(243, 238, 238, 0.8)">
             <div class="pt-4"></div>
-            <p class="fw-bold">It's simple and smart</p>
-            <h1 class="fw-bold">Search | Find | Apply</h1>
-            
-            <div class="d-flex justify-content-center pt-4">
-                <div class="pe-4">
-                    <img src="assets/job.svg" height="40px" width="40px" alt="">
-                    {{totalJobCount}} Job
-                </div>
-                <div class="pe-4">
-                    <img src="assets/company.png" height="40px" width="40px" alt="">
-                    {{totalCompanyCount}} Companies
-                </div>
-                <div>
-                    <img src="assets/job-seeker.jpg" height="40px" width="40px" alt="">
-                    {{jobSeekerCount}} Job Seekers
-                </div>
-            </div>
+            <p class="fw-bold fs-2">The Easiest Way To Get Your Dream Job</p>
+            <h1 class="fw-bold fs-3">Your Dream Job is Waiting</h1>
 
-            <div class="pt-5"></div>
-
+            <div class="p-4"></div>
             <div class="d-flex justify-content-center">
                 <form [formGroup]="searchBarForm">
-                    <div class="card">
+                    <div class="card" id="card1">
                         <div class="d-flex justify-content-center p-2">
 
                             <!-- search icon -->
                             <div class="pt-2">
-                                <button pButton 
-                                    pRipple 
-                                    type="button"
-                                    [disabled]="true"
-                                    icon="pi pi-search"
+                                <button pButton pRipple type="button" [disabled]="true" icon="pi pi-search"
                                     class="p-button-rounded p-button-text mr-2 mb-2">
                                 </button>
                             </div>
 
                             <!-- designation -->
-                            <input type="text"
-                                pInputText
-                                formControlName="designation"
-                                class="border-0 input"
-                                list="designation-datalist"
-                                placeholder="Search designation">
-                            <datalist id="designation-datalist"
-                                class="datalist">
+                            <input type="text" pInputText formControlName="designation" class="border-0 input"
+                                list="designation-datalist" placeholder="Search designation">
+                            <datalist id="designation-datalist" class="datalist">
                                 <ng-container *ngFor="let designation of designations">
                                     <option [value]="designation">
                                         <span style="text-transform: capitalize;">
@@ -95,14 +68,11 @@
                             <div class="pe-4 d-flex">
                                 <select class="input bg-white pe-5"
                                     [ngClass]="isExperiencePlaceholder ? 'text-muted': 'text-dark'"
-                                    formControlName="experience"
-                                    (change)="onExperienceChnage($event)">
-                                    <option *ngFor="let option of experience; let i = index"
-                                        [value]="option.value"
-                                        class="text-dark bg-white"
-                                        [disabled]="i == 0">   
-                                    {{option.label}}
-                                </option>
+                                    formControlName="experience" (change)="onExperienceChnage($event)">
+                                    <option *ngFor="let option of experience; let i = index" [value]="option.value"
+                                        class="text-dark bg-white" [disabled]="i == 0">
+                                        {{option.label}}
+                                    </option>
                                 </select>
                             </div>
 
@@ -110,29 +80,83 @@
                             <div class="pe-4 d-flex">
                                 <select class="input bg-white pe-5"
                                     [ngClass]="isLocationPlaceholder ? 'text-muted': 'text-dark'"
-                                    formControlName="location"
-                                    (change)="onLocationChange($event)">
-                                    <option *ngFor="let option of location; let i = index"
-                                        [value]="option.value"
-                                        class="text-dark bg-white"
-                                        [disabled]="i == 0">   
-                                    {{option.label}}
-                                </option>
+                                    formControlName="location" (change)="onLocationChange($event)">
+                                    <option *ngFor="let option of location; let i = index" [value]="option.value"
+                                        class="text-dark bg-white" [disabled]="i == 0">
+                                        {{option.label}}
+                                    </option>
                                 </select>
                             </div>
 
-
-                            <button pButton
-                                class="p-button-raised p-button-rounded px-4 fs-4 bg-dark text-secondary"
-                                type="button"
-                                (click)="search()">
-                                    <i class="pi pi-search pe-3"></i>
-                                    Search
+                            <div class="clearfix"></div>
+                            <button pButton class="p-button-raised p-button-rounded px-4 fs-4 bg-dark text-secondary"
+                                type="button" (click)="search()">
+                                <i class="pi pi-search pe-3"></i>
+                                Search
                             </button>
 
                         </div>
                     </div>
                 </form>
+            </div>
+            <div class="p-3"></div>
+            <div class="our-services section-pad-t30">
+                <div class="container">
+                    <!-- Section Tittle -->
+
+                    <div class="row d-flex justify-contnet-center">
+                        <div class="single-services text-center mb-30">
+                            <div class="services-ion">
+                                <span class="flaticon-cms"></span>
+                            </div>
+
+                            <div class="section-tittle text-center">
+                                <h3 class="fw-bold">Glint Job Stats</h3>
+                            </div>
+                            <div class="row">
+                                <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6">
+                                    <div class="single-services text-center mb-30">
+                                        <div class="services-ion">
+                                            <span class="flaticon-report"></span>
+                                        </div>
+                                        <div class="services-cap">
+                                            <h5>Total Jobs</h5>
+                                            <h5>
+                                                {{totalJobCount}}</h5>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6">
+                                    <div class="single-services text-center mb-30">
+                                        <div class="services-ion">
+                                            <span class="flaticon-report"></span>
+                                        </div>
+                                        <div class="services-cap">
+                                            <h5>Companies</h5>
+                                            <h5>
+                                                {{totalCompanyCount}}</h5>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6">
+                                    <div class="single-services text-center mb-30">
+                                        <div class="services-ion">
+                                            <span class="flaticon-app"></span>
+                                        </div>
+                                        <div class="services-cap">
+                                            <h5>Job Seekers</h5>
+                                            <h5>
+                                                {{jobSeekerCount}}</h5>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
             </div>
         </div>
     </div>

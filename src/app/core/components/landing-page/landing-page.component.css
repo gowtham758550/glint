@@ -14,8 +14,116 @@
 
 
 
-.card {
+#card1 {
     width: max-content;
     box-shadow: 0 4px 12px rgb(86 141 187 / 12%);
     border-radius: 100px;
-}   
+}
+
+.single-services {
+    border: green;
+    padding: 44px 0;
+    -webkit-transition: .4s;
+    -moz-transition: .4s;
+    -o-transition: .4s;
+    transition: .4s
+}
+
+.our-services .single-services .services-ion span {
+    font-size: 60px;
+    margin-bottom: 13px;
+    color: #014b85;
+    -webkit-transition: .3s;
+    -moz-transition: .3s;
+    -o-transition: .3s;
+    transition: .3s
+}
+
+.our-services .single-services .services-cap h5 a {
+    font-weight: 600;
+    font-size: 18px;
+    color: #001f38;
+    line-height: 1.4;
+    -webkit-transition: .3s;
+    -moz-transition: .3s;
+    -o-transition: .3s;
+    transition: .3s
+}
+
+.our-services .single-services .services-cap span {
+    color: #12174f;
+    font-size: 18px
+}
+.our-services .single-services {
+    border:rgba(133, 66, 189, 0.1);
+    background-color: rgba(209, 218, 234, 0.2);
+    border-radius: 10px;
+
+   
+}
+
+.our-services .single-services:hover {
+    box-shadow: 0px 30px 30px 0px rgba(133, 66, 189, 0.1)
+}
+
+.our-services .single-services:hover .services-ion span {
+    color: #12174f
+}
+
+.our-services .single-services:hover .services-cap h5 a {
+    color: #12174f
+}
+
+@media (max-width: 767px) {
+    .online-cv {
+        padding-top: 80px;
+        padding-bottom: 90px
+    }
+}
+
+.our-services .single-services {
+    border: 1px solid #dafcef;
+    padding: 44px 0;
+    -webkit-transition: .4s;
+    -moz-transition: .4s;
+    -o-transition: .4s;
+    transition: .4s
+}
+
+.our-services .single-services .services-ion span {
+    font-size: 60px;
+    margin-bottom: 13px;
+    color: #014b85;
+    -webkit-transition: .3s;
+    -moz-transition: .3s;
+    -o-transition: .3s;
+    transition: .3s
+}
+
+.our-services .single-services .services-cap h5 a {
+    font-weight: 600;
+    font-size: 18px;
+    color: #001f38;
+    line-height: 1.4;
+    -webkit-transition: .3s;
+    -moz-transition: .3s;
+    -o-transition: .3s;
+    transition: .3s
+}
+
+.our-services .single-services .services-cap span {
+    color: #12174f;
+    font-size: 18px
+}
+
+.our-services .single-services:hover {
+    box-shadow: 0px 10px 30px 0px rgba(133, 66, 189, 0.1)
+}
+
+.our-services .single-services:hover .services-ion span {
+    color: #12174f
+}
+
+.our-services .single-services:hover .services-cap h5 a {
+    color: #12174f
+}
