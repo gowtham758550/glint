@@ -66,12 +66,6 @@ export class ProfileComponent implements OnInit {
   ]
   skillFields: FormField[] = [
     {
-      type: 'input',
-      label: 'Enter your skill',
-      formControlName: 'skillTitle',
-      class: ['w'],
-    },
-    {
       type: 'chips',
       label: 'Enter your skill',
       formControlName: 'SkillTitle',
