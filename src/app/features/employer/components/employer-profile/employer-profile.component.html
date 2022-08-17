@@ -3,12 +3,23 @@
         <!-- Profile Image -->
         <div class="card shadow">
             <div class="div">
-                <img id="coverpicture" class="rounded-top text-white d-flex flex-row" [src]="backgroundImage"
-                    (click)="openCoverPictureTrigger(coverPicture)" pTooltip="Update Cover picture">
+                <ng-container *ngIf="isCoverImageLoaded; then coverImage; else coverImageLoader"></ng-container>
+                <ng-template #coverImageLoader>
+                    <img id="coverpicture" class="rounded-top text-white d-flex flex-row"
+                        style="height:170px; width:100%; cursor: pointer; background-repeat: no-repeat; background-size: cover; background-blend-mode: darken;"
+                        src="/assets/defaultCoverPicture.jpg" (click)="openFileTrigger(coverPicture)"
+                        pTooltip="Update Cover picture">
+                </ng-template>
+                <ng-template #coverImage>
+                    <img id="coverpicture" class="rounded-top text-white d-flex flex-row"
+                        style="height:170px; width:100%; cursor: pointer; background-repeat: no-repeat; background-size: cover; background-blend-mode: darken;"
+                        [src]="backgroundImage" (click)="openFileTrigger(coverPicture)" pTooltip="Update Cover picture">
+                </ng-template>
                 <ng-container *ngIf="isImageLoaded; then image; else imageLoader"></ng-container>
                 <ng-template #imageLoader>
-                    <img id="innerimage" [src]="imageUrl" class="rounded-circle img-fluid img-thumbnail pointer"
-                        (click)="openFileTrigger(fileTigger)" pTooltip="Update Profile picture">
+                    <img id="innerimage" src="/assets/defaultProfilePicture.png"
+                        class="rounded-circle img-fluid img-thumbnail pointer" (click)="openFileTrigger(fileTigger)"
+                        pTooltip="Update Profile picture">
                 </ng-template>
                 <ng-template #image>
                     <img id="innerimage" [src]="imageUrl" class=" rounded-circle mt-5 img-fluid img-thumbnail pointer"
