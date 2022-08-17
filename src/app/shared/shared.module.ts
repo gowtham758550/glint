@@ -28,7 +28,7 @@ import { LoginTemplateComponent } from './components/login-template/login-templa
     JobCardComponent,
     JobInfoComponent,
     LayoutComponent,
-    LoginTemplateComponent
+    LoginTemplateComponent,
   ],
   imports: [
     CommonModule,
@@ -50,7 +50,7 @@ import { LoginTemplateComponent } from './components/login-template/login-templa
     JobCardComponent,
     JobInfoComponent,
     LayoutComponent,
-    LoginTemplateComponent
+    LoginTemplateComponent,
   ]
 })
 export class SharedModule { }

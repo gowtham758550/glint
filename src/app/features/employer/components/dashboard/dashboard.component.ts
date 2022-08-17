@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { EChartsOption } from 'echarts';
+import { NgxSpinnerService } from 'ngx-spinner';
+import { BarChartData } from 'src/app/data/models/barchart-data.model';
 import { FilterService } from 'src/app/data/services/filter.service';
 
 @Component({
@@ -13,48 +15,8 @@ export class DashboardComponent implements OnInit {
   totalJobs!: number;
   totalHiring!: number;
   totalShortlisted!: number;
-  barChartOptions: EChartsOption = {
-    title: {
-      text: 'Job Application Status'
-    },
-    tooltip: {
-      trigger: 'axis',
-      axisPointer: {
-        type: 'shadow'
-      }
-    },
-    legend: {},
-    grid: {
-      left: '3%',
-      right: '4%',
-      bottom: '3%',
-      containLabel: true
-    },
-    xAxis: {
-      type: 'value',
-      boundaryGap: [0, 0.01]
-    },
-    yAxis: {
-      type: 'category',
-      data: ['Tester', 'Developer', 'Engineering Manager', 'Customer Support']
-    },
-    series: [
-      {
-        name: 'Total Applicants',
-        type: 'bar',
-        data: [11, 32, 13, 22]
-      },
-      {
-        name: 'Shortlisted',
-        type: 'bar',
-        data: [6, 12, 3, 19]
-      }
-    ]
-  };
+  barChartOptions!: EChartsOption;
   pieChartOptions: EChartsOption = {
-    title: {
-        text: 'All Jobs'
-    },
     tooltip: {
       trigger: 'item'
     },
@@ -98,12 +60,15 @@ export class DashboardComponent implements OnInit {
   };
 
   constructor(
-    private filterService: FilterService
+    private filterService: FilterService,
+    private spinner: NgxSpinnerService
   ) { }
 
   ngOnInit(): void {
+    this.spinner.show();
     this.totalJobs = 9;
     this.totalHiring = 41;
+    this.getBarChartData();
   }
 
   getTotalJobs() {
@@ -111,6 +76,50 @@ export class DashboardComponent implements OnInit {
       .subscribe({
         next: data => this.totalJobs = data
       });
+  }
+
+  getBarChartData() {
+    this.filterService.getBarChartData().subscribe({
+      next: (data: BarChartData) => {
+        this.barChartOptions = {
+          tooltip: {
+            trigger: 'axis',
+            axisPointer: {
+              type: 'shadow'
+            }
+          },
+          legend: {},
+          grid: {
+            left: '3%',
+            right: '4%',
+            bottom: '3%',
+            containLabel: true
+          },
+          xAxis: {
+            type: 'value',
+            boundaryGap: [0, 0.01]
+          },
+          yAxis: {
+            type: 'category',
+            data: data.jobTitles
+          },
+          series: [
+            {
+              name: 'Total Applicants',
+              type: 'bar',
+              data: data.applicantCount
+            },
+            {
+              name: 'Shortlisted',
+              type: 'bar',
+              data: data.shortListedCount
+            }
+          ]
+        };
+        this.spinner.hide();
+      }
+    });
+    
   }
 
 }

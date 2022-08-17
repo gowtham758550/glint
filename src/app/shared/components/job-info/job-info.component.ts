@@ -6,6 +6,7 @@ import { LocalStorage } from 'src/app/data/services/local-storage.service';
 import { AuthService } from "src/app/data/services/auth.service";
 import { ToastrService } from 'ngx-toastr';
 import { AppliedJobService } from 'src/app/data/services/applied-job.service';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-job-info',
@@ -26,7 +27,8 @@ export class JobInfoComponent implements OnInit, AfterContentInit {
     private authService: AuthService,
     private router: Router,
     private toastr: ToastrService,
-    private appliedJobService: AppliedJobService
+    private appliedJobService: AppliedJobService,
+    private spinner: NgxSpinnerService
   ) { 
   }
 
@@ -64,9 +66,11 @@ export class JobInfoComponent implements OnInit, AfterContentInit {
   }
 
   applyForJob() {
+    this.spinner.show();
     if (this.job.postJobDetailId) {
       this.appliedJobService.applyJob(this.job.postJobDetailId).subscribe({
         next: data => {
+          this.spinner.hide();
           this.toastr.success('Applied');
           this.isApplied = true;
         }
