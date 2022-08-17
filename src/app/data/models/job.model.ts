@@ -1,5 +1,7 @@
 export interface Job {
     postJobDetailId?: number
+    companyName?:string
+    companyProfilePicture?: string
     employerID?: number
     jobTitle: string
     description: string

@@ -71,6 +71,12 @@ export class ProfileComponent implements OnInit {
       formControlName: 'skillTitle',
       class: ['w'],
     },
+    {
+      type: 'chips',
+      label: 'Enter your skill',
+      formControlName: 'SkillTitle',
+      class: ['w'],
+    }
   ]
 
   profileFields: FormField[] = [
@@ -603,6 +609,7 @@ export class ProfileComponent implements OnInit {
   getskill(): FormGroup {
     return this.formBuilder.group({
       skillTitle: ['', Validators.required],
+      SkillTitle:['',Validators.required]
     })
   }
   // Modal Add job
@@ -629,22 +636,35 @@ export class ProfileComponent implements OnInit {
     console.log(jobToAdd);
     this.skillService.addSkills([{ skillTitle: jobToAdd.skillTitle }]).subscribe(res => this.getSkill());
   }
+  skillTitleArray:any=[]
   executeSkillAction() {
     if (this.action == 'Add') {
       this.skillService.getSkills().subscribe(res => {
-        console.log(this.skillForm.value.skillTitle)
-        for (var i = 0; i < res.length; i++) {
-          console.log(res[i].skillTitle)
-          if (res[i].skillTitle === this.skillForm.value.skillTitle) {
-            console.log(this.skillForm.value.skillTitle)
-            this.isSkillAdded = false;
-            break;
+        console.log(this.skillForm.value.SkillTitle)
+        for(var i=0;i<res.length;i++){
+          this.skillTitleArray.push(res[i].skillTitle)
+        }
+        for (var i = 0; i < this.skillForm.value.SkillTitle.length; i++) {
+          console.log(this.skillTitleArray)
+          for(var j=0;j<this.skillTitleArray.length;j++){
+            if(this.skillTitleArray[j].toLowerCase()===(this.skillForm.value.SkillTitle[i].toLowerCase())){
+              this.isSkillAdded = false;
+              break;
           }
+          
+          }
+          // if (res[i].skillTitle === this.skillForm.value.skillTitle) {
+          //   console.log(this.skillForm.value.skillTitle)
+          //   this.isSkillAdded = false;
+          //   break;
+          // }
         }
         if (this.isSkillAdded) {
-          this.skillService.addSkills([{ skillTitle: this.skillForm.value.skillTitle }]).subscribe(res => this.getSkill());
+          for(var i=0;i<this.skillForm.value.SkillTitle.length;i++){
+          this.skillService.addSkills([{ skillTitle: this.skillForm.value.SkillTitle[i]}]).subscribe(res => this.getSkill());
           this.toastr.success('Skill added');
           this.modalService.dismissAll();
+          }
         }
         else {
           this.isSkillAdded = true;

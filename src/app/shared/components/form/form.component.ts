@@ -22,6 +22,7 @@ export class FormComponent implements OnInit {
   @Output()
   formEmitter = new EventEmitter();
   
+  value:[]=[];
 
   constructor() { }
 

@@ -29,6 +29,7 @@ import { DividerModule } from "primeng/divider";
 import { TooltipModule } from 'primeng/tooltip';
 import { ChipModule } from 'primeng/chip';
 import { ChipsModule } from 'primeng/chips';
+import { ScrollPanelModule } from 'primeng/scrollpanel';
 import { JobsComponent } from './components/jobs/jobs.component';
 
 
@@ -67,6 +68,7 @@ import { JobsComponent } from './components/jobs/jobs.component';
     CardModule,
     ChipsModule,
     ChipModule,
+    ScrollPanelModule,
     PdfViewerModule
   ]
 })
