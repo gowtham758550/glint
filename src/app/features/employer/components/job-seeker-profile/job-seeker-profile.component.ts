@@ -23,8 +23,8 @@ export class JobSeekerProfileComponent implements OnInit {
   educationArray: any;
   experienceArray: any;
   postJobDetailId = this.route.snapshot.params['jobId'];;
-  appliers!: Appliers[];
-  currentApplier!: Appliers;
+  appliers!: any;
+  currentApplier!: any;
   skillArray !: any;
   sas_token = environment.profile_sas_token;
 
@@ -52,7 +52,7 @@ export class JobSeekerProfileComponent implements OnInit {
         for (var i = 0; i < this.appliers.length; i++) {
           console.log(this.id)
           console.log(this.appliers[i].id)
-          if (this.appliers[i].id == this.id) {
+          if (this.appliers[i].jobSeekerId == this.id) {
             this.currentApplier = this.appliers[i];
             console.log(this.currentApplier)
             this.getSkillDetail(this.currentApplier);
@@ -64,8 +64,8 @@ export class JobSeekerProfileComponent implements OnInit {
     });
   }
 
-  getSkillDetail(currentApplier: Appliers){
-    this.skillService.getSkillsByUserId(currentApplier.id).subscribe(res=>this.skillArray=res)
+  getSkillDetail(currentApplier: any){
+    this.skillService.getSkillsByUserId(currentApplier.jobSeekerId).subscribe(res=>this.skillArray=res)
   }
   getResumebyId(id:number){
     console.log(id)
