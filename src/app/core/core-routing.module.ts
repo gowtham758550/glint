@@ -6,6 +6,8 @@ import { LoginComponent } from "./components/login/login.component";
 import { ResetPasswordComponent } from "./components/reset-password/reset-password.component";
 import { UserVerificationComponent } from "./components/user-verification/user-verification.component";
 import { AuthGuard } from 'src/app/core/guards/auth.guard';
+import { pendingChangesGuard } from 'src/app/core/guards/pendingChanges.guard';
+
 
 const routes: Routes = [
     { 

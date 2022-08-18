@@ -1,30 +1,39 @@
-<div class="pointer"
-    [routerLink]="'/job-seeker/job/' + job.postJobDetailId">
-    <div class="p-4 card">
-        <div class="fs-3 fw-bold">
-            {{job.jobTitle}}
-        </div>
-        <div class="fs-5">
-            <i class="pi pi-building"></i>
-            <span class="align-bottom">
-                {{job.companyName}}
-            </span>
-        </div>
-        <div class="fs-6 text-muted">
-            <i class="pi pi-map-marker"></i>
-            {{job.location}}
-        </div>
-        <div class="pt-2">
-            <span class="badge badge-primary bg-dark text-white">
-                <i class="pi pi-wallet"></i>
-                {{job.salary | currency: 'INR'}}
-            </span>
-            <span class="pe-2"></span>
-            <span class="badge badge-secondary bg-dark">
-                <i class="pi pi-briefcase"></i>
-                {{job.jobType}}
-            </span>
+<div class="pointer" [routerLink]="'/job-seeker/job/' + job.postJobDetailId">
+    <div class="p-4 card d-flex">
+        <div class="d-flex justify-content-start">
+            <div>
+                <img class="img-fluid rounded-circle" [src]="job.companyProfilePicture + '?' + profile_sas_token"
+                    style="height:80px; width: 80px">
+            </div>
+            <div class="ps-5">
+                <div class="fs-3 fw-bold">
+                    {{job.jobTitle}}
+                </div>
+                <div class="p-2"></div>
+                <div class="d-block fs-6">
+                    <span class="me-2">
+                        <i class="pi pi-building pe-2"></i>
+                        {{job.companyName}}
+                    </span>
+                    <span class="me-2">
+                        <i class="pi pi-map-marker pe-2"></i>
+                        {{job.location}}
+                    </span>
+
+                    <span class="me-2 text-success">
+                        <i class="pi pi-clock pe-2"></i>
+                        {{job.createdDate|date}}
+                    </span>
+
+                </div>
+
+                <div class="pt-2">
+                    <i class="pi pi-briefcase pe-2"></i>
+                    {{job.jobType}}
+                </div>
+            </div>
         </div>
     </div>
+    
     <div class="pt-4"></div>
 </div>

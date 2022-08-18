@@ -3,6 +3,7 @@ import { ToastrService } from 'ngx-toastr';
 import { Job } from 'src/app/data/models/job.model';
 import { AppliedJobService } from 'src/app/data/services/applied-job.service';
 import { FilterService } from 'src/app/data/services/filter.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-job-card',
@@ -16,7 +17,8 @@ export class JobCardComponent implements OnInit {
 
   @Input() minimalJobs!: any[];
   currentJob!: any;
-  variableChange!:any
+  variableChange!:any;
+  profile_sas_token = environment.profile_sas_token;
 
   isApplied: boolean = false;
 

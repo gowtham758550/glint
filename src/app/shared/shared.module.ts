@@ -16,6 +16,8 @@ import { VerifyComponent } from './components/verify/verify.component';
 import { JobCardComponent } from './components/job-card/job-card.component';
 import { JobInfoComponent } from './components/job-info/job-info.component';
 import { LayoutComponent } from './components/layout/layout.component';
+import { ModalModule } from 'ngx-bootstrap/modal';
+import { ConfirmationComponent } from '../core/components/confirmation/confirmation.component';
 
 @NgModule({
   declarations: [
@@ -38,7 +40,8 @@ import { LayoutComponent } from './components/layout/layout.component';
     FormsModule,
     ReactiveFormsModule,
     StepsModule,
-    ChipsModule
+    ChipsModule,
+    ModalModule.forRoot()
   ],
   exports: [
     FormComponent,
@@ -49,6 +52,7 @@ import { LayoutComponent } from './components/layout/layout.component';
     JobCardComponent,
     JobInfoComponent,
     LayoutComponent
-  ]
+  ],
+  entryComponents: [ConfirmationComponent] 
 })
 export class SharedModule { }
