@@ -18,6 +18,7 @@ import { JobInfoComponent } from './components/job-info/job-info.component';
 import { LayoutComponent } from './components/layout/layout.component';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { ConfirmationComponent } from '../core/components/confirmation/confirmation.component';
+import { LoginTemplateComponent } from './components/login-template/login-template.component';
 
 @NgModule({
   declarations: [
@@ -29,6 +30,7 @@ import { ConfirmationComponent } from '../core/components/confirmation/confirmat
     JobCardComponent,
     JobInfoComponent,
     LayoutComponent,
+    LoginTemplateComponent,
   ],
   imports: [
     CommonModule,
@@ -51,7 +53,8 @@ import { ConfirmationComponent } from '../core/components/confirmation/confirmat
     VerifyComponent,
     JobCardComponent,
     JobInfoComponent,
-    LayoutComponent
+    LayoutComponent,
+    LoginTemplateComponent,
   ],
   entryComponents: [ConfirmationComponent] 
 })

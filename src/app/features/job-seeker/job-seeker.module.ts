@@ -31,6 +31,7 @@ import { ChipModule } from 'primeng/chip';
 import { ChipsModule } from 'primeng/chips';
 import { ScrollPanelModule } from 'primeng/scrollpanel';
 import { JobsComponent } from './components/jobs/jobs.component';
+import { LoginComponent } from './components/login/login.component';
 
 
 @NgModule({
@@ -44,7 +45,8 @@ import { JobsComponent } from './components/jobs/jobs.component';
     ProfileComponent,
     AccountSettingsComponent,
     MyJobsComponent,
-    JobsComponent
+    JobsComponent,
+    LoginComponent
   ],
   imports: [
     CommonModule,

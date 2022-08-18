@@ -2,22 +2,13 @@ import { NgModule } from "@angular/core";
 import { RouterModule, Routes } from "@angular/router";
 import { ForgotPasswordComponent } from "./components/forgot-password/forgot-password.component";
 import { LandingPageComponent } from "./components/landing-page/landing-page.component";
-import { LoginComponent } from "./components/login/login.component";
 import { ResetPasswordComponent } from "./components/reset-password/reset-password.component";
 import { UserVerificationComponent } from "./components/user-verification/user-verification.component";
-import { AuthGuard } from 'src/app/core/guards/auth.guard';
-import { pendingChangesGuard } from 'src/app/core/guards/pendingChanges.guard';
-
 
 const routes: Routes = [
     { 
         path: '',
         component: LandingPageComponent
-    },
-    { 
-        path: 'login',
-        component: LoginComponent,
-        canActivate: [AuthGuard]
     },
     {
         path: 'user-verification',

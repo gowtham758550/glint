@@ -5,10 +5,14 @@
 :root {
     /* --primary: #ff0038; */
     --primary: #9d00d6;
-    --secondary: #fff;
+    --secondary: #7289da;
     --warning: #ffb31d;
     --dark: #171b34;
     --success: #8cffa7;
+}
+
+body {
+    background-color: #f3eeeecc;
 }
 
 .bg-primary {
@@ -63,15 +67,15 @@
 .card-shadow {
     /* -webkit-box-shadow: 1px -2px 24px 2px #5C5C5C;
     -moz-box-shadow: 1px -2px 24px 2px #5C5C5C; */
-    box-shadow: 0 0.3rem 1rem rgba(0,0,0,0.4);
+    box-shadow: 0 0.3rem 1rem rgba(0, 0, 0, 0.2);
     border-radius: 10px;
 }
 
 .raise:hover,
 .raise:focus {
-    -webkit-box-shadow: 14px 10px 5px -1px rgba(0,0,0,0.75);
-    -moz-box-shadow: 14px 10px 5px -1px rgba(0,0,0,0.75);
-    box-shadow: 14px 10px 5px -1px rgba(0,0,0,0.75);
+    -webkit-box-shadow: 14px 10px 5px -1px rgba(0, 0, 0, 0.75);
+    -moz-box-shadow: 14px 10px 5px -1px rgba(0, 0, 0, 0.75);
+    box-shadow: 14px 10px 5px -1px rgba(0, 0, 0, 0.75);
     transform: translateY(-0.20em);
 }
 
@@ -95,14 +99,14 @@
 
 /* Transparent Overlay */
 .progress-spinner:before {
-  content: '';
-  display: block;
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  /* background-color: rgba(5, 5, 5, 0.53); */
+    content: '';
+    display: block;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    /* background-color: rgba(5, 5, 5, 0.53); */
 }
 
 .blur {
@@ -154,19 +158,42 @@
 /* sidebar */
 
 .sidebar {
-    width: 22vh;
+    width: 23vh;
+    /* animation: hideMe 200ms forwards; */
 }
+@keyframes hideMe{
+    0%{
+        width: 0;
+    }
+    100%{
+        width: 23vh;
+    }
+}
+
+/* .navbar-fixed {
+    width: 77vh;
+} */
 
 .side-nav-item {
     color: #aeaeb4;
 }
+
+.navbar-fixed {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    background-color: red;
+    color: white;
+    text-align: center;
+  }
 
 .side-nav-item:hover {
     color: var(--secondary);
 }
 
 .spacer {
-    flex: 1 1
+    flex: 1 1;
 }
 
 .fixed {
@@ -207,6 +234,7 @@
 .dropdown:hover .dropdown-content {
     display: block;
 }
+
 .dashboard-title {
     padding: 20px 30px;
     border: 1px solid #ededed;
@@ -232,4 +260,29 @@
 
 .option {
     text-transform: capitalize;
+}
+
+.signup-profile {
+    width: 10rem;
+    height: 10rem;
+    border: var(--dark) solid 2px;
+}
+
+/* .profile-wrapper {
+    position: relative;
+    width: fit-content;
+}
+
+.profile-wrapper img {
+    display: block;
+}
+
+.profile-wrapper button {
+    position: absolute;
+    bottom: 0;
+    right: .5rem;
+} */
+
+.animate {
+    transition: all 700ms ease-in-out;
 }

@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrService } from 'ngx-toastr';
 import { PrimeNGConfig } from 'primeng/api';
+import { RouteConstants } from 'src/app/data/enums/constatnts/route.constants';
 import { FormField } from 'src/app/data/models/form-field.model';
 import { AuthService } from 'src/app/data/services/auth.service';
 import { EmployerService } from 'src/app/data/services/employer.service';
@@ -64,7 +65,7 @@ export class AccountSettingsEmployerComponent implements OnInit {
 
         this.toastr.success('Password changed successfully', 'Success');
         this.authService.logout();
-        this.router.navigateByUrl("/login");
+        this.router.navigateByUrl(RouteConstants.employerLogin);
       }
     });
 
@@ -112,7 +113,7 @@ export class AccountSettingsEmployerComponent implements OnInit {
         next: () => {
           this.toastr.success('Email updated. Verify your email and Login', 'Success');
           this.authService.logout();
-          this.router.navigateByUrl("employer/login");
+          this.router.navigateByUrl(RouteConstants.employerLogin);
         }
       });
   }
@@ -127,6 +128,7 @@ export class AccountSettingsEmployerComponent implements OnInit {
     this.displayMaximizable = false;
     this.authService.logout();
     this.toastr.success('Account deleted');
+    this.router.navigateByUrl(RouteConstants.employerLogin);
   }
   // --------------------------------------------------------------------------------//
 

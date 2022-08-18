@@ -10,7 +10,7 @@
                 </h4>
                 <hr>
             </ng-template>
-            
+
             <!-- input:text -->
             <ng-template [ngSwitchCase]="'chips'">
                 <label>{{field.label}}</label>
@@ -114,11 +114,12 @@
                     </label>
                     <input type="password" class="form-control" [ngClass]="field.class" [placeholder]="field.label"
                         [id]="field.formControlName" formControlName={{field.formControlName}}>
-                    <div>
+                    <div [ngClass]="field.class">
                         <small class="text-danger" *ngIf="formGroup.get('password')?.errors?.['minlength']">
                             Password should have atleast 8 characters!
                         </small>
-                        <small class="text-danger" *ngIf="formGroup.get('password')?.errors?.['pattern'] && !formGroup.get('password')?.errors?.['minlength']">
+                        <small class="text-danger text-wrap"
+                            *ngIf="formGroup.get('password')?.errors?.['pattern'] && !formGroup.get('password')?.errors?.['minlength']">
                             Password must contain one lowercase, uppercase, and one numeric character!
                         </small>
 
@@ -133,8 +134,7 @@
                     <input type="password" class="form-control" [ngClass]="field.class" [placeholder]="field.label"
                         [id]="field.formControlName" formControlName={{field.formControlName}}>
 
-                    <div *ngIf="formGroup.controls['confirmPassword'].errors?.['minlength']"
-                        class="text-danger">
+                    <div *ngIf="formGroup.controls['confirmPassword'].errors?.['minlength']" class="text-danger">
                         {{formGroup.controls['confirmPassword'].errors?.['mismatch']}}
                         Password and ConfirmPassword does not match!
                     </div>
@@ -192,7 +192,7 @@
             <ng-template [ngSwitchCase]="'submit'">
                 <div class="mb-3 text-center" [ngClass]="field.class">
                     <button type="submit" pButton [disabled]="!formGroup.valid" (click)="emitFormData()"
-                        class="p-button-raised p-button-rounded px-4 bg-dark text-secondary text-center raise">
+                        class="p-button-raised p-button-rounded px-4 bg-dark text-white text-center raise">
                         {{field.label}}
                     </button>
                 </div>

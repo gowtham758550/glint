@@ -22,6 +22,7 @@ import { environment } from "src/environments/environment";
 export class EmployerProfileComponent implements OnInit {
   backgroundImage: string = "/assets/defaultCoverPicture.jpg";
   isImageLoaded = false;
+  isCoverImageLoaded = false;
   imageUrl: string = "/assets/defaultProfilePicture.png";
 
   profileForm!: FormGroup;
@@ -137,12 +138,12 @@ export class EmployerProfileComponent implements OnInit {
   }
 
   getCoverPicture() {
-    // this.isImageLoaded = false;
+    this.isCoverImageLoaded = false;
     this.profileService.getCoverPicture().subscribe({
       next: (data: any) => {
         let res = data.url;
         this.backgroundImage = res + "?" + environment.cover_sas_token;
-        // this.isImageLoaded = true;
+        this.isCoverImageLoaded = true;
       },
     });
   }

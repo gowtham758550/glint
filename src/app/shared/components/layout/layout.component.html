@@ -1,10 +1,11 @@
 <div class="d-flex justify-content-start">
 
     <!-- sidebar -->
-    <div class="sidebar" *ngIf="sideBarVisibility">
+    <div class="sidebar animate"
+        [hidden]="!sideBarVisibility">
         <div class="fixed bg-dark p-4 text-secondary h-100-vh">
             <div>
-                <app-logo [class]="'text-secondary'"></app-logo>
+                <app-logo></app-logo>
             </div>
 
             <div class="pt-3">
@@ -37,7 +38,7 @@
                     </svg>
                 </button>
 
-                <app-logo *ngIf="!sideBarVisibility" [class]="'text-secondary'"></app-logo>
+                <app-logo *ngIf="!sideBarVisibility"></app-logo>
 
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#nav-item"
                     aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">

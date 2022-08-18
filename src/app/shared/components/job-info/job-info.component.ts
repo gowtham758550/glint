@@ -8,6 +8,7 @@ import { ToastrService } from 'ngx-toastr';
 import { AppliedJobService } from 'src/app/data/services/applied-job.service';
 import { FilterService } from 'src/app/data/services/filter.service';
 import { environment } from 'src/environments/environment';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-job-info',
@@ -32,7 +33,8 @@ export class JobInfoComponent implements OnInit, AfterContentInit {
     private router: Router,
     private toastr: ToastrService,
     private appliedJobService: AppliedJobService,
-    private filterService: FilterService
+    private filterService: FilterService,
+    private spinner: NgxSpinnerService
   ) {
   }
 
@@ -90,9 +92,11 @@ export class JobInfoComponent implements OnInit, AfterContentInit {
   }
 
   applyForJob() {
+    this.spinner.show();
     if (this.job.postJobDetailId) {
       this.appliedJobService.applyJob(this.job.postJobDetailId).subscribe({
         next: data => {
+          this.spinner.hide();
           this.toastr.success('Applied');
           this.isApplied = true;
         }

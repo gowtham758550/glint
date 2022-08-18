@@ -2,6 +2,7 @@ import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
 import { environment } from "src/environments/environment";
+import { Status } from "../enums/status.enum";
 import { AppliedJob } from "../models/applied-job.model";
 
 @Injectable({
@@ -21,6 +22,15 @@ export class AppliedJobService {
             jobStatus: 'Pending'
         }
         return this.httpClient.post(`${this.host}/add`, applyJobPayload);
+    }
+
+    updateAppliedJobStatus(appliedJobId: number, postJobId: number, status: Status) {
+        const payload = {
+            appliedJobID: appliedJobId,
+            jobStatus: status,
+            postJobId: postJobId
+        }
+        return this.httpClient.put(`${this.host}/update`, payload);
     }
 
     getAppliedJobs(): Observable<AppliedJob[]> {

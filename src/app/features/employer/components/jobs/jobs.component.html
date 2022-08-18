@@ -1,8 +1,7 @@
 <div>
 
-
     <!-- jobs table -->
-    <div class="card">
+    <div class="card-shadow p-2">
         <div class="d-flex justify-content-between">
             <div>
                 <h1 class="fw-bold p-2">
@@ -10,12 +9,24 @@
                 </h1>
             </div>
             <div class="p-3">
-                <button class="btn bg-dark border-none border-dark bg-primary rounded-fill text-secondary p-2"
+                <button class="btn bg-dark border-none border-dark bg-primary rounded-fill text-white p-2"
                     [routerLink]="routeConstants.employerNewJob">
                     <i class="pi pi-plus-circle"></i>
                     Create Job
                 </button>
             </div>
+        </div>
+        <div class="m-2"> 
+            <!-- <button class="btn bg-danger text-white me-2" 
+                (click)="exportPdf()">
+                Export as PDF
+                <i class="pi pi-file-pdf"></i>
+            </button> -->
+            <button class="btn bg-success text-dark border-none" 
+                (click)="exportExcel()">
+                Export as Excel
+                <i class="pi pi-file-excel"></i>
+            </button>
         </div>
 
         <!-- jobs table -->

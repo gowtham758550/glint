@@ -3,6 +3,7 @@ export enum RouteConstants {
     login = '/login',
     
     // jobSeeker
+    jobSeekerLogin = '/job-seeker/login',
     jobSeekerSignup = '/job-seeker/signup',
     jobSeekerVerification = '/job-seeker/account-verification',
     jobSeekerProfile = '/job-seeker/profile',
@@ -11,10 +12,12 @@ export enum RouteConstants {
     jobSeekerAccountSettings = '/job-seeker/account-settings',
 
     // employer
+    employerLogin = '/employer/login',
     employerSignup = '/employer/signup',
     employerProfile = '/employer/profile',
     employerDashboard = '/employer/dashboard',
     employerJobs = '/employer/jobs',
     employerAccountSettings = '/employer/account-settings',
-    employerNewJob = '/employer/job/new'
+    employerNewJob = '/employer/job/new',
+    employerJobSeekerProfile = '/employer/job-seeker/profile'
 }

@@ -39,21 +39,20 @@
                 {{job.jobType}}
             </div>
 
-            <div class="p-2" *ngIf="isJobSeeker">
-                <ng-container *ngIf="isApplied; then applied; else notApplied">
-                </ng-container>
-                <ng-template #applied>
-                    <button class="btn bg-dark text-secondary rounded-pill" [disabled]="isApplied">
-                        Applied
-                    </button>
-                </ng-template>
-                <ng-template #notApplied>
-                    <button class="btn bg-dark text-secondary rounded-pill " (click)="applyForJob()">
-                        Apply for Job
-                    </button>
-                </ng-template>
-            </div>
-        </div>
+    <div class="pt-2"
+        *ngIf="isJobSeeker">
+        <ng-container *ngIf="isApplied; then applied; else notApplied">
+        </ng-container>
+        <ng-template #applied>
+            <button class="btn bg-dark text-white rounded-pill" [disabled]="isApplied">
+                Applied
+            </button>
+        </ng-template>
+        <ng-template #notApplied>
+            <button class="btn bg-dark text-white rounded-pill" (click)="applyForJob()">
+                Apply
+            </button>
+        </ng-template>
     </div>
 </div>
 <div class="pt-4"></div>

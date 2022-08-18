@@ -1,5 +1,8 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
+import { Role } from 'src/app/data/enums/role.enum';
+
 import { AuthService } from 'src/app/data/services/auth.service';
 import { LocalStorage } from 'src/app/data/services/local-storage.service';
 
@@ -9,44 +12,49 @@ import { LocalStorage } from 'src/app/data/services/local-storage.service';
   styles: [
   ]
 })
-export class VerifyComponent implements OnInit {
+export class VerifyComponent implements OnInit, OnDestroy {
 
   @Input()
   role!: string;
 
   isVerified = false;
   email!: string;
+  interval!: any;
 
   constructor(
     private router: Router,
     private localStorage: LocalStorage,
     private authService: AuthService,
+    private toastr: ToastrService
   ) { }
 
   ngOnInit(): void {
     this.email = this.localStorage.getItem('email');
-    setTimeout(this.getVerificationStatus, 1000);
-    
+    // this.interval = setInterval(() => this.getVerificationStatus(), 5000);
+    // this.getVerificationStatus();
   }
 
-  next() {
-    if (this.isVerified) {
-      this.router.navigateByUrl('/job-seeker/signup/personal-information');
-    } else {
-      console.log(false);
-    }
+  ngOnDestroy(): void {
+    clearInterval(this.interval);
   }
 
   getVerificationStatus() {
-    // console.log("vstatus");
+    console.log("vstatus");
     const email = this.localStorage.getItem('email');
     this.authService.isVerified(email)
       .subscribe({
         next: res => {
-          if (this.role == 'Employer') this.router.navigateByUrl('/employer/signup/company-detail');
-          else this.router.navigateByUrl('/job-seeker/signup/personal-information');
-        }
+          if (!res) {
+            this.isVerified = true;
+            this.toastr.success('Verified successfully');
+            if (this.role == Role.employer) this.router.navigateByUrl('/employer/signup/company-detail');
+            else if (this.role == Role.jobSeeker) this.router.navigateByUrl('/job-seeker/signup/personal-information');
+            clearInterval(this.interval);
+          }
+        },
+        error: () => {}
       });
   }
+  
 
 }
