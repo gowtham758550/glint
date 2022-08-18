@@ -76,21 +76,21 @@ body {
     color: var(--dark) !important;
 }
 
-.btn-orange {
-    background-color: var(--orange);
-    color: #fff;
-}
-
-
-.btn-orange:hover {
+.btn-orange,
+.btn-orange:hover,
+.btn-orange:disabled,
+.btn-orange:focus {
     background-color: var(--orange);
     color: #fff;
 }
 
 .btn-orange:disabled {
-    background-color: var(--orange);
     opacity: .7;
-    color: #fff;
+}
+
+.required::after {
+    content: ' *';
+    color: #ff0000;
 }
 
 /* width */

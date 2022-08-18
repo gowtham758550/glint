@@ -23,7 +23,7 @@ export class NewJobComponent implements OnInit {
     jobType: ['', Validators.required],
     minimumQualification: ['', Validators.required],
     location: ['', Validators.required],
-    createdDate: [new Date(), Validators.required]
+    // createdDate: [new Date()]
   })
   jobFields: FormField[] = [
     {

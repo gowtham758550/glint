@@ -125,5 +125,6 @@ export class LandingPageComponent implements OnInit {
     if (event.target.value == 0) this.isExperiencePlaceholder = true;
     else this.isExperiencePlaceholder = false;
   }
+  
 
 }
