@@ -1,25 +1,25 @@
 <!-- inspiration - https://dribbble.com/shots/15794174-Chakri-Job-Portal-Landing-page-v2/attachments/7604296?mode=media -->
 
-<div class="main">
-    <div class="d-flex justify-content-between px-5 pt-2 pb-2 bg-dark">
+<div>
+    <div class="d-flex justify-content-between px-5 pt-2 pb-2 bg-white">
         <div class="flex-grow-1">
-            <app-logo></app-logo>
+            <app-logo [variant]="'light'"></app-logo>
         </div>
         <div class="pe-3 pt-2">
-            <button class="fw-bold btn border-none text-dark bg-white rounded-pill"
+            <button class="fw-bold btn border-none login rounded-pill"
                 [routerLink]="routeConstants.jobSeekerLogin">
                     Login
             </button>
         </div>
         <div class="pe-3 pt-2">
-            <button class="btn border-none text-white bg-secondary rounded-pill"
+            <button class="fw-bold btn border-none register rounded-pill"
                 [routerLink]="routeConstants.jobSeekerSignup">
                     Register
             </button>
         </div>
         <div class="vr"></div>
         <div class="ps-3 pt-2 dropdown">
-            <button class="btn border border-dark bg-white border-none rounded-pill">
+            <button class="btn employers border-none rounded-pill">
                 For employers
                 <i class="pi pi-angle-down"></i>
             </button>
@@ -36,32 +36,25 @@
     </div>
     
 
-    <div class="pt-5 bg-white">
-        <div class="text-center">
-            <div class="pt-4"></div>
-            <p class="fw-bold">It's simple and smart</p>
-            <h1 class="fw-bold">Search | Find | Apply</h1>
-            
-            <div class="d-flex justify-content-center pt-4">
-                <div class="pe-4">
-                    <img src="assets/job.svg" height="40px" width="40px" alt="">
-                    {{totalJobCount}} Job
-                </div>
-                <div class="pe-4">
-                    <img src="assets/company.png" height="40px" width="40px" alt="">
-                    {{totalCompanyCount}} Companies
-                </div>
-                <div>
-                    <img src="assets/job-seeker.jpg" height="40px" width="40px" alt="">
-                    {{jobSeekerCount}} Job Seekers
-                </div>
+    <div class="pt-5 bg-orange-light main" style="height: 86vh;">
+       
+        <div class="">
+            <div class="mb-4">
+                <h1 class="fw-bold text-start" style="padding-left: 50vh;">
+                    Searching for a job? <br>
+                    Find the <span class="text-orange">best job</span> <br>
+                    that fit you
+                </h1>
             </div>
+            <!-- <h1 class="fw-bold">Search | Find | Apply</h1> -->
+            <!-- <p class="fw-bold">It's simple and smart</p> -->
+            
 
-            <div class="pt-5"></div>
+            <!-- <div class="pt-5"></div> -->
 
-            <div class="d-flex justify-content-center">
+            <div class="d-flex justify-content-center mt-2">
                 <form [formGroup]="searchBarForm">
-                    <div class="card">
+                    <div class="card-shadow bg-white rounded-fill">
                         <div class="d-flex justify-content-center p-2">
 
                             <!-- search icon -->
@@ -124,11 +117,11 @@
                             </div>
 
 
-                            <button pButton
-                                class="p-button-raised p-button-rounded px-4 fs-4 bg-dark text-white"
+                            <button 
+                                class="btn px-4 fs-5 employers"
                                 type="button"
                                 (click)="search()">
-                                    <i class="pi pi-search pe-3"></i>
+                                    <!-- <i class="pi pi-search pe-3"></i> -->
                                     Search
                             </button>
 
@@ -136,6 +129,33 @@
                     </div>
                 </form>
             </div>
+            <div class="d-flex justify-content-center pt-4 fs-4 fw-bold mt-3">
+                <div class="pe-4">
+                    <i class="pi pi-briefcase text-orange pe-2 fs-5"></i>
+                    <!-- <img src="assets/job.svg" height="40px" width="40px" alt=""> -->
+                    <span>
+                        {{totalJobCount}} Job
+                    </span>
+                </div>
+                <div class="pe-4">
+                    <i class="pi pi-building text-orange pe-2 fs-5"></i>
+                    <!-- <img src="assets/company.png" height="40px" width="40px" alt=""> -->
+                    <span>
+                        {{totalCompanyCount}} Companies
+                    </span>
+                </div>
+                <div>
+                    <i class="pi pi-user text-orange pe-2 fs-5"></i>
+                    <!-- <img src="assets/job-seeker.jpg" height="40px" width="40px" alt=""> -->
+                    <span>
+                        {{jobSeekerCount}} Job Seekers
+                    </span>
+                </div>
+            </div>
         </div>
     </div>
 </div>
+
+<footer class="text-center">
+    © Copyright 2022-23 Glint Pvt Ltd. - All Rights Reserved.
+</footer>

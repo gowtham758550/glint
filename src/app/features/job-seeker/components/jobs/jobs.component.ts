@@ -123,7 +123,7 @@ export class JobsComponent implements OnInit {
         // updatedParams = updatedParams.set('location', Location[e]);
         tempLocation.push(e);
       });
-      updatedFilter.push(`location==${tempLocation.toString()}`);
+      updatedFilter.push(`location==${tempLocation.join('|')}`);
     }
 
     this.router.navigateByUrl(`/job-seeker/home?${updatedParams.toString().slice(0, -1)}`);

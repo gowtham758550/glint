@@ -3,18 +3,18 @@
 <div class="d-flex justify-content-start">
 
     <!-- sidebar -->
-    <div class="sidebar animate"
+    <div class="sidebar card-shadow"
         [hidden]="!sideBarVisibility">
-        <div class="fixed bg-dark p-4 text-secondary h-100-vh">
+        <div class="fixed bg-white p-4 h-100-vh">
             <div>
-                <app-logo></app-logo>
+                <app-logo [variant]="'light'"></app-logo>
             </div>
             
             <div class="pt-3">
                 <ng-container *ngFor="let item of sideNavItems">
-                    <div class="pe-3 py-2 side-nav-item pointer"
+                    <div class="pe-3 py-2 pointer nav-item"
                         [routerLink]="item.routeTo"
-                        routerLinkActive="text-secondary"
+                        routerLinkActive="text-orange"
                         >
                         <i class="pi" [ngClass]="item.icon"></i>
                         {{item.label}}
@@ -28,17 +28,16 @@
     <div class="flex-grow-1">
 
         <!-- navbar -->
-        <nav class="navbar navbar-expand-lg navbar-light"
+        <nav class="navbar navbar-expand-lg bg-white mb-4"
             [ngClass]="sideBarVisibility ? 'bg-light' : 'bg-dark text-secondary'">
             <div class="container-fluid">
-                <button class="btn border-none"
+                <!-- <button class="btn border-none"
                 (click)="toggleSideBar()"
                 [ngClass]="sideBarVisibility ? '' : 'text-white'">
-                <!-- hamburger -->
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-list" viewBox="0 0 16 16">
                     <path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z"/>
                     </svg>
-                </button> 
+                </button>  -->
 
                 <app-logo *ngIf="!sideBarVisibility"></app-logo>
 
@@ -95,7 +94,7 @@
                                 </span>
                             </div>
                             <div>
-                                <span class="fw-bold">
+                                <span class="fw-bold text-dark">
                                     {{email}}
                                 </span>
                             </div>

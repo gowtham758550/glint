@@ -1,6 +1,6 @@
 <div class="pointer"
     [routerLink]="'/job-seeker/job/' + job.postJobDetailId">
-    <div class="p-4 card-shadow">
+    <div class="p-4 card-shadow bg-white">
         <div class="fs-3 fw-bold">
             {{job.jobTitle}}
         </div>
@@ -15,12 +15,12 @@
             {{job.location}}
         </div>
         <div class="pt-2">
-            <span class="badge badge-primary bg-secondary text-white">
+            <span class="badge badge-primary bg-orange text-white">
                 <i class="pi pi-wallet"></i>
                 {{job.salary | currency: 'INR'}}
             </span>
             <span class="pe-2"></span>
-            <span class="badge badge-secondary bg-secondary">
+            <span class="badge badge-secondary bg-orange">
                 <i class="pi pi-briefcase"></i>
                 {{job.jobType}}
             </span>

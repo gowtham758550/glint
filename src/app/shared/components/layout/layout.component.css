@@ -1,0 +1,7 @@
+.side-nav-item {
+    color: var(--dark);
+}
+
+.side-nav-item:hover {
+    color: var(--orange);
+}

@@ -60,7 +60,7 @@ body {
     top: 0px;
     border: none;
     height: 40px;
-    background: #191F40;
+    background: var(--orange);
     color: #fff;
     width: 90px;
     border-radius: 100px

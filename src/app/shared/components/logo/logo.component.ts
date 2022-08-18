@@ -4,16 +4,23 @@ import { RouteConstants } from 'src/app/data/enums/constatnts/route.constants';
 @Component({
   selector: 'app-logo',
   template: `
-    <h1 [ngClass]="class"
-      class="pointer text-white"
-      [routerLink]="routeConstants.landingPage">
-      Gl<span class="text-warning">i</span>nt
-      <span>
-        <i class="pi pi-briefcase fs-3"
-          [ngClass]="class">
-        </i>
-      </span>
-    </h1>
+
+    <ng-container *ngIf="variant == 'light'; then light; else dark">
+    </ng-container>
+    <ng-template #light>
+      <h1 class="pointer text-dark"
+        [routerLink]="routeConstants.landingPage">
+        <span><i class="fs-3 text-orange pi pi-briefcase"></i></span>
+        Gl<span class="text-orange">i</span>nt
+      </h1>
+    </ng-template>
+    <ng-template #dark>
+      <h1 class="pointer text-white"
+        [routerLink]="routeConstants.landingPage">
+        <span><i class="fs-3 text-white pi pi-briefcase"></i></span>
+        Gl<span class="text-white">i</span>nt
+      </h1>
+    </ng-template>
   `,
   styles: [
   ]
@@ -21,7 +28,7 @@ import { RouteConstants } from 'src/app/data/enums/constatnts/route.constants';
 export class LogoComponent implements OnInit {
 
   @Input()
-  class!: string;
+  variant!: string;
 
   routeConstants = RouteConstants;
 
