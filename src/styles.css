@@ -11,6 +11,10 @@
     --success: #8cffa7;
 }
 
+body {
+    background-color: #f3eeeecc;
+}
+
 .bg-primary {
     background-color: var(--primary) !important;
 }
@@ -155,11 +159,34 @@
 
 .sidebar {
     width: 23vh;
+    /* animation: hideMe 200ms forwards; */
 }
+@keyframes hideMe{
+    0%{
+        width: 0;
+    }
+    100%{
+        width: 23vh;
+    }
+}
+
+/* .navbar-fixed {
+    width: 77vh;
+} */
 
 .side-nav-item {
     color: #aeaeb4;
 }
+
+.navbar-fixed {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    background-color: red;
+    color: white;
+    text-align: center;
+  }
 
 .side-nav-item:hover {
     color: var(--secondary);

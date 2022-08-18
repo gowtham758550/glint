@@ -42,7 +42,7 @@ export class MyJobsComponent implements OnInit {
   getTimeline(index: number) {
     this.jobTimeline = [
         {jobTitle: this.myJobs[index].jobTitle, status: 'Applied', date: new Date(this.myJobs[index].appliedOn).toDateString(), icon: PrimeIcons.BOOK },
-        {status: this.myJobs[index].jobStatus, date: new Date(this.myJobs[index].modifiedOn).toDateString(), icon: this.myJobs[index].jobStatus == Status.Pending ? PrimeIcons.CLOCK : PrimeIcons.CHECK_CIRCLE},
+        {status: this.myJobs[index].jobStatus, date: new Date(this.myJobs[index].modifiedOn).toDateString(), icon: this.myJobs[index].jobStatus == Status.Pending ? PrimeIcons.CLOCK : PrimeIcons.TIMES_CIRCLE},
     ];
   }
 

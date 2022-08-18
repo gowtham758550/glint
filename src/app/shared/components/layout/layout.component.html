@@ -4,7 +4,7 @@
 
     <!-- sidebar -->
     <div class="sidebar animate"
-        *ngIf="sideBarVisibility">
+        [hidden]="!sideBarVisibility">
         <div class="fixed bg-dark p-4 text-secondary h-100-vh">
             <div>
                 <app-logo></app-logo>

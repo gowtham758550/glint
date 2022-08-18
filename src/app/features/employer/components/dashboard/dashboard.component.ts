@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { EChartsOption } from 'echarts';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { BarChartData } from 'src/app/data/models/barchart-data.model';
+import { PieChartData } from 'src/app/data/models/piechart-data.model';
 import { FilterService } from 'src/app/data/services/filter.service';
 
 @Component({
@@ -16,49 +17,8 @@ export class DashboardComponent implements OnInit {
   totalHiring!: number;
   totalShortlisted!: number;
   barChartOptions!: EChartsOption;
-  pieChartOptions: EChartsOption = {
-    tooltip: {
-      trigger: 'item'
-    },
-    legend: {
-      top: '5%',
-      left: 'center'
-    },
-    series: [
-      {
-        name: 'All Jobs',
-        type: 'pie',
-        radius: ['40%', '70%'],
-        avoidLabelOverlap: false,
-        itemStyle: {
-          borderRadius: 10,
-          borderColor: '#fff',
-          borderWidth: 2
-        },
-        label: {
-          show: false,
-          position: 'center'
-        },
-        emphasis: {
-          label: {
-            show: true,
-            fontSize: '40',
-            fontWeight: 'bold'
-          }
-        },
-        labelLine: {
-          show: false
-        },
-        data: [
-          { value: 19, name: 'Customer Support' },
-          { value: 3, name: 'Engineering Manager' },
-          { value: 12, name: 'Developer' },
-          { value: 26, name: 'Tester' },
-        ]
-      }
-    ]
-  };
-
+  pieChartOptions!: EChartsOption;
+  
   constructor(
     private filterService: FilterService,
     private spinner: NgxSpinnerService
@@ -69,6 +29,7 @@ export class DashboardComponent implements OnInit {
     this.totalJobs = 9;
     this.totalHiring = 41;
     this.getBarChartData();
+    // this.getPieChartData();
   }
 
   getTotalJobs() {
@@ -119,7 +80,64 @@ export class DashboardComponent implements OnInit {
         this.spinner.hide();
       }
     });
-    
+  }
+
+  getPieChartData() {
+    this.filterService.getPieChartData().subscribe({
+      next: (data: PieChartData) => {
+        let pieData: any[] = [];
+        for (let i = 0; i < data['jobTitles'].length; i++) {
+          const temp: any = {
+            value: data['rejectionPercentage'][i],
+            name: data['jobTitles'][i]
+          }
+          pieData.push(temp);
+        }
+        this.pieChartOptions = {
+          tooltip: {
+            trigger: 'item'
+          },
+          legend: {
+            top: '5%',
+            left: 'center'
+          },
+          series: [
+            {
+              type: 'pie',
+              radius: ['40%', '70%'],
+              avoidLabelOverlap: false,
+              itemStyle: {
+                borderRadius: 10,
+                borderColor: '#fff',
+                borderWidth: 2
+              },
+              label: {
+                show: false,
+                position: 'center'
+              },
+              emphasis: {
+                label: {
+                  show: true,
+                  fontSize: '40',
+                  fontWeight: 'bold'
+                }
+              },
+              labelLine: {
+                show: false
+              },
+              data: pieData
+              // data: [
+              //   { value: 19, name: 'Customer Support' },
+              //   { value: 3, name: 'Engineering Manager' },
+              //   { value: 12, name: 'Developer' },
+              //   { value: 26, name: 'Tester' },
+              // ]
+            }
+          ]
+        };
+      
+      }
+    });
   }
 
 }

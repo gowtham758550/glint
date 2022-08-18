@@ -6,6 +6,7 @@ import { environment } from "src/environments/environment";
 import { Appliers } from "../models/appliers.model";
 import { BarChartData } from "../models/barchart-data.model";
 import { Job } from "../models/job.model";
+import { PieChartData } from "../models/piechart-data.model";
 
 @Injectable({
     providedIn: 'root'
@@ -49,7 +50,7 @@ export class FilterService {
         return this.httpClient.get<BarChartData>(`${this.host}/bar_chart/get`);
     }
 
-    getPieChartData() {
-        return this.httpClient.get(`${this.host}/pie_chart/get`);
+    getPieChartData(): Observable<PieChartData> {
+        return this.httpClient.get<PieChartData>(`${this.host}/pie_chart/get`);
     }
 }

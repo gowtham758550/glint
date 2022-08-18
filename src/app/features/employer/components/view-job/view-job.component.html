@@ -103,7 +103,7 @@
 
     </ng-template>
 
-    <div class="pt-4">
+    <div class="pt-4 card-shadow p-2">
 
         <ng-container *ngIf="isAppliersTableLoaded; then appliersDataTable; else appliersLoader"></ng-container>
         <!-- loader -->
@@ -203,10 +203,28 @@
                             </td>
                             <td>{{applier.email}}</td>
                             <td>
-                                <span class="bg-dark text-white fw-xsmall px-2 py-1 rounded"
+                                <ng-container [ngSwitch]="applier.status">
+                                    <ng-container *ngSwitchCase="status.Pending">
+                                        <span class="bg-dark text-white fw-small px-3 py-1 rounded">
+                                            {{status.Pending}}
+                                        </span>
+                                    </ng-container>
+                                    <ng-container *ngSwitchCase="status.Shortlisted">
+                                        <span class="bg-success text-white fw-small px-3 py-1 rounded">
+                                            {{status.Shortlisted}}
+                                        </span>
+                                    </ng-container>
+                                    <!-- rejected -->
+                                    <ng-container *ngSwitchCase="status.Rejected">
+                                        <span class="bg-danger text-white fw-small px-3 py-1 rounded">
+                                            {{status.Rejected}}
+                                        </span>
+                                    </ng-container>
+                                </ng-container>
+                                <!-- <span class="bg-dark text-white fw-xsmall px-2 py-1 rounded"
                                     [ngClass]="applier.status == 'Pending' ? 'status-pending' : 'status-success'">
                                     {{applier.status}}
-                                </span>
+                                </span> -->
                             </td>
                             <td>{{applier.gender}}</td>
                             <td>{{applier.dateOfBirth | date }}</td>

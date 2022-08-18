@@ -81,7 +81,6 @@ export class LandingPageComponent implements OnInit {
     this.getTotalJobCount();
     this.getEmployerCount();
     this.getJobSeekerCount();
-    this.spinner.hide();
   }
 
   getDesignations() {
@@ -102,7 +101,10 @@ export class LandingPageComponent implements OnInit {
 
   getJobSeekerCount() {
     this.filterService.getJobSeekerCount().subscribe({
-      next: data => this.jobSeekerCount = data
+      next: data => {
+        this.jobSeekerCount = data;
+        this.spinner.hide();
+      }
     })
   }
 
