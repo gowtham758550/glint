@@ -5,6 +5,10 @@
     color: #000;
 }
 
+.main {
+    background: linear-gradient(var(--orange-light), rgba(255,255,255,.8)), url('../../../../assets/landing-page.webp') no-repeat center;
+}
+
 .input {
     border-style: none;
     outline: none;
@@ -19,3 +23,41 @@
     box-shadow: 0 4px 12px rgb(86 141 187 / 12%);
     border-radius: 100px;
 }   
+
+.login {
+    background-color: #fff;
+    border: var(--orange) solid 2px;
+    color: var(--orange);
+}
+
+.login:hover {
+    background-color: var(--orange);
+    color: #fff;
+}
+
+.register {
+    background-color: var(--orange);
+    border: var(--orange) solid 2px;
+    color: #fff;
+}
+
+.register:hover {
+    background-color: #fff;
+    border: var(--orange) solid 2px;
+    color: var(--orange);
+}
+
+.employers {
+    background-color: var(--orange);
+    color: #fff;
+}
+
+.employers {
+    border: var(--orange) solid 2px;
+}
+
+.employers:hover {
+    background-color: var(--orange);
+    border: var(--orange) solid 2px;
+    color: #fff;
+}

@@ -47,9 +47,9 @@ export class JobInfoComponent implements OnInit, AfterContentInit {
     if (role == 'Employer') this.isJobSeeker = false;
     else if (role == 'JobSeeker') {
       this.isJobSeeker = true;
-      this.appliedJobService.isApplied(postJobDetailId).subscribe({
-        next: (data: any) => { this.isApplied = data.status; console.log(data) }
-      })
+      // this.appliedJobService.isApplied(postJobDetailId).subscribe({
+      //   next: (data: any) => this.isApplied = data.status   
+      // })
     }
   }
 

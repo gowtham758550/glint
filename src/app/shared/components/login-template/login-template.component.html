@@ -1,13 +1,17 @@
 
-<div class="main vh-100 d-flex justify-content-center align-items-center bg-secondary">
+<div class="d-flex justify-content-center align-items-center vh-100 bg-orange-light">
     <div class="d-flex pt-5">
         <div class="card card-shadow d-flex flex-row">
             <div class="p-3">
                 <img src="../../../../assets/employer-signup-2.webp" width="500px" height="400px" alt="">
             </div>
             <div class="p-4" style="width: 500px;">
-                <app-logo [class]="'text-dark'"></app-logo>
-                <hr>
+                <div class="text-center">
+                    <app-logo [variant]="'light'"></app-logo>
+                </div>
+                <h3 class="fw-bold">
+                    Login
+                </h3>
                 <form [formGroup]="loginForm">
                     <div class="mb-3">
                         <label for="usernameOrMail">Username or Mail Address</label>
@@ -24,7 +28,7 @@
                             placeholder="********">
                     </div>
                     <div class="mb-3 text-center">
-                        <button class="btn bg-dark rounded-pill text-white ps-5 pe-5"
+                        <button class="btn btn-orange rounded-pill text-white ps-5 pe-5"
                             (click)="login()"
                             [disabled]="!this.loginForm.valid">
                             Login
