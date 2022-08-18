@@ -32,6 +32,7 @@
     "jspdf-autotable": "^3.5.25",
     "jwt-decode": "^3.1.2",
     "ng2-pdf-viewer": "^9.1.0",
+    "ngx-bootstrap": "^9.0.0",
     "ngx-echarts": "^14.0.0",
     "ngx-photo-editor": "^0.4.3",
     "ngx-spinner": "^14.0.0",

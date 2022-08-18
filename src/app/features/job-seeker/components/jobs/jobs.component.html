@@ -24,37 +24,64 @@
     <ng-container *ngIf="isLoaded; then data; else loader">
     </ng-container>
     <ng-template #loader>
-        <div class="flex-grow-1">
-            <div class="card p-4">
-                <p-skeleton width="10rem" height="2rem" styleClass="mb-2"></p-skeleton>
-                <p-skeleton width="15rem" styleClass="mb-2"></p-skeleton>
-                <p-skeleton width="8rem" styleClass="mb-2"></p-skeleton>
-                <div class="d-flex gap-2">
-                    <p-skeleton height="1.5rem" width="7rem"></p-skeleton>
-                    <p-skeleton height="1.5rem" width="5rem"></p-skeleton>
+        <div class="col-8">
+            <div class="card-shadow p-4 mb-3">
+                <div class="d-flex justify-content-start">
+                    <div class="mt-2">
+                        <p-skeleton [shape]="'circle'" width="80px" height="80px"></p-skeleton>
+                    </div>
+                    <div class="ps-3">
+                        <p-skeleton width="14rem" height="2rem" styleClass="mb-2"></p-skeleton>
+                        <div class="d-flex gap-2">
+                            <p-skeleton height="1.5rem" width="12rem"></p-skeleton>
+                            <p-skeleton height="1.5rem" width="7rem"></p-skeleton>
+                            <p-skeleton height="1.5rem" width="5rem"></p-skeleton>
+                        </div>
+                        <div class="d-flex gap-2 pt-2">
+                            <p-skeleton height="1.5rem" width="7rem"></p-skeleton>
+                            <p-skeleton height="1.5rem" width="5rem"></p-skeleton>
+                        </div>
+                    </div>
                 </div>
             </div>
-            <div class="pb-3"></div>
-            <div class="card p-5">
-                <p-skeleton width="10rem" height="2rem" styleClass="mb-2"></p-skeleton>
-                <p-skeleton width="15rem" styleClass="mb-2"></p-skeleton>
-                <p-skeleton width="8rem" styleClass="mb-2"></p-skeleton>
-                <div class="d-flex gap-2">
-                    <p-skeleton height="1.5rem" width="7rem"></p-skeleton>
-                    <p-skeleton height="1.5rem" width="5rem"></p-skeleton>
+            <div class="card-shadow p-4 mb-3">
+                <div class="d-flex justify-content-start">
+                    <div class="mt-2">
+                        <p-skeleton [shape]="'circle'" width="80px" height="80px"></p-skeleton>
+                    </div>
+                    <div class="ps-3">
+                        <p-skeleton width="14rem" height="2rem" styleClass="mb-2"></p-skeleton>
+                        <div class="d-flex gap-2">
+                            <p-skeleton height="1.5rem" width="12rem"></p-skeleton>
+                            <p-skeleton height="1.5rem" width="7rem"></p-skeleton>
+                            <p-skeleton height="1.5rem" width="5rem"></p-skeleton>
+                        </div>
+                        <div class="d-flex gap-2 pt-2">
+                            <p-skeleton height="1.5rem" width="7rem"></p-skeleton>
+                            <p-skeleton height="1.5rem" width="5rem"></p-skeleton>
+                        </div>
+                    </div>
                 </div>
             </div>
-            <div class="pb-3"></div>
-            <div class="card p-5">
-                <p-skeleton width="10rem" height="2rem" styleClass="mb-2"></p-skeleton>
-                <p-skeleton width="15rem" styleClass="mb-2"></p-skeleton>
-                <p-skeleton width="8rem" styleClass="mb-2"></p-skeleton>
-                <div class="d-flex gap-2">
-                    <p-skeleton height="1.5rem" width="7rem"></p-skeleton>
-                    <p-skeleton height="1.5rem" width="5rem"></p-skeleton>
+            <div class="card-shadow p-4 mb-3">
+                <div class="d-flex justify-content-start">
+                    <div class="mt-2">
+                        <p-skeleton [shape]="'circle'" width="80px" height="80px"></p-skeleton>
+                    </div>
+                    <div class="ps-3">
+                        <p-skeleton width="14rem" height="2rem" styleClass="mb-2"></p-skeleton>
+                        <div class="d-flex gap-2">
+                            <p-skeleton height="1.5rem" width="12rem"></p-skeleton>
+                            <p-skeleton height="1.5rem" width="7rem"></p-skeleton>
+                            <p-skeleton height="1.5rem" width="5rem"></p-skeleton>
+                        </div>
+                        <div class="d-flex gap-2 pt-2">
+                            <p-skeleton height="1.5rem" width="7rem"></p-skeleton>
+                            <p-skeleton height="1.5rem" width="5rem"></p-skeleton>
+                        </div>
+                    </div>
                 </div>
             </div>
-            <div class="pb-3"></div>
         </div>
     </ng-template>
     <ng-template #data>
@@ -63,7 +90,7 @@
             <div class="d-flex flex-column">
                 <div>
                     <p class="fw-bold text-center">
-                        no jobs available :(
+                        no jobs available right now.
                     </p>
                 </div>
                 <!-- <div class="text-center">
@@ -75,7 +102,7 @@
             </div>
         </ng-template>
         <ng-template #jobCards>
-            <div class="flex-grow-1">
+            <div class="col-8">
                 <ng-container *ngFor="let job of allJobs">
                     <app-job-card [job]="job">
                     </app-job-card>

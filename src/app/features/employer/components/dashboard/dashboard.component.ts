@@ -14,7 +14,7 @@ import { FilterService } from 'src/app/data/services/filter.service';
 export class DashboardComponent implements OnInit {
 
   totalJobs!: number;
-  totalHiring!: number;
+  totalApplication!: number;
   totalShortlisted!: number;
   barChartOptions!: EChartsOption;
   pieChartOptions!: EChartsOption;
@@ -26,10 +26,9 @@ export class DashboardComponent implements OnInit {
 
   ngOnInit(): void {
     this.spinner.show();
-    this.totalJobs = 9;
-    this.totalHiring = 41;
     this.getBarChartData();
-    // this.getPieChartData();
+    this.getPieChartData();
+    this.getTotalJobs();
   }
 
   getTotalJobs() {
@@ -42,6 +41,8 @@ export class DashboardComponent implements OnInit {
   getBarChartData() {
     this.filterService.getBarChartData().subscribe({
       next: (data: BarChartData) => {
+        this.totalApplication = data.applicantCount.reduce((a, b) => a + b, 0);
+        this.totalShortlisted = data.shortListedCount.reduce((a, b) => a + b, 0);
         this.barChartOptions = {
           tooltip: {
             trigger: 'axis',
@@ -83,16 +84,16 @@ export class DashboardComponent implements OnInit {
   }
 
   getPieChartData() {
-    this.filterService.getPieChartData().subscribe({
-      next: (data: PieChartData) => {
-        let pieData: any[] = [];
-        for (let i = 0; i < data['jobTitles'].length; i++) {
-          const temp: any = {
-            value: data['rejectionPercentage'][i],
-            name: data['jobTitles'][i]
-          }
-          pieData.push(temp);
-        }
+    // this.filterService.getPieChartData().subscribe({
+    //   next: (data: PieChartData) => {
+    //     let pieData: any[] = [];
+    //     for (let i = 0; i < data['jobTitles'].length; i++) {
+    //       const temp: any = {
+    //         value: data['rejectionPercentage'][i],
+    //         name: data['jobTitles'][i]
+    //       }
+    //       pieData.push(temp);
+    //     }
         this.pieChartOptions = {
           tooltip: {
             trigger: 'item'
@@ -125,19 +126,19 @@ export class DashboardComponent implements OnInit {
               labelLine: {
                 show: false
               },
-              data: pieData
-              // data: [
-              //   { value: 19, name: 'Customer Support' },
-              //   { value: 3, name: 'Engineering Manager' },
-              //   { value: 12, name: 'Developer' },
-              //   { value: 26, name: 'Tester' },
-              // ]
+              // data: pieData
+              data: [
+                { value: 19, name: 'Customer Support' },
+                { value: 3, name: 'Engineering Manager' },
+                { value: 12, name: 'Developer' },
+                { value: 26, name: 'Tester' },
+              ]
             }
           ]
         };
       
-      }
-    });
+      // }
+    // });
   }
 
 }

@@ -78,6 +78,8 @@ export class CompanyDetailComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    // this.getProfilePicture();
+
   }
   openFileTrigger(component: HTMLElement) {
     component.click();
@@ -89,7 +91,7 @@ export class CompanyDetailComponent implements OnInit {
         autoCropArea: 1,
       })
       .subscribe((data: any) => {
-        // this.output = data;
+        console.log(data)
         let file: any = data.file;
         let formData: FormData = new FormData();
         formData.append("profilePicture", file, file.name);
@@ -97,7 +99,8 @@ export class CompanyDetailComponent implements OnInit {
           next: (_data) => {
             console.log("success");
             this.getProfilePicture();
-          }
+          },
+          
         });
       });
   }
@@ -109,6 +112,9 @@ export class CompanyDetailComponent implements OnInit {
         let res = data.url;
         this.imageUrl = res + "?" + environment.profile_sas_token;
         this.isImageLoaded = true;
+      },
+      error(err) {
+        
       },
     });
   }

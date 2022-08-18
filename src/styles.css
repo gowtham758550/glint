@@ -10,12 +10,14 @@
     --dark: #171b34;
     --success: #8cffa7;
     --orange: #f17921;
-    --orange-light: #FFF4E2;
+    /* --orange-light: #a4a3a0; */
+    --orange-light: #e7cea4;
 }
 
 body {
     /* background-color: #f3eeeecc; */
-    background-color: var(--orange-light);
+    /* background-color: var(--orange-light); */
+    background-color: #FAF3E3;
 }
 
 .bg-primary {
@@ -192,7 +194,7 @@ body {
 /* sidebar */
 
 .sidebar {
-    width: 22vh;
+    width: 20vh;
     /* animation: hideMe 200ms forwards; */
 }
 @keyframes hideMe{
@@ -324,3 +326,6 @@ html, body {
     margin: 0;
   }
   
+.form-control {
+    /* border: ; */
+}

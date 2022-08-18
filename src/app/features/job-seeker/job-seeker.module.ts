@@ -8,6 +8,7 @@ import { MessagesModule } from 'primeng/messages';
 import { CheckboxModule } from 'primeng/checkbox';
 import { SkeletonModule } from 'primeng/skeleton';
 import { TimelineModule } from 'primeng/timeline';
+
 import { CardModule } from 'primeng/card';
 import  {  PdfViewerModule  }  from  'ng2-pdf-viewer';
 import { JobSeekerRoutingModule } from './job-seeker-routing.module';
@@ -29,6 +30,7 @@ import { DividerModule } from "primeng/divider";
 import { TooltipModule } from 'primeng/tooltip';
 import { ChipModule } from 'primeng/chip';
 import { ChipsModule } from 'primeng/chips';
+import { ScrollPanelModule } from 'primeng/scrollpanel';
 import { JobsComponent } from './components/jobs/jobs.component';
 import { LoginComponent } from './components/login/login.component';
 
@@ -69,6 +71,7 @@ import { LoginComponent } from './components/login/login.component';
     CardModule,
     ChipsModule,
     ChipModule,
+    ScrollPanelModule,
     PdfViewerModule
   ]
 })

@@ -15,7 +15,9 @@
     <div class="fs-6">
         <span *ngIf="isJobSeeker">
             <i class="pi pi-building"></i>
-            company name
+            <span class="fw-bold">
+                {{job.companyName}}
+            </span>
             .
         </span>
         <span>
@@ -25,7 +27,7 @@
         .
         <span class="text-success">
             <i class="pi pi-clock"></i>
-            22 hours ago
+            {{job.createdDate | date}}
         </span>
     </div>
 
@@ -53,13 +55,13 @@
 <div class="pt-4"></div>
 <div class="card-shadow p-4">
     <div class="fs-3 fw-bold">
-        About the job
+        About
     </div>
     <div class="fs-5 fw-bold">
         Company Description
     </div>
     <div class="fs-6">
-        {{job.description}}
+        {{job.companyDescription}}
     </div>
 
     <div class="fs-5 fw-bold pt-4">

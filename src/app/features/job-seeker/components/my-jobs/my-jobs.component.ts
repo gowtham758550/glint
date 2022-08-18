@@ -32,6 +32,7 @@ export class MyJobsComponent implements OnInit {
   getMyJobs() {
     this.appliedJobService.getAppliedJobs().subscribe({
       next: data => {
+        console.log(data)
         this.myJobs = data;
         this.isAppliedJobLoaded = true;
         this.getTimeline(0);

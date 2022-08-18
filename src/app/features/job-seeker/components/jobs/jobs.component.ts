@@ -16,6 +16,8 @@ export class JobsComponent implements OnInit {
   routeConstants = RouteConstants;
   isLoaded = false;
   allJobs!: Job[];
+  minimalJob!:any[]
+
   filteredJobs!: Job[];
   locations = ["Bangalore", "Coimbatore", "Chennai", "Kolkata", "Mumbai"];
   experiences = ["Experienced", "Fresher"];
@@ -30,9 +32,9 @@ export class JobsComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    // this.getAllJob();
     this.getJobs();
-  }
+    this.getJobMinimal();
+   }
 
   getJobs() {
     console.log("started");
@@ -78,6 +80,7 @@ export class JobsComponent implements OnInit {
     this.filterService.getNonAppliedJobs(filters.toString()).subscribe({
       next: (data) => {
         this.allJobs = data;
+        console.log(data)
         this.isLoaded = true;
       },
     });
@@ -158,5 +161,18 @@ export class JobsComponent implements OnInit {
     });
   }
 
-  search() {}
+  search() {
+    
+  }
+
+  // formatJob()
+  // {
+  //   for(let i=0;i<this.allJobs.length;i++)
+  //   {
+  //     for()
+  //   }
+  // }
+  getJobMinimal(){
+    this.filterService.getJobMinimal().subscribe(res=> {this.minimalJob=res; console.log(this.minimalJob)})
+  }
 }

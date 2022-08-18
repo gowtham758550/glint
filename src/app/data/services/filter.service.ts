@@ -53,4 +53,7 @@ export class FilterService {
     getPieChartData(): Observable<PieChartData> {
         return this.httpClient.get<PieChartData>(`${this.host}/pie_chart/get`);
     }
+    getJobMinimal(){
+        return this.httpClient.get<Job[]>(`${this.host}/post_job_list/get_minimal`);
+    }
 }

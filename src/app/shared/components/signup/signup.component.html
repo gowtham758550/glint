@@ -1,10 +1,47 @@
 <div class="p-5">
-    <h3 class="">
+    <h3 class="fw-bold text-center">
         Signup
     </h3>
-    <hr>
-    <app-form [formFields]="registerationFields"
+    <div class="mt-3">
+        <form [formGroup]="registerationForm">
+
+            <!-- row 1 -->
+            <div class="row">
+                <div class="mb-3 col">
+                    <label for="firstName">First Name</label>
+                    <input type="text" id="firstName" class="form-control">
+                </div>
+                <div class="mb-3 col">
+                    <label for="lastName">Last Name</label>
+                    <input type="text" id="lastName" class="form-control">
+                </div>
+            </div>
+
+            <div class="mb-3 col">
+                <label for="userName">Username</label>
+                <input type="text" id="userName" class="form-control">
+            </div>
+            <div class="mb-3 col">
+                <label for="emailAddress">Email Address</label>
+                <input type="text" id="emailAddress" class="form-control">
+            </div>
+
+            <div class="mb-3 col">
+                <label for="password">Password</label>
+                <input type="text" id="userName" class="form-control">
+            </div>
+            <div class="mb-3 col">
+                <label for="confirmPassword">Confirm Password</label>
+                <input type="text" id="confirmPassword" class="form-control">
+            </div>
+
+            <button class="float-end btn btn-orange text-end rounded-pill px-3 py-1">
+                Next
+            </button>
+        </form>
+    </div>
+    <!-- <app-form [formFields]="registerationFields"
         [formGroup]="registerationForm"
         (formEmitter)="receiveFormData()">
-    </app-form>
+    </app-form> -->
 </div>
