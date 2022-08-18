@@ -12,6 +12,11 @@
             </ng-template>
 
             <!-- input:text -->
+            <ng-template [ngSwitchCase]="'chips'">
+                <label>{{field.label}}</label>
+                <p-chips type="chips" formControlName={{field.formControlName}}></p-chips>
+            </ng-template>
+
             <ng-template [ngSwitchCase]="'input'">
                 <div class="mb-3">
                     <label [for]="field.formControlName">

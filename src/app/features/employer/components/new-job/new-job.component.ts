@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { NgxSpinnerService } from 'ngx-spinner';
 import { ToastrService } from 'ngx-toastr';
 import { FormField } from 'src/app/data/models/form-field.model';
 import { DataService } from 'src/app/data/services/data.service';
@@ -22,7 +23,7 @@ export class NewJobComponent implements OnInit {
     jobType: ['', Validators.required],
     minimumQualification: ['', Validators.required],
     location: ['', Validators.required],
-    createdDate: [new Date(), Validators.required]
+    // createdDate: [new Date()]
   })
   jobFields: FormField[] = [
     {
@@ -88,7 +89,8 @@ export class NewJobComponent implements OnInit {
     private jobService: JobService,
     private toastr: ToastrService,
     private router: Router,
-    private dataService: DataService
+    private dataService: DataService,
+    private spinner: NgxSpinnerService
   ) { }
 
   ngOnInit(): void {
@@ -109,11 +111,13 @@ export class NewJobComponent implements OnInit {
   }
 
   createJob() {
+    this.spinner.show();
     console.log(this.jobForm.value);
     this.jobService.postJob(this.jobForm.value).subscribe({
       next: data => {
         this.toastr.success('Job created successfully', 'Success');
         this.router.navigateByUrl('/employer/jobs');
+        this.spinner.hide();
       }
     });
   }

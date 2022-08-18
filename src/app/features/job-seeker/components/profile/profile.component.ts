@@ -59,20 +59,20 @@ export class ProfileComponent implements OnInit {
 
   preferredJobFields: FormField[] = [
     {
-      type: "input",
-      label: "Enter Job Title",
-      formControlName: "preferredJobTitle",
-      class: ["w"],
+      type: 'chips',
+      label: 'Enter Job Title',
+      formControlName: 'preferredJobTitle',
+      class: ['w'],
     },
   ];
   skillFields: FormField[] = [
     {
-      type: "input",
-      label: "Enter your skill",
-      formControlName: "skillTitle",
-      class: ["w"],
-    },
-  ];
+      type: 'chips',
+      label: 'Enter your skill',
+      formControlName: 'SkillTitle',
+      class: ['w'],
+    }
+  ]
 
   profileFields: FormField[] = [
     {
@@ -604,28 +604,32 @@ export class ProfileComponent implements OnInit {
       .addPreferredJob([{ jobTitle: jobToAdd.preferredJobTitle }])
       .subscribe((res) => this.getPreferredJob());
   }
+  preferredjobArray: any=[];
   executePreferredJobAction() {
     if (this.action == "Add") {
       this.preferredJobService.getPreferredJob().subscribe((res: any) => {
-        for (var i = 0; i < res.length; i++) {
-          console.log(res[i].jobTitle);
-          // console.log()
-          if (
-            res[i].jobTitle === this.preferredJobForm.value.preferredJobTitle
-          ) {
-            this.isPreferredJobAdded = false;
-            break;
+        for (var j = 0; j < res.length; j++) {
+          this.preferredjobArray.push(res[j].jobTitle);
+        }
+        for (var i = 0; i < this.preferredJobForm.value.preferredJobTitle.length; i++) {
+          console.log(this.preferredjobArray)
+          for (var j = 0; j < this.preferredjobArray.length; j++) {
+            console.log(this.preferredjobArray[j]);
+            if (this.preferredjobArray[j].toLowerCase()=== (this.preferredJobForm.value.preferredJobTitle[i])) {
+              this.isPreferredJobAdded = false;
+              break;
+            }
+
           }
         }
         if (this.isPreferredJobAdded) {
-          this.preferredJobService
-            .addPreferredJob([
-              { jobTitle: this.preferredJobForm.value.preferredJobTitle },
-            ])
-            .subscribe((res) => this.getPreferredJob());
-          this.toastr.success("Job added");
-          this.modalService.dismissAll();
-        } else {
+          for (var i = 0; i < this.preferredJobForm.value.preferredJobTitle.length; i++) {
+            this.preferredJobService.addPreferredJob([{ jobTitle: this.preferredJobForm.value.preferredJobTitle[i] }]).subscribe(res => this.getPreferredJob());
+            this.toastr.success('Job added');
+            this.modalService.dismissAll();
+          }
+        }
+        else {
           this.isPreferredJobAdded = true;
           this.toastr.warning("Job already added");
           this.modalService.dismissAll();
@@ -638,8 +642,8 @@ export class ProfileComponent implements OnInit {
   skillForm!: FormGroup;
   getskill(): FormGroup {
     return this.formBuilder.group({
-      skillTitle: ["", Validators.required],
-    });
+      SkillTitle: ['', Validators.required]
+    })
   }
   // Modal Add job
   addskill(ref: any) {
@@ -666,25 +670,37 @@ export class ProfileComponent implements OnInit {
       .addSkills([{ skillTitle: jobToAdd.skillTitle }])
       .subscribe((res) => this.getSkill());
   }
+  skillTitleArray: any = []
   executeSkillAction() {
-    if (this.action == "Add") {
-      this.skillService.getSkills().subscribe((res) => {
-        console.log(this.skillForm.value.skillTitle);
+    if (this.action == 'Add') {
+      this.skillService.getSkills().subscribe(res => {
+        console.log(this.skillForm.value.SkillTitle)
         for (var i = 0; i < res.length; i++) {
-          console.log(res[i].skillTitle);
-          if (res[i].skillTitle === this.skillForm.value.skillTitle) {
-            console.log(this.skillForm.value.skillTitle);
-            this.isSkillAdded = false;
-            break;
+          this.skillTitleArray.push(res[i].skillTitle)
+        }
+        for (var i = 0; i < this.skillForm.value.SkillTitle.length; i++) {
+          console.log(this.skillTitleArray)
+          for (var j = 0; j < this.skillTitleArray.length; j++) {
+            if (this.skillTitleArray[j].toLowerCase() === (this.skillForm.value.SkillTitle[i].toLowerCase())) {
+              this.isSkillAdded = false;
+              break;
+            }
+
           }
+          // if (res[i].skillTitle === this.skillForm.value.skillTitle) {
+          //   console.log(this.skillForm.value.skillTitle)
+          //   this.isSkillAdded = false;
+          //   break;
+          // }
         }
         if (this.isSkillAdded) {
-          this.skillService
-            .addSkills([{ skillTitle: this.skillForm.value.skillTitle }])
-            .subscribe((res) => this.getSkill());
-          this.toastr.success("Skill added");
-          this.modalService.dismissAll();
-        } else {
+          for (var i = 0; i < this.skillForm.value.SkillTitle.length; i++) {
+            this.skillService.addSkills([{ skillTitle: this.skillForm.value.SkillTitle[i] }]).subscribe(res => this.getSkill());
+            this.toastr.success('Skill added');
+            this.modalService.dismissAll();
+          }
+        }
+        else {
           this.isSkillAdded = true;
           this.toastr.warning("Skill already added!");
           this.modalService.dismissAll();

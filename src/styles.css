@@ -10,10 +10,23 @@
     --dark: #171b34;
     /* --dark: orange; */
     --success: #8cffa7;
+    --orange: #f17921;
+    /* --orange-light: #a4a3a0; */
+    --orange-light: #e7cea4;
+}
+
+body {
+    /* background-color: #f3eeeecc; */
+    /* background-color: var(--orange-light); */
+    background-color: #FAF3E3;
 }
 
 .bg-primary {
     background-color: var(--primary) !important;
+}
+
+.bg-orange-light {
+    background-color: var(--orange-light) !important;
 }
 
 .bg-secondary {
@@ -23,6 +36,11 @@
 .bg-success {
     background-color: var(--success) !important;
     color: var(--dark);
+}
+
+.bg-orange {
+    background-color: var(--orange) !important;
+    color: #fff;
 }
 
 .bg-dark {
@@ -35,6 +53,10 @@
 
 .text-primary {
     color: var(--primary) !important;
+}
+
+.text-orange {
+    color: var(--orange);
 }
 
 .text-secondary {
@@ -55,6 +77,23 @@
     color: var(--dark) !important;
 }
 
+.btn-orange,
+.btn-orange:hover,
+.btn-orange:disabled,
+.btn-orange:focus {
+    background-color: var(--orange);
+    color: #fff;
+}
+
+.btn-orange:disabled {
+    opacity: .7;
+}
+
+.required::after {
+    content: ' *';
+    color: #ff0000;
+}
+
 /* width */
 
 .w {
@@ -64,8 +103,9 @@
 .card-shadow {
     /* -webkit-box-shadow: 1px -2px 24px 2px #5C5C5C;
     -moz-box-shadow: 1px -2px 24px 2px #5C5C5C; */
-    box-shadow: 0 0.3rem 1rem rgba(0, 0, 0, 0.4);
+    box-shadow: 0 0.3rem 1rem rgba(0, 0, 0, 0.2);
     border-radius: 10px;
+    background-color: #fff;
 }
 
 .raise:hover,
@@ -155,12 +195,33 @@
 /* sidebar */
 
 .sidebar {
-    width: 23vh;
+    width: 20vh;
+    /* animation: hideMe 200ms forwards; */
+}
+@keyframes hideMe{
+    0%{
+        width: 0;
+    }
+    100%{
+        width: 23vh;
+    }
 }
 
-.side-nav-item {
-    color: #aeaeb4;
-}
+/* .navbar-fixed {
+    width: 77vh;
+} */
+
+
+
+.navbar-fixed {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    background-color: red;
+    color: white;
+    text-align: center;
+  }
 
 .side-nav-item:hover {
     color: var(--secondary);
@@ -202,7 +263,7 @@
 
 .dropdown-content a:hover {
     /* border-radius: 4%; */
-    background-color: rgb(244, 241, 241);
+    /* background-color: rgb(244, 241, 241); */
 }
 
 .dropdown:hover .dropdown-content {
@@ -256,3 +317,16 @@
     bottom: 0;
     right: .5rem;
 } */
+
+.animate {
+    transition: all 700ms ease-in-out;
+}
+
+html, body {
+    height: 100%;
+    margin: 0;
+  }
+  
+.form-control {
+    /* border: ; */
+}

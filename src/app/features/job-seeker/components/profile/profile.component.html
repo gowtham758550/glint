@@ -1,7 +1,7 @@
 <div class="d-flex justify-content-center align-items-center h-100">
     <div class="flex-grow-1 h-100">
         <!-- Profile Image -->
-        <div class="card shadow">
+        <div class="card-shadow">
             <div class="div">
                 <ng-container *ngIf="isCoverImageLoaded; then coverImage; else coverImageLoader"></ng-container>
                 <ng-template #coverImageLoader>
@@ -90,15 +90,17 @@
                 <!-- EducationCard  -->
                 <div class="col-xl-6 col-lg-12 col-md-12 col-12 mb-6">
                     <!-- card -->
-                    <div class="card shadow">
+                    <div class="card shadow" style="height: 300px;">
                         <!-- card body -->
                         <div class="card-body">
                             <!-- card title -->
-                            <div class="flex-grow-1 fs-4">
-                                <h4 class="card-title">Education <button class="btn btn-rounded float-end"
-                                        (click)="addEducation(educationModal)">
-                                        <i class="pi pi-plus"></i>
-                                    </button></h4>
+                            <div class="flex-grow-1 fs-4" >
+                                <h4 class="card-title">Education
+
+                                    <button pButton pRipple type="button" icon="pi pi-plus"
+                                        (click)="addEducation(educationModal)"
+                                        class="p-button-rounded p-button-secondary float-end bg-dark text-white"></button>
+                                </h4>
                             </div>
                             <hr>
                             <div class="d-flex justify-content-center align-items-center" id="main"
@@ -110,16 +112,20 @@
                                     <h2 class="font-weight-normal lead" id="desc">No Education added</h2>
                                 </div>
                             </div>
+                            <p-scrollPanel [style]="{width: '100%', height: '200px'}" styleClass="custom">
                             <ng-container *ngFor="let education of educationArray; let id=index;">
+                               
+                                    
+                               
                                 <div class="pt-3 d-flex justify-content-start" *ngIf="educationArray.length>=1">
                                     <div class="pt-3">
                                         <img src="assets/university.svg" height="50px" width="50px">
                                     </div>
                                     <div class="ps-4 d-flex flex-column flex-grow-1">
                                         <!-- {{education.value | json}} -->
-                                        <h4>
+                                        <h5>
                                             {{education.universityName}}
-                                        </h4>
+                                        </h5>
                                         <div class="fs-7">
                                             {{education.qualification}}-
                                             {{education.courseName}}
@@ -140,24 +146,26 @@
                                         </button>
                                     </div>
                                 </div>
-
+                           
 
                             </ng-container>
+                        </p-scrollPanel>
                         </div>
                     </div>
                 </div>
                 <!-- Experience card -->
                 <div class="col-xl-6 col-lg-12 col-md-12 col-12 mb-6">
                     <!-- card -->
-                    <div class="card shadow">
+                    <div class="card shadow" style="height: 300px;">
                         <!-- card body -->
                         <div class="card-body">
                             <!-- card title -->
                             <div class="flex-grow-1 fs-4">
-                                <h4 class="card-title">Experience <button class="btn btn-rounded float-end"
-                                        (click)="addExperience(experienceModal)">
-                                        <i class="pi pi-plus"></i>
-                                    </button></h4>
+                                <h4 class="card-title">Experience
+                                    <button pButton pRipple type="button" icon="pi pi-plus"
+                                        (click)="addExperience(experienceModal)"
+                                        class="p-button-rounded p-button-secondary float-end bg-dark text-white"></button>
+                                </h4>
                             </div>
                             <hr>
                             <div class="d-flex justify-content-center align-items-center" id="main"
@@ -169,15 +177,16 @@
                                     <h2 class="font-weight-normal lead" id="desc">No Experience added</h2>
                                 </div>
                             </div>
+                            <p-scrollPanel [style]="{width: '100%', height: '200px'}" styleClass="custom">
                             <ng-container *ngFor="let experience of experienceArray; let id = index">
                                 <div class="pt-3 d-flex justify-content-start">
                                     <div class="pt-3">
                                         <img src="../../../../../assets/company.png" height="50px" width="50px">
                                     </div>
                                     <div class="ps-4 d-flex flex-column flex-grow-1">
-                                        <h4>
+                                        <h5>
                                             {{experience.previousCompanyName}}
-                                        </h4>
+                                        </h5>
                                         <div class="fs-7">
                                             {{experience.designation}}
                                         </div>
@@ -197,6 +206,7 @@
                                     </div>
                                 </div>
                             </ng-container>
+                            </p-scrollPanel>
                         </div>
                     </div>
                 </div>
@@ -207,18 +217,28 @@
             <div class="row">
                 <div class="col-xl-6 col-lg-12 col-md-12 col-12 mb-6">
                     <!-- card -->
-                    <div class="card shadow">
+                    <div class="card-shadow">
                         <!-- card body -->
                         <div class="card-body">
                             <!-- card title -->
                             <div class="flex-grow-1 fs-4">
-                                <h4 class="card-title">Preferred Job
-                                    <button class="btn btn-rounded float-end">
-                                        <i class="pi pi-plus" (click)="addjob(PreferredJobModal)"></i>
-                                    </button>
+                                <h4 class="card-title">My Interested Jobs
+                                    <button pButton pRipple type="button" icon="pi pi-plus"
+                                        (click)="addjob(PreferredJobModal)"
+                                        class="p-button-rounded p-button-secondary float-end bg-dark text-white"></button>
                                 </h4>
                                 <hr>
                             </div>
+                            <div class="d-flex justify-content-center align-items-center" id="main"
+                                *ngIf="preferredJobArray.length==0">
+                                <img class="mr-3 pr-3 align-top border-right inline-block align-content-center"
+                                    src="https://cdn.dribbble.com/users/1753953/screenshots/3818675/animasi-emptystate.gif"
+                                    style="height:150px; width: 150px;">
+                                <div class="inline-block align-middle">
+                                    <h2 class="font-weight-normal lead" id="desc">No Interested Jobs</h2>
+                                </div>
+                            </div>
+                            <p-scrollPanel [style]="{width: '100%', height: '200px'}" styleClass="custom">
                             <div class="flex-grow-1 fs-4" *ngFor="let preferredJob of preferredJobArray"
                                 style="margin-left:5%;top:10%">
 
@@ -226,6 +246,7 @@
                                     (onRemove)="deleteJob(preferredJob.preferredJobId)">{{preferredJob.jobTitle}}
                                 </p-chip>
                             </div>
+                        </p-scrollPanel>
                         </div>
 
                     </div>
@@ -234,18 +255,29 @@
                 <!-- Skills Card -->
                 <div class="col-xl-6 col-lg-12 col-md-12 col-12 mb-6">
                     <!-- card -->
-                    <div class="card shadow">
+                    <div class="card-shadow">
                         <!-- card body -->
                         <div class="card-body">
                             <!-- card title -->
                             <div class="flex-grow-1 fs-4">
-                                <h4 class="card-title">Skills
-                                    <button class="btn btn-rounded float-end">
-                                        <i class="pi pi-plus" (click)="addskill(SkillModal)"></i>
-                                    </button>
+                                <h4 class="card-title">My Skills
+                                    <button pButton pRipple type="button" icon="pi pi-plus"
+                                        (click)="addskill(SkillModal)"
+                                        class="p-button-rounded p-button-secondary float-end bg-dark text-white"></button>
+
                                 </h4>
                                 <hr>
                             </div>
+                            <div class="d-flex justify-content-center align-items-center" id="main"
+                                *ngIf="skillArray.length==0">
+                                <img class="mr-3 pr-3 align-top border-right inline-block align-content-center"
+                                    src="https://cdn.dribbble.com/users/1753953/screenshots/3818675/animasi-emptystate.gif"
+                                    style="height:150px; width: 150px;">
+                                <div class="inline-block align-middle">
+                                    <h2 class="font-weight-normal lead" id="desc">No Skills</h2>
+                                </div>
+                            </div>
+                            <p-scrollPanel [style]="{width: '100%', height: '200px'}" styleClass="custom">
                             <div class="flex-grow-1 fs-4" *ngFor="let skill of skillArray"
                                 style="margin-left:5%;top:10%; display:flex;">
 
@@ -253,6 +285,7 @@
                                     {{skill.skillTitle}}
                                 </p-chip>
                             </div>
+                            </p-scrollPanel>
                         </div>
 
                     </div>
@@ -335,26 +368,6 @@
                 <div class="text-end pb-3 pe-3">
                     <button class="btn bg-dark text-white" style="border-radius: 13px;"
                         [disabled]="!preferredJobForm.valid" (click)="executePreferredJobAction()">
-                        {{action}}
-                    </button>
-                </div>
-            </ng-template>
-            <ng-template #PreferredJobModal let-modal>
-                <div class="modal-header">
-                    <h4 class="modal-title" id="modal-basic-title">
-                        {{action}} Interested Job
-                    </h4>
-                    <button type="button" class="btn-close" aria-label="Close"
-                        (click)="modal.dismiss('Cross click')"></button>
-                </div>
-                <div class="modal-body d-flex justify-content-center">
-                    <app-form [formGroup]="preferredJobForm" [formFields]="preferredJobFields">
-                    </app-form>
-                </div>
-                <hr>
-                <div class="text-end pb-3 pe-3">
-                    <button class="btn bg-dark text-white" style="border-radius: 13px;" [disabled]="!skillForm.valid"
-                        (click)="executeSkillAction()">
                         {{action}}
                     </button>
                 </div>

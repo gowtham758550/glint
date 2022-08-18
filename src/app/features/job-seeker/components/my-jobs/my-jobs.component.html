@@ -1,5 +1,5 @@
 <div>
-    
+
     <div class="card p-3">
         <div class="card-title fs-2 fw-bold">
             My Jobs
@@ -7,8 +7,8 @@
         <hr>
 
         <ng-container></ng-container>
-        <div class="d-flex flex-wrap">
-            <div class="flex-grow-1">
+        <div class="d-flex flex-wrap row">
+            <div class="flex-grow-1 col-4">
                 <ng-container *ngIf="isAppliedJobLoaded; then appliedJob; else appliedJobLoader"></ng-container>
                 <ng-template #appliedJobLoader>
                     <div class="pt-3 d-flex justify-content-start">
@@ -52,7 +52,18 @@
                         </div>
                     </div>
                 </ng-template>
-
+                <div class="d-flex justify-content-center align-items-center" id="main" *ngIf="myJobs.length==0">
+                    <img class="mr-3 pr-3 align-top border-right inline-block align-content-center"
+                        src="https://cdn.dribbble.com/users/1753953/screenshots/3818675/animasi-emptystate.gif"
+                        style="height:150px; width: 150px;">
+                    <div class="inline-block align-middle">
+                        <h2 class="font-weight-normal lead" id="desc">You have not applied for jobs yet!
+                            <a routerLink="/job-seeker/home" class="text-decoration-none">
+                                Apply now?
+                            </a>
+                        </h2>
+                    </div>
+                </div>
                 <ng-template #appliedJob>
                     <ng-container *ngIf="myJobs.length > 0; then appliedJobs; else noJobsApplied"></ng-container>
                     <ng-template #noJobsApplied>
@@ -67,12 +78,10 @@
                     </ng-template>
                     <ng-template #appliedJobs>
                         <ng-container *ngFor="let job of myJobs; let i = index">
-                            <div class="pt-3 d-flex justify-content-start pointer"
+                            <div class="pt-3 d-flex justify-content-start pointer card-shadow p-3 mb-3"
                                 (click)="getTimeline(i)">
                                 <div class="pt-3">
-                                    <img [src]="job.companyProfilePicture + '?' + sasToken"
-                                        height="50px"
-                                        width="50px"
+                                    <img [src]="job.companyProfilePicture + '?' + sasToken" height="50px" width="50px"
                                         style="border-radius: 25px;">
                                 </div>
                                 <div class="ps-4 d-flex flex-column flex-grow-1">
@@ -100,8 +109,9 @@
                         </ng-container>
                     </ng-template>
                 </ng-template>
+               
             </div>
-            <div class="w-50" *ngIf="isTimeline">
+            <div class="col-8" *ngIf="isTimeline">
                 <h3 class="fw-bold">
                     {{jobTimeline[0].jobTitle}}
                 </h3>
@@ -112,8 +122,16 @@
                         </span>
                     </ng-template>
                     <ng-template pTemplate="content" let-event>
-                        <p-card [header]="event.status" [subheader]="event.date">
-                        </p-card>
+                        <!-- <p-card class="col-2" [header]="event.status" [subheader]="event.date">
+                        </p-card> -->
+                        <div class="card-shadow boder-none p-3">
+                            <div class="fw-bold fs-4">
+                                {{event.status}}
+                            </div>
+                            <div>
+                                {{event.date}}
+                            </div>
+                        </div>
                     </ng-template>
                 </p-timeline>
             </div>

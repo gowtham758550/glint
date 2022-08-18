@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { NgxSpinnerService } from 'ngx-spinner';
 import { FormField } from 'src/app/data/models/form-field.model';
 import { AuthService } from 'src/app/data/services/auth.service';
 import { LocalStorage } from 'src/app/data/services/local-storage.service';
@@ -84,13 +85,15 @@ export class SignupComponent implements OnInit {
     private formBuilder: FormBuilder,
     private router: Router,
     private authService: AuthService,
-    private localStorage: LocalStorage
+    private localStorage: LocalStorage,
+    private spinner: NgxSpinnerService
   ) { }
 
   ngOnInit(): void {
   }
 
   receiveFormData() {
+    this.spinner.show();
     console.log(this.registerationForm.value);
     this.authService.signup({ ...this.registerationForm.value, ...{ authRole: this.role } })
       .subscribe({
@@ -102,8 +105,8 @@ export class SignupComponent implements OnInit {
           if (this.role == 'JobSeeker') this.router.navigateByUrl('/job-seeker/signup/verify-account');
           else this.router.navigateByUrl('/employer/signup/verify-account');
           this.localStorage.setItem('accessToken', data.jwt);
-        },
-        error: err => console.log(err)
+          this.spinner.hide();
+        }
       });
   }
 

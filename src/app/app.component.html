@@ -1,34 +1,15 @@
-<ng-container *ngIf="visibility">
-    <ng-container *ngFor="let route of routes">
-        <a [routerLink]="route.routeTo" class="px-2">
-            {{route.value}}
-        </a>
-    </ng-container>
-    <input type="checkbox" [(ngModel)]="visibility">
-    <br>
-</ng-container>
-<!-- 
-<ng-container *ngIf="(isLoading | async); then blur; else normal">
-</ng-container>
 
-<ng-template #blur>
-    <div class="blur">
-        <router-outlet></router-outlet>
-    </div>
-</ng-template>
-
-<ng-template #normal>
-    <div>
-        <router-outlet></router-outlet>
-    </div>
-</ng-template>
-
-
-<div class="progress-spinner" *ngIf="(isLoading | async)">
-    <img src="../assets/breath-glint.svg" class="progress-spinner">
-</div> -->
-
+<!-- preloader -->
+<ngx-spinner bdColor = "rgba(0, 0, 0, 0.8)"
+    size = "medium"
+    color = "#fff"
+    type = "ball-pulse"
+    [fullScreen] = "true">
+        <p class="text-white"> Loading... </p>
+</ngx-spinner>
 
 <div>
     <router-outlet></router-outlet>
 </div>
+
+

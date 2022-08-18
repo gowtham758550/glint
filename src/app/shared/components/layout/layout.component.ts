@@ -11,8 +11,7 @@ import { environment } from 'src/environments/environment';
 @Component({
   selector: 'app-layout',
   templateUrl: './layout.component.html',
-  styles: [
-  ]
+  styleUrls: ['./layout.component.css']
 })
 export class LayoutComponent implements OnInit {
 

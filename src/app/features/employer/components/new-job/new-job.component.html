@@ -1,6 +1,86 @@
-<div class="card shadow" style="padding:20px 20px;">
-    <app-form [formGroup]="jobForm"
-        [formFields]="jobFields"
-        (formEmitter)="createJob()">
-    </app-form>
+<div class="card-shadow gap-2">
+    <div class="p-2 row">
+        <img src="../../../../../assets/new-job.jpg" alt="create new job" class="col-7">
+        <div class="col-4 m-3">
+            <h3 class="fw-bold text-orange">
+                Create new job
+            </h3>
+            <form [formGroup]="jobForm">
+                <div class="mb-3">
+                    <label for="jobTitle" class="required">
+                        Job Title
+                    </label>
+                    <input type="text" class="form-control" placeholder="Job title" formControlName="jobTitle"
+                        id="jobTitle">
+                </div>
+
+                <div class="mb-3">
+                    <label for="description" class="required">Job description</label>
+                    <textarea id="about" class="form-control" formControlName="description"
+                        placeholder="Job description" rows="3"></textarea>
+                </div>
+
+                <div class="mb-3 row">
+                    <div class="col">
+                        <label for="experience" class="required">Experience needed</label>
+                        <input type="text" class="form-control" placeholder="(in years)"
+                            formControlName="experienceNeeded" id="experience">
+                    </div>
+                    <div class="col">
+                        <label for="salary" class="required">Salary</label>
+                        <input type="number" placeholder="Salary" class="form-control" formControlName="salary"
+                            id="salary">
+                    </div>
+                </div>
+
+                <div class="mb-3 row">
+                    <div class="col">
+                        <label for="jobType" class="required">Job type</label>
+                        <select class="form-select" aria-label="Select job type" formControlName="jobType" id="jobType">
+                            <option value="" disabled>Select job type</option>
+                            <option value="Male">Male</option>
+                            <option value="Female">Female</option>
+                            <option value="Prefer not to say">Prefer not to say</option>
+                        </select>
+                    </div>
+                    <div class="col">
+                        <label for="location" class="required">Job location</label>
+                        <select class="form-select" aria-label="Select job location" formControlName="location"
+                            id="jobType">
+                            <option value="" disabled>Select job location</option>
+                            <option value="Male">Male</option>
+                            <option value="Female">Female</option>
+                            <option value="Prefer not to say">Prefer not to say</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <label for="jobType" class="required">Minimum qualification</label>
+                    <select class="form-select" aria-label="Select minimum qualification"
+                        formControlName="minimumQualification" id="jobType">
+                        <option value="" disabled>Select minimum qualification</option>
+                        <option value="Male">Male</option>
+                        <option value="Female">Female</option>
+                        <option value="Prefer not to say">Prefer not to say</option>
+                    </select>
+                </div>
+
+
+                <div class="mb-3 float-end">
+                    <button class="btn btn-orange px-2 py-1 rounded-fill" (click)="createJob()"
+                        [disabled]="jobForm.valid">
+                        Create job
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- <div class="flex-grow-1"> -->
+    <!-- <app-form [formGroup]="jobForm"
+            [formFields]="jobFields"
+            (formEmitter)="createJob()">
+        </app-form> -->
+    <!-- </div> -->
 </div>

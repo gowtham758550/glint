@@ -18,6 +18,7 @@ import { JobSeekerProfileComponent } from './components/job-seeker-profile/job-s
 import { JobCardsComponent } from './components/job-cards/job-cards.component';
 import { EmployerGuard } from 'src/app/core/guards/employer.guard';
 import { LoginComponent } from './components/login/login.component';
+import { pendingChangesGuard } from 'src/app/core/guards/pendingChanges.guard';
 
 const routes: Routes = [
   {
@@ -59,7 +60,8 @@ const routes: Routes = [
       },
       {
         path: 'job/new',
-        component: NewJobComponent
+        component: NewJobComponent,
+        // canDeactivate:[pendingChangesGuard]  
       },
       {
         path: 'job/:postJobDetailId',
@@ -91,6 +93,6 @@ const routes: Routes = [
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
 export class EmployerRoutingModule { }

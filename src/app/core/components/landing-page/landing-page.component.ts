@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { FilterService } from 'src/app/data/services/filter.service';
 import { JobService } from 'src/app/data/services/job.service';
 import { RouteConstants } from 'src/app/data/enums/constatnts/route.constants';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-landing-page',
@@ -71,10 +72,12 @@ export class LandingPageComponent implements OnInit {
     private formBuilder: FormBuilder,
     private router: Router,
     private filterService: FilterService,
-    private jobService: JobService
+    private jobService: JobService,
+    private spinner: NgxSpinnerService
   ) { }
 
   ngOnInit(): void {
+    this.spinner.show();
     this.getTotalJobCount();
     this.getEmployerCount();
     this.getJobSeekerCount();
@@ -98,7 +101,10 @@ export class LandingPageComponent implements OnInit {
 
   getJobSeekerCount() {
     this.filterService.getJobSeekerCount().subscribe({
-      next: data => this.jobSeekerCount = data
+      next: data => {
+        this.jobSeekerCount = data;
+        this.spinner.hide();
+      }
     })
   }
 
@@ -119,5 +125,6 @@ export class LandingPageComponent implements OnInit {
     if (event.target.value == 0) this.isExperiencePlaceholder = true;
     else this.isExperiencePlaceholder = false;
   }
+  
 
 }

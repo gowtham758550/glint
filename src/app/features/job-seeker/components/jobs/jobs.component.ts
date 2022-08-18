@@ -1,5 +1,6 @@
 import { Component, OnInit } from "@angular/core";
-import { ActivatedRoute, Params, Router } from "@angular/router";
+import { ActivatedRoute, Router } from "@angular/router";
+import { HttpParams } from "@angular/common/http";
 import { Location } from "src/app/data/enums/location.enum";
 import { Experience } from "src/app/data/models/experience.enum";
 import { Job } from "src/app/data/models/job.model";
@@ -15,6 +16,8 @@ export class JobsComponent implements OnInit {
   routeConstants = RouteConstants;
   isLoaded = false;
   allJobs!: Job[];
+  minimalJob!:any[]
+
   filteredJobs!: Job[];
   locations = ["Bangalore", "Coimbatore", "Chennai", "Kolkata", "Mumbai"];
   experiences = ["Experienced", "Fresher"];
@@ -29,9 +32,9 @@ export class JobsComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    // this.getAllJob();
     this.getJobs();
-  }
+    this.getJobMinimal();
+   }
 
   getJobs() {
     console.log("started");
@@ -77,48 +80,63 @@ export class JobsComponent implements OnInit {
     this.filterService.getNonAppliedJobs(filters.toString()).subscribe({
       next: (data) => {
         this.allJobs = data;
+        console.log(data)
         this.isLoaded = true;
       },
     });
   }
 
   applyFilters() {
-    this.router.navigateByUrl(this.routeConstants.jobSeekerHome);
     this.isLoaded = false;
-    // console.log(this.filteredExperience, this.filteredLocations);
+    console.log(this.filteredExperience, this.filteredLocations);
     let updatedParams = "";
+    // let updatedParams: new HttpParams();
     let updatedFilter: string[] = [];
     let _filteredExperience = [...new Set(this.filteredExperience)];
     let _filteredLocation = [...new Set(this.filteredLocations)];
-    updatedParams += `designation=${this.searchText}&`;
-    updatedFilter.push(`jobTitle@=*${this.searchText}`);
+    if (this.searchText && this.searchText != '') {
+      updatedParams += `designation=${this.searchText}&`;
+      // updatedParams = updatedParams.set('designation', this.searchText);
+      updatedFilter.push(`jobTitle@=*${this.searchText}`);
+    }
     console.log(updatedParams);
     if (_filteredExperience.length > 0) {
       let experienceCount: any = 0;
       _filteredExperience.forEach((e: any) => {
         experienceCount += Experience[e];
         updatedParams += `experience=${Experience[e]}&`;
+        // updatedParams = updatedParams.set('experience', Experience[e]);
       });
       // experienceCount = this.filteredExperience.at(
       //   this.filteredExperience.length - 1
       // );
       if (experienceCount == 1) {
         updatedFilter.push(`experienceNeeded==0`);
-      } else if (experienceCount > 1) {
+      } else if (experienceCount == 2) {
         updatedFilter.push(`experienceNeeded>0`);
+      } else if (experienceCount > 1) {
+        updatedFilter.push(`experienceNeeded>=0`);
       }
     }
     if (_filteredLocation.length > 0) {
       let tempLocation: string[] = [];
-      _filteredLocation.forEach((e: string) => {
-        updatedParams += `location=${e}&`;
+      _filteredLocation.forEach((e: any) => {
+        console.log(e);
+        updatedParams += `location=${Location[e]}&`;
+        // updatedParams = updatedParams.set('location', Location[e]);
         tempLocation.push(e);
       });
-      updatedFilter.push(`location==${tempLocation.toString()}`);
+      updatedFilter.push(`location==${tempLocation.join('|')}`);
     }
-    this.router.navigateByUrl(
-      `${this.routeConstants.jobSeekerHome}?${updatedParams.slice(0, -1)}`
-    );
+
+    this.router.navigateByUrl(`/job-seeker/home?${updatedParams.toString().slice(0, -1)}`);
+    // this.router.navigate(
+    //   [],
+    //   {
+    //     relativeTo: this.activatedRoute,
+    //     queryParams: updatedParams,
+    //   }
+    // );
 
     console.log("=--=-=-=-=",updatedFilter.toString());
 
@@ -143,5 +161,18 @@ export class JobsComponent implements OnInit {
     });
   }
 
-  search() {}
+  search() {
+    
+  }
+
+  // formatJob()
+  // {
+  //   for(let i=0;i<this.allJobs.length;i++)
+  //   {
+  //     for()
+  //   }
+  // }
+  getJobMinimal(){
+    this.filterService.getJobMinimal().subscribe(res=> {this.minimalJob=res; console.log(this.minimalJob)})
+  }
 }

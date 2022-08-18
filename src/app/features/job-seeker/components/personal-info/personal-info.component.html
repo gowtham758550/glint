@@ -1,25 +1,62 @@
 <div class="p-5">
-    <h2>
+    <h2 class="fw-bold text-center">
         Personal details
     </h2>
-    <hr>
-    <div class="ms-4 ml-5 d-flex mx-auto" style="width: 200px;">
+    <div class="d-flex justify-content-center">
         <ng-container *ngIf="isImageLoaded; then image; else imageLoader"></ng-container>
         <ng-template #imageLoader>
-            <img [src]="imageUrl" class="pointer rounded-circle" style="width: 150px; height: 150px; margin-left:50%"
-                (click)="openFileTrigger(fileTigger)" pTooltip="Update Profile picture">
+            <div>
+                <p-skeleton shape="circle" class="rounded-cicle" height="150px" width="150px"></p-skeleton>
+            </div>
         </ng-template>
         <ng-template #image>
-            <img [src]="imageUrl" class="pointer rounded-circle" style="width: 150px; height: 150px; margin-left:50%"
-                (click)="openFileTrigger(fileTigger)" pTooltip="Update Profile picture">
+            <div>
+                <img [src]="imageUrl" class="pointer rounded-circle" style="width: 150px; height: 150px;"
+                    (click)="openFileTrigger(fileTigger)" pTooltip="Update Profile picture">
+            </div>
         </ng-template>
 
     </div>
     <input type="file" (change)="updateProfilePicture($event)" accept=".png,.jpg,.jpeg" style="display: none;"
         #fileTigger>
     <!-- profile form -->
-    <app-form [formFields]="profileFields" [formGroup]="profileForm">
-    </app-form>
+    <form [formGroup]="profileForm">
+        <div class="row">
+            <div class="mb-3 col">
+                <label for="firstName">First Name</label>
+                <input type="text" id="firstName" formControlName="firstName" class="form-control" readonly>
+            </div>
+            <div class="mb-3 col">
+                <label for="lastName">Last Name</label>
+                <input type="text" id="lastName" formControlName="lastName" class="form-control" readonly>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="mb-3">
+                <label for="dateOfBirth">Date of Birth</label>
+                <input type="date" id="dateOfBirth" formControlName="dateOfBirth" class="form-control">
+            </div>
+            <div class="mb-3">
+                <label for="gender">Date of Birth</label>
+                <select class="form-select" aria-label="Select gender"
+                    formControlName="gender">
+                    <option value="" disabled>Select gender</option>
+                    <option value="Male">Male</option>
+                    <option value="Female">Female</option>
+                    <option value="Prefer not to say">Prefer not to say</option>
+                  </select>
+            </div>
+            <div class="mb-3">
+                <label for="about">Bio</label>
+                <!-- <div class="form-floating"> -->
+                    <textarea id="about" class="form-control" placeholder="Bio" rows="3"></textarea>
+                <!-- </div> -->
+            </div>
+        </div>
+    </form>
+    <!-- <app-form [formFields]="profileFields" [formGroup]="profileForm">
+    </app-form> -->
 
     <!-- education details -->
     <div class="card p-3">
@@ -156,7 +193,7 @@
 
     <!-- end of profile -->
     <div class="text-end pt-3">
-        <button class="btn btn-primary bg-dark" [disabled]="!profileForm.valid" (click)="complete()">
+        <button class="btn btn-orange" [disabled]="!profileForm.valid" (click)="complete()">
             Complete
         </button>
     </div>

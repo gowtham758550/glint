@@ -8,14 +8,16 @@
     </button>
 </div>
 
-<div class="card p-4">
+<div class="card-shadow p-4">
     <div class="fs-3 fw-bold">
         {{job.jobTitle}}
     </div>
     <div class="fs-6">
         <span *ngIf="isJobSeeker">
             <i class="pi pi-building"></i>
-            company name
+            <span class="fw-bold">
+                {{job.companyName}}
+            </span>
             .
         </span>
         <span>
@@ -25,7 +27,7 @@
         .
         <span class="text-success">
             <i class="pi pi-clock"></i>
-            22 hours ago
+            {{job.createdDate | date}}
         </span>
     </div>
 
@@ -39,27 +41,27 @@
         <ng-container *ngIf="isApplied; then applied; else notApplied">
         </ng-container>
         <ng-template #applied>
-            <button class="btn bg-dark text-white rounded-pill" [disabled]="isApplied">
+            <button class="btn bg-orange text-white rounded-pill px-2 py-1" [disabled]="isApplied">
                 Applied
             </button>
         </ng-template>
         <ng-template #notApplied>
-            <button class="btn bg-dark text-white rounded-pill" (click)="applyForJob()">
+            <button class="btn bg-orange text-white rounded-pill px-3 py-1" (click)="applyForJob()">
                 Apply
             </button>
         </ng-template>
     </div>
 </div>
 <div class="pt-4"></div>
-<div class="card p-4">
+<div class="card-shadow p-4">
     <div class="fs-3 fw-bold">
-        About the job
+        About
     </div>
     <div class="fs-5 fw-bold">
         Company Description
     </div>
     <div class="fs-6">
-        {{job.description}}
+        {{job.companyDescription}}
     </div>
 
     <div class="fs-5 fw-bold pt-4">
