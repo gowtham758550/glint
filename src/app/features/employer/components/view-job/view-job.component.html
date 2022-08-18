@@ -192,7 +192,7 @@
                         </tr>
                     </ng-template>
                     <ng-template pTemplate="body" let-applier>
-                        {{applier | json}}
+                        <!-- {{applier | json}} -->
                         <tr class="pointer" (click)="getJobSeekerProfileById(applier.jobSeekerId, applier.appliedJobId)">
                             <td>
                                 <span>
