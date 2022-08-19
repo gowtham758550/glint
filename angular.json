@@ -47,7 +47,7 @@
             "tsConfig": "tsconfig.app.json",
             "assets": [
               "src/favicon.ico",
-              "src/assets",
+              "src/assets/landing-page.webp",
               "src/web.config"
             ],
             "styles": [
