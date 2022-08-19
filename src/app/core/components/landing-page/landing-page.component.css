@@ -6,7 +6,7 @@
 }
 
 .main {
-    background: linear-gradient(var(--orange-light), rgba(255,255,255,.8)), url('https://glint.azurewebsites.net/src/assets/landing-page.webp') no-repeat center;
+    background: linear-gradient(var(--orange-light), rgba(255,255,255,.8)), url('../../../../assets/landing-page.webp') no-repeat center;
 }
 
 .input {
