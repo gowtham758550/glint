@@ -5,7 +5,7 @@
         [hidden]="!sideBarVisibility">
         <div class="fixed bg-white p-4 h-100-vh">
             <div>
-                <app-logo [variant]="'light'"></app-logo>
+                <app-logo variant="light"></app-logo>
             </div>
 
             <div class="pt-3">
@@ -46,12 +46,12 @@
                 <div class="collapse navbar-collapse" id="nav-item">
                     <span class="spacer"></span>
 
-                    <div class="pe-2">
+                    <!-- <div class="pe-2">
                         <button class="btn border-none mt-1">
                             <i class="pi pi-bell" [ngClass]="sideBarVisibility ? '' : 'text-secondary'">
                             </i>
                         </button>
-                    </div> 
+                    </div>  -->
 
                     <div class="pe-4 pointer d-flex">
                         <div class="dropdown">
@@ -60,16 +60,16 @@
                                     style="border-radius: 20px;">
                             </button>
                              <!-- dropdown content -->
-                            <div class="dropdown-menu" aria-labelledby="profile-menu">
-                                <div class="pointer p-2" (click)="routeToProfile()">
+                            <div class="dropdown-menu card-shadow border-none p-1 text-nowrap" aria-labelledby="profile-menu">
+                                <div class="pointer p-2 dropdown-menu-item" (click)="routeToProfile()">
                                     <i class="pi pi-user"></i>
                                     Profile
                                 </div>
-                                <div class="pointer p-2" (click)="routeToAccountSettings()">
+                                <div class="pointer p-2 dropdown-menu-item" (click)="routeToAccountSettings()">
                                     <i class="pi pi-cog"></i>
                                     Account Settings
                                 </div>
-                                <div class="pointer p-2" (click)="logout()">
+                                <div class="pointer p-2 dropdown-menu-item rounded" (click)="logout()">
                                     <i class="pi pi-sign-out"></i>
                                     Logout
                                 </div>

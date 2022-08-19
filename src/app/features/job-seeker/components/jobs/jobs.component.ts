@@ -16,7 +16,7 @@ export class JobsComponent implements OnInit {
   routeConstants = RouteConstants;
   isLoaded = false;
   allJobs!: Job[];
-  minimalJob!:any[]
+  minimalJob!: any[]
 
   filteredJobs!: Job[];
   locations = ["Bangalore", "Coimbatore", "Chennai", "Kolkata", "Mumbai"];
@@ -29,12 +29,12 @@ export class JobsComponent implements OnInit {
     private filterService: FilterService,
     private activatedRoute: ActivatedRoute,
     private router: Router
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.getJobs();
     this.getJobMinimal();
-   }
+  }
 
   getJobs() {
     console.log("started");
@@ -44,8 +44,10 @@ export class JobsComponent implements OnInit {
     console.log("started");
     this.activatedRoute.queryParams.subscribe((params: any) => {
       if (Object.keys(params).length != 0) {
-        filters.push(`jobTitle@=*${params.designation}`);
-        this.searchText = params.designation;
+        if (params.designation && params.designation != "") {
+          filters.push(`jobTitle@=*${params.designation}`);
+          this.searchText = params.designation;
+        }
         // experience
         if (typeof params.experience == "string" && params.experience != 0) {
           this.filteredExperience = [Experience[params.experience]];
@@ -72,7 +74,8 @@ export class JobsComponent implements OnInit {
             this.filteredLocations.push(Location[e]);
             tempLocation.push(Location[e]);
           });
-          filters.push(`location==${tempLocation.toString()}`);
+          filters.push(`location==${tempLocation.join('|')}`);
+          // filters.push(`location==${tempLocation.toString()}`);
         }
       }
     });
@@ -138,7 +141,7 @@ export class JobsComponent implements OnInit {
     //   }
     // );
 
-    console.log("=--=-=-=-=",updatedFilter.toString());
+    console.log("=--=-=-=-=", updatedFilter.toString());
 
     this.filterService.getNonAppliedJobs(updatedFilter.toString()).subscribe({
       next: (data) => {
@@ -149,20 +152,22 @@ export class JobsComponent implements OnInit {
   }
 
   clearFilters() {
-    this.isLoaded = false;
-    this.filteredExperience = [];
-    this.filteredLocations = [];
-    this.router.navigateByUrl(this.routeConstants.jobSeekerHome);
-    this.filterService.getNonAppliedJobs("").subscribe({
-      next: (data) => {
-        this.allJobs = data;
-        this.isLoaded = true;
-      },
-    });
+    if (this.filteredExperience.length > 0 || this.filteredLocations.length > 0) {
+      this.isLoaded = false;
+      this.filteredExperience = [];
+      this.filteredLocations = [];
+      this.router.navigateByUrl(this.routeConstants.jobSeekerHome);
+      this.filterService.getNonAppliedJobs("").subscribe({
+        next: (data) => {
+          this.allJobs = data;
+          this.isLoaded = true;
+        },
+      });
+    }
   }
 
   search() {
-    
+
   }
 
   // formatJob()
@@ -172,7 +177,7 @@ export class JobsComponent implements OnInit {
   //     for()
   //   }
   // }
-  getJobMinimal(){
-    this.filterService.getJobMinimal().subscribe(res=> {this.minimalJob=res; console.log(this.minimalJob)})
+  getJobMinimal() {
+    this.filterService.getJobMinimal().subscribe(res => { this.minimalJob = res; console.log(this.minimalJob) })
   }
 }

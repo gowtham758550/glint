@@ -9,7 +9,7 @@ import { ProfileComponent } from './components/profile/profile.component';
 import { RegisterComponent } from './components/register/register.component';
 import { SignupComponent } from './components/signup/signup.component';
 import { VerifyComponent } from './components/verify/verify.component';
-import { JobInfoComponent } from 'src/app/shared/components/job-info/job-info.component';
+import { JobInfoComponent } from 'src/app/features/job-seeker/components/job-info/job-info.component';
 import { MyJobsComponent } from './components/my-jobs/my-jobs.component';
 import { JobsComponent } from './components/jobs/jobs.component';
 import { JobSeekerGuard } from 'src/app/core/guards/job-seeker.guard';

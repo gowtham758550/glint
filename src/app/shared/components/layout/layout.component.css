@@ -5,3 +5,7 @@
 .side-nav-item:hover {
     color: var(--orange);
 }
+
+.dropdown-menu-item:hover {
+    color: var(--orange);
+}

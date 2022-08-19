@@ -16,10 +16,10 @@ import { JobService } from 'src/app/data/services/job.service';
 export class NewJobComponent implements OnInit {
 
   jobForm: FormGroup = this.formBuilder.group({
-    jobTitle: ['', Validators.required],
+    jobTitle: ['', [Validators.required, Validators.minLength(3)]],
     description: ['', Validators.required],
-    experienceNeeded: ['', Validators.required],
-    salary: ['', Validators.required],
+    experienceNeeded: ['', [Validators.required, Validators.min(0)]],
+    salary: ['', [Validators.required, Validators.min(0)]],
     jobType: ['', Validators.required],
     minimumQualification: ['', Validators.required],
     location: ['', Validators.required],
@@ -86,7 +86,7 @@ export class NewJobComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
-    private jobService: JobService,
+    public jobService: JobService,
     private toastr: ToastrService,
     private router: Router,
     private dataService: DataService,

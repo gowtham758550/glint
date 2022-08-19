@@ -18,6 +18,7 @@ export class DashboardComponent implements OnInit {
   totalShortlisted!: number;
   barChartOptions!: EChartsOption;
   pieChartOptions!: EChartsOption;
+  isBarChartDataLoaded = false;
   
   constructor(
     private filterService: FilterService,
@@ -78,6 +79,7 @@ export class DashboardComponent implements OnInit {
             }
           ]
         };
+        this.isBarChartDataLoaded = true;
         this.spinner.hide();
       }
     });

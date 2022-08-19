@@ -13,6 +13,7 @@ import { DatePipe } from "@angular/common";
 import { NgxCroppedEvent, NgxPhotoEditorService } from "ngx-photo-editor";
 import { BlobService } from "src/app/data/services/blob.service";
 import { environment } from "src/environments/environment";
+import { NgxSpinnerService } from "ngx-spinner";
 
 @Component({
   selector: "app-employer-profile",
@@ -144,14 +145,16 @@ export class EmployerProfileComponent implements OnInit {
         let res = data.url;
         this.backgroundImage = res + "?" + environment.cover_sas_token;
         this.isCoverImageLoaded = true;
+        this.spinner.hide();
       },
     });
   }
   // ----------------------------------------Update Profile operation----------------------------------
   updateProfile(ref: any) {
+    this.spinner.show();
     this.action = "Update";
     console.log(this.action);
-    this.modalService.open(ref).result.then((result) => {});
+    this.modalService.open(ref).result.then((result) => {this.spinner.hide()});
   }
   executeProfileAction() {
     if (this.action == "Update") {
@@ -204,10 +207,12 @@ export class EmployerProfileComponent implements OnInit {
     private formBuilder: FormBuilder,
     private datePipe: DatePipe,
     private profileService: BlobService,
-    private imageService: NgxPhotoEditorService
+    private imageService: NgxPhotoEditorService,
+    private spinner: NgxSpinnerService
   ) {}
 
   ngOnInit(): void {
+    this.spinner.show();
     this.email = this.authService.getEmail();
     this.employerProfile();
     this.getEmployer();

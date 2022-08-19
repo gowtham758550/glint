@@ -14,7 +14,6 @@ import { LogoComponent } from './components/logo/logo.component';
 import { SignupComponent } from './components/signup/signup.component';
 import { VerifyComponent } from './components/verify/verify.component';
 import { JobCardComponent } from './components/job-card/job-card.component';
-import { JobInfoComponent } from './components/job-info/job-info.component';
 import { LayoutComponent } from './components/layout/layout.component';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { ConfirmationComponent } from '../core/components/confirmation/confirmation.component';
@@ -28,7 +27,6 @@ import { LoginTemplateComponent } from './components/login-template/login-templa
     SignupComponent,
     VerifyComponent,
     JobCardComponent,
-    JobInfoComponent,
     LayoutComponent,
     LoginTemplateComponent,
   ],
@@ -52,7 +50,6 @@ import { LoginTemplateComponent } from './components/login-template/login-templa
     SignupComponent,
     VerifyComponent,
     JobCardComponent,
-    JobInfoComponent,
     LayoutComponent,
     LoginTemplateComponent,
   ],

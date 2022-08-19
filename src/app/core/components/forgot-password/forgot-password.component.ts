@@ -1,6 +1,7 @@
 import {  Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { NgxSpinnerService } from 'ngx-spinner';
 import { FormField } from 'src/app/data/models/form-field.model';
 import { AuthService } from 'src/app/data/services/auth.service';
 
@@ -31,8 +32,9 @@ export class ForgotPasswordComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
-    private authService: AuthService,
-    private router: Router
+    private router: Router,
+    private spinner: NgxSpinnerService,
+    private authService: AuthService
   ) { }
 
   ngOnInit(): void {
@@ -43,8 +45,12 @@ export class ForgotPasswordComponent implements OnInit {
   }
 
   sendOTP() {
+    this.spinner.show();
     this.authService.forgotPassword(this.forgotPasswordForm.value).subscribe({
-      next: data => this.router.navigateByUrl('/reset-password')
+      next: () => {
+        this.router.navigateByUrl('/reset-password');
+        this.spinner.hide();
+      }
     });
   }
 
