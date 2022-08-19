@@ -51,7 +51,7 @@
     <div class="row">
         <div class="ps-4 d-flex gap-5">
             <div class="col-5">
-                <h3 class="fw-bold">
+                <h3 class="fw-bold text-orange mb-3">
                     Job Application Status
                 </h3>
                 <ng-container *ngIf="isBarChartDataLoaded;then barChart; else barChartPlaceholder"></ng-container>
@@ -61,14 +61,19 @@
                     </div>
                 </ng-template>
                 <ng-template #barChart>
-                    <div class="card-shadow p-3">
+                    <div class="card-shadow p-3"
+                        *ngIf="!isBarChartHasData">
+                        No data to display statistics
+                    </div>
+                    <div class="card-shadow p-3"
+                        *ngIf="isBarChartHasData">
                         <div echarts [options]="barChartOptions" class="w-100"></div>
                     </div>
                 </ng-template>
             </div>
 
             <div class="col-5">
-                <h3 class="fw-bold col-6">
+                <h3 class="fw-bold col-6 text-orange mb-3">
                     All Jobs
                 </h3>
                 <ng-container *ngIf="isPieChartDataLoaded; then pieChart; else pieChartPlaceholder"></ng-container>
@@ -78,7 +83,12 @@
                     </div>
                 </ng-template>
                 <ng-template #pieChart>
-                    <div class="card-shadow p-3">
+                    <div class="card-shadow p-3"
+                        *ngIf="!isPieChartHasData">
+                        No data to display statisics
+                    </div>
+                    <div class="card-shadow p-3"
+                        *ngIf="isPieChartHasData">
                         <div echarts [options]="pieChartOptions" class="w-100"></div>
                     </div>
                 </ng-template>
