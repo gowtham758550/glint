@@ -19,6 +19,8 @@ import { JobCardsComponent } from './components/job-cards/job-cards.component';
 import { EmployerGuard } from 'src/app/core/guards/employer.guard';
 import { LoginComponent } from './components/login/login.component';
 import { pendingChangesGuard } from 'src/app/core/guards/pendingChanges.guard';
+import { Title } from 'src/app/data/enums/constatnts/title.constants';
+import { RouteConstants } from 'src/app/data/enums/constatnts/route.constants';
 
 const routes: Routes = [
   {
@@ -89,6 +91,10 @@ const routes: Routes = [
       }
     ]
   },
+  // {
+  //   path: '**',
+  //   redirectTo: 'not-found'
+  // }
 ];
 
 @NgModule({

@@ -19,6 +19,7 @@ export class DashboardComponent implements OnInit {
   barChartOptions!: EChartsOption;
   pieChartOptions!: EChartsOption;
   isBarChartDataLoaded = false;
+  isPieChartDataLoaded = false;
   
   constructor(
     private filterService: FilterService,
@@ -80,22 +81,21 @@ export class DashboardComponent implements OnInit {
           ]
         };
         this.isBarChartDataLoaded = true;
-        this.spinner.hide();
       }
     });
   }
 
   getPieChartData() {
-    // this.filterService.getPieChartData().subscribe({
-    //   next: (data: PieChartData) => {
-    //     let pieData: any[] = [];
-    //     for (let i = 0; i < data['jobTitles'].length; i++) {
-    //       const temp: any = {
-    //         value: data['rejectionPercentage'][i],
-    //         name: data['jobTitles'][i]
-    //       }
-    //       pieData.push(temp);
-    //     }
+    this.filterService.getPieChartData().subscribe({
+      next: (data: PieChartData) => {
+        let pieData: any[] = [];
+        for (let i = 0; i < data['jobTitles'].length; i++) {
+          const temp: any = {
+            value: data['rejectionPercentage'][i],
+            name: data['jobTitles'][i]
+          }
+          pieData.push(temp);
+        }
         this.pieChartOptions = {
           tooltip: {
             trigger: 'item'
@@ -128,19 +128,20 @@ export class DashboardComponent implements OnInit {
               labelLine: {
                 show: false
               },
-              // data: pieData
-              data: [
-                { value: 19, name: 'Customer Support' },
-                { value: 3, name: 'Engineering Manager' },
-                { value: 12, name: 'Developer' },
-                { value: 26, name: 'Tester' },
-              ]
+              data: pieData
+              // data: [
+              //   { value: 19, name: 'Customer Support' },
+              //   { value: 3, name: 'Engineering Manager' },
+              //   { value: 12, name: 'Developer' },
+              //   { value: 26, name: 'Tester' },
+              // ]
             }
           ]
         };
-      
-      // }
-    // });
+        this.isPieChartDataLoaded = true;
+        this.spinner.hide();
+      }
+    });
   }
 
 }

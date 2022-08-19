@@ -14,6 +14,7 @@ import { UserVerificationComponent } from './components/user-verification/user-v
 import { ForgotPasswordComponent } from './components/forgot-password/forgot-password.component';
 import { ResetPasswordComponent } from './components/reset-password/reset-password.component';
 import { ConfirmationComponent } from './components/confirmation/confirmation.component';
+import { NotFoundComponent } from './components/not-found/not-found.component';
 
 
 
@@ -23,7 +24,8 @@ import { ConfirmationComponent } from './components/confirmation/confirmation.co
     UserVerificationComponent,
     ForgotPasswordComponent,
     ResetPasswordComponent,
-    ConfirmationComponent
+    ConfirmationComponent,
+    NotFoundComponent
   ],
   imports: [
     CommonModule,

@@ -1,5 +1,5 @@
 <div class="bg-white rounded p-3">
-    <div class="text-orange fs-2 fw-bold">
+    <div class="text-orange fs-2 fw-bold mb-4">
         My Jobs
     </div>
 
@@ -70,7 +70,7 @@
         </ng-template>
         <ng-template #appliedJobs>
             <div class="row">
-                <div class="col-4">
+                <div class="col-4 me-3">
                     <ng-container *ngFor="let job of myJobs; let i = index">
                         <div class="pt-3 d-flex justify-content-start pointer card-shadow p-3 mb-3" (click)="getTimeline(i)">
                             <div class="pt-3">

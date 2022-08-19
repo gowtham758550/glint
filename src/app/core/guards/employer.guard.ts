@@ -31,7 +31,7 @@ export class EmployerGuard implements CanActivate {
                 return false;
             }
         }
-        this.router.navigateByUrl(this.routeConstants.login);
+        this.router.navigateByUrl(this.routeConstants.employerLogin);
         return false;
     }
 }

@@ -24,6 +24,7 @@ export class ViewJobComponent implements OnInit {
   appliers!: Appliers[];
   job!: Job;
   totalApplicants!:number;
+  totalShortlisted!: number;
 
   constructor(
     private filterService: FilterService,
@@ -43,8 +44,8 @@ export class ViewJobComponent implements OnInit {
   getJobAppliers() {
     this.filterService.getJobAppliers(this.postJobDetailId).subscribe({
       next: data => {
+        // console.log(data);
         this.appliers = data;
-        console.log(this.appliers)
         this.isAppliersTableLoaded = true;
       }
     });
@@ -60,7 +61,7 @@ export class ViewJobComponent implements OnInit {
     this.jobService.getJobById(this.postJobDetailId).subscribe({
       next: data => {
         this.job = data;
-        console.log(data)
+        // console.log(data)
         this.isJobInfoLoaded = true;
       }
     });
@@ -80,6 +81,9 @@ export class ViewJobComponent implements OnInit {
   }
 
   getjobSeekerCountByJobId(){
-    this.filterService.getJobSeekerCountByJobId(this.postJobDetailId).subscribe(res=>this.totalApplicants=res)
+    this.filterService.getJobSeekerCountByJobId(this.postJobDetailId).subscribe(res=>{
+      this.totalApplicants = res.totalCount;
+      this.totalShortlisted = res.shortlistedCount;
+    })
   }
 }

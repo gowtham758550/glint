@@ -37,8 +37,8 @@ export class AppliedJobService {
         return this.httpClient.get<AppliedJob[]>(`${this.host}/get`);
     }
 
-    getAppliedJobId(){
-        return this.httpClient.get<any[]>(`${this.host}/get`);
+    getAppliedJobWithJobId() {
+        
     }
 
     isApplied(postJobId?: number) {

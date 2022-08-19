@@ -5,6 +5,7 @@ import { Observable } from "rxjs";
 import { environment } from "src/environments/environment";
 import { Appliers } from "../models/appliers.model";
 import { BarChartData } from "../models/barchart-data.model";
+import { JobStats } from "../models/job-stats.model";
 import { Job } from "../models/job.model";
 import { PieChartData } from "../models/piechart-data.model";
 
@@ -42,8 +43,8 @@ export class FilterService {
     getJobSeekerCount(): Observable<number> {
         return this.httpClient.get<number>(`${this.host}/job_seeker_count/get`);
     }
-    getJobSeekerCountByJobId(id:number): Observable<number> {
-        return this.httpClient.get<number>(`${this.host}/job_seeker_count/get/${id}`);
+    getJobSeekerCountByJobId(id:number): Observable<JobStats> {
+        return this.httpClient.get<JobStats>(`${this.host}/job_seeker_count/get/${id}`);
     }
 
     getBarChartData(): Observable<BarChartData> {

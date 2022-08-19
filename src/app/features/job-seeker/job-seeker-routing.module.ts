@@ -48,7 +48,7 @@ const routes: Routes = [
   {
     path: 'job-seeker',
     component: HomeComponent,
-    // canActivate: [JobSeekerGuard],
+    canActivate: [JobSeekerGuard],
     children: [
       {
         path: 'home',
@@ -76,6 +76,10 @@ const routes: Routes = [
       }
     ]
   },
+  // {
+  //   path: '**',
+  //   redirectTo: 'not-found'
+  // }
 ];
 
 @NgModule({

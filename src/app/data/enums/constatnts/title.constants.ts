@@ -5,6 +5,7 @@ export enum Title {
     profile = 'Profile | Glint',
     accountSettings = 'Account Settings | Glint',
     resetPassword = 'Reset Password | Glint',
+    notFound = 'Not Found | Glint',
 
     // jobseeker
     jobSeekerLogin = 'Login | Glint',
