@@ -53,7 +53,8 @@
             </div>
 
             <button class="float-end btn btn-orange text-end rounded-pill px-3 py-1"
-                [disabled]="!registerationForm.valid">
+                [disabled]="!registerationForm.valid"
+                (click)="receiveFormData()">
                 Next
             </button>
         </form>
