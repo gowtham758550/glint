@@ -22,6 +22,7 @@ export class JobInfoComponent implements OnInit, AfterContentInit {
   isJobSeeker!: boolean;
   jobId!: number;
   isApplied!: boolean;
+  isJobLoaded = false;
   currentJob!: any;
   today = new Date();
   profile_sas_token = environment.profile_sas_token;
@@ -60,7 +61,11 @@ export class JobInfoComponent implements OnInit, AfterContentInit {
     const postJobDetailId = this.activatedRoute.snapshot.params['postJobDetailId']
     this.jobId = postJobDetailId;
     this.jobService.getJobById(postJobDetailId).subscribe({
-      next: data => { this.job = data; console.log(this.job) }
+      next: data => {
+        this.job = data;
+        // console.log(this.job);
+        this.isJobLoaded = true;
+      }
     });
   }
 

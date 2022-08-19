@@ -84,7 +84,7 @@
                         <div class="text-nowrap">
                             Applied Candidates
                         </div>
-                        <div class="text-white bg-dark px-2 py-1 rounded">
+                        <div class="bg-orange px-2 py-1 rounded">
                             <i class="pi pi-briefcase"></i>
                         </div>
                     </div>
@@ -92,7 +92,7 @@
                         {{totalApplicants}}
                     </div>
                     <div class="text-muted">
-                        10 Shortlisted
+                        {{totalShortlisted}} Shortlisted
                     </div>
                 </div>
             </div>
@@ -103,7 +103,7 @@
 
     </ng-template>
 
-    <div class="pt-4 card-shadow p-2">
+    <div class="mt-4 card-shadow p-2">
 
         <ng-container *ngIf="isAppliersTableLoaded; then appliersDataTable; else appliersLoader"></ng-container>
         <!-- loader -->

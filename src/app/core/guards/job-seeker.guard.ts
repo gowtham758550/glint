@@ -27,11 +27,11 @@ export class JobSeekerGuard implements CanActivate {
             if (role == this.role.jobSeeker) {
                 return true;
             } else if (role == this.role.employer) {
-                this.router.navigateByUrl(this.routeConstants.jobSeekerHome);
+                this.router.navigateByUrl(this.routeConstants.employerDashboard);
                 return false;
             }
         }
-        this.router.navigateByUrl(this.routeConstants.login);
+        this.router.navigateByUrl(this.routeConstants.jobSeekerLogin);
         return false;
     }
 }

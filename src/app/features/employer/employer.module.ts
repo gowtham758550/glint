@@ -5,6 +5,7 @@ import { TableModule } from 'primeng/table';
 import { SkeletonModule } from 'primeng/skeleton';
 import { KnobModule } from 'primeng/knob';
 import { NgxEchartsModule } from 'ngx-echarts';
+import { ScrollPanelModule } from 'primeng/scrollpanel';
 
 import { EmployerRoutingModule } from './employer-routing.module';
 import { RegisterComponent } from './components/register/register.component';
@@ -70,6 +71,7 @@ import { LoginComponent } from './components/login/login.component';
     PasswordModule,
     TooltipModule,
     BadgeModule,
+    ScrollPanelModule,
     NgxEchartsModule.forRoot({
       echarts: () => import('echarts'),
     }),

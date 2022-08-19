@@ -5,7 +5,6 @@ import { NgxSpinnerService } from 'ngx-spinner';
 import { ToastrService } from 'ngx-toastr';
 import { RouteConstants } from 'src/app/data/enums/constatnts/route.constants';
 import { Role } from 'src/app/data/enums/role.enum';
-import { FormField } from 'src/app/data/models/form-field.model';
 import { AuthService } from 'src/app/data/services/auth.service';
 import { LocalStorage } from 'src/app/data/services/local-storage.service';
 
@@ -56,6 +55,11 @@ export class LoginTemplateComponent implements OnInit {
         if (role == 'JobSeeker') this.router.navigateByUrl(this.routeConstants.jobSeekerHome);
         else if (role == 'Employer') this.router.navigateByUrl(this.routeConstants.employerDashboard);
       },
+      error: () => {
+        this.loginForm.patchValue({
+          password: ''
+        });
+      }
     });
   }
 

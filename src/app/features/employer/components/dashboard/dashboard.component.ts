@@ -14,10 +14,12 @@ import { FilterService } from 'src/app/data/services/filter.service';
 export class DashboardComponent implements OnInit {
 
   totalJobs!: number;
-  totalHiring!: number;
+  totalApplication!: number;
   totalShortlisted!: number;
   barChartOptions!: EChartsOption;
   pieChartOptions!: EChartsOption;
+  isBarChartDataLoaded = false;
+  isPieChartDataLoaded = false;
   
   constructor(
     private filterService: FilterService,
@@ -26,10 +28,9 @@ export class DashboardComponent implements OnInit {
 
   ngOnInit(): void {
     this.spinner.show();
-    this.totalJobs = 9;
-    this.totalHiring = 41;
     this.getBarChartData();
-    // this.getPieChartData();
+    this.getPieChartData();
+    this.getTotalJobs();
   }
 
   getTotalJobs() {
@@ -42,6 +43,8 @@ export class DashboardComponent implements OnInit {
   getBarChartData() {
     this.filterService.getBarChartData().subscribe({
       next: (data: BarChartData) => {
+        this.totalApplication = data.applicantCount.reduce((a, b) => a + b, 0);
+        this.totalShortlisted = data.shortListedCount.reduce((a, b) => a + b, 0);
         this.barChartOptions = {
           tooltip: {
             trigger: 'axis',
@@ -77,7 +80,7 @@ export class DashboardComponent implements OnInit {
             }
           ]
         };
-        this.spinner.hide();
+        this.isBarChartDataLoaded = true;
       }
     });
   }
@@ -135,7 +138,8 @@ export class DashboardComponent implements OnInit {
             }
           ]
         };
-      
+        this.isPieChartDataLoaded = true;
+        this.spinner.hide();
       }
     });
   }

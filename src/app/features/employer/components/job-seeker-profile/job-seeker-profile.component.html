@@ -5,11 +5,14 @@
             <div class="card p-4">
                 <div class="d-flex justify-content-start">
                     <div>
+                        <!-- <p-skeleton shape="circle" height="150px" width="150px"></p-skeleton> -->
                         <img [src]="currentApplier.profilePicture+ '?'+ sas_token" alt="profile pic" height="150px"
                             width="150px" class="rounded-pill">
                         <div class="p-4"></div>
-                        <button class="btn btn-primary rounded-pill bg-dark"
-                            (click)="getResumebyId(currentApplier.jobSeekerId)">Download Resume
+                        <button class="btn btn-orange rounded-pill"
+                            (click)="getResumebyId(currentApplier.jobSeekerId)">
+                        Resume
+                        <i class="pi pi-cloud-download"></i>
                         </button>
                     </div>
                     <div class="ps-5">
@@ -46,14 +49,14 @@
                                     {{currentApplier.dateOfBirth | date}}
                                 </div>
                             </div>
-                            <div class="d-flex pt-1">
+                            <!-- <div class="d-flex pt-1">
                                 <div class="fw-bold pe-3">
                                     Location:
                                 </div>
                                 <div>
                                     {{jobSeekerProfile.location}}
                                 </div>
-                            </div>
+                            </div> -->
                             <div class="d-flex pt-1">
                                 <div class="fw-bold pe-3">
                                     About:
@@ -63,12 +66,20 @@
                                 </div>
                             </div>
                             <div class="p-3"></div>
-                            <div class="d-flex pt-1 justify-content-start">
-                                <button class="btn btn-primary rounded-pill bg-dark h-50 w-100" (click)="shortlistCandidate()">Shortlist</button>
+                            <div class="d-flex pt-4 justify-content-start">
+                                <button class="btn btn-success rounded-pill" (click)="shortlistCandidate()">
+                                    Shortlist
+                                    <i class="pi pi-check-circle"></i>
+                                </button>
                                 <div class="p-1"></div>
 
                                 <div class="p-1"></div>
-                                <button class="btn btn-danger rounded-pill h-50 w-100" (click)="rejectCandidate()"> Decline</button>
+                                <button class="btn btn-danger rounded-pill" (click)="rejectCandidate()">
+                                    Decline
+                                    <span class="mt-1">
+                                        <i class="pi pi-times-circle"></i>
+                                    </span>
+                                </button>
 
                             </div>
                         </div>

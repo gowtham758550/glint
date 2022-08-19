@@ -8,14 +8,17 @@
     --secondary: #7289da;
     --warning: #ffb31d;
     --dark: #171b34;
+    /* --dark: orange; */
     --success: #8cffa7;
     --orange: #f17921;
-    --orange-light: #FFF4E2;
+    /* --orange-light: #a4a3a0; */
+    --orange-light: #e7cea4;
 }
 
 body {
     /* background-color: #f3eeeecc; */
-    background-color: var(--orange-light);
+    /* background-color: var(--orange-light); */
+    background-color: #FAF3E3;
 }
 
 .bg-primary {
@@ -74,21 +77,21 @@ body {
     color: var(--dark) !important;
 }
 
-.btn-orange {
-    background-color: var(--orange);
-    color: #fff;
-}
-
-
-.btn-orange:hover {
+.btn-orange,
+.btn-orange:hover,
+.btn-orange:disabled,
+.btn-orange:focus {
     background-color: var(--orange);
     color: #fff;
 }
 
 .btn-orange:disabled {
-    background-color: var(--orange);
     opacity: .7;
-    color: #fff;
+}
+
+.required::after {
+    content: ' *';
+    color: #ff0000;
 }
 
 /* width */
@@ -192,7 +195,7 @@ body {
 /* sidebar */
 
 .sidebar {
-    width: 22vh;
+    width: 20vh;
     /* animation: hideMe 200ms forwards; */
 }
 @keyframes hideMe{
@@ -324,3 +327,14 @@ html, body {
     margin: 0;
   }
   
+.form-control {
+    /* border: ; */
+}
+
+.center {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+  }

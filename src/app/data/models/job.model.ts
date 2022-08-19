@@ -11,4 +11,5 @@ export interface Job {
     minimumQualification: string
     location: string
     createdDate: Date
+    companyDescription: string
 }

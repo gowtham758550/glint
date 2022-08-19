@@ -5,15 +5,13 @@
         [hidden]="!sideBarVisibility">
         <div class="fixed bg-white p-4 h-100-vh">
             <div>
-                <app-logo [variant]="'light'"></app-logo>
+                <app-logo variant="light"></app-logo>
             </div>
 
             <div class="pt-3">
                 <ng-container *ngFor="let item of sideNavItems">
-                    <div class="pe-3 py-2 pointer nav-item"
-                        [routerLink]="item.routeTo"
-                        routerLinkActive="text-orange"
-                        >
+                    <div class="pe-3 py-2 pointer" [routerLink]="item.routeTo"
+                        [routerLinkActive]="'text-orange'">
                         <i class="pi" [ngClass]="item.icon"></i>
                         {{item.label}}
                     </div>
@@ -26,17 +24,18 @@
     <div class="flex-grow-1">
 
         <!-- navbar -->
-        <nav class="navbar navbar-expand-lg bg-white mb-4" style="position: sticky;
+        <nav class="navbar navbar-expand-lg bg-white" style="position: sticky;
         top: 0;
         z-index: 100; margin-left:0.5%" [ngClass]="sideBarVisibility ? 'bg-light' : 'bg-dark text-secondary'">
             <div class="container-fluid">
-                <!-- <button class="btn border-none"
-                (click)="toggleSideBar()"
-                [ngClass]="sideBarVisibility ? '' : 'text-white'">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-list" viewBox="0 0 16 16">
-                    <path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z"/>
+                <!-- <button class="btn border-none" (click)="toggleSideBar()"
+                    [ngClass]="sideBarVisibility ? '' : 'text-white'">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                        class="bi bi-list" viewBox="0 0 16 16">
+                        <path fill-rule="evenodd"
+                            d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z" />
                     </svg>
-                </button>  -->
+                </button> -->
 
                 <app-logo *ngIf="!sideBarVisibility"></app-logo>
 
@@ -47,12 +46,12 @@
                 <div class="collapse navbar-collapse" id="nav-item">
                     <span class="spacer"></span>
 
-                    <div class="pe-2">
+                    <!-- <div class="pe-2">
                         <button class="btn border-none mt-1">
                             <i class="pi pi-bell" [ngClass]="sideBarVisibility ? '' : 'text-secondary'">
                             </i>
                         </button>
-                    </div>
+                    </div>  -->
 
                     <div class="pe-4 pointer d-flex">
                         <div class="dropdown">
@@ -60,17 +59,17 @@
                                 <img [src]="profilePictureSource" alt="" height="40px" width="40px" class="mt-1"
                                     style="border-radius: 20px;">
                             </button>
-                            <!-- dropdown content-->
-                            <div class="dropdown-menu" aria-labelledby="profile-menu">
-                                <div class="pointer p-2" (click)="routeToProfile()">
+                             <!-- dropdown content -->
+                            <div class="dropdown-menu card-shadow border-none p-1 text-nowrap" aria-labelledby="profile-menu">
+                                <div class="pointer p-2 dropdown-menu-item" (click)="routeToProfile()">
                                     <i class="pi pi-user"></i>
                                     Profile
                                 </div>
-                                <div class="pointer p-2" (click)="routeToAccountSettings()">
+                                <div class="pointer p-2 dropdown-menu-item" (click)="routeToAccountSettings()">
                                     <i class="pi pi-cog"></i>
                                     Account Settings
                                 </div>
-                                <div class="pointer p-2" (click)="logout()">
+                                <div class="pointer p-2 dropdown-menu-item rounded" (click)="logout()">
                                     <i class="pi pi-sign-out"></i>
                                     Logout
                                 </div>
@@ -95,7 +94,7 @@
         </nav>
 
         <!-- content -->
-        <div class="container my-3">
+        <div class="container w-auto my-3">
             <ng-content></ng-content>
         </div>
     </div>

@@ -1,5 +1,6 @@
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { NgxSpinnerService } from 'ngx-spinner';
 import { ToastrService } from 'ngx-toastr';
 import { Role } from 'src/app/data/enums/role.enum';
 
@@ -25,7 +26,8 @@ export class VerifyComponent implements OnInit, OnDestroy {
     private router: Router,
     private localStorage: LocalStorage,
     private authService: AuthService,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    private spinner: NgxSpinnerService
   ) { }
 
   ngOnInit(): void {
@@ -39,7 +41,7 @@ export class VerifyComponent implements OnInit, OnDestroy {
   }
 
   getVerificationStatus() {
-    console.log("vstatus");
+    this.spinner.show();
     const email = this.localStorage.getItem('email');
     this.authService.isVerified(email)
       .subscribe({
@@ -49,10 +51,9 @@ export class VerifyComponent implements OnInit, OnDestroy {
             this.toastr.success('Verified successfully');
             if (this.role == Role.employer) this.router.navigateByUrl('/employer/signup/company-detail');
             else if (this.role == Role.jobSeeker) this.router.navigateByUrl('/job-seeker/signup/personal-information');
-            clearInterval(this.interval);
+            this.spinner.hide();
           }
         },
-        error: () => {}
       });
   }
   

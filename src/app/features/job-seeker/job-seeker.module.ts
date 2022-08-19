@@ -8,6 +8,7 @@ import { MessagesModule } from 'primeng/messages';
 import { CheckboxModule } from 'primeng/checkbox';
 import { SkeletonModule } from 'primeng/skeleton';
 import { TimelineModule } from 'primeng/timeline';
+
 import { CardModule } from 'primeng/card';
 import  {  PdfViewerModule  }  from  'ng2-pdf-viewer';
 import { JobSeekerRoutingModule } from './job-seeker-routing.module';
@@ -19,7 +20,6 @@ import { SignupComponent } from './components/signup/signup.component';
 import { VerifyComponent } from './components/verify/verify.component';
 import { DataModule } from 'src/app/data/data.module';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { SearchComponent } from './components/search/search.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { AccountSettingsComponent } from './components/account-settings/account-settings.component';
 import { NgxPhotoEditorModule } from "ngx-photo-editor";
@@ -31,6 +31,7 @@ import { ChipModule } from 'primeng/chip';
 import { ChipsModule } from 'primeng/chips';
 import { ScrollPanelModule } from 'primeng/scrollpanel';
 import { JobsComponent } from './components/jobs/jobs.component';
+import { JobInfoComponent } from './components/job-info/job-info.component';
 import { LoginComponent } from './components/login/login.component';
 
 
@@ -41,12 +42,12 @@ import { LoginComponent } from './components/login/login.component';
     PersonalInfoComponent,
     SignupComponent,
     VerifyComponent,
-    SearchComponent,
     ProfileComponent,
     AccountSettingsComponent,
     MyJobsComponent,
     JobsComponent,
-    LoginComponent
+    LoginComponent,
+    JobInfoComponent
   ],
   imports: [
     CommonModule,

@@ -1,14 +1,11 @@
 import { DatePipe, formatDate } from "@angular/common";
-import { HttpHeaders } from "@angular/common/http";
-import { Component, ComponentFactoryResolver, OnInit } from "@angular/core";
+import { Component, OnInit } from "@angular/core";
 import { FormGroup, Validators, FormArray, FormBuilder } from "@angular/forms";
 import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
 import { NgxPhotoEditorService } from "ngx-photo-editor";
-import { NgxCroppedEvent } from "ngx-photo-editor/lib/ngx-photo-editor.component";
+import { NgxSpinnerService } from "ngx-spinner";
 import { ToastrService } from "ngx-toastr";
-import { map } from "rxjs";
 import { FormField } from "src/app/data/models/form-field.model";
-import { preferred_job } from "src/app/data/models/preferred-job";
 import { AuthService } from "src/app/data/services/auth.service";
 import { BlobService } from "src/app/data/services/blob.service";
 import { EducationService } from "src/app/data/services/education.service";
@@ -187,10 +184,12 @@ export class ProfileComponent implements OnInit {
     private datePipe: DatePipe,
     private preferredJobService: PreferredJobService,
     private skillService: SkillsService,
-    private blobService: BlobService
+    private blobService: BlobService,
+    private spinner: NgxSpinnerService
   ) {}
 
   ngOnInit(): void {
+    this.spinner.show();
     this.email = this.authService.getEmail();
     this.getProfilePicture();
     this.getCoverPicture();
@@ -288,6 +287,7 @@ export class ProfileComponent implements OnInit {
   // -------------------------------Resume Operation-----------------------------------
 
   uploadResume(event: any) {
+    this.spinner.show();
     let fileList: FileList = event.target.files;
     console.log(fileList);
     if (fileList.length > 0) {
@@ -301,6 +301,7 @@ export class ProfileComponent implements OnInit {
           console.log("success");
           this.toastr.success("Resume uploaded successfully!");
           //this.getResume();
+          this.spinner.hide();
         },
         error: (error) => {
           console.log(error);
@@ -654,6 +655,7 @@ export class ProfileComponent implements OnInit {
   getSkill() {
     this.skillService.getSkills().subscribe((res) => {
       this.skillArray = res;
+      this.spinner.hide();
       console.log(res);
     });
   }

@@ -47,7 +47,7 @@ export class JobSeekerProfileComponent implements OnInit {
     ) { }
 
   ngOnInit() {
-    // this.spinner.show();
+    this.spinner.show();
     this.getJobSeekerbyId();
     this.getProfilePicture();
     this.getEducationDetail();
@@ -108,7 +108,10 @@ export class JobSeekerProfileComponent implements OnInit {
     this.educationService.getEducationByUserId(this.id).subscribe(res => this.educationArray = res);
   }
   getExperienceDetail() {
-    this.experienceService.getExperienceByUserId(this.id).subscribe((res: any) => this.experienceArray = res);
+    this.experienceService.getExperienceByUserId(this.id).subscribe((res: any) => {
+      this.experienceArray = res;
+      this.spinner.hide();
+    });
   }
 
   shortlistCandidate() {

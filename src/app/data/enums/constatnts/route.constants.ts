@@ -1,6 +1,8 @@
 export enum RouteConstants {
     landingPage = '/',
     login = '/login',
+    forgotPassword = '/forgot-password',
+    notFound = 'not-found',
     
     // jobSeeker
     jobSeekerLogin = '/job-seeker/login',

@@ -7,21 +7,21 @@
             </div>
             <div class="p-4" style="width: 500px;">
                 <div class="text-center">
-                    <app-logo [variant]="'light'"></app-logo>
+                    <app-logo variant="light"></app-logo>
                 </div>
-                <h3 class="fw-bold">
+                <h3 class="fw-bold text-orange">
                     Login
                 </h3>
                 <form [formGroup]="loginForm">
                     <div class="mb-3">
-                        <label for="usernameOrMail">Username or Mail Address</label>
+                        <label for="usernameOrMail" class="required">Username or Mail Address</label>
                         <input type="text"
                             class="form-control"
                             formControlName="userName_or_Email"
                             placeholder="username of mail address">
                     </div>
                     <div class="mb-3">
-                        <label for="password">Password</label>
+                        <label for="password" class="required">Password</label>
                         <input type="password"
                         formControlName="password"
                             class="form-control"
@@ -42,7 +42,7 @@
                             </a>
                         </div>
                         <div>
-                            <a [routerLink]="routeConstants.jobSeekerHome">
+                            <a [routerLink]="routeConstants.forgotPassword">
                                 Forgot password
                             </a>
                         </div>
