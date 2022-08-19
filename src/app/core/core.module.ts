@@ -13,6 +13,8 @@ import { ToastrModule } from 'ngx-toastr';
 import { UserVerificationComponent } from './components/user-verification/user-verification.component';
 import { ForgotPasswordComponent } from './components/forgot-password/forgot-password.component';
 import { ResetPasswordComponent } from './components/reset-password/reset-password.component';
+import { ConfirmationComponent } from './components/confirmation/confirmation.component';
+import { NotFoundComponent } from './components/not-found/not-found.component';
 
 
 
@@ -21,7 +23,9 @@ import { ResetPasswordComponent } from './components/reset-password/reset-passwo
     LandingPageComponent,
     UserVerificationComponent,
     ForgotPasswordComponent,
-    ResetPasswordComponent
+    ResetPasswordComponent,
+    ConfirmationComponent,
+    NotFoundComponent
   ],
   imports: [
     CommonModule,

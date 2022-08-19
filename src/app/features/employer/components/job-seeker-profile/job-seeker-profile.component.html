@@ -5,11 +5,14 @@
             <div class="card p-4">
                 <div class="d-flex justify-content-start">
                     <div>
+                        <!-- <p-skeleton shape="circle" height="150px" width="150px"></p-skeleton> -->
                         <img [src]="currentApplier.profilePicture+ '?'+ sas_token" alt="profile pic" height="150px"
                             width="150px" class="rounded-pill">
                         <div class="p-4"></div>
-                        <button class="btn btn-primary rounded-pill bg-dark"
-                            (click)="getResumebyId(currentApplier.id)">Download Resume
+                        <button class="btn btn-orange rounded-pill"
+                            (click)="getResumebyId(currentApplier.jobSeekerId)">
+                        Resume
+                        <i class="pi pi-cloud-download"></i>
                         </button>
                     </div>
                     <div class="ps-5">
@@ -46,14 +49,14 @@
                                     {{currentApplier.dateOfBirth | date}}
                                 </div>
                             </div>
-                            <div class="d-flex pt-1">
+                            <!-- <div class="d-flex pt-1">
                                 <div class="fw-bold pe-3">
                                     Location:
                                 </div>
                                 <div>
                                     {{jobSeekerProfile.location}}
                                 </div>
-                            </div>
+                            </div> -->
                             <div class="d-flex pt-1">
                                 <div class="fw-bold pe-3">
                                     About:
@@ -63,12 +66,20 @@
                                 </div>
                             </div>
                             <div class="p-3"></div>
-                            <div class="d-flex pt-1 justify-content-start">
-                                <button class="btn btn-primary rounded-pill bg-dark h-50 w-100">Shortlist</button>
+                            <div class="d-flex pt-4 justify-content-start">
+                                <button class="btn btn-success rounded-pill" (click)="shortlistCandidate()">
+                                    Shortlist
+                                    <i class="pi pi-check-circle"></i>
+                                </button>
                                 <div class="p-1"></div>
 
                                 <div class="p-1"></div>
-                                <button class="btn btn-danger rounded-pill h-50 w-100"> Decline</button>
+                                <button class="btn btn-danger rounded-pill" (click)="rejectCandidate()">
+                                    Decline
+                                    <span class="mt-1">
+                                        <i class="pi pi-times-circle"></i>
+                                    </span>
+                                </button>
 
                             </div>
                         </div>
@@ -83,6 +94,14 @@
                         <h4 class="card-title">Skills</h4>
                     </div>
                     <hr>
+                    <div class="d-flex justify-content-center align-items-center" id="main"
+                            *ngIf="skillArray.length==0">
+                            <img class="mr-3 pr-3 align-top border-right inline-block align-content-center"
+                                src="https://cdn.dribbble.com/users/1753953/screenshots/3818675/animasi-emptystate.gif"
+                                style="height:150px; width: 150px;">
+                            <div class="inline-block align-middle">
+                                <h2 class="font-weight-normal lead" id="desc">No Skills</h2>
+                            </div>
                     <div class="clearfix"></div>
                     <div *ngFor="let skill of skillArray; let id=index">
 

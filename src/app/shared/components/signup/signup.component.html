@@ -1,10 +1,65 @@
 <div class="p-5">
-    <h3 class="">
+    <h3 class="fw-bold text-center text-orange">
         Signup
     </h3>
-    <hr>
-    <app-form [formFields]="registerationFields"
+    <div class="mt-5">
+        <form [formGroup]="registerationForm">
+
+            <!-- row 1 -->
+            <div class="row">
+                <div class="mb-3 col">
+                    <label for="firstName" class="required">First Name</label>
+                    <input type="text" id="firstName" class="form-control" placeholder="First Name"
+                        formControlName="firstName">
+                </div>
+                <div class="mb-3 col">
+                    <label for="lastName" class="required">Last Name</label>
+                    <input type="text" id="lastName" class="form-control" placeholder="Last Name"
+                        formControlName="lastName">
+                </div>
+            </div>
+
+            <div class="mb-3 col">
+                <label for="userName" class="required">Username</label>
+                <input type="text" id="userName" class="form-control" placeholder="Username"
+                    formControlName="userName">
+            </div>
+            <div class="mb-3 col">
+                <label for="emailAddress" class="required">Email Address</label>
+                <input type="email" id="emailAddress" class="form-control" placeholder="Email address"
+                    formControlName="email">
+            </div>
+
+            <div class="mb-3 col">
+                <label for="password" class="required">Password</label>
+                <input type="password" id="userName" class="form-control" placeholder="********"
+                    formControlName="password">
+                <small class="text-danger" *ngIf="registerationForm.get('password')?.errors?.['minlength']">
+                    Password should have atleast 8 characters!
+                </small>
+                <small class="text-danger text-wrap"
+                    *ngIf="registerationForm.get('password')?.errors?.['pattern'] && !registerationForm.get('password')?.errors?.['minlength']">
+                    Password must contain one lowercase, uppercase, and one numeric character!
+                </small>
+            </div>
+
+            <div class="mb-3 col">
+                <label for="confirmPassword" class="required">Confirm Password</label>
+                <input type="password" id="confirmPassword" class="form-control" placeholder="********"
+                    formControlName="confirmPassword">
+                <small *ngIf="registerationForm.controls['confirmPassword'].errors?.['minlength']" class="text-danger">
+                    Password and confirm password does not match!
+                </small>
+            </div>
+
+            <button class="float-end btn btn-orange text-end rounded-pill px-3 py-1"
+                [disabled]="!registerationForm.valid">
+                Next
+            </button>
+        </form>
+    </div>
+    <!-- <app-form [formFields]="registerationFields"
         [formGroup]="registerationForm"
         (formEmitter)="receiveFormData()">
-    </app-form>
+    </app-form> -->
 </div>

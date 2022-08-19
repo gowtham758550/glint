@@ -1,7 +1,8 @@
 import { Status } from "../enums/status.enum"
 
 export interface Appliers {
-    id:number;
+    jobSeekerId:number
+    appliedJobId: number
     fullName: string
     userName: string
     profilePicture: string

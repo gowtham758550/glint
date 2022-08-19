@@ -1,10 +1,10 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { NgxSpinnerService } from 'ngx-spinner';
 import { ToastrService } from 'ngx-toastr';
 import { RouteConstants } from 'src/app/data/enums/constatnts/route.constants';
 import { Role } from 'src/app/data/enums/role.enum';
-import { FormField } from 'src/app/data/models/form-field.model';
 import { AuthService } from 'src/app/data/services/auth.service';
 import { LocalStorage } from 'src/app/data/services/local-storage.service';
 
@@ -31,11 +31,11 @@ export class LoginTemplateComponent implements OnInit {
     private authService: AuthService,
     private localStorage: LocalStorage,
     private router: Router,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    private spinner: NgxSpinnerService
   ) { }
 
   ngOnInit(): void {
-    console.log(this.role);
     if (this.role = Role.jobSeeker) {
       this.signupRoute = this.routeConstants.jobSeekerSignup;
     } else if (this.role = Role.employer) {
@@ -44,14 +44,21 @@ export class LoginTemplateComponent implements OnInit {
   }
 
   login() {
+    this.spinner.show();
     this.authService.login(this.loginForm.value).subscribe({
       next: data => {
         this.toastr.success('Logged in successfully');
         const dataObject = JSON.parse(JSON.stringify(data));
         this.localStorage.setItem('accessToken', dataObject.jwt);
         const role = this.authService.getRole();
+        this.spinner.hide()
         if (role == 'JobSeeker') this.router.navigateByUrl(this.routeConstants.jobSeekerHome);
         else if (role == 'Employer') this.router.navigateByUrl(this.routeConstants.employerDashboard);
+      },
+      error: () => {
+        this.loginForm.patchValue({
+          password: ''
+        });
       }
     });
   }

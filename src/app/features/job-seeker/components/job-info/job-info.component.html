@@ -1,0 +1,98 @@
+<ng-container *ngIf="isJobLoaded; then jobInfo; else jobInfoLoader"></ng-container>
+<ng-template #jobInfoLoader>
+    <div class="card-shadow p-4">
+        <p-skeleton styleClass="mb-2" height="2rem" width="15rem"></p-skeleton>
+        <div class="d-flex gap-2">
+            <p-skeleton styleClass="mb-2" height="1rem" width="10rem"></p-skeleton>
+            <p-skeleton styleClass="mb-2" height="1rem" width="8rem"></p-skeleton>
+            <p-skeleton styleClass="mb-2" height="1rem" width="5rem"></p-skeleton>
+        </div>
+        <div class="d-fled gap-2">
+            <p-skeleton styleClass="mb-2" height="1rem" width="10rem"></p-skeleton>
+            <p-skeleton styleClass="mb-2" height="1rem" width="8rem"></p-skeleton>
+        </div>
+        <p-skeleton styleClass="rounded-pill" height="2rem" width="5rem"></p-skeleton>
+    </div>
+    <div class="mt-4 card-shadow p-4">
+        <p-skeleton styleClass="mb-2" height="2rem" width="5rem"></p-skeleton>
+        <p-skeleton styleClass="mb-2" height="1.7rem" width="15rem"></p-skeleton>
+        <p-skeleton styleClass="mb-2" ></p-skeleton>
+        <p-skeleton styleClass="mb-2" ></p-skeleton>
+        <p-skeleton styleClass="mb-2" width="34%"></p-skeleton>
+        <p-skeleton styleClass="mb-2" height="1.7rem" width="15rem"></p-skeleton>
+        <p-skeleton styleClass="mb-2" ></p-skeleton>
+        <p-skeleton styleClass="mb-2" ></p-skeleton>
+        <p-skeleton styleClass="mb-2" width="64%"></p-skeleton>
+    </div>
+</ng-template>
+<ng-template #jobInfo>
+
+    <div class="card-shadow p-4">
+        <div class="fs-3 fw-bold">
+            {{job.jobTitle}}
+        </div>
+        <div class="fs-6">
+            <span *ngIf="isJobSeeker">
+                <i class="pi pi-building"></i>
+                <span class="fw-bold">
+                    {{job.companyName}}
+                </span>
+                .
+            </span>
+            <span>
+                <i class="pi pi-map-marker"></i>
+                {{job.location}}
+            </span>
+            .
+            <span class="text-success">
+                <i class="pi pi-clock"></i>
+                {{job.createdDate | date}}
+            </span>
+        </div>
+
+        <div class="pt-2">
+            <span class="pe-2">
+                <i class="pi pi-briefcase"></i>
+                {{job.jobType}}
+            </span>
+            <span>
+                <i class="pi pi-wallet"></i>
+                {{job.salary | currency: 'INR'}}
+            </span>
+        </div>
+
+        <div class="pt-2" *ngIf="isJobSeeker">
+            <ng-container *ngIf="isApplied; then applied; else notApplied">
+            </ng-container>
+            <ng-template #applied>
+                <button class="btn bg-orange text-white rounded-pill px-2 py-1" [disabled]="isApplied">
+                    Applied
+                </button>
+            </ng-template>
+            <ng-template #notApplied>
+                <button class="btn bg-orange text-white rounded-pill px-3 py-1" (click)="applyForJob()">
+                    Apply
+                </button>
+            </ng-template>
+        </div>
+    </div>
+    <div class="card-shadow p-4 mt-4">
+        <div class="fs-3 fw-bold">
+            About
+        </div>
+        <div class="fs-5 fw-bold">
+            Company Description
+        </div>
+        <div class="fs-6">
+            {{job.companyDescription}}
+        </div>
+
+        <div class="fs-5 fw-bold pt-4">
+            Job Description
+        </div>
+        <div class="fs-6">
+            {{job.description}}
+        </div>
+    </div>
+</ng-template>
+

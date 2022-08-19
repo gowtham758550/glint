@@ -6,6 +6,7 @@ import * as FileSaver from 'file-saver';
 import { RouteConstants } from 'src/app/data/enums/constatnts/route.constants';
 import { Job } from 'src/app/data/models/job.model';
 import { JobService } from 'src/app/data/services/job.service';
+import { PdfColumn } from 'src/app/data/models/pdf-column.model';
 
 @Component({
   selector: 'app-jobs',
@@ -18,7 +19,18 @@ export class JobsComponent implements OnInit {
   jobs: Job[] = [];
   isLoaded = false;
   postJobDetailId = this.activatedRoute.snapshot.params['postJobDetailId'];
-
+  pdfColumn: PdfColumn[] = [
+    { field: 'postJobDetailId', header: 'Job id' },
+    { field: 'employerID', header: 'Employer id' },
+    { field: 'jobTitle', header: 'Job title' },
+    { field: 'description', header: 'Job description' },
+    { field: 'experienceNeeded', header: 'Experience needed' },
+    { field: 'salary', header: 'Salary' },
+    { field: 'jobType', header: 'Job type' },
+    { field: 'minimumQualification', header: 'Minimum qualification' },
+    { field: 'location', header: 'Location' },
+    { field: 'createdDate', header: 'Created date' },
+  ]
 
   constructor(
     private jobService: JobService,
@@ -60,7 +72,7 @@ export class JobsComponent implements OnInit {
     import("jspdf").then(jsPDF => {
       import("jspdf-autotable").then(x => {
         const doc = new jsPDF.default('p', 'in');
-        // doc.;
+        (doc as any).autoTable(this.pdfColumn, this.jobs);
         const timestamp = new Date();
         doc.save(`All Jobs ${timestamp.toLocaleString()}.pdf`);
       })

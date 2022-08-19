@@ -1,5 +1,5 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { FilterService } from 'src/app/data/services/filter.service';
 import { Appliers } from 'src/app/data/models/appliers.model';
 import { BlobService } from 'src/app/data/services/blob.service';
@@ -8,7 +8,11 @@ import { ExperienceService } from 'src/app/data/services/experience.service';
 import { JobSeekerService } from 'src/app/data/services/job-seeker.service';
 import { environment } from 'src/environments/environment';
 import { SkillsService } from 'src/app/data/services/skills.service';
-import { map } from 'rxjs';
+import { AppliedJobService } from 'src/app/data/services/applied-job.service';
+import { NgxSpinnerService } from 'ngx-spinner';
+import { ToastrService } from 'ngx-toastr';
+import { Status } from 'src/app/data/enums/status.enum';
+import { RouteConstants } from 'src/app/data/enums/constatnts/route.constants';
 
 @Component({
   selector: 'app-job-seeker-profile',
@@ -16,15 +20,15 @@ import { map } from 'rxjs';
   styleUrls: ['job-seeker.component.css']
 })
 export class JobSeekerProfileComponent implements OnInit {
-  id: any;
+  id = this.activatedRoute.snapshot.params['jobSeekerId'];
   imageUrl!: string;
   isImageLoaded!: boolean;
   jobSeekerProfile!: any;
   educationArray: any;
   experienceArray: any;
   postJobDetailId = this.route.snapshot.params['jobId'];;
-  appliers!: Appliers[];
-  currentApplier!: Appliers;
+  appliers!: any;
+  currentApplier!: any;
   skillArray !: any;
   sas_token = environment.profile_sas_token;
 
@@ -34,9 +38,16 @@ export class JobSeekerProfileComponent implements OnInit {
     private educationService: EducationService,
     private experienceService: ExperienceService,
     private filterService: FilterService,
-    private skillService: SkillsService) { }
+    private skillService: SkillsService,
+    private appliedJobService: AppliedJobService,
+    private spinner: NgxSpinnerService,
+    private router: Router,
+    private activatedRoute: ActivatedRoute,
+    private toastr: ToastrService
+    ) { }
 
   ngOnInit() {
+    this.spinner.show();
     this.getJobSeekerbyId();
     this.getProfilePicture();
     this.getEducationDetail();
@@ -52,7 +63,7 @@ export class JobSeekerProfileComponent implements OnInit {
         for (var i = 0; i < this.appliers.length; i++) {
           console.log(this.id)
           console.log(this.appliers[i].id)
-          if (this.appliers[i].id == this.id) {
+          if (this.appliers[i].jobSeekerId == this.id) {
             this.currentApplier = this.appliers[i];
             console.log(this.currentApplier)
             this.getSkillDetail(this.currentApplier);
@@ -64,8 +75,8 @@ export class JobSeekerProfileComponent implements OnInit {
     });
   }
 
-  getSkillDetail(currentApplier: Appliers){
-    this.skillService.getSkillsByUserId(currentApplier.id).subscribe(res=>this.skillArray=res)
+  getSkillDetail(currentApplier: any){
+    this.skillService.getSkillsByUserId(currentApplier.jobSeekerId).subscribe(res=>this.skillArray=res)
   }
   getResumebyId(id:number){
     console.log(id)
@@ -81,7 +92,6 @@ export class JobSeekerProfileComponent implements OnInit {
     })
   }
   getJobSeekerbyId() {
-    this.id = this.route.snapshot.paramMap.get('jobSeekerId');
     console.log(this.id);
     this.jobSeekerService.getUserById(this.id).subscribe(res => this.jobSeekerProfile = res)
   }
@@ -98,7 +108,28 @@ export class JobSeekerProfileComponent implements OnInit {
     this.educationService.getEducationByUserId(this.id).subscribe(res => this.educationArray = res);
   }
   getExperienceDetail() {
-    this.experienceService.getExperienceByUserId(this.id).subscribe((res: any) => this.experienceArray = res);
+    this.experienceService.getExperienceByUserId(this.id).subscribe((res: any) => {
+      this.experienceArray = res;
+      this.spinner.hide();
+    });
+  }
+
+  shortlistCandidate() {
+    this.appliedJobService.updateAppliedJobStatus(this.currentApplier.appliedJobId, this.postJobDetailId, Status.Shortlisted).subscribe({
+      next: () => {
+        this.toastr.success(`Candidate ${this.currentApplier.userName} shortlisted`);
+        this.router.navigateByUrl(`/employer/job/${this.postJobDetailId}`);
+      }
+    });
+  }
+
+  rejectCandidate() {
+    this.appliedJobService.updateAppliedJobStatus(this.currentApplier.appliedJobId, this.postJobDetailId, Status.Rejected).subscribe({
+      next: () => {
+        this.router.navigateByUrl(`/employer/job/${this.postJobDetailId}`);
+        this.toastr.info(`Candidate ${this.currentApplier.userName} rejected`);
+      }
+    })
   }
 
 

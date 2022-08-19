@@ -1033,5 +1033,6 @@ export class JobService {
     getAllJob(): Observable<Job[]> {
         return this.httpClient.get<Job[]>(`${this.employerHost}/getall`);
     }
+   
 
 }

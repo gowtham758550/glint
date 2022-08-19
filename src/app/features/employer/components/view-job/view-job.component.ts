@@ -1,6 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { RouteConstants } from 'src/app/data/enums/constatnts/route.constants';
+import { Status } from 'src/app/data/enums/status.enum';
 import { Appliers } from 'src/app/data/models/appliers.model';
 import { Job } from 'src/app/data/models/job.model';
 import { FilterService } from 'src/app/data/services/filter.service';
@@ -15,12 +17,14 @@ import { environment } from 'src/environments/environment';
 export class ViewJobComponent implements OnInit {
 
   isJobInfoLoaded = false;
+  status = Status;
   isAppliersTableLoaded = false;
   postJobDetailId = this.activatedRoute.snapshot.params['postJobDetailId'];;
   sas_token = environment.profile_sas_token;
   appliers!: Appliers[];
   job!: Job;
   totalApplicants!:number;
+  totalShortlisted!: number;
 
   constructor(
     private filterService: FilterService,
@@ -40,8 +44,8 @@ export class ViewJobComponent implements OnInit {
   getJobAppliers() {
     this.filterService.getJobAppliers(this.postJobDetailId).subscribe({
       next: data => {
+        // console.log(data);
         this.appliers = data;
-        console.log(this.appliers)
         this.isAppliersTableLoaded = true;
       }
     });
@@ -57,7 +61,7 @@ export class ViewJobComponent implements OnInit {
     this.jobService.getJobById(this.postJobDetailId).subscribe({
       next: data => {
         this.job = data;
-        console.log(data)
+        // console.log(data)
         this.isJobInfoLoaded = true;
       }
     });
@@ -70,13 +74,16 @@ export class ViewJobComponent implements OnInit {
   deleteJob() {
     this.jobService.deleteJob(this.postJobDetailId).subscribe({
       next: () => {
-        this.router.navigateByUrl('/employer/jobs');
+        this.router.navigateByUrl(RouteConstants.employerJobs);
         this.toastr.success(`${this.job.jobTitle} deleted successfully`);
       }
     });
   }
 
   getjobSeekerCountByJobId(){
-    this.filterService.getJobSeekerCountByJobId(this.postJobDetailId).subscribe(res=>this.totalApplicants=res)
+    this.filterService.getJobSeekerCountByJobId(this.postJobDetailId).subscribe(res=>{
+      this.totalApplicants = res.totalCount;
+      this.totalShortlisted = res.shortlistedCount;
+    })
   }
 }

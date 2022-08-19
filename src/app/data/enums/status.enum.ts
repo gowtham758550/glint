@@ -1,5 +1,6 @@
 export enum Status {
-    'Pending',
-    'Selected',
-    'Rejected'
+    Pending = 'Pending',
+    Selected = 'Selected',
+    Rejected = 'Rejected',
+    Shortlisted = 'Shortlisted'
 }

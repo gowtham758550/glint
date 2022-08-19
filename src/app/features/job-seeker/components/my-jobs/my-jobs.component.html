@@ -1,81 +1,84 @@
-<div>
-    
-    <div class="card p-3">
-        <div class="card-title fs-2 fw-bold">
-            My Jobs
+<div class="bg-white rounded p-3">
+    <div class="text-orange fs-2 fw-bold mb-4">
+        My Jobs
+    </div>
+
+    <ng-container *ngIf="isAppliedJobLoaded; then appliedJob; else appliedJobLoader"></ng-container>
+    <ng-template #appliedJobLoader>
+        <div class="row">
+            <div class="col">
+                <div class="p-3 m-3 d-flex justify-content-start card-shadow">
+                    <p-skeleton width="4rem" height="4rem" shape="circle"></p-skeleton>
+                    <div class="d-flex flex-column ps-3 gap-1">
+                        <p-skeleton height="1.5rem" width="15rem"></p-skeleton>
+                        <p-skeleton height="1rem" width="10rem"></p-skeleton>
+                        <p-skeleton height="1rem" width="5rem"></p-skeleton>
+                    </div>
+                </div>
+                <div class="p-3 m-3 d-flex justify-content-start card-shadow">
+                    <p-skeleton width="4rem" height="4rem" shape="circle"></p-skeleton>
+                    <div class="d-flex flex-column ps-3 gap-1">
+                        <p-skeleton height="1.5rem" width="15rem"></p-skeleton>
+                        <p-skeleton height="1rem" width="10rem"></p-skeleton>
+                        <p-skeleton height="1rem" width="5rem"></p-skeleton>
+                    </div>
+                </div>
+                <div class="p-3 m-3 d-flex justify-content-start card-shadow">
+                    <p-skeleton width="4rem" height="4rem" shape="circle"></p-skeleton>
+                    <div class="d-flex flex-column ps-3 gap-1">
+                        <p-skeleton height="1.5rem" width="15rem"></p-skeleton>
+                        <p-skeleton height="1rem" width="10rem"></p-skeleton>
+                        <p-skeleton height="1rem" width="5rem"></p-skeleton>
+                    </div>
+                </div>
+                <div class="p-3 m-3 d-flex justify-content-start card-shadow">
+                    <p-skeleton width="4rem" height="4rem" shape="circle"></p-skeleton>
+                    <div class="d-flex flex-column ps-3 gap-1">
+                        <p-skeleton height="1.5rem" width="15rem"></p-skeleton>
+                        <p-skeleton height="1rem" width="10rem"></p-skeleton>
+                        <p-skeleton height="1rem" width="5rem"></p-skeleton>
+                    </div>
+                </div>
+                <div class="p-3 m-3 d-flex justify-content-start card-shadow">
+                    <p-skeleton width="4rem" height="4rem" shape="circle"></p-skeleton>
+                    <div class="d-flex flex-column ps-3 gap-1">
+                        <p-skeleton height="1.5rem" width="15rem"></p-skeleton>
+                        <p-skeleton height="1rem" width="10rem"></p-skeleton>
+                        <p-skeleton height="1rem" width="5rem"></p-skeleton>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-8">
+                <div class="d-flex flex-column">
+                    <p-skeleton styleClass="m-4 ms-5" height="30rem" width="40rem"></p-skeleton>
+                </div>
+            </div>
         </div>
-        <hr>
-
-        <ng-container></ng-container>
-        <div class="d-flex flex-wrap">
-            <div class="flex-grow-1">
-                <ng-container *ngIf="isAppliedJobLoaded; then appliedJob; else appliedJobLoader"></ng-container>
-                <ng-template #appliedJobLoader>
-                    <div class="pt-3 d-flex justify-content-start">
-                        <p-skeleton width="4rem" height="4rem" shape="circle" class="pt-3"></p-skeleton>
-                        <div class="d-flex flex-column ps-4 gap-1">
-                            <p-skeleton height="1.5rem" width="15rem"></p-skeleton>
-                            <p-skeleton height="1rem" width="10rem"></p-skeleton>
-                            <p-skeleton height="1rem" width="5rem"></p-skeleton>
-                        </div>
-                    </div>
-                    <div class="pt-3 d-flex justify-content-start">
-                        <p-skeleton width="4rem" height="4rem" shape="circle" class="pt-3"></p-skeleton>
-                        <div class="d-flex flex-column ps-4 gap-1">
-                            <p-skeleton height="1.5rem" width="15rem"></p-skeleton>
-                            <p-skeleton height="1rem" width="10rem"></p-skeleton>
-                            <p-skeleton height="1rem" width="5rem"></p-skeleton>
-                        </div>
-                    </div>
-                    <div class="pt-3 d-flex justify-content-start">
-                        <p-skeleton width="4rem" height="4rem" shape="circle" class="pt-3"></p-skeleton>
-                        <div class="d-flex flex-column ps-4 gap-1">
-                            <p-skeleton height="1.5rem" width="15rem"></p-skeleton>
-                            <p-skeleton height="1rem" width="10rem"></p-skeleton>
-                            <p-skeleton height="1rem" width="5rem"></p-skeleton>
-                        </div>
-                    </div>
-                    <div class="pt-3 d-flex justify-content-start">
-                        <p-skeleton width="4rem" height="4rem" shape="circle" class="pt-3"></p-skeleton>
-                        <div class="d-flex flex-column ps-4 gap-1">
-                            <p-skeleton height="1.5rem" width="15rem"></p-skeleton>
-                            <p-skeleton height="1rem" width="10rem"></p-skeleton>
-                            <p-skeleton height="1rem" width="5rem"></p-skeleton>
-                        </div>
-                    </div>
-                    <div class="pt-3 d-flex justify-content-start">
-                        <p-skeleton width="4rem" height="4rem" shape="circle" class="pt-3"></p-skeleton>
-                        <div class="d-flex flex-column ps-4 gap-1">
-                            <p-skeleton height="1.5rem" width="15rem"></p-skeleton>
-                            <p-skeleton height="1rem" width="10rem"></p-skeleton>
-                            <p-skeleton height="1rem" width="5rem"></p-skeleton>
-                        </div>
-                    </div>
-                </ng-template>
-
-                <ng-template #appliedJob>
-                    <ng-container *ngIf="myJobs.length > 0; then appliedJobs; else noJobsApplied"></ng-container>
-                    <ng-template #noJobsApplied>
-                        <div class="text-center">
-                            <p>
-                                You don't applied any jobs. Apply
-                                <a [routerLink]="routeConstants.jobSeekerHome">
-                                    here
-                                </a>
-                            </p>
-                        </div>
-                    </ng-template>
-                    <ng-template #appliedJobs>
-                        <ng-container *ngFor="let job of myJobs; let i = index">
-                            <div class="pt-3 d-flex justify-content-start pointer"
-                                (click)="getTimeline(i)">
-                                <div class="pt-3">
-                                    <img [src]="job.companyProfilePicture + '?' + sasToken"
-                                        height="50px"
-                                        width="50px"
-                                        style="border-radius: 25px;">
-                                </div>
-                                <div class="ps-4 d-flex flex-column flex-grow-1">
+    </ng-template>
+    <ng-template #appliedJob>
+        <ng-container *ngIf="myJobs.length > 0; then appliedJobs; else noJobsApplied"></ng-container>
+        <ng-template #noJobsApplied>
+            <div class="text-center">
+                <p>
+                    You don't applied any jobs. Apply
+                    <a [routerLink]="routeConstants.jobSeekerHome">
+                        here
+                    </a>
+                </p>
+            </div>
+        </ng-template>
+        <ng-template #appliedJobs>
+            <div class="row">
+                <div class="col-4 me-3">
+                    <ng-container *ngFor="let job of myJobs; let i = index">
+                        <div class="pt-3 d-flex justify-content-start pointer card-shadow p-3 mb-3" (click)="getTimeline(i)">
+                            <div class="pt-3">
+                                <img [src]="job.companyProfilePicture + '?' + sasToken" height="50px" width="50px"
+                                    style="border-radius: 25px;">
+                            </div>
+                            <div class="row">
+                                <div class="col ps-4 d-flex flex-column flex-grow-1">
                                     <div class="fs-5">
                                         {{job.jobTitle}}
                                         <span>
@@ -97,26 +100,36 @@
                                     </div>
                                 </div>
                             </div>
-                        </ng-container>
-                    </ng-template>
-                </ng-template>
+                        </div>
+                    </ng-container>
+                </div>
+                <div class="col">
+                    <div class="col-8" *ngIf="isTimeline">
+                        <h3 class="fw-bold">
+                            {{jobTimeline[0].jobTitle}}
+                        </h3>
+                        <p-timeline [value]="jobTimeline" align="alternate">
+                            <ng-template pTemplate="marker" let-event>
+                                <span class="rounded bg-dark text-white px-2 py-1 rounded">
+                                    <i [ngClass]="event.icon"></i>
+                                </span>
+                            </ng-template>
+                            <ng-template pTemplate="content" let-event>
+                                <!-- <p-card class="col-2" [header]="event.status" [subheader]="event.date">
+                                </p-card> -->
+                                <div class="card-shadow boder-none p-3">
+                                    <div class="fw-bold fs-4">
+                                        {{event.status}}
+                                    </div>
+                                    <div>
+                                        {{event.date}}
+                                    </div>
+                                </div>
+                            </ng-template>
+                        </p-timeline>
+                    </div>
+                </div>
             </div>
-            <div class="w-50" *ngIf="isTimeline">
-                <h3 class="fw-bold">
-                    {{jobTimeline[0].jobTitle}}
-                </h3>
-                <p-timeline [value]="jobTimeline" align="alternate">
-                    <ng-template pTemplate="marker" let-event>
-                        <span class="rounded bg-dark text-white px-2 py-1 rounded">
-                            <i [ngClass]="event.icon"></i>
-                        </span>
-                    </ng-template>
-                    <ng-template pTemplate="content" let-event>
-                        <p-card [header]="event.status" [subheader]="event.date">
-                        </p-card>
-                    </ng-template>
-                </p-timeline>
-            </div>
-        </div>
-    </div>
+        </ng-template>
+    </ng-template>
 </div>

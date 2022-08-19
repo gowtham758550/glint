@@ -1,6 +1,8 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
+import { Observable } from "rxjs";
 import { environment } from "src/environments/environment";
+import { JobCategory } from "../models/job-category.model";
 
 @Injectable({
     providedIn: 'root'
@@ -13,8 +15,8 @@ export class DataService {
         private httpClient: HttpClient
     ) {}
 
-    getCategories() {
-        return this.httpClient.get(`${this.host}/job_category/get`);
+    getJobCategories(): Observable<JobCategory[]> {
+        return this.httpClient.get<JobCategory[]>(`${this.host}/job_category/get`);
     }
 
     getQualifications() {

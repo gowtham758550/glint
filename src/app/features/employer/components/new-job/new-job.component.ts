@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { NgxSpinnerService } from 'ngx-spinner';
 import { ToastrService } from 'ngx-toastr';
 import { FormField } from 'src/app/data/models/form-field.model';
 import { DataService } from 'src/app/data/services/data.service';
@@ -15,14 +16,14 @@ import { JobService } from 'src/app/data/services/job.service';
 export class NewJobComponent implements OnInit {
 
   jobForm: FormGroup = this.formBuilder.group({
-    jobTitle: ['', Validators.required],
+    jobTitle: ['', [Validators.required, Validators.minLength(3)]],
     description: ['', Validators.required],
-    experienceNeeded: ['', Validators.required],
-    salary: ['', Validators.required],
+    experienceNeeded: ['', [Validators.required, Validators.min(0)]],
+    salary: ['', [Validators.required, Validators.min(0)]],
     jobType: ['', Validators.required],
     minimumQualification: ['', Validators.required],
     location: ['', Validators.required],
-    createdDate: [new Date(), Validators.required]
+    // createdDate: [new Date()]
   })
   jobFields: FormField[] = [
     {
@@ -85,10 +86,11 @@ export class NewJobComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
-    private jobService: JobService,
+    public jobService: JobService,
     private toastr: ToastrService,
     private router: Router,
-    private dataService: DataService
+    private dataService: DataService,
+    private spinner: NgxSpinnerService
   ) { }
 
   ngOnInit(): void {
@@ -97,8 +99,8 @@ export class NewJobComponent implements OnInit {
   }
 
   getCategories() {
-    this.dataService.getCategories().subscribe({
-      next: categries => console.log(categries)
+    this.dataService.getJobCategories().subscribe({
+      next: categories => console.log(categories)
     });
   }
 
@@ -109,11 +111,13 @@ export class NewJobComponent implements OnInit {
   }
 
   createJob() {
+    this.spinner.show();
     console.log(this.jobForm.value);
     this.jobService.postJob(this.jobForm.value).subscribe({
       next: data => {
         this.toastr.success('Job created successfully', 'Success');
         this.router.navigateByUrl('/employer/jobs');
+        this.spinner.hide();
       }
     });
   }
