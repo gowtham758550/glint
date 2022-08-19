@@ -78,7 +78,7 @@
                                 placeholder="Search designation">
                             <datalist id="designation-datalist"
                                 class="datalist">
-                                <ng-container *ngFor="let designation of designations">
+                                <ng-container *ngFor="let designation of jobSearchList">
                                     <option [value]="designation">
                                         <span style="text-transform: capitalize;">
                                             {{designation}}

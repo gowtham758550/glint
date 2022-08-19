@@ -99,8 +99,8 @@ export class NewJobComponent implements OnInit {
   }
 
   getCategories() {
-    this.dataService.getCategories().subscribe({
-      next: categries => console.log(categries)
+    this.dataService.getJobCategories().subscribe({
+      next: categories => console.log(categories)
     });
   }
 
