@@ -150,7 +150,7 @@ export class PersonalInfoComponent implements OnInit {
     },
     {
       type: 'number',
-      label: 'Year of in this company',
+      label: 'Year\'(s) of experience',
       formControlName: 'yearOfExperience',
       class: ['w']
     }

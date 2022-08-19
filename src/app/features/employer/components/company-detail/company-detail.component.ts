@@ -43,7 +43,7 @@ export class CompanyDetailComponent implements OnInit {
       class: ['w']
     },
     {
-      type: 'number',
+      type: 'input',
       label: 'Contact number',
       formControlName: 'contactNumber',
       class: ['w']

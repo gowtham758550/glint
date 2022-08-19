@@ -948,6 +948,21 @@ SOFTWARE.
 ng2-pdf-viewer
 MIT
 
+ngx-bootstrap/component-loader
+MIT
+
+ngx-bootstrap/focus-trap
+MIT
+
+ngx-bootstrap/modal
+MIT
+
+ngx-bootstrap/positioning
+MIT
+
+ngx-bootstrap/utils
+MIT
+
 ngx-echarts
 MIT
 MIT License
@@ -974,6 +989,9 @@ SOFTWARE.
 
 
 ngx-photo-editor
+MIT
+
+ngx-spinner
 MIT
 
 ngx-toastr

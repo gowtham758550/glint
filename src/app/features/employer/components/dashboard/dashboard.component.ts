@@ -4,6 +4,7 @@ import { NgxSpinnerService } from 'ngx-spinner';
 import { BarChartData } from 'src/app/data/models/barchart-data.model';
 import { PieChartData } from 'src/app/data/models/piechart-data.model';
 import { FilterService } from 'src/app/data/services/filter.service';
+import { PostJobService } from 'src/app/data/services/post-job.service';
 
 @Component({
   selector: 'app-dashboard-employer',
@@ -23,7 +24,8 @@ export class DashboardComponent implements OnInit {
   
   constructor(
     private filterService: FilterService,
-    private spinner: NgxSpinnerService
+    private spinner: NgxSpinnerService,
+    private postJobService: PostJobService
   ) { }
 
   ngOnInit(): void {
@@ -34,10 +36,15 @@ export class DashboardComponent implements OnInit {
   }
 
   getTotalJobs() {
-    this.filterService.getPostJobCount()
-      .subscribe({
-        next: data => this.totalJobs = data
-      });
+    // this.filterService.getPostJobCount()
+    //   .subscribe({
+    //     next: data => this.totalJobs = data
+    //   });
+    this.postJobService.getPostJob().subscribe({
+      next: data => {
+        this.totalJobs = data.length;
+      }
+    });
   }
 
   getBarChartData() {

@@ -46,6 +46,7 @@ export class VerifyComponent implements OnInit, OnDestroy {
     this.authService.isVerified(email)
       .subscribe({
         next: res => {
+          console.log(res);
           if (!res) {
             this.isVerified = true;
             this.toastr.success('Verified successfully');
