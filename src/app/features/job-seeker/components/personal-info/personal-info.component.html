@@ -1,5 +1,5 @@
 <div class="p-5">
-    <h2 class="fw-bold text-center">
+    <h2 class="fw-bold text-center text-orange">
         Personal details
     </h2>
     <div class="d-flex justify-content-center">
@@ -65,9 +65,9 @@
                 Education
             </div>
             <div>
-                <button class="btn btn-rounded" (click)="addEducation(educationModal)">
-                    <i class="pi pi-plus text-dark"></i>
-                </button>
+                <button pButton pRipple type="button" icon="pi pi-plus"
+                    (click)="addEducation(educationModal)"
+                    class="p-button-rounded p-button-secondary float-end bg-dark text-white"></button>
             </div>
         </div>
         <hr>
@@ -109,9 +109,9 @@
                 Experience
             </div>
             <div>
-                <button class="btn btn-rounded" (click)="addExperience(experienceModal)">
-                    <i class="pi pi-plus text-dark"></i>
-                </button>
+                <button pButton pRipple type="button" icon="pi pi-plus"
+                    (click)="addExperience(experienceModal)"
+                    class="p-button-rounded p-button-secondary float-end bg-dark text-white"></button>
             </div>
         </div>
         <hr>
@@ -151,9 +151,9 @@
             <!-- card title -->
             <div class="flex-grow-1 fs-4">
                 <div class="card-title fs-5">Preferred Job
-                    <button class="btn btn-rounded float-end">
-                        <i class="pi pi-plus" (click)="addjob(PreferredJobModal)"></i>
-                    </button>
+                    <button pButton pRipple type="button" icon="pi pi-plus"
+                        (click)="addjob(PreferredJobModal)"
+                        class="p-button-rounded p-button-secondary float-end bg-dark text-white"></button>
                 </div>
                 <hr>
             </div>
@@ -175,9 +175,9 @@
             <!-- card title -->
             <div class="flex-grow-1 fs-4">
                 <div class="card-title fs-5">Skills
-                    <button class="btn btn-rounded float-end">
-                        <i class="pi pi-plus" (click)="addskill(SkillModal)"></i>
-                    </button>
+                    <button pButton pRipple type="button" icon="pi pi-plus"
+                        (click)="addskill(SkillModal)"
+                        class="p-button-rounded p-button-secondary float-end bg-dark text-white"></button>
                 </div>
                 <hr>
             </div>
@@ -247,7 +247,9 @@
         <h4 class="modal-title" id="modal-basic-title">
             {{action}} Interested Job
         </h4>
-        <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+        <button pButton pRipple type="button" icon="pi pi-plus"
+            (click)="addjob(PreferredJobModal)"
+            class="p-button-rounded p-button-secondary float-end bg-dark text-white"></button>
     </div>
     <div class="modal-body d-flex justify-content-center">
         <app-form [formGroup]="preferredJobForm" [formFields]="preferredJobFields">
