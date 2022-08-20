@@ -14,9 +14,9 @@ import { PostJobService } from 'src/app/data/services/post-job.service';
 })
 export class DashboardComponent implements OnInit {
 
-  totalJobs!: number;
-  totalApplication!: number;
-  totalShortlisted!: number;
+  totalJobs: number = 0;
+  totalApplication: number = 0;
+  totalShortlisted: number = 0;
   barChartOptions!: EChartsOption;
   pieChartOptions!: EChartsOption;
   isBarChartDataLoaded = false;
