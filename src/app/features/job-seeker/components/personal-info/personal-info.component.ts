@@ -148,10 +148,22 @@ export class PersonalInfoComponent implements OnInit {
       formControlName: 'designation',
       class: ['w']
     },
+    // {
+    //   type: 'number',
+    //   label: 'Year\'(s) of experience',
+    //   formControlName: 'yearOfExperience',
+    //   class: ['w']
+    // }
     {
-      type: 'number',
-      label: 'Year\'(s) of experience',
-      formControlName: 'yearOfExperience',
+      type: 'date',
+      label: 'Start date',
+      formControlName: 'startDate',
+      class: ['w']
+    },
+    {
+      type: 'date',
+      label: 'End date',
+      formControlName: 'toDate',
       class: ['w']
     }
   ]
@@ -263,7 +275,9 @@ export class PersonalInfoComponent implements OnInit {
     return this.formBuilder.group({
       previousCompanyName: ['', Validators.required],
       designation: ['', Validators.required],
-      yearOfExperience: ['']
+      // yearOfExperience: ['']
+      startDate: [new Date(), Validators.required],
+      toDate: [new Date(), Validators.required]
     })
   }
 

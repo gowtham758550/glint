@@ -30,11 +30,13 @@
             </button>
              <!-- dropdown content -->
             <div class="dropdown-menu card-shadow border-none p-1 text-nowrap" aria-labelledby="employers-menu">
-                <div class="pointer p-2 dropdown-menu-item rounded">
+                <div class="pointer p-2 dropdown-menu-item rounded"
+                    [routerLink]="routeConstants.employerLogin">
                     <i class="pi pi-sign-in me-2"></i>
                     Login
                 </div>
-                <div class="pointer p-2 dropdown-menu-item rounded">
+                <div class="pointer p-2 dropdown-menu-item rounded"
+                    [routerLink]="routeConstants.employerSignup">
                     <i class="pi pi-user-plus me-2"></i>
                     Register
                 </div>

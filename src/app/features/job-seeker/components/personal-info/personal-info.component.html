@@ -129,8 +129,7 @@
                         {{experience.controls['designation'].value}}
                     </div>
                     <div class="text-muted">
-                        Experience:
-                        {{experience.controls['yearOfExperience'].value}} year(s)
+                        {{experience.controls['startDate'].value | date}} - {{experience.controls['toDate'].value | date}}
                     </div>
                 </div>
                 <div class="ps-2 pt-3">

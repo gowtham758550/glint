@@ -22,7 +22,7 @@ import { RouteConstants } from 'src/app/data/enums/constatnts/route.constants';
 export class JobSeekerProfileComponent implements OnInit {
   id = this.activatedRoute.snapshot.params['jobSeekerId'];
   imageUrl!: string;
-  isProfilePictureLoaded: boolean = false;
+  isProfilePictureLoaded = false;
   jobSeekerProfile!: any;
   educationArray: any;
   experienceArray: any;
@@ -31,6 +31,7 @@ export class JobSeekerProfileComponent implements OnInit {
   currentApplier!: any;
   skillArray !: any;
   sas_token = environment.profile_sas_token;
+  status = Status;
 
   constructor(private route: ActivatedRoute,
     private jobSeekerService: JobSeekerService,
@@ -61,8 +62,6 @@ export class JobSeekerProfileComponent implements OnInit {
         this.appliers = data;
         console.log(this.appliers)
         for (var i = 0; i < this.appliers.length; i++) {
-          console.log(this.id)
-          console.log(this.appliers[i].id)
           if (this.appliers[i].jobSeekerId == this.id) {
             this.currentApplier = this.appliers[i];
             console.log(this.currentApplier)
@@ -126,8 +125,8 @@ export class JobSeekerProfileComponent implements OnInit {
   rejectCandidate() {
     this.appliedJobService.updateAppliedJobStatus(this.currentApplier.appliedJobId, this.postJobDetailId, Status.Rejected).subscribe({
       next: () => {
-        this.router.navigateByUrl(`/employer/job/${this.postJobDetailId}`);
         this.toastr.info(`Candidate ${this.currentApplier.userName} rejected`);
+        this.router.navigateByUrl(`/employer/job/${this.postJobDetailId}`);
       }
     })
   }
