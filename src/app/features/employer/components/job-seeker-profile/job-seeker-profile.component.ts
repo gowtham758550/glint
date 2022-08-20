@@ -22,7 +22,7 @@ import { RouteConstants } from 'src/app/data/enums/constatnts/route.constants';
 export class JobSeekerProfileComponent implements OnInit {
   id = this.activatedRoute.snapshot.params['jobSeekerId'];
   imageUrl!: string;
-  isImageLoaded!: boolean;
+  isProfilePictureLoaded: boolean = false;
   jobSeekerProfile!: any;
   educationArray: any;
   experienceArray: any;
@@ -100,7 +100,7 @@ export class JobSeekerProfileComponent implements OnInit {
       next: (data: any) => {
         let res = data.url;
         this.imageUrl = res + "?" + environment.profile_sas_token;
-        this.isImageLoaded = true;
+        this.isProfilePictureLoaded = true;
       },
     })
   }
