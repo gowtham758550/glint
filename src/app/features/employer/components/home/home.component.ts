@@ -21,7 +21,7 @@ export class HomeComponent implements OnInit {
       icon: 'pi-home'
     },
     {
-      label: 'Jobs',
+      label: 'Manage Jobs',
       routeTo: this.routeConstants.employerJobs,
       icon: 'pi-briefcase'
     }

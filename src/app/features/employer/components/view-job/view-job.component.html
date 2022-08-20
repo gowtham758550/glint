@@ -33,9 +33,14 @@
             <div class="flex-grow-1">
                 <div class="card-shadow p-4 mb-4">
                     <div class="d-flex justify-content-between">
-                        <h5>
+                        <h5 class="d-block">
                             {{job.jobTitle}}
                         </h5>
+                        <button class="px-2 py-1 btn btn-danger rounded-pill d-block"
+                            (click)="deleteJob()">
+                            <i class="pi pi-pencil"></i>
+                            Delete
+                        </button>
                         <!-- action buttons -->
                     </div>
                     <div class="fs-6 d-flex flex-wrap">
