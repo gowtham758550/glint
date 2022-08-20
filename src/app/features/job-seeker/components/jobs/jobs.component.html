@@ -1,14 +1,13 @@
-<div class="pb-4">
+<div class="pb-5">
     <div class="row">
-        <div class="col-md-12">
-            <div class="search-1">
+        <div class="col-4">
+            <div class="search-1" style="position: fixed;">
                 <i class='ms-2 pi pi-search text-dark'></i>
-                <input class="border border-radius w-100" type="text" [(ngModel)]="searchText" placeholder="Search Jobs">
+                <input class="border border-radius" type="text" [(ngModel)]="searchText" placeholder="Search Jobs">
                 <button (click)="applyFilters()">
                     Search
                 </button>
             </div>
-
         </div>
     </div>
     <!-- <div class="col-12 md:col-4">
@@ -20,7 +19,7 @@
     </div> -->
 </div>
 
-<div class="d-flex justify-content-start">
+<div class="d-flex justify-content-start mt-3">
     <ng-container *ngIf="isLoaded; then data; else loader">
     </ng-container>
     <ng-template #loader>
@@ -122,10 +121,12 @@
         </ng-template>
         <ng-template #jobCards>
             <div class="col-8">
-                <ng-container *ngFor="let job of allJobs">
-                    <app-job-card [job]="job">
-                    </app-job-card>
-                </ng-container>
+                <!-- <p-scrollPanel [style]="{height: '100vh'}"> -->
+                    <ng-container *ngFor="let job of allJobs">
+                        <app-job-card [job]="job">
+                        </app-job-card>
+                    </ng-container>
+                <!-- </p-scrollPanel> -->
             </div>
         </ng-template>
     </ng-template>

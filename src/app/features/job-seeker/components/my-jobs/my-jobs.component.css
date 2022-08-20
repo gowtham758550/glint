@@ -1,0 +1,4 @@
+.my-job-card:hover,
+.my-job-card:focus {
+    border: 2px solid var(--orange);
+}

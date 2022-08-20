@@ -9,8 +9,7 @@ import { environment } from 'src/environments/environment';
 @Component({
   selector: 'app-my-jobs',
   templateUrl: './my-jobs.component.html',
-  styles: [
-  ]
+  styleUrls: ['./my-jobs.component.css']
 })
 export class MyJobsComponent implements OnInit {
 

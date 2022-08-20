@@ -1,11 +1,11 @@
 <div class="bg-white rounded p-3">
-    <div class="text-orange fs-2 fw-bold mb-4">
+    <div class="text-orange bg-white fs-2 ms-3 fw-bold">
         My Jobs
     </div>
 
     <ng-container *ngIf="isAppliedJobLoaded; then appliedJob; else appliedJobLoader"></ng-container>
     <ng-template #appliedJobLoader>
-        <div class="row">
+        <div class="row ms-3">
             <div class="col">
                 <div class="p-3 m-3 d-flex justify-content-start card-shadow">
                     <p-skeleton width="4rem" height="4rem" shape="circle"></p-skeleton>
@@ -69,10 +69,12 @@
             </div>
         </ng-template>
         <ng-template #appliedJobs>
-            <div class="row">
-                <div class="col-4 me-3">
+            <div class="row ms-3 mt-2">
+                <div class="col-5 me-3">
                     <ng-container *ngFor="let job of myJobs; let i = index">
-                        <div class="pt-3 d-flex justify-content-start pointer card-shadow p-3 mb-3" (click)="getTimeline(i)">
+                        <div class="pt-3 d-flex justify-content-start pointer card-shadow my-job-card p-3 mb-3"
+                            (click)="getTimeline(i)"
+                            [tabindex]="i">
                             <div class="pt-3">
                                 <img [src]="job.companyProfilePicture + '?' + sasToken" height="50px" width="50px"
                                     style="border-radius: 25px;">
@@ -103,11 +105,14 @@
                         </div>
                     </ng-container>
                 </div>
-                <div class="col">
-                    <div class="col-8" *ngIf="isTimeline">
-                        <h3 class="fw-bold">
+                <div class="col-4 ms-5" style="position: fixed; left: 60%;">
+                    <div class="fs-2 fw-bold text-orange">
+                        Application Status
+                    </div>
+                    <div class="" *ngIf="isTimeline">
+                        <h4 class="fw-bold">
                             {{jobTimeline[0].jobTitle}}
-                        </h3>
+                        </h4>
                         <p-timeline [value]="jobTimeline" align="alternate">
                             <ng-template pTemplate="marker" let-event>
                                 <!-- {{event | json}} -->
