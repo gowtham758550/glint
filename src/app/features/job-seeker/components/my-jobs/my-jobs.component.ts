@@ -19,7 +19,8 @@ export class MyJobsComponent implements OnInit {
   sasToken = environment.profile_sas_token;
   isTimeline = true;
   isAppliedJobLoaded = false;
-  jobTimeline: any
+  jobTimeline: any;
+  status = Status;
 
   constructor(
     private appliedJobService: AppliedJobService
@@ -41,9 +42,18 @@ export class MyJobsComponent implements OnInit {
   }
 
   getTimeline(index: number) {
-    this.jobTimeline = [
+    let icon: any;
+    const currentStatus = this.myJobs[index].jobStatus;
+    if (currentStatus == this.status.Pending) {
+      icon = PrimeIcons.CLOCK;
+    } else if (currentStatus == this.status.Rejected) {
+      icon = PrimeIcons.TIMES_CIRCLE;
+    } else if (currentStatus == this.status.Shortlisted) {
+      icon = PrimeIcons.CHECK_CIRCLE;
+    }
+    this.jobTimeline = [  
         {jobTitle: this.myJobs[index].jobTitle, status: 'Applied', date: new Date(this.myJobs[index].appliedOn).toDateString(), icon: PrimeIcons.BOOK },
-        {status: this.myJobs[index].jobStatus, date: new Date(this.myJobs[index].modifiedOn).toDateString(), icon: this.myJobs[index].jobStatus == Status.Pending ? PrimeIcons.CLOCK : PrimeIcons.TIMES_CIRCLE},
+        {status: this.myJobs[index].jobStatus, date: new Date(this.myJobs[index].modifiedOn).toDateString(), icon: icon }
     ];
   }
 

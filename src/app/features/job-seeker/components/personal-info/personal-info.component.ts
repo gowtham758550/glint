@@ -162,6 +162,7 @@ export class PersonalInfoComponent implements OnInit {
   isImageLoaded = true;
   imageUrl: string = "https://cdn-icons-png.flaticon.com/512/1077/1077012.png?w=360";
   routeConstants = RouteConstants;
+  isProfilePhotoUploaded = false;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -196,6 +197,7 @@ export class PersonalInfoComponent implements OnInit {
         formData.append("profilePicture", file, file.name);
         this.profileService.addProfilePicture(formData).subscribe({
           next: (_data) => {
+            this.isProfilePhotoUploaded = true;
             console.log("success");
             this.getProfilePicture();
           },
@@ -302,6 +304,11 @@ export class PersonalInfoComponent implements OnInit {
   }
 
   complete() {
+    if (!this.isProfilePhotoUploaded) {
+      // let file: File = path
+      let formData: FormData = new FormData();
+      // formData.append('profilePicture', file, file.name);
+    }
     this.jobSeekerService.updateProfile(this.profileForm.value).subscribe();
     const educations = [];
     for (let i = 0; i < this.educationDetails.length; i++) {
