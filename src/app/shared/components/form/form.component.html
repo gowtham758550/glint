@@ -144,7 +144,8 @@
             <!-- input:date -->
             <ng-template [ngSwitchCase]="'date'">
                 <div class="mb-3">
-                    <label [for]="field.formControlName">
+                    <label [for]="field.formControlName"
+                        class="required">
                         {{field.label}}
                     </label>
                     <input type="date" class="form-control" [ngClass]="field.class" [id]="field.formControlName"
