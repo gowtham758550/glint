@@ -1,212 +1,68 @@
-<div>
-
-    <div class="row">
-        <div class="col-xl-6 col-lg-12 col-md-12 col-12">
-            <div class="card p-4">
-                <div class="d-flex justify-content-start">
-                    <div>
-                        <!-- <p-skeleton shape="circle" height="150px" width="150px"></p-skeleton> -->
-                        <img [src]="currentApplier.profilePicture+ '?'+ sas_token" alt="profile pic" height="150px"
-                            width="150px" class="rounded-pill">
-                        <div class="p-4"></div>
-                        <button class="btn btn-orange rounded-pill"
-                            (click)="getResumebyId(currentApplier.jobSeekerId)">
-                        Resume
-                        <i class="pi pi-cloud-download"></i>
-                        </button>
+<div class="d-flex gap-3 flex-wrap">
+    <!-- appliedJobId: 38
+dateOfBirth: null
+email: "rexedel@gmail.com"
+fullName: "John Edelbert"
+gender: null
+jobSeekerId: 5
+profilePicture: "https://glint.blob.core.windows.net/profile-picture/jobseeker_ProfilePicture2022-08-17/20220817T033426798.jpeg"
+status: "Pending"
+userName: "jobseeker" -->
+    <div class="card-shadow p-4">
+        <div class="row">
+            <div class="col">
+                <ng-container *ngIf="isProfilePictureLoaded; then profilePicture; else profilePictureLoader"></ng-container>
+                <ng-template #profilePictureLoader>
+                    <p-skeleton shape="circle" height="6rem" width="6rem"></p-skeleton>
+                </ng-template>
+                <ng-template #profilePicture>
+                    <img [src]="imageUrl" class="profile-picture" alt="profile-picture">
+                    <div class="text-muted">
+                        @{{currentApplier.userName}}
                     </div>
-                    <div class="ps-5">
-                        <div>
-                            <!-- username -->
-                            <div class="text-muted">
-                                @{{currentApplier.userName}}
-                            </div>
+                </ng-template>
+            </div>
 
-                            <!-- name -->
-                            <div class="d-flex pt-1">
-                                <div class="fw-bold pe-3">
-                                    Name:
-                                </div>
-                                <div class=" pe-3">
-                                    {{currentApplier.fullName}}
-                                </div>
-                            </div>
-
-                            <!-- email -->
-                            <div class="d-flex pt-1">
-                                <div class="fw-bold pe-3">
-                                    Email:
-                                </div>
-                                <div>
-                                    {{currentApplier.email}}
-                                </div>
-                            </div>
-                            <div class="d-flex pt-1">
-                                <div class="fw-bold pe-3">
-                                    Date Of Birth:
-                                </div>
-                                <div>
-                                    {{currentApplier.dateOfBirth | date}}
-                                </div>
-                            </div>
-                            <!-- <div class="d-flex pt-1">
-                                <div class="fw-bold pe-3">
-                                    Location:
-                                </div>
-                                <div>
-                                    {{jobSeekerProfile.location}}
-                                </div>
-                            </div> -->
-                            <div class="d-flex pt-1">
-                                <div class="fw-bold pe-3">
-                                    About:
-                                </div>
-                                <div>
-                                    {{jobSeekerProfile.about}}
-                                </div>
-                            </div>
-                            <div class="p-3"></div>
-                            <div class="d-flex pt-4 justify-content-start">
-                                <button class="btn btn-success rounded-pill" (click)="shortlistCandidate()">
-                                    Shortlist
-                                    <i class="pi pi-check-circle"></i>
-                                </button>
-                                <div class="p-1"></div>
-
-                                <div class="p-1"></div>
-                                <button class="btn btn-danger rounded-pill" (click)="rejectCandidate()">
-                                    Decline
-                                    <span class="mt-1">
-                                        <i class="pi pi-times-circle"></i>
-                                    </span>
-                                </button>
-
-                            </div>
-                        </div>
-                    </div>
+            <div class="col text-nowrap">
+                <div class="fw-bold fs-4 text-orange">
+                    {{currentApplier.fullName}}
+                </div>
+                <div>
+                    <a [href]="'mailto:' + currentApplier.email"
+                        class="text-decoration-none text-dark">
+                        <i class="pi pi-envelope"></i>
+                        {{currentApplier.email}}
+                    </a>
+                </div>
+                <div>
+                    <i class="pi pi-calendar"></i>
+                    {{currentApplier.dateOfBirth | date}}
                 </div>
             </div>
         </div>
-        <div class="col-xl-6 col-lg-12 col-md-12 col-12">
-            <div class="card p-4">
-                <div class="justify-content-start">
-                    <div class=" fs-normal">
-                        <h4 class="card-title">Skills</h4>
-                    </div>
-                    <hr>
-                    <div class="d-flex justify-content-center align-items-center" id="main"
-                            *ngIf="skillArray.length==0">
-                            <img class="mr-3 pr-3 align-top border-right inline-block align-content-center"
-                                src="https://cdn.dribbble.com/users/1753953/screenshots/3818675/animasi-emptystate.gif"
-                                style="height:150px; width: 150px;">
-                            <div class="inline-block align-middle">
-                                <h2 class="font-weight-normal lead" id="desc">No Skills</h2>
-                            </div>
-                    <div class="clearfix"></div>
-                    <div *ngFor="let skill of skillArray; let id=index">
 
-                        <ul>
-                            <li>
-                                {{skill.skillTitle}}
-                            </li>
-                        </ul>
-
-                    </div>
-                </div>
-
+        <div class="d-flex justify-content-between">
+            <div>
+                <button class="btn btn-orange px-2 py-1 rounded-pill">
+                    <i class="pi pi-cloud-download"></i>
+                    Resume
+                </button>
+            </div>
+            <div>
+                <button>
+                    <i class="pi pi-cicle-times"></i>
+                </button>
             </div>
         </div>
-    </div>
-    <div class="p-2"></div>
-    <div class="row">
-        <div class="col-xl-6 col-lg-12 col-md-12 col-12">
-            <!-- card -->
-            <div class="card  h-100">
-                <!-- card body -->
-                <div class="card-body h-100">
-                    <!-- card title -->
-                    <div class="flex-grow-1 fs-normal">
-                        <h4 class="card-title">Education</h4>
-                    </div>
-                    <hr>
-                    <div class="d-flex justify-content-center align-items-center" id="main"
-                        *ngIf="educationArray.length==0">
-                        <img class="mr-3 pr-3 align-top border-right inline-block align-content-center"
-                            src="https://cdn.dribbble.com/users/1753953/screenshots/3818675/animasi-emptystate.gif"
-                            style="height:150px; width: 150px;">
-                        <div class="inline-block align-middle">
-                            <h2 class="font-weight-normal lead" id="desc">No Education added</h2>
-                        </div>
-                    </div>
-                    <ng-container *ngFor="let education of educationArray; let id=index;">
-                        <div class="col-lg-12 mb-1-9 mb-lg-2-5">
-                            <div class="p-1-6">
-                                <div class="vertical-timeline">
-                                    <div class="d-block d-sm-flex justify-content-between mb-1-9">
-                                        <div class="left-side">
-                                            <h6 class=" fs-normal">{{education.universityName}}</h6>
-                                            <span class="text-primary  fs-normal">{{education.startDate|date}} -
-                                                {{education.completionDate|date}}</span>
-                                        </div>
-                                        <div class="right-side">
-                                            <h6 class=" fs-normal">{{education.courseName}}</h6>
-                                        </div>
 
-                                    </div>
-                                    <br>
-                                </div>
-                            </div>
-                        </div>
-
-                    </ng-container>
-                </div>
-            </div>
-
-        </div>
-        <div class="col-xl-6 col-lg-12 col-md-12 col-12  h-100" style="height: 50vh">
-            <!-- card -->
-            <div class="card ">
-                <!-- card body -->
-                <div class="card-body">
-                    <!-- card title -->
-                    <div class="flex-grow-1 fs-normal">
-                        <h4 class="card-title">Experience</h4>
-                    </div>
-                    <hr>
-                    <div class="d-flex justify-content-center align-items-center" id="main"
-                        *ngIf="experienceArray.length==0">
-                        <img class="mr-3 pr-3 align-top border-right inline-block align-content-center"
-                            src="https://cdn.dribbble.com/users/1753953/screenshots/3818675/animasi-emptystate.gif"
-                            style="height:150px; width: 150px;">
-                        <div class="inline-block align-middle">
-                            <h2 class="font-weight-normal lead" id="desc">No Experience added</h2>
-                        </div>
-                    </div>
-                    <ng-container *ngFor="let experience of experienceArray; let id=index;">
-                        <div class="col-lg-12 mb-1-9 mb-lg-2-5">
-                            <div class="p-1-6">
-                                <div class="vertical-timeline">
-                                    <div class="d-block d-sm-flex justify-content-between mb-1-9">
-                                        <div class="left-side">
-                                            <h6 class=" fs-normal">{{experience.previousCompanyName}}</h6>
-                                            <span class="text-primary  fs-normal">{{experience.startDate|date}} -
-                                                {{experience.toDate|date}}</span>
-                                        </div>
-                                        <div class="right-side">
-                                            <h6 class=" fs-normal">{{experience.designation}}</h6>
-                                        </div>
-
-                                    </div>
-                                    <br>
-
-                                </div>
-                            </div>
-                        </div>
-
-                    </ng-container>
-                </div>
-            </div>
-
+        <!-- about -->
+        <div class="mt-2">
+            <h5 class="fw-bold">
+                About
+            </h5>
+            <p>
+                {{currentApplier.about}}
+            </p>
         </div>
     </div>
 </div>
