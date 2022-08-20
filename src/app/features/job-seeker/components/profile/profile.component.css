@@ -13,3 +13,8 @@ div {
     width:auto;
     color: var(--primary-color-text);
 }
+
+.modal-title {
+  color: var(--orange);
+  font-weight: bold;
+}

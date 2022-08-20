@@ -64,8 +64,8 @@ export class ProfileComponent implements OnInit {
   ];
   skillFields: FormField[] = [
     {
-      type: 'chips',
-      label: 'Enter your skill',
+      type: 'input',
+      label: 'Enter your skills ',
       formControlName: 'SkillTitle',
       class: ['w'],
     }
@@ -162,12 +162,12 @@ export class ProfileComponent implements OnInit {
       formControlName: "toDate",
       class: ["w"],
     },
-    {
-      type: "number",
-      label: "Salary",
-      formControlName: "salary",
-      class: ["w"],
-    },
+    // {
+    //   type: "number",
+    //   label: "Salary",
+    //   formControlName: "salary",
+    //   class: ["w"],
+    // },
   ];
 
   constructor(
@@ -698,9 +698,9 @@ export class ProfileComponent implements OnInit {
         if (this.isSkillAdded) {
           for (var i = 0; i < this.skillForm.value.SkillTitle.length; i++) {
             this.skillService.addSkills([{ skillTitle: this.skillForm.value.SkillTitle[i] }]).subscribe(res => this.getSkill());
-            this.toastr.success('Skill added');
             this.modalService.dismissAll();
           }
+          this.toastr.success('Skills added');
         }
         else {
           this.isSkillAdded = true;

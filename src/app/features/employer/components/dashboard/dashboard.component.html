@@ -6,7 +6,7 @@
             <div class="card-shadow p-4 flex-fill">
                 <div class="d-flex justify-content-between">
                     <div>
-                        <h3>Total Jobs</h3>
+                        <h4>Total Jobs</h4>
                     </div>
                     <div class="mt-2">
                         <i class="pi pi-briefcase bg-orange text-white px-2 py-1 rounded"></i>
@@ -21,7 +21,7 @@
             <div class="card-shadow p-4 flex-fill">
                 <div class="d-flex justify-content-between">
                     <div>
-                        <h3>Total Application</h3>
+                        <h4>Total Application</h4>
                     </div>
                     <div class="mt-2">
                         <i class="pi pi-book bg-orange text-white px-2 py-1 rounded"></i>
@@ -36,7 +36,7 @@
             <div class="card-shadow p-4 flex-fill">
                 <div class="d-flex justify-content-between">
                     <div>
-                        <h3>Shortlisted</h3>
+                        <h4>Shortlisted Candidates</h4>
                     </div>
                     <div class="mt-2">
                         <i class="pi pi-check-square bg-orange text-white px-2 py-1 rounded"></i>
@@ -49,9 +49,9 @@
         </div>
     </div>
     <div class="row">
-        <div class="ps-4 d-flex gap-5">
-            <div class="col-5">
-                <h3 class="fw-bold">
+        <div class="ps-4 d-flex gap-3">
+            <div class="col-6">
+                <h3 class="fw-bold text-orange mb-3">
                     Job Application Status
                 </h3>
                 <ng-container *ngIf="isBarChartDataLoaded;then barChart; else barChartPlaceholder"></ng-container>
@@ -61,15 +61,20 @@
                     </div>
                 </ng-template>
                 <ng-template #barChart>
-                    <div class="card-shadow p-3">
+                    <div class="card-shadow p-3"
+                        *ngIf="!isBarChartHasData">
+                        No data to display statistics
+                    </div>
+                    <div class="card-shadow p-3"
+                        *ngIf="isBarChartHasData">
                         <div echarts [options]="barChartOptions" class="w-100"></div>
                     </div>
                 </ng-template>
             </div>
 
-            <div class="col-5">
-                <h3 class="fw-bold col-6">
-                    All Jobs
+            <div class="col-6">
+                <h3 class="fw-bold col-6 text-orange mb-3">
+                    Job Rejection Rate
                 </h3>
                 <ng-container *ngIf="isPieChartDataLoaded; then pieChart; else pieChartPlaceholder"></ng-container>
                 <ng-template #pieChartPlaceholder>
@@ -78,7 +83,12 @@
                     </div>
                 </ng-template>
                 <ng-template #pieChart>
-                    <div class="card-shadow p-3">
+                    <div class="card-shadow p-3"
+                        *ngIf="!isPieChartHasData">
+                        No data to display statisics
+                    </div>
+                    <div class="card-shadow p-3"
+                        *ngIf="isPieChartHasData">
                         <div echarts [options]="pieChartOptions" class="w-100"></div>
                     </div>
                 </ng-template>
