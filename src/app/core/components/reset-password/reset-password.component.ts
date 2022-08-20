@@ -7,6 +7,7 @@ import { RouteConstants } from 'src/app/data/enums/constatnts/route.constants';
 import { Role } from 'src/app/data/enums/role.enum';
 import { FormField } from 'src/app/data/models/form-field.model';
 import { AuthService } from 'src/app/data/services/auth.service';
+import { LocalStorage } from 'src/app/data/services/local-storage.service';
 
 @Component({
   selector: 'app-reset-password',
@@ -37,7 +38,7 @@ export class ResetPasswordComponent implements OnInit {
       class: []
     },
     {
-      type: 'password',
+      type: 'confirmPassword',
       label: 'Confirm password',
       formControlName: 'confirmPassword',
       class: []
@@ -49,7 +50,8 @@ export class ResetPasswordComponent implements OnInit {
     private authService: AuthService,
     private toastr: ToastrService,
     private router: Router,
-    private spinner: NgxSpinnerService
+    private spinner: NgxSpinnerService,
+    private localStorage: LocalStorage
   ) { }
 
   ngOnInit(): void {
@@ -64,12 +66,15 @@ export class ResetPasswordComponent implements OnInit {
   }
 
   validateOTP() {
-    const role = this.authService.getRole();
+    // const role = this.authService.getRole();
+    // console.log(role);
     this.spinner.show();
     const formValue = this.validateOTPForm.value;
     this.authService.resetPassword(formValue).subscribe({
-      next: () => {
+      next: (data:any) => {
+        this.localStorage.setItem('accessToken',data.jwt);
         this.toastr.success('Password changed successfully', 'Success');
+        const role = this.authService.getRole();
         if (role == Role.jobSeeker) {
           setTimeout(() => this.router.navigateByUrl(RouteConstants.jobSeekerLogin), 1000);
         } else if (role == Role.employer) {
