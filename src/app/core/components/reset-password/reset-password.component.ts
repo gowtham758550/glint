@@ -3,6 +3,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ToastrService } from 'ngx-toastr';
+import { RouteConstants } from 'src/app/data/enums/constatnts/route.constants';
+import { Role } from 'src/app/data/enums/role.enum';
 import { FormField } from 'src/app/data/models/form-field.model';
 import { AuthService } from 'src/app/data/services/auth.service';
 
@@ -62,12 +64,17 @@ export class ResetPasswordComponent implements OnInit {
   }
 
   validateOTP() {
+    const role = this.authService.getRole();
     this.spinner.show();
     const formValue = this.validateOTPForm.value;
     this.authService.resetPassword(formValue).subscribe({
       next: () => {
         this.toastr.success('Password changed successfully', 'Success');
-        setTimeout(() => this.router.navigateByUrl('/login'), 1000);
+        if (role == Role.jobSeeker) {
+          setTimeout(() => this.router.navigateByUrl(RouteConstants.jobSeekerLogin), 1000);
+        } else if (role == Role.employer) {
+          setTimeout(() => this.router.navigateByUrl(RouteConstants.employerLogin), 1000);
+        }
         this.spinner.hide();
       },
     });
