@@ -73,7 +73,7 @@ export class DashboardComponent implements OnInit {
             },
             xAxis: {
               type: 'value',
-              boundaryGap: [0, 0.01]
+              boundaryGap: [0, 1]
             },
             yAxis: {
               type: 'category',
