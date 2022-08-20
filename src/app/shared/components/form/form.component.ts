@@ -11,12 +11,12 @@ import { FormField } from 'src/app/data/models/form-field.model';
   ]
 })
 export class FormComponent implements OnInit {
-  @HostListener("window:beforeunload")  
-  canDeactivate(): Observable<boolean> | boolean {  
-      return (  
-          !this.formGroup.dirty  
-      );  
-  } 
+  // @HostListener("window:beforeunload")  
+  // canDeactivate(): Observable<boolean> | boolean {  
+  //     return (  
+  //         !this.formGroup.dirty  
+  //     );  
+  // } 
   @Input()
   formGroup!: FormGroup;
   get f() {
