@@ -143,13 +143,13 @@ export class DashboardComponent implements OnInit {
                 labelLine: {
                   show: false
                 },
-                data: pieData
-                // data: [
-                //   { value: 19, name: 'Customer Support' },
-                //   { value: 3, name: 'Engineering Manager' },
-                //   { value: 12, name: 'Developer' },
-                //   { value: 26, name: 'Tester' },
-                // ]
+                // data: pieData
+                data: [
+                  { value: 19, name: 'Customer Support' },
+                  { value: 3, name: 'Engineering Manager' },
+                  { value: 12, name: 'Developer' },
+                  { value: 26, name: 'Tester' },
+                ]
               }
             ]
           };

@@ -75,7 +75,7 @@ export class ViewJobComponent implements OnInit {
     this.jobService.deleteJob(this.postJobDetailId).subscribe({
       next: () => {
         this.router.navigateByUrl(RouteConstants.employerJobs);
-        this.toastr.success(`${this.job.jobTitle} deleted successfully`);
+        this.toastr.success(`${this.job.jobTitle} job deleted successfully`);
       }
     });
   }

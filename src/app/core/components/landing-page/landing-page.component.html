@@ -9,29 +9,37 @@
         <div class="pe-3 pt-2">
             <button class="fw-bold btn border-none login rounded-pill"
                 [routerLink]="routeConstants.jobSeekerLogin">
-                    Login
+                <i class="pi pi-sign-in me-2"></i>
+                Login
             </button>
         </div>
         <div class="pe-3 pt-2">
             <button class="fw-bold btn border-none register rounded-pill"
                 [routerLink]="routeConstants.jobSeekerSignup">
+                    <i class="pi pi-user-plus me-2"></i>
                     Register
             </button>
         </div>
         <div class="vr"></div>
-        <div class="ps-3 pt-2 dropdown">
-            <button class="btn employers border-none rounded-pill">
+        <div class="dropdown ps-3 pt-2">
+            <button class="btn employers border-none rounded-pill"
+                id="employers-menu"
+                data-bs-toggle="dropdown">
                 For employers
                 <i class="pi pi-angle-down"></i>
             </button>
-            <div class="dropdown-content">
-                <a [routerLink]="routeConstants.employerLogin">
+             <!-- dropdown content -->
+            <div class="dropdown-menu card-shadow border-none p-1 text-nowrap" aria-labelledby="employers-menu">
+                <div class="pointer p-2 dropdown-menu-item rounded"
+                    [routerLink]="routeConstants.employerLogin">
+                    <i class="pi pi-sign-in me-2"></i>
                     Login
-                    <!-- <i class="pi pi-sign-in"></i> -->
-                </a>
-                <a [routerLink]="routeConstants.employerSignup">
+                </div>
+                <div class="pointer p-2 dropdown-menu-item rounded"
+                    [routerLink]="routeConstants.employerSignup">
+                    <i class="pi pi-user-plus me-2"></i>
                     Register
-                </a>
+                </div>
             </div>
         </div>
     </div>
