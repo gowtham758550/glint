@@ -2,6 +2,7 @@ import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ToastrService } from 'ngx-toastr';
+import { RouteConstants } from 'src/app/data/enums/constatnts/route.constants';
 import { Role } from 'src/app/data/enums/role.enum';
 
 import { AuthService } from 'src/app/data/services/auth.service';
@@ -50,8 +51,8 @@ export class VerifyComponent implements OnInit, OnDestroy {
           if (!res) {
             this.isVerified = true;
             this.toastr.success('Verified successfully');
-            if (this.role == Role.employer) this.router.navigateByUrl('/employer/signup/company-detail');
-            else if (this.role == Role.jobSeeker) this.router.navigateByUrl('/job-seeker/signup/personal-information');
+            if (this.role == Role.employer) this.router.navigateByUrl(RouteConstants.employerCompanyDetails);
+            else if (this.role == Role.jobSeeker) this.router.navigateByUrl(RouteConstants.jobSeekerPersonalInformation);
             this.spinner.hide();
           }
         },
