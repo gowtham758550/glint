@@ -44,7 +44,7 @@
                   col-form-label form-label">Current password</label>
 
                     <div class="col-md-8 col-12 h-50">
-                        <p-password  type="password" placeholder="Current Password" [(ngModel)]="currentPassword"
+                        <p-password styleClass="w-100" type="password" placeholder="Current Password" [(ngModel)]="currentPassword"
                             (ngModelChange)="checkCurrentPassword($event)" [toggleMask]="true" [feedback]="false"
                             required>
                         </p-password>
@@ -58,7 +58,7 @@
                   col-form-label form-label">New password</label>
 
                     <div class="col-md-8 col-12 h-50">
-                        <p-password placeholder="New Password" [(ngModel)]="newPassword"
+                        <p-password styleClass="w-100" placeholder="New Password" [(ngModel)]="newPassword"
                             (ngModelChange)="checkNewPassword($event)" [toggleMask]="true">
                             <p-divider></p-divider>
                         </p-password>

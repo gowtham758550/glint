@@ -46,9 +46,13 @@ select:focus {
     background-color: var(--secondary) !important;
 }
 
-.bg-success {
+/* .bg-success {
     background-color: var(--success) !important;
     color: var(--dark);
+} */
+
+.bg-gray {
+    background-color: #aeaeb4;
 }
 
 .bg-orange {
