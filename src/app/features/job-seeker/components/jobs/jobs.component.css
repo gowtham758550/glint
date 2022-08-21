@@ -1,5 +1,5 @@
 body {
-    background-image: linear-gradient(to right top,#D91B23,#124FEB);
+    background-image: linear-gradient(to right top, #D91B23, #124FEB);
     height: 100vh;
     display: flex;
     justify-content: center;
@@ -10,9 +10,9 @@ body {
 .search {
     background-color: #fff;
     padding: 4px;
-    border-radius:100px;
-    width:50%;
-    height:45px;
+    border-radius: 100px;
+    width: 50%;
+    height: 45px;
 }
 
 .search-1 {
@@ -20,7 +20,7 @@ body {
     width: 50%;
     border-radius: 100px;
     height: 40px;
-    
+
 }
 
 .search-1 input {
@@ -49,9 +49,9 @@ body {
 }
 
 ::placeholder {
-    color: rgba(5, 5, 5,0.4);
+    color: rgba(5, 5, 5, 0.4);
     height: 40px;
-    
+
 }
 
 .search-1 button {
@@ -84,4 +84,12 @@ body {
         height: 37px;
         top: 5px
     }
+}
+
+.footer {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    text-align: center;
 }

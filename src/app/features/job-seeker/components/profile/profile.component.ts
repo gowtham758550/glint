@@ -240,8 +240,10 @@ export class ProfileComponent implements OnInit {
     this.isImageLoaded = false;
     this.profileService.getProfilePicture().subscribe({
       next: (data: any) => {
-        let res = data.url;
-        this.imageUrl = res + "?" + environment.profile_sas_token;
+        if (data.url) {
+          let res = data.url;
+          this.imageUrl = res + "?" + environment.profile_sas_token;
+        }
         this.isImageLoaded = true;
       },
     });
@@ -277,8 +279,10 @@ export class ProfileComponent implements OnInit {
     this.isCoverImageLoaded = false;
     this.profileService.getCoverPicture().subscribe({
       next: (data: any) => {
-        let res = data.url;
-        this.backgroundImage = res + "?" + environment.cover_sas_token;
+        if (data.url) {
+          let res = data.url;
+          this.backgroundImage = res + "?" + environment.cover_sas_token;
+        }
         this.isCoverImageLoaded = true;
       },
     });

@@ -224,8 +224,10 @@ export class PersonalInfoComponent implements OnInit {
     this.isImageLoaded = false;
     this.profileService.getProfilePicture().subscribe({
       next: (data: any) => {
-        let res = data.url;
-        this.imageUrl = res + "?" + environment.profile_sas_token;
+        if (data.url) {
+          let res = data.url;
+          this.imageUrl = res + "?" + environment.profile_sas_token;
+        }
         this.isImageLoaded = true;
       },
     });

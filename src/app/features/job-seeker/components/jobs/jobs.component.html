@@ -122,10 +122,10 @@
         <ng-template #jobCards>
             <div class="col-8">
                 <!-- <p-scrollPanel [style]="{height: '100vh'}"> -->
-                    <ng-container *ngFor="let job of allJobs">
-                        <app-job-card [job]="job">
-                        </app-job-card>
-                    </ng-container>
+                <ng-container *ngFor="let job of allJobs">
+                    <app-job-card [job]="job">
+                    </app-job-card>
+                </ng-container>
                 <!-- </p-scrollPanel> -->
             </div>
         </ng-template>
@@ -178,11 +178,15 @@
                 </p-accordion>
             </div>
 
-            <div class="pt-3 text-end">
+            <div class="pt-1 text-end">
                 <button class="btn btn-orange rounded-pill" (click)="applyFilters()">
                     Apply filters
                 </button>
             </div>
         </div>
     </div>
+</div>
+
+<div class="footer">
+    <p-paginator [rows]="10" [totalRecords]="100" [pageLinkSize]="3" (onPageChange)="getPaginatorValue($event)"></p-paginator>
 </div>

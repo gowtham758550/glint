@@ -2,7 +2,6 @@ import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
-import { FormField } from 'src/app/data/models/form-field.model';
 import { AuthService } from 'src/app/data/services/auth.service';
 import { LocalStorage } from 'src/app/data/services/local-storage.service';
 @Component({
@@ -30,56 +29,7 @@ export class SignupComponent implements OnInit {
   },
     { validator: this.passwordValidator }
   );
-  registerationFields: FormField[] = [
-    // {
-    //   type: 'title',
-    //   label: 'Signup',
-    //   class: ['fw-bold']
-    // },
-    {
-      type: 'input',
-      label: 'First Name',
-      formControlName: 'firstName',
-      class: ['w']
-    },
-    {
-      type: 'input',
-      label: 'Last Name',
-      formControlName: 'lastName',
-      class: ['w']
-    },
-    {
-      type: 'input',
-      label: 'Username',
-      formControlName: 'userName',
-      class: ['w']
-    },
-    {
-      type: 'email',
-      label: 'Email address',
-      formControlName: 'email',
-      class: ['w']
-    },
-    {
-      type: 'password',
-      label: 'Password',
-      formControlName: 'password',
-      hintMessage: 'Password should should be atleast 8 characters!',
-      class: ['w']
-    },
-    {
-      type: 'confirmPassword',
-      label: 'Confirm password',
-      hintMessage: 'Password mismatch!',
-      formControlName: 'confirmPassword',
-      class: ['w']
-    },
-    {
-      type: 'submit',
-      label: 'Next',
-      class: ['d-flex justify-content-end']
-    }
-  ]
+
 
   constructor(
     private formBuilder: FormBuilder,
@@ -94,11 +44,9 @@ export class SignupComponent implements OnInit {
 
   receiveFormData() {
     this.spinner.show();
-    console.log(this.registerationForm.value);
     this.authService.signup({ ...this.registerationForm.value, ...{ authRole: this.role } })
       .subscribe({
         next: (data) => {
-          console.log(data);
           this.localStorage.setItem('email', this.registerationForm.controls['email'].value);
           this.localStorage.setItem('firstName', this.registerationForm.controls['firstName'].value);
           this.localStorage.setItem('lastName', this.registerationForm.controls['lastName'].value);

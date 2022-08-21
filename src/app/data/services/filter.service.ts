@@ -1,7 +1,7 @@
-import { HttpClient } from "@angular/common/http";
+import { HttpClient, HttpParams } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Params } from "@angular/router";
-import { Observable } from "rxjs";
+import { filter, Observable } from "rxjs";
 import { environment } from "src/environments/environment";
 import { Appliers } from "../models/appliers.model";
 import { BarChartData } from "../models/barchart-data.model";
@@ -28,8 +28,14 @@ export class FilterService {
         return this.httpClient.get<Job[]>(`${this.host}/post_job_list/get?filters=${filters}`);
     }
 
-    getNonAppliedJobs(filters: string): Observable<Job[]> {
-        return this.httpClient.get<Job[]>(`${this.host}/post_job_list/get_non_applied_job?filters=${filters}`);
+    getNonAppliedJobs(filters: string, pageNumber: number): Observable<Job[]> {
+        // if (filters != '') filters = 'filters=' + filters;
+        let params = new HttpParams().set('filters', filters);
+        params = params.append('Page', pageNumber);
+        // return this.httpClient.get<Job[]>(`${this.host}/post_job_list/get_non_applied_job${filters}?Page=${pageNumber}`);
+        return this.httpClient.get<Job[]>(`${this.host}/post_job_list/get_non_applied_job`, {
+            params: params
+        });
     }
 
     getPostJobCount(): Observable<number> {
