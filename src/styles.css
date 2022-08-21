@@ -46,10 +46,10 @@ select:focus {
     background-color: var(--secondary) !important;
 }
 
-.bg-success {
+/* .bg-success {
     background-color: var(--success) !important;
     color: var(--dark);
-}
+} */
 
 .bg-orange {
     background-color: var(--orange) !important;
