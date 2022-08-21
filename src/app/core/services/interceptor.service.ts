@@ -29,10 +29,10 @@ export class Interceptor implements HttpInterceptor {
                 catchError((error: HttpErrorResponse) => {
                     // this.loaderService.hide();
                     let errorMessage;
-                    if (typeof error.error.title == 'string') errorMessage = error.error.title;
-                    else if (typeof error.error == 'string') errorMessage = error.error;
-                    else if (typeof error.error.error == 'string') errorMessage = error.error.error;
-                    else errorMessage = 'Unknow error'
+                    if (typeof error.error.errorMessage == 'string') errorMessage = error.error.errorMessage;
+                    // else if (typeof error.error == 'string') errorMessage = error.error;
+                    // else if (typeof error.error.error == 'string') errorMessage = error.error.error;
+                    // else errorMessage = 'Unknow error'
                     this.toastr.error(errorMessage);
                     console.log(error.error);
                     setTimeout(() => {
