@@ -8,6 +8,7 @@ import { MessagesModule } from 'primeng/messages';
 import { CheckboxModule } from 'primeng/checkbox';
 import { SkeletonModule } from 'primeng/skeleton';
 import { TimelineModule } from 'primeng/timeline';
+import { PaginatorModule } from 'primeng/paginator';
 
 import { CardModule } from 'primeng/card';
 import  {  PdfViewerModule  }  from  'ng2-pdf-viewer';
@@ -67,12 +68,14 @@ import { LoginComponent } from './components/login/login.component';
     DividerModule,
     TimelineModule,
     PasswordModule,
+    PaginatorModule,
     TooltipModule,
     CardModule,
     ChipsModule,
     ChipModule,
     ScrollPanelModule,
-    PdfViewerModule
+    PdfViewerModule,
+    PaginatorModule
   ]
 })
 export class JobSeekerModule { }

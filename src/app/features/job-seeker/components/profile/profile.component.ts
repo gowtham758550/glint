@@ -64,7 +64,7 @@ export class ProfileComponent implements OnInit {
   ];
   skillFields: FormField[] = [
     {
-      type: 'input',
+      type: 'chips',
       label: 'Enter your skills ',
       formControlName: 'SkillTitle',
       class: ['w'],
@@ -162,12 +162,12 @@ export class ProfileComponent implements OnInit {
       formControlName: "toDate",
       class: ["w"],
     },
-    // {
-    //   type: "number",
-    //   label: "Salary",
-    //   formControlName: "salary",
-    //   class: ["w"],
-    // },
+    {
+      type: "number",
+      label: "Salary",
+      formControlName: "salary",
+      class: ["w"],
+    },
   ];
 
   constructor(
@@ -240,8 +240,10 @@ export class ProfileComponent implements OnInit {
     this.isImageLoaded = false;
     this.profileService.getProfilePicture().subscribe({
       next: (data: any) => {
-        let res = data.url;
-        this.imageUrl = res + "?" + environment.profile_sas_token;
+        if (data.url) {
+          let res = data.url;
+          this.imageUrl = res + "?" + environment.profile_sas_token;
+        }
         this.isImageLoaded = true;
       },
     });
@@ -277,8 +279,10 @@ export class ProfileComponent implements OnInit {
     this.isCoverImageLoaded = false;
     this.profileService.getCoverPicture().subscribe({
       next: (data: any) => {
-        let res = data.url;
-        this.backgroundImage = res + "?" + environment.cover_sas_token;
+        if (data.url) {
+          let res = data.url;
+          this.backgroundImage = res + "?" + environment.cover_sas_token;
+        }
         this.isCoverImageLoaded = true;
       },
     });
@@ -328,6 +332,7 @@ export class ProfileComponent implements OnInit {
       .getEducation()
       .subscribe((res) => {
         this.educationArray = res;
+        console.log(this.educationArray)
       });
   }
   //----------------------- Get Experience List Api Call ---------------------------------
@@ -449,7 +454,7 @@ export class ProfileComponent implements OnInit {
         courseName: this.educationForm.value.courseName,
         universityName: this.educationForm.value.universityName,
         startDate: this.educationForm.value.startDate,
-        completionDate: this.educationForm.value.endDate,
+        completionDate: this.educationForm.value.completionDate,
       };
       console.log(this.educationToEdit);
       this.educationService
@@ -616,7 +621,7 @@ export class ProfileComponent implements OnInit {
           console.log(this.preferredjobArray)
           for (var j = 0; j < this.preferredjobArray.length; j++) {
             console.log(this.preferredjobArray[j]);
-            if (this.preferredjobArray[j].toLowerCase()=== (this.preferredJobForm.value.preferredJobTitle[i])) {
+            if (this.preferredjobArray[j].toLowerCase()=== (this.preferredJobForm.value.preferredJobTitle[i].toLowerCase())) {
               this.isPreferredJobAdded = false;
               break;
             }

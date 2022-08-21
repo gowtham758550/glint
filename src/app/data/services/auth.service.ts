@@ -24,8 +24,8 @@ export class AuthService {
 
   isVerified(email: string) {
     let params = new HttpParams();
-    params=params.append('mailId',email);
-    return this.httpClient.get(`${this.host}/is_verified`, {params : params})
+    params = params.append('mailId', email);
+    return this.httpClient.get(`${this.host}/is_verified`, { params: params })
   }
 
   login(credentials: object) {
@@ -44,8 +44,8 @@ export class AuthService {
     return this.httpClient.post(`${this.host}/reset_password`, data);
   }
 
-  getUserId(accessToken:string){
-    const claims:any=jwtDecode(accessToken);
+  getUserId(accessToken: string) {
+    const claims: any = jwtDecode(accessToken);
     return claims['UserID']
   }
 
@@ -66,7 +66,7 @@ export class AuthService {
     return claims['UserName'];
   }
 
-  deleteProfile(){
-    return this.httpClient.delete(`${this.host}/delete`, {responseType: 'text'});
-}
+  deleteProfile() {
+    return this.httpClient.delete(`${this.host}/delete`, { responseType: 'text' });
+  }
 }

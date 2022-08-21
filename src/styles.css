@@ -2,6 +2,16 @@
 @import '~ngx-toastr/toastr';
 @import 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css';
 
+html,
+body {
+    height: 100%;
+    margin: 0;
+}
+
+body {
+    background-color: #FAF3E3;
+}
+
 :root {
     /* --primary: #ff0038; */
     --primary: #9d00d6;
@@ -15,10 +25,13 @@
     --orange-light: #e7cea4;
 }
 
-body {
-    /* background-color: #f3eeeecc; */
-    /* background-color: var(--orange-light); */
-    background-color: #FAF3E3;
+
+input:focus,
+textarea:focus,
+select:focus {
+    /* border: 3px solid var(--ornage-light) !important; */
+    border: 3px solid var(--orange-light) !important;
+    box-shadow: none !important;
 }
 
 .bg-primary {
@@ -198,11 +211,13 @@ body {
     width: 20vh;
     /* animation: hideMe 200ms forwards; */
 }
-@keyframes hideMe{
-    0%{
+
+@keyframes hideMe {
+    0% {
         width: 0;
     }
-    100%{
+
+    100% {
         width: 23vh;
     }
 }
@@ -221,7 +236,7 @@ body {
     background-color: red;
     color: white;
     text-align: center;
-  }
+}
 
 .side-nav-item:hover {
     color: var(--secondary);
@@ -261,10 +276,6 @@ body {
     display: block;
 }
 
-.dropdown-content a:hover {
-    /* border-radius: 4%; */
-    /* background-color: rgb(244, 241, 241); */
-}
 
 .dropdown:hover .dropdown-content {
     display: block;
@@ -322,14 +333,7 @@ body {
     transition: all 700ms ease-in-out;
 }
 
-html, body {
-    height: 100%;
-    margin: 0;
-  }
-  
-.form-control {
-    /* border: ; */
-}
+
 
 .center {
     position: absolute;
@@ -337,4 +341,4 @@ html, body {
     top: 50%;
     -webkit-transform: translate(-50%, -50%);
     transform: translate(-50%, -50%);
-  }
+}
