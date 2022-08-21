@@ -70,16 +70,17 @@
                         height="400px"
                         width="400px"
                         class="rounded">
-                </div> -->
-            </div>
-        </ng-template>
+                    </div> -->
+                </div>
+            </ng-template>
         <ng-template #jobCards>
             <div class="col-8">
                 <!-- <p-scrollPanel [style]="{height: '100vh'}"> -->
-                <ng-container *ngFor="let job of allJobs">
-                    <app-job-card [job]="job">
-                    </app-job-card>
-                </ng-container>
+                    <ng-container *ngFor="let job of allJobs">
+                        <app-job-card [job]="job">
+                        </app-job-card>
+                    </ng-container>
+                    <p-paginator [rows]="10" [totalRecords]="allJobs.length" [pageLinkSize]="2" (onPageChange)="getPaginatorValue($event)"></p-paginator>
                 <!-- </p-scrollPanel> -->
             </div>
         </ng-template>
@@ -108,8 +109,8 @@
                         <ng-container *ngFor="let experience of experiences">
                             <div class="pb-2">
                                 <p-checkbox [value]="experience" name="experience" [inputId]="experience"
-                                    [(ngModel)]="filteredExperience">
-                                </p-checkbox>
+                                [(ngModel)]="filteredExperience">
+                            </p-checkbox>
                                 <label class="ps-2 pointer" [for]="experience">
                                     {{experience}}
                                 </label>
@@ -141,6 +142,5 @@
     </div>
 </div>
 
-<div class="footer">
-    <p-paginator [rows]="10" [totalRecords]="100" [pageLinkSize]="3" (onPageChange)="getPaginatorValue($event)"></p-paginator>
+<div>
 </div>
