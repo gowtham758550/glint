@@ -1,5 +1,5 @@
 import { DatePipe, formatDate } from "@angular/common";
-import { Component, OnInit } from "@angular/core";
+import { Component, OnDestroy, OnInit } from "@angular/core";
 import { FormGroup, Validators, FormArray, FormBuilder } from "@angular/forms";
 import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
 import { NgxPhotoEditorService } from "ngx-photo-editor";
@@ -21,7 +21,7 @@ import { environment } from "src/environments/environment";
   templateUrl: "profile.component.html",
   styleUrls: ["profile.component.css"],
 })
-export class ProfileComponent implements OnInit {
+export class ProfileComponent implements OnInit, OnDestroy {
   backgroundImage: string = "/assets/defaultCoverPicture.jpg";
   email!: string;
   jobSeekerProfile: any = {};
@@ -53,6 +53,7 @@ export class ProfileComponent implements OnInit {
   isImageLoaded = false;
   isCoverImageLoaded = false;
   resume!: any;
+  skillDeleteIndex!: number;
 
   preferredJobFields: FormField[] = [
     {
@@ -84,12 +85,12 @@ export class ProfileComponent implements OnInit {
       formControlName: "lastName",
       class: ["w"],
     },
-    {
-      type: "input",
-      label: "Location",
-      formControlName: "location",
-      class: ["w"],
-    },
+    // {
+    //   type: "input",
+    //   label: "Location",
+    //   formControlName: "location",
+    //   class: ["w"],
+    // },
     {
       type: "textarea",
       label: "Bio",
@@ -187,6 +188,9 @@ export class ProfileComponent implements OnInit {
     private blobService: BlobService,
     private spinner: NgxSpinnerService
   ) {}
+  ngOnDestroy(): void {
+    this.modalService.dismissAll();
+  }
 
   ngOnInit(): void {
     this.spinner.show();
@@ -234,6 +238,10 @@ export class ProfileComponent implements OnInit {
           },
         });
       });
+  }
+
+  showDelete(index: number) {
+    this.skillDeleteIndex = index;
   }
 
   getProfilePicture() {
@@ -380,8 +388,8 @@ export class ProfileComponent implements OnInit {
           lastName: [res.lastName, [Validators.required]],
           gender: [res.gender, [Validators.required]],
           dateOfBirth: [formatDate(res.dateOfBirth, "yyyy-MM-dd", "en")],
-          location: [res.location, Validators.required],
-          about: ["Software Engineer"],
+          // location: [res.location, Validators.required],
+          about: [res.about],
         });
       });
   }
@@ -592,20 +600,28 @@ export class ProfileComponent implements OnInit {
   }
 
   getPreferredJob() {
+    this.spinner.show();
     this.preferredJobService.getPreferredJob().subscribe((res) => {
       this.preferredJobArray = res;
-      console.log(res);
+      this.spinner.hide();
     });
   }
   deleteJob(jobId: number) {
-    console.log(this.preferredJobArray);
+    this.spinner.show();
     this.preferredJobService
       .deletePreferredJobbyId(jobId)
-      .subscribe((res) => console.log(res));
+      .subscribe({
+        next: () => {
+          this.preferredJobArray = this.preferredJobArray.filter((preferredJob: any) => {
+            return preferredJob.preferredJobId != jobId
+          });
+          this.spinner.hide();
+        }
+      });
     console.log(jobId);
   }
   addJob(jobToAdd: any) {
-    console.log(jobToAdd);
+    this.spinner.show();
     this.preferredJobService
       .addPreferredJob([{ jobTitle: jobToAdd.preferredJobTitle }])
       .subscribe((res) => this.getPreferredJob());
@@ -653,10 +669,10 @@ export class ProfileComponent implements OnInit {
   }
   // Modal Add job
   addskill(ref: any) {
-    (this.action = "Add"), console.log(this.action);
     this.skillForm = this.getskill();
     this.modalService.open(ref).result.then((result) => {});
   }
+  
   getSkill() {
     this.skillService.getSkills().subscribe((res) => {
       this.skillArray = res;
@@ -664,19 +680,31 @@ export class ProfileComponent implements OnInit {
       console.log(res);
     });
   }
-  deleteSkill(jobId: number) {
-    console.log(jobId);
-    this.skillService.deleteSkillbyId(jobId).subscribe((res) => {
-      console.log(res);
+  deleteSkill(skillId: number) {
+    this.spinner.show();
+    this.skillService.deleteSkillbyId(skillId).subscribe({
+      next: () => {
+        this.toastr.success(`Skill deleted`);
+        this.skillArray = this.skillArray.filter((skill: any) => {
+          return skill['skillId'] != skillId;
+        });
+        this.spinner.hide();
+      }
     });
-    console.log(jobId);
   }
   addSkill(jobToAdd: any) {
-    console.log(jobToAdd);
+    this.spinner.show();
     this.skillService
       .addSkills([{ skillTitle: jobToAdd.skillTitle }])
-      .subscribe((res) => this.getSkill());
+      .subscribe({
+        next: () => {
+          this.skillArray.push(jobToAdd);
+          this.spinner.hide();
+        }
+      });
   }
+
+
   skillTitleArray: any = []
   executeSkillAction() {
     if (this.action == 'Add') {

@@ -1,7 +1,6 @@
 import { HttpClient, HttpParams } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { Params } from "@angular/router";
-import { filter, Observable } from "rxjs";
+import { Observable } from "rxjs";
 import { environment } from "src/environments/environment";
 import { Appliers } from "../models/appliers.model";
 import { BarChartData } from "../models/barchart-data.model";
@@ -32,6 +31,7 @@ export class FilterService {
         // if (filters != '') filters = 'filters=' + filters;
         let params = new HttpParams().set('filters', filters);
         params = params.append('Page', pageNumber);
+        params = params.append('PageSize', 10);
         // return this.httpClient.get<Job[]>(`${this.host}/post_job_list/get_non_applied_job${filters}?Page=${pageNumber}`);
         return this.httpClient.get<Job[]>(`${this.host}/post_job_list/get_non_applied_job`, {
             params: params

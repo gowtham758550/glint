@@ -32,6 +32,7 @@ export class JobSeekerProfileComponent implements OnInit {
   skillArray !: any;
   sas_token = environment.profile_sas_token;
   status = Status;
+  isProfileLoaded = false;
 
   constructor(private route: ActivatedRoute,
     private jobSeekerService: JobSeekerService,
@@ -95,7 +96,7 @@ export class JobSeekerProfileComponent implements OnInit {
     this.jobSeekerService.getUserById(this.id).subscribe(res => this.jobSeekerProfile = res)
   }
   getProfilePicture() {
-    this.blobService.getProfilePictureById(this.id).subscribe({
+    this.blobService.getProfilePicturebyId(this.id).subscribe({
       next: (data: any) => {
         if (data.url) {
           let res = data.url;
@@ -112,6 +113,7 @@ export class JobSeekerProfileComponent implements OnInit {
     this.experienceService.getExperienceByUserId(this.id).subscribe((res: any) => {
       this.experienceArray = res;
       this.spinner.hide();
+      setTimeout(() => this.isProfileLoaded = true, 2500);
     });
   }
 
