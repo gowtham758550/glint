@@ -95,7 +95,7 @@ export class JobSeekerProfileComponent implements OnInit {
     this.jobSeekerService.getUserById(this.id).subscribe(res => this.jobSeekerProfile = res)
   }
   getProfilePicture() {
-    this.blobService.getProfilePicture().subscribe({
+    this.blobService.getProfilePictureById(this.id).subscribe({
       next: (data: any) => {
         let res = data.url;
         this.imageUrl = res + "?" + environment.profile_sas_token;

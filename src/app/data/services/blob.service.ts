@@ -20,6 +20,10 @@ export class BlobService {
     return this.httpClient.get<ProfilePictureResponse>(`${this.profilePictureHost}/get`);
   }
 
+  getProfilePictureById(id: number): Observable<ProfilePictureResponse> {
+    return this.httpClient.get<ProfilePictureResponse>(`${this.profilePictureHost}/get/${id}`);
+  }
+
   addProfilePicture(profile: FormData) {
     let params = new HttpParams();
 
