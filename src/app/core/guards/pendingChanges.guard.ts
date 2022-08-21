@@ -22,7 +22,6 @@ export class pendingChangesGuard implements CanDeactivate<ComponentCanDeactivate
             this.openConfirmDialog();
     }
     openConfirmDialog() {
-        console.log("jdkjijfkijfk")
         this.modalRef = this.modalService.show(ConfirmationComponent);
         return this.modalRef.content.onClose.map((result:any) => {
             return result;

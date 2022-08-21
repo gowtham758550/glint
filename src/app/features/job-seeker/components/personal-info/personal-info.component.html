@@ -20,8 +20,7 @@
     <input type="file" (change)="updateProfilePicture($event)" accept=".png,.jpg,.jpeg" style="display: none;"
         #fileTigger>
     <!-- profile form -->
-    <form [formGroup]="profileForm"
-        class="mt-4">
+    <form [formGroup]="profileForm" class="mt-4">
         <div class="row">
             <div class="mb-3 col">
                 <label for="firstName" class="required">First Name</label>
@@ -40,18 +39,17 @@
             </div>
             <div class="mb-3 col">
                 <label for="gender" class="required">Gender</label>
-                <select class="form-select" aria-label="Select gender"
-                    formControlName="gender">
+                <select class="form-select" aria-label="Select gender" formControlName="gender">
                     <option value="" disabled>Select gender</option>
                     <option value="Male">Male</option>
                     <option value="Female">Female</option>
                     <option value="Prefer not to say">Prefer not to say</option>
-                  </select>
+                </select>
             </div>
             <div class="mb-3">
                 <label for="about" class="required">Bio</label>
                 <!-- <div class="form-floating"> -->
-                    <textarea id="about" class="form-control" placeholder="Bio" rows="3"></textarea>
+                <textarea id="about" class="form-control" placeholder="Bio" rows="3"></textarea>
                 <!-- </div> -->
             </div>
         </div>
@@ -66,8 +64,7 @@
                 Education
             </div>
             <div>
-                <button pButton pRipple type="button" icon="pi pi-plus"
-                    (click)="addEducation(educationModal)"
+                <button pButton pRipple type="button" icon="pi pi-plus" (click)="addEducation(educationModal)"
                     class="p-button-rounded p-button-secondary float-end bg-dark text-white"></button>
             </div>
         </div>
@@ -110,8 +107,7 @@
                 Experience
             </div>
             <div>
-                <button pButton pRipple type="button" icon="pi pi-plus"
-                    (click)="addExperience(experienceModal)"
+                <button pButton pRipple type="button" icon="pi pi-plus" (click)="addExperience(experienceModal)"
                     class="p-button-rounded p-button-secondary float-end bg-dark text-white"></button>
             </div>
         </div>
@@ -129,7 +125,8 @@
                         {{experience.controls['designation'].value}}
                     </div>
                     <div class="text-muted">
-                        {{experience.controls['startDate'].value | date}} - {{experience.controls['toDate'].value | date}}
+                        {{experience.controls['startDate'].value | date}} - {{experience.controls['toDate'].value |
+                        date}}
                     </div>
                 </div>
                 <div class="ps-2 pt-3">
@@ -145,14 +142,13 @@
     </div>
     <div class="pt-3"></div>
     <!-- Preferred Job -->
-    <div class="card shadow">
+    <div class="card p-3">
         <!-- card body -->
         <div class="card-body">
             <!-- card title -->
             <div class="flex-grow-1 fs-4">
-                <div class="card-title fs-5">Preferred Job
-                    <button pButton pRipple type="button" icon="pi pi-plus"
-                        (click)="addjob(PreferredJobModal)"
+                <div class="card-title fs-5">My Interested Jobs
+                    <button pButton pRipple type="button" icon="pi pi-plus" (click)="addjob(PreferredJobModal)"
                         class="p-button-rounded p-button-secondary float-end bg-dark text-white"></button>
                 </div>
                 <hr>
@@ -163,33 +159,39 @@
                     {{preferredJob.jobTitle}}
                 </p-chip>
             </div>
+
         </div>
+
     </div>
     <div class="pt-3"></div>
 
     <!-- Skills Section -->
 
-    <div class="card shadow">
+
+    <div class="card p-3">
         <!-- card body -->
         <div class="card-body">
             <!-- card title -->
             <div class="flex-grow-1 fs-4">
-                <div class="card-title fs-5">Skills
-                    <button pButton pRipple type="button" icon="pi pi-plus"
-                        (click)="addskill(SkillModal)"
+                <div class="card-title fs-5">My Skills
+                    <button pButton pRipple type="button" icon="pi pi-plus" (click)="addskill(SkillModal)"
                         class="p-button-rounded p-button-secondary float-end bg-dark text-white"></button>
+
                 </div>
                 <hr>
             </div>
+
             <div class="flex-grow-1 fs-4" *ngFor="let skill of skillArray"
                 style="margin-left:5%;top:10%; display:flex;">
-
-                <p-chip [removable]="true" separator="," (onRemove)="deleteSkill(skill.skillId)">{{skill.skillTitle}}
+                <p-chip [removable]="true" separator="," (onRemove)="deleteSkill(skill.skillId)">
+                    {{skill.skillTitle}}
                 </p-chip>
             </div>
+
         </div>
 
     </div>
+
 
     <!-- end of profile -->
     <div class="text-end pt-3">
@@ -247,9 +249,7 @@
         <h4 class="modal-title" id="modal-basic-title">
             {{action}} Interested Job
         </h4>
-        <button pButton pRipple type="button" icon="pi pi-plus"
-            (click)="addjob(PreferredJobModal)"
-            class="p-button-rounded p-button-secondary float-end bg-dark text-white"></button>
+        <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
     </div>
     <div class="modal-body d-flex justify-content-center">
         <app-form [formGroup]="preferredJobForm" [formFields]="preferredJobFields">
@@ -269,8 +269,7 @@
         <h4 class="modal-title" id="modal-basic-title">
             {{action}} Skills
         </h4>
-        <button type="button" class="btn-close" aria-label="Close"
-            (click)="modal.dismiss('Cross click')"></button>
+        <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
     </div>
     <div class="modal-body d-flex justify-content-center">
         <app-form [formGroup]="skillForm" [formFields]="skillFields">
@@ -278,8 +277,8 @@
     </div>
     <hr>
     <div class="text-end pb-3 pe-3">
-        <button class="btn bg-dark text-white" style="border-radius: 13px;"
-            [disabled]="!skillForm.valid" (click)="executeSkillAction()">
+        <button class="btn bg-dark text-white" style="border-radius: 13px;" [disabled]="!skillForm.valid"
+            (click)="executeSkillAction()">
             {{action}}
         </button>
     </div>
