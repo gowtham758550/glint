@@ -74,13 +74,9 @@
                     <app-job-card [job]="job">
                     </app-job-card>
                 </ng-container>
-                <p-paginator [rows]="10" [totalRecords]="allJobs.length" [pageLinkSize]="2"
-                    (onPageChange)="getPaginatorValue($event)"></p-paginator>
                 <!-- </p-scrollPanel> -->
-                <div>
-                    <p-paginator [rows]="10" [totalRecords]="allJobs.length" [pageLinkSize]="3"
-                        (onPageChange)="getPaginatorValue($event)"></p-paginator>
-                </div>
+                <p-paginator [rows]="10" [totalRecords]="allJobs.length" [pageLinkSize]="3"
+                    (onPageChange)="getPaginatorValue($event)"></p-paginator>
             </div>
         </ng-template>
     </ng-template>
