@@ -1,408 +1,294 @@
-<div class="d-flex justify-content-center align-items-center h-100">
-    <div class="flex-grow-1 h-100">
-        <!-- Profile Image -->
-        <div class="card-shadow" style="height: 400px;">
+<div class="card-shadow p-4">
+    <div>
+        <ng-container *ngIf="isCoverImageLoaded; then coverImage; else coverImageLoader"></ng-container>
+        <ng-template #coverImageLoader>
+            <img id="coverpicture" class="rounded-top text-white d-flex flex-row cover-picture w-100"
+                src="/assets/defaultCoverPicture.jpg" (click)="openFileTrigger(coverPicture)" tooltipPosition="bottom"
+                pTooltip="Update Cover picture">
+        </ng-template>
+        <ng-template #coverImage>
+            <img id="coverpicture" class="rounded-top text-white d-flex flex-row cover-picture w-100"
+                [src]="backgroundImage" (click)="openFileTrigger(coverPicture)" pTooltip="Update Cover picture"
+                tooltipPosition="bottom">
+        </ng-template>
+        <ng-container *ngIf="isImageLoaded; then image; else imageLoader"></ng-container>
+        <ng-template #imageLoader>
+            <img src="/assets/defaultProfilePicture.png"
+                class="inner-image rounded-circle img-fluid img-thumbnail pointer"
+                style="width: 150px; height:150px;  margin-left: 2%; margin-top:4%;"
+                (click)="openFileTrigger(fileTigger)" pTooltip="Update Profile picture">
+        </ng-template>
+        <ng-template #image>
+            <img [src]="imageUrl" class="inner-image rounded-circle img-fluid img-thumbnail pointer"
+                style="width: 150px; height:150px; margin-left: 2%; margin-top:4%;"
+                (click)="openFileTrigger(fileTigger)" pTooltip="Update Profile picture">
+        </ng-template>
+        <input type="file" (change)="updateProfilePicture($event)" accept=".png,.jpg,.jpeg" style="display: none;"
+            #fileTigger>
+
+        <input type="file" (change)="updateCoverPicture($event)" accept=".png,.jpg,.jpeg" style="display: none;"
+            #coverPicture>
+    </div>
+
+    <!-- Profile Details -->
+    <div class="mt-5">
+        <div class="pt-3 d-flex justify-content-between flex-wrap">
+            <div class="fw-bold fs-4 text-orange">
+                {{jobSeekerArray.firstName | titlecase}} {{jobSeekerArray.lastName | titlecase}}
+            </div>
             <div class="">
-                <ng-container *ngIf="isCoverImageLoaded; then coverImage; else coverImageLoader"></ng-container>
-                <ng-template #coverImageLoader>
-                    <img id="coverpicture" class="rounded-top text-white d-flex flex-row"
-                        style="height:170px; width:100%; cursor: pointer; background-repeat: no-repeat; background-size: cover; background-blend-mode: darken;"
-                        src="/assets/defaultCoverPicture.jpg" (click)="openFileTrigger(coverPicture)"
-                        tooltipPosition="bottom" pTooltip="Update Cover picture">
-                </ng-template>
-                <ng-template #coverImage>
-                    <img id="coverpicture" class="rounded-top text-white d-flex flex-row"
-                        style="height:170px; width:100%; cursor: pointer; background-repeat: no-repeat; background-size: cover; background-blend-mode: darken;"
-                        [src]="backgroundImage" (click)="openFileTrigger(coverPicture)" pTooltip="Update Cover picture"
-                        tooltipPosition="bottom">
-                </ng-template>
-                <ng-container *ngIf="isImageLoaded; then image; else imageLoader"></ng-container>
-                <ng-template #imageLoader>
-                    <img src="/assets/defaultProfilePicture.png"
-                        class="inner-image rounded-circle img-fluid img-thumbnail pointer"
-                        style="width: 150px; height:150px;  margin-left: 2%; margin-top:4%;"
-                        (click)="openFileTrigger(fileTigger)" pTooltip="Update Profile picture">
-                </ng-template>
-                <ng-template #image>
-                    <img [src]="imageUrl" class="inner-image rounded-circle img-fluid img-thumbnail pointer"
-                        style="width: 150px; height:150px; margin-left: 2%; margin-top:4%;"
-                        (click)="openFileTrigger(fileTigger)" pTooltip="Update Profile picture">
-                </ng-template>
-                <input type="file" (change)="updateProfilePicture($event)" accept=".png,.jpg,.jpeg"
-                    style="display: none;" #fileTigger>
-
-                <input type="file" (change)="updateCoverPicture($event)" accept=".png,.jpg,.jpeg" style="display: none;"
-                    #coverPicture>
-            </div>
-
-            <!-- Profile Details -->
-            <form [formGroup]="profileForm" class="mt-4 p-2">
-                <div class="card-body text-black" style="left:5px; top:20px;">
-                    <div class="flex">
-                        <div class="flex">
-                            <p class="lead fw-normal fs-4 mb-1 float-start">{{jobSeekerArray.firstName}}
-                                {{jobSeekerArray.lastName}}</p>
-                            <div class="d-flex float-end">
-                                <button class="btn btn-orange rounded-pill" (click)="updateProfile(profileModal)">
-                                    <i class="pi pi-pencil"></i>
-                                    Edit Profile
-                                </button>
-                                <div class="p-1"></div>
-                                <div class="btn-group me-2" role="group">
-                                    <button id="resume" type="button" class="btn btn-dark dropdown-toggle rounded-pill"
-                                        data-bs-toggle="dropdown" aria-expanded="false">
-                                        <i class="pi pi-file"></i>
-                                        Resume
-                                    </button>
-                                    <ul class="dropdown-menu" aria-labelledby="btnGroupDrop1">
-                                        <li><a class="dropdown-item pointer" (click)="openFileTrigger(resumeTigger)">
-                                                <i class="pi pi-cloud-upload"></i>
-                                                Upload
-                                            </a></li>
-                                        <li><a class="dropdown-item pointer" (click)="getResume()">
-                                                <i class="pi pi-cloud-download"></i>
-                                                Download
-                                            </a></li>
-                                    </ul>
-                                </div>
-                                <!-- <button class="btn btn-rounded btn btn-outline-dark
-                                d-none d-md-block bg-dark text-white" (click)="openFileTrigger(resumeTigger)">Upload
-                                    Resume
-                                </button>
-                                <div class="p-1"></div>
-                                <button class="btn btn-rounded btn btn-outline-dark
-                                d-none d-md-block bg-dark text-white" (click)="getResume()">Download Resume
-                                </button> -->
-                                <input type="file" (change)="uploadResume($event)" accept=".pdf" style="display: none;"
-                                    #resumeTigger>
-
-
-                            </div>
-                            <span class="clearfix"></span>
-                            <p class="fw-200 fs-6 mb-1">{{jobSeekerArray.about}}</p>
-                            <p class="fw-200 fs-6 mb-1">{{jobSeekerArray.location}}</p>
-                            <span class="clearfix"></span>
-
-                            <p>
-                                <span><i class="p-2 pi pi-envelope"></i></span>
-                                <span class="ms-1">{{email}}</span>
-                            </p>
-                            <p>
-                                <span><i class="p-2 pi pi-calendar"></i></span>
-                                <span class="ms-1">{{jobSeekerArray.dateOfBirth | date}}</span>
-                            </p>
-
-                        </div>
-                    </div>
+                <button class="btn btn-orange rounded-pill me-3" (click)="updateProfile(profileModal)">
+                    <i class="pi pi-pencil"></i>
+                    Edit Profile
+                </button>
+                <input type="file" (change)="uploadResume($event)" accept=".pdf" style="display: none;" #resumeTigger>
+                <div class="btn-group me-2" role="group">
+                    <button id="resume" type="button" class="btn btn-dark dropdown-toggle rounded-pill"
+                        data-bs-toggle="dropdown" aria-expanded="false">
+                        <i class="pi pi-file"></i>
+                        Resume
+                    </button>
+                    <ul class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+                        <li><a class="dropdown-item pointer" (click)="openFileTrigger(resumeTigger)">
+                                <i class="pi pi-cloud-upload"></i>
+                                Upload
+                            </a>
+                        </li>
+                        <li><a class="dropdown-item pointer" (click)="getResume()">
+                                <i class="pi pi-cloud-download"></i>
+                                Download
+                            </a>
+                        </li>
+                    </ul>
                 </div>
-            </form>
+            </div>
         </div>
-        <div class="p-2"></div>
-        <!-- Education Details -->
-        <div class="py-6">
-            <!-- row -->
-            <div class="row">
-                <!-- EducationCard  -->
-                <div class="col-xl-6 col-lg-12 col-md-12 col-12 mb-6">
-                    <!-- card -->
-                    <div class="card shadow" style="height: 300px;">
-                        <!-- card body -->
-                        <div class="card-body">
-                            <!-- card title -->
-                            <div class="flex-grow-1 fs-4">
-                                <h4 class="card-title">Education
 
-                                    <button pButton pRipple type="button" icon="pi pi-plus"
-                                        (click)="addEducation(educationModal)"
-                                        class="p-button-rounded p-button-secondary float-end bg-dark text-white"></button>
-                                </h4>
-                            </div>
-                            <hr>
-                            <div class="d-flex justify-content-center align-items-center" id="main"
-                                *ngIf="educationArray.length==0">
-                                <img class="mr-3 pr-3 align-top border-right inline-block align-content-center"
-                                    src="https://cdn.dribbble.com/users/1753953/screenshots/3818675/animasi-emptystate.gif"
-                                    style="height:150px; width: 150px;">
-                                <div class="inline-block align-middle">
-                                    <h2 class="font-weight-normal lead" id="desc">No Education added</h2>
-                                </div>
-                            </div>
-                            <p-scrollPanel [style]="{width: '100%', height: '200px'}" styleClass="custom">
-                                <ng-container *ngFor="let education of educationArray; let id=index;">
+        <div>
+            <i class="pi pi-envelope me-1 mt-1"></i>
+            {{email}}
+        </div>
 
+        <div>
+            <i class="pi pi-calendar me-1"></i>
+            {{jobSeekerArray.dateOfBirth | date}}
+        </div>
+    </div>
 
+    <div class="mt-4">
+        <h5 class="fw-bold text-orange mb-3">
+            About
+        </h5>
+        <div>
+            {{jobSeekerArray.about}}
+        </div>
+    </div>
 
-                                    <div class="pt-3 d-flex justify-content-start" *ngIf="educationArray.length>=1">
-                                        <div class="pt-3">
-                                            <img src="assets/university.svg" height="50px" width="50px">
-                                        </div>
-                                        <div class="ps-4 d-flex flex-column flex-grow-1">
-                                            <!-- {{education.value | json}} -->
-                                            <h5>
-                                                {{education.universityName}}
-                                            </h5>
-                                            <div class="fs-7">
-                                                {{education.qualification}}-
-                                                {{education.courseName}}
-                                            </div>
-                                            <div class="text-muted">
-                                                {{education.startDate | date}}-
-                                                {{education.completionDate | date}}
-                                            </div>
-                                        </div>
-                                        <div class="ps-2 pt-3">
-                                            <button class="btn btn-rounded"
-                                                (click)="editEducation(educationModal, education.educationDetailId)">
-                                                <i class="pi pi-pencil"></i>
-                                            </button>
-                                            <button class="ps-2 btn btn-rounded-danger"
-                                                (click)="deleteEducation(education.educationDetailId)">
-                                                <i class="pi pi-trash"></i>
-                                            </button>
-                                        </div>
-                                    </div>
+    <!-- skills -->
+    <div class="mt-4">
+        <h5 class="fw-bold text-orange mb-3">
+            Skills
+        </h5>
+        <ng-container *ngFor="let skill of skillArray; let i = index">
+            <span class="border rounded-pill border-dark px-2 py-1 me-2 my-2 skill-badge"
+                (mouseover)="showDelete(i)">
+                {{skill.skillTitle}}
+                <i class="pi pi-trash text-danger pointer skill-trash"
+                    (click)="deleteSkill(skill.skillId)">
+                </i>
+            </span>
+        </ng-container>
+        <p class="small pointer mt-2 text-primary"
+            (click)="addskill(SkillModal)">
+            <i class="pi pi-plus-circle"></i>
+            <span>
+                Add skill
+            </span>
+        </p>
+    </div>
 
+    <!-- preferred job -->
+    <div class="mt-4">
+        <h5 class="fw-bold text-orange mb-3">
+            Preferred Jobs
+        </h5>
+        <ng-container *ngFor="let preferredJob of preferredJobArray; let i = index">
+            <span class="border rounded-pill border-dark px-2 py-1 me-2 skill-badge"
+                (mouseover)="showDelete(i)">
+                {{preferredJob.jobTitle}}
+                <i class="pi pi-trash text-danger pointer skill-trash"
+                    (click)="deleteJob(preferredJob.preferredJobId)">
+                </i>
+            </span>
+        </ng-container>
+        <p class="small pointer mt-2 text-primary"
+            (click)="addjob(PreferredJobModal)">
+            <i class="pi pi-plus-circle"></i>
+            <span>
+                Add preferred job
+            </span>
+        </p>
+    </div>
 
-                                </ng-container>
-                            </p-scrollPanel>
-                        </div>
-                    </div>
+    <!-- education and experience -->
+    <div class="row mt-4">
+        <!-- education -->
+        <div class="col">
+            <h5 class="fw-bold text-orange mb-3">
+                Education
+            </h5>
+            <ng-container *ngFor="let education of educationArray">
+                <div class="vtl">
+                <div class="event">
+                    <h5>
+                        {{education.qualification}} {{education.courseName}}
+                        <span class="small ps-1 pointer text-orange"
+                            (click)="editEducation(educationModal, education.educationDetailId)">
+                            <i class="pi pi-pencil"></i>
+                        </span>
+                    </h5>
+                    <span class="d-block small fw-bold text-orange">
+                        {{education.universityName}}
+                    </span>
+                    <span class="small text-muted">
+                        {{education.startDate | date}} - {{education.completionDate | date}}
+                    </span>
                 </div>
-                <!-- Experience card -->
-                <div class="col-xl-6 col-lg-12 col-md-12 col-12 mb-6">
-                    <!-- card -->
-                    <div class="card shadow" style="height: 300px;">
-                        <!-- card body -->
-                        <div class="card-body">
-                            <!-- card title -->
-                            <div class="flex-grow-1 fs-4">
-                                <h4 class="card-title">Experience
-                                    <button pButton pRipple type="button" icon="pi pi-plus"
-                                        (click)="addExperience(experienceModal)"
-                                        class="p-button-rounded p-button-secondary float-end bg-dark text-white"></button>
-                                </h4>
-                            </div>
-                            <hr>
-                            <div class="d-flex justify-content-center align-items-center" id="main"
-                                *ngIf="experienceArray.length==0">
-                                <img class="mr-3 pr-3 align-top border-right inline-block align-content-center"
-                                    src="https://cdn.dribbble.com/users/1753953/screenshots/3818675/animasi-emptystate.gif"
-                                    style="height:150px; width: 150px;">
-                                <div class="inline-block align-middle">
-                                    <h2 class="font-weight-normal lead" id="desc">No Experience added</h2>
-                                </div>
-                            </div>
-                            <p-scrollPanel [style]="{width: '100%', height: '200px'}" styleClass="custom">
-                                <ng-container *ngFor="let experience of experienceArray; let id = index">
-                                    <div class="pt-3 d-flex justify-content-start">
-                                        <div class="pt-3">
-                                            <img src="../../../../../assets/company.png" height="50px" width="50px">
-                                        </div>
-                                        <div class="ps-4 d-flex flex-column flex-grow-1">
-                                            <h5>
-                                                {{experience.previousCompanyName}}
-                                            </h5>
-                                            <div class="fs-7">
-                                                {{experience.designation}}
-                                            </div>
-                                            <div class="text-muted">
-                                                {{experience.startDate | date}} - {{experience.toDate|date}}
-                                            </div>
-                                        </div>
-                                        <div class="ps-2 pt-3">
-                                            <button class="btn btn-rounded"
-                                                (click)="editExperience(experienceModal, experience.experienceDetailId)">
-                                                <i class="pi pi-pencil"></i>
-                                            </button>
-                                            <button class="ps-2 btn btn-rounded-danger"
-                                                (click)="deleteExperience(experience.experienceDetailId)">
-                                                <i class="pi pi-trash"></i>
-                                            </button>
-                                        </div>
-                                    </div>
-                                </ng-container>
-                            </p-scrollPanel>
-                        </div>
-                    </div>
                 </div>
-            </div>
+            </ng-container>
+            <p class="small pointer mt-2 pointer text-primary"
+                (click)="addEducation(educationModal)">
+                <i class="pi pi-plus-circle"></i>
+                <span>
+                    Add education
+                </span>
+            </p>
+        </div>
 
-            <div class="p-2"></div>
-            <!-- Preferred Job Card -->
-            <div class="row">
-                <div class="col-xl-6 col-lg-12 col-md-12 col-12 mb-6">
-                    <!-- card -->
-                    <div class="card-shadow p-3" style="height: 300px;">
-                        <!-- card body -->
-                        <div class="card-body">
-                            <!-- card title -->
-                            <div class="flex-grow-1 fs-4">
-                                <h4 class="card-title">My Interested Jobs
-                                    <button pButton pRipple type="button" icon="pi pi-plus"
-                                        (click)="addjob(PreferredJobModal)"
-                                        class="p-button-rounded p-button-secondary float-end bg-dark text-white"></button>
-                                </h4>
-                                <hr>
-                            </div>
-                            <div class="d-flex justify-content-center align-items-center" id="main"
-                                *ngIf="preferredJobArray.length==0">
-                                <img class="mr-3 pr-3 align-top border-right inline-block align-content-center"
-                                    src="https://cdn.dribbble.com/users/1753953/screenshots/3818675/animasi-emptystate.gif"
-                                    style="height:150px; width: 150px;">
-                                <div class="inline-block align-middle">
-                                    <h2 class="font-weight-normal lead" id="desc">No Interested Jobs</h2>
-                                </div>
-                            </div>
-                            <p-scrollPanel [style]="{width: '100%', height: '200px'}" styleClass="custom">
-                                <div class="flex-grow-1 fs-4" *ngFor="let preferredJob of preferredJobArray"
-                                    style="margin-left:5%;top:10%">
+        <div class="col">
+            <h5 class="fw-bold text-orange mb-3">
+                Experience 
+            </h5>
+            <ng-container *ngFor="let experience of experienceArray">
+                <div class="vtl">
+                <div class="event">
+                    <h5>
+                        {{experience.designation}}
+                        <span class="ps-2 pointer text-orange"
+                            (click)="editExperience(experienceModal, experience.experienceDetailId)">
+                            <i class="pi pi-pencil"></i>
+                        </span>
+                    </h5>
+                    <span class="d-block small fw-bold">
+                        {{experience.previousCompanyName}}
+                    </span>
+                    <span class="small text-muted">
+                        {{experience.startDate | date}} - {{experience.toDate | date}}
+                    </span>
+                </div>
+                </div>
+            </ng-container>
+            <p class="small pointer mt-2 text-primary pointer"
+                (click)="addExperience(experienceModal)">
+                <i class="pi pi-plus-circle"></i>
+                <span>
+                    Add experience
+                </span>
+            </p>
+        </div>
 
-                                    <p-chip [removable]="true" separator=","
-                                        (onRemove)="deleteJob(preferredJob.preferredJobId)">{{preferredJob.jobTitle}}
-                                    </p-chip>
-                                </div>
-                            </p-scrollPanel>
-                        </div>
-
-                    </div>
-                </div>
-
-                <!-- Skills Card -->
-                <div class="col-xl-6 col-lg-12 col-md-12 col-12 mb-6">
-                    <!-- card -->
-                    <div class="card-shadow p-3" style="height: 300px;">
-                        <!-- card body -->
-                        <div class="card-body">
-                            <!-- card title -->
-                            <div class="flex-grow-1 fs-4">
-                                <h4 class="card-title">My Skills
-                                    <button pButton pRipple type="button" icon="pi pi-plus"
-                                        (click)="addskill(SkillModal)"
-                                        class="p-button-rounded p-button-secondary float-end bg-dark text-white"></button>
-
-                                </h4>
-                                <hr>
-                            </div>
-                            <div class="d-flex justify-content-center align-items-center" id="main"
-                                *ngIf="skillArray.length==0">
-                                <img class="mr-3 pr-3 align-top border-right inline-block align-content-center"
-                                    src="https://cdn.dribbble.com/users/1753953/screenshots/3818675/animasi-emptystate.gif"
-                                    style="height:150px; width: 150px;">
-                                <div class="inline-block align-middle">
-                                    <h2 class="font-weight-normal lead" id="desc">No Skills</h2>
-                                </div>
-                            </div>
-                            <p-scrollPanel [style]="{width: '100%', height: '200px'}" styleClass="custom">
-                                <div class="flex-grow-1 fs-4" *ngFor="let skill of skillArray"
-                                    style="margin-left:5%;top:10%; display:flex;">
-                                    <p-chip [removable]="true" separator="," (onRemove)="deleteSkill(skill.skillId)">
-                                        {{skill.skillTitle}}
-                                    </p-chip>
-                                </div>
-                            </p-scrollPanel>
-                        </div>
-
-                    </div>
-                </div>
-            </div>
-            <!------------------------------------------------------------------------------------------->
-            <ng-template #educationModal let-modal>
-                <div class="modal-header">
-                    <h4 class="modal-title" id="modal-basic-title">
-                        {{action}} Education
-                    </h4>
-                    <button type="button" class="btn-close" aria-label="Close"
-                        (click)="modal.dismiss('Cross click')"></button>
-                </div>
-                <div class="modal-body d-flex justify-content-center">
-                    <app-form [formGroup]="educationForm" [formFields]="educationFields">
-                    </app-form>
-                </div>
-                <hr>
-                <div class="text-end pb-3 pe-3">
-                    <button class="btn bg-dark text-white" style="border-radius: 13px;"
-                        [disabled]="!educationForm.valid" (click)="executeEducationAction()">
-                        {{action}}
-                    </button>
-                </div>
-            </ng-template>
-            <ng-template #experienceModal let-modal>
-                <div class="modal-header">
-                    <h4 class="modal-title" id="modal-basic-title">
-                        {{action}} Experience
-                    </h4>
-                    <button type="button" class="btn-close" aria-label="Close"
-                        (click)="modal.dismiss('Cross click')"></button>
-                </div>
-                <div class="modal-body d-flex justify-content-center">
-                    <app-form [formGroup]="experienceForm" [formFields]="experienceFields">
-                    </app-form>
-                </div>
-                <hr>
-                <div class="text-end pb-3 pe-3">
-                    <button class="btn bg-dark text-white" style="border-radius: 13px;"
-                        [disabled]="!experienceForm.valid" (click)="executeExperienceAction()">
-                        {{action}}
-                    </button>
-                </div>
-            </ng-template>
-            <ng-template #profileModal let-modal>
-                <div class="modal-header">
-                    <h4 class="modal-title" id="modal-basic-title">
-                        {{action}} Profile
-                    </h4>
-                    <button type="button" class="btn-close" aria-label="Close"
-                        (click)="modal.dismiss('Cross click')"></button>
-                </div>
-                <div class="modal-body d-flex justify-content-center">
-                    <app-form [formGroup]="profileForm" [formFields]="profileFields">
-                    </app-form>
-                </div>
-                <hr>
-                <div class="text-end pb-3 pe-3">
-                    <button class="btn bg-dark text-white" style="border-radius: 13px;" [disabled]="!profileForm.valid"
-                        (click)="executeProfileAction()">
-                        {{action}}
-                    </button>
-                </div>
-            </ng-template>
-            <ng-template #PreferredJobModal let-modal>
-                <div class="modal-header">
-                    <h4 class="modal-title" id="modal-basic-title">
-                        {{action}} Interested Job
-                    </h4>
-                    <button type="button" class="btn-close" aria-label="Close"
-                        (click)="modal.dismiss('Cross click')"></button>
-                </div>
-                <div class="modal-body d-flex justify-content-center">
-                    <app-form [formGroup]="preferredJobForm" [formFields]="preferredJobFields">
-                    </app-form>
-                </div>
-                <hr>
-                <div class="text-end pb-3 pe-3">
-                    <button class="btn bg-dark text-white" style="border-radius: 13px;"
-                        [disabled]="!preferredJobForm.valid" (click)="executePreferredJobAction()">
-                        {{action}}
-                    </button>
-                </div>
-            </ng-template>
-            <ng-template #SkillModal let-modal>
-                <div class="modal-header">
-                    <h4 class="modal-title" id="modal-basic-title">
-                        {{action}} Skills
-                    </h4>
-                    <button type="button" class="btn-close" aria-label="Close"
-                        (click)="modal.dismiss('Cross click')"></button>
-                </div>
-                <div class="modal-body">
-                    <app-form [formGroup]="skillForm" [formFields]="skillFields">
-                    </app-form>
-                </div>
-                <hr>
-                <div class="text-end pb-3 pe-3">
-                    <button class="btn bg-dark text-white" style="border-radius: 13px;" [disabled]="!skillForm.valid"
-                        (click)="executeSkillAction()">
-                        {{action}}
-                    </button>
-                </div>
-            </ng-template>
+        <ng-template #educationModal let-modal>
+        <div class="modal-header">
+            <h4 class="modal-title" id="modal-basic-title">
+                {{action}} Education
+            </h4>
+            <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+        </div>
+        <div class="modal-body d-flex justify-content-center">
+            <app-form [formGroup]="educationForm" [formFields]="educationFields">
+            </app-form>
+        </div>
+        <hr>
+        <div class="text-end pb-3 pe-3">
+            <button class="btn btn-orange px-2 py-1 rounded-pill"  [disabled]="!educationForm.valid"
+                (click)="executeEducationAction()">
+                {{action}}
+            </button>
+        </div>
+    </ng-template>
+    <ng-template #experienceModal let-modal>
+        <div class="modal-header">
+            <h4 class="modal-title" id="modal-basic-title">
+                {{action}} Experience
+            </h4>
+            <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+        </div>
+        <div class="modal-body d-flex justify-content-center">
+            <app-form [formGroup]="experienceForm" [formFields]="experienceFields">
+            </app-form>
+        </div>
+        <hr>
+        <div class="text-end pb-3 pe-3">
+            <button class="btn btn-orange px-2 py-1 rounded-pill"  [disabled]="!experienceForm.valid"
+                (click)="executeExperienceAction()">
+                {{action}}
+            </button>
+        </div>
+    </ng-template>
+    <ng-template #profileModal let-modal>
+        <div class="modal-header">
+            <h4 class="modal-title" id="modal-basic-title">
+                {{action}} Profile
+            </h4>
+            <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+        </div>
+        <div class="modal-body d-flex justify-content-center">
+            <app-form [formGroup]="profileForm" [formFields]="profileFields">
+            </app-form>
+        </div>
+        <hr>
+        <div class="text-end pb-3 pe-3">
+            <button class="btn btn-orange px-2 py-1 rounded-pill"  [disabled]="!profileForm.valid"
+                (click)="executeProfileAction()">
+                {{action}}
+            </button>
+        </div>
+    </ng-template>
+    <ng-template #PreferredJobModal let-modal>
+        <div class="modal-header">
+            <h4 class="modal-title" id="modal-basic-title">
+                {{action}} Interested Job
+            </h4>
+            <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+        </div>
+        <div class="modal-body">
+            <app-form [formGroup]="preferredJobForm" [formFields]="preferredJobFields">
+            </app-form>
+        </div>
+        <hr>
+        <div class="text-end pb-3 pe-3">
+            <button class="btn btn-orange px-2 py-1 rounded-pill"  [disabled]="!preferredJobForm.valid"
+                (click)="executePreferredJobAction()">
+                {{action}}
+            </button>
+        </div>
+    </ng-template>
+    <ng-template #SkillModal let-modal>
+        <div class="modal-header">
+            <h4 class="modal-title" id="modal-basic-title">
+                Add Skills
+            </h4>
+            <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+        </div>
+        <div class="modal-body">
+            <app-form [formGroup]="skillForm" [formFields]="skillFields">
+            </app-form>
+        </div>
+        <hr>
+        <div class="text-end pb-3 pe-3">
+            <button class="btn btn-orange px-2 py-1 rounded-pill"  [disabled]="!skillForm.valid"
+                (click)="executeSkillAction()">
+                {{action}}
+            </button>
+        </div>
+    </ng-template>
