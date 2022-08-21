@@ -14,6 +14,7 @@ import { JobService } from 'src/app/data/services/job.service';
   ]
 })
 export class NewJobComponent implements OnInit {
+  jobSearchList: string[] = [];
 
   jobForm: FormGroup = this.formBuilder.group({
     jobTitle: ['', [Validators.required, Validators.minLength(3)]],
@@ -94,8 +95,17 @@ export class NewJobComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.getJobCategories();
     // this.getCategories()
     // this.getQualifications();
+  }
+  getJobCategories() {
+    this.dataService.getJobCategories().subscribe({
+      next: (data) =>
+        data.forEach((val) => {
+          this.jobSearchList.push(val.jobTitle.charAt(0).toUpperCase() + val.jobTitle.slice(1));
+        }),
+    });
   }
 
   getCategories() {

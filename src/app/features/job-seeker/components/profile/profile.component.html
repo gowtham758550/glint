@@ -7,13 +7,14 @@
                 <ng-template #coverImageLoader>
                     <img id="coverpicture" class="rounded-top text-white d-flex flex-row"
                         style="height:170px; width:100%; cursor: pointer; background-repeat: no-repeat; background-size: cover; background-blend-mode: darken;"
-                        src="/assets/defaultCoverPicture.jpg" (click)="openFileTrigger(coverPicture)" tooltipPosition="bottom"
-                        pTooltip="Update Cover picture">
+                        src="/assets/defaultCoverPicture.jpg" (click)="openFileTrigger(coverPicture)"
+                        tooltipPosition="bottom" pTooltip="Update Cover picture">
                 </ng-template>
                 <ng-template #coverImage>
                     <img id="coverpicture" class="rounded-top text-white d-flex flex-row"
                         style="height:170px; width:100%; cursor: pointer; background-repeat: no-repeat; background-size: cover; background-blend-mode: darken;"
-                        [src]="backgroundImage" (click)="openFileTrigger(coverPicture)" pTooltip="Update Cover picture" tooltipPosition="bottom">
+                        [src]="backgroundImage" (click)="openFileTrigger(coverPicture)" pTooltip="Update Cover picture"
+                        tooltipPosition="bottom">
                 </ng-template>
                 <ng-container *ngIf="isImageLoaded; then image; else imageLoader"></ng-container>
                 <ng-template #imageLoader>
@@ -43,26 +44,27 @@
                                 {{jobSeekerArray.lastName}}</p>
                             <div class="d-flex float-end">
                                 <button class="btn btn-orange rounded-pill" (click)="updateProfile(profileModal)">
-                                <i class="pi pi-pencil"></i> 
-                                Edit Profile
+                                    <i class="pi pi-pencil"></i>
+                                    Edit Profile
                                 </button>
                                 <div class="p-1"></div>
                                 <div class="btn-group me-2" role="group">
-                                    <button id="resume" type="button" class="btn btn-dark dropdown-toggle rounded-pill" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <button id="resume" type="button" class="btn btn-dark dropdown-toggle rounded-pill"
+                                        data-bs-toggle="dropdown" aria-expanded="false">
                                         <i class="pi pi-file"></i>
                                         Resume
                                     </button>
                                     <ul class="dropdown-menu" aria-labelledby="btnGroupDrop1">
-                                      <li><a class="dropdown-item pointer" (click)="openFileTrigger(resumeTigger)">
-                                        <i class="pi pi-cloud-upload"></i>
-                                        Upload
-                                      </a></li>
-                                      <li><a class="dropdown-item pointer" (click)="getResume()">
-                                        <i class="pi pi-cloud-download"></i>
-                                        Download
-                                      </a></li>
+                                        <li><a class="dropdown-item pointer" (click)="openFileTrigger(resumeTigger)">
+                                                <i class="pi pi-cloud-upload"></i>
+                                                Upload
+                                            </a></li>
+                                        <li><a class="dropdown-item pointer" (click)="getResume()">
+                                                <i class="pi pi-cloud-download"></i>
+                                                Download
+                                            </a></li>
                                     </ul>
-                                  </div>
+                                </div>
                                 <!-- <button class="btn btn-rounded btn btn-outline-dark
                                 d-none d-md-block bg-dark text-white" (click)="openFileTrigger(resumeTigger)">Upload
                                     Resume
@@ -107,7 +109,7 @@
                         <!-- card body -->
                         <div class="card-body">
                             <!-- card title -->
-                            <div class="flex-grow-1 fs-4" >
+                            <div class="flex-grow-1 fs-4">
                                 <h4 class="card-title">Education
 
                                     <button pButton pRipple type="button" icon="pi pi-plus"
@@ -126,43 +128,43 @@
                                 </div>
                             </div>
                             <p-scrollPanel [style]="{width: '100%', height: '200px'}" styleClass="custom">
-                            <ng-container *ngFor="let education of educationArray; let id=index;">
-                               
-                                    
-                               
-                                <div class="pt-3 d-flex justify-content-start" *ngIf="educationArray.length>=1">
-                                    <div class="pt-3">
-                                        <img src="assets/university.svg" height="50px" width="50px">
-                                    </div>
-                                    <div class="ps-4 d-flex flex-column flex-grow-1">
-                                        <!-- {{education.value | json}} -->
-                                        <h5>
-                                            {{education.universityName}}
-                                        </h5>
-                                        <div class="fs-7">
-                                            {{education.qualification}}-
-                                            {{education.courseName}}
-                                        </div>
-                                        <div class="text-muted">
-                                            {{education.startDate | date}}-
-                                            {{education.completionDate | date}}
-                                        </div>
-                                    </div>
-                                    <div class="ps-2 pt-3">
-                                        <button class="btn btn-rounded"
-                                            (click)="editEducation(educationModal, education.educationDetailId)">
-                                            <i class="pi pi-pencil"></i>
-                                        </button>
-                                        <button class="ps-2 btn btn-rounded-danger"
-                                            (click)="deleteEducation(education.educationDetailId)">
-                                            <i class="pi pi-trash"></i>
-                                        </button>
-                                    </div>
-                                </div>
-                           
+                                <ng-container *ngFor="let education of educationArray; let id=index;">
 
-                            </ng-container>
-                        </p-scrollPanel>
+
+
+                                    <div class="pt-3 d-flex justify-content-start" *ngIf="educationArray.length>=1">
+                                        <div class="pt-3">
+                                            <img src="assets/university.svg" height="50px" width="50px">
+                                        </div>
+                                        <div class="ps-4 d-flex flex-column flex-grow-1">
+                                            <!-- {{education.value | json}} -->
+                                            <h5>
+                                                {{education.universityName}}
+                                            </h5>
+                                            <div class="fs-7">
+                                                {{education.qualification}}-
+                                                {{education.courseName}}
+                                            </div>
+                                            <div class="text-muted">
+                                                {{education.startDate | date}}-
+                                                {{education.completionDate | date}}
+                                            </div>
+                                        </div>
+                                        <div class="ps-2 pt-3">
+                                            <button class="btn btn-rounded"
+                                                (click)="editEducation(educationModal, education.educationDetailId)">
+                                                <i class="pi pi-pencil"></i>
+                                            </button>
+                                            <button class="ps-2 btn btn-rounded-danger"
+                                                (click)="deleteEducation(education.educationDetailId)">
+                                                <i class="pi pi-trash"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+
+
+                                </ng-container>
+                            </p-scrollPanel>
                         </div>
                     </div>
                 </div>
@@ -191,34 +193,34 @@
                                 </div>
                             </div>
                             <p-scrollPanel [style]="{width: '100%', height: '200px'}" styleClass="custom">
-                            <ng-container *ngFor="let experience of experienceArray; let id = index">
-                                <div class="pt-3 d-flex justify-content-start">
-                                    <div class="pt-3">
-                                        <img src="../../../../../assets/company.png" height="50px" width="50px">
-                                    </div>
-                                    <div class="ps-4 d-flex flex-column flex-grow-1">
-                                        <h5>
-                                            {{experience.previousCompanyName}}
-                                        </h5>
-                                        <div class="fs-7">
-                                            {{experience.designation}}
+                                <ng-container *ngFor="let experience of experienceArray; let id = index">
+                                    <div class="pt-3 d-flex justify-content-start">
+                                        <div class="pt-3">
+                                            <img src="../../../../../assets/company.png" height="50px" width="50px">
                                         </div>
-                                        <div class="text-muted">
-                                            {{experience.startDate | date}} - {{experience.toDate|date}}
+                                        <div class="ps-4 d-flex flex-column flex-grow-1">
+                                            <h5>
+                                                {{experience.previousCompanyName}}
+                                            </h5>
+                                            <div class="fs-7">
+                                                {{experience.designation}}
+                                            </div>
+                                            <div class="text-muted">
+                                                {{experience.startDate | date}} - {{experience.toDate|date}}
+                                            </div>
+                                        </div>
+                                        <div class="ps-2 pt-3">
+                                            <button class="btn btn-rounded"
+                                                (click)="editExperience(experienceModal, experience.experienceDetailId)">
+                                                <i class="pi pi-pencil"></i>
+                                            </button>
+                                            <button class="ps-2 btn btn-rounded-danger"
+                                                (click)="deleteExperience(experience.experienceDetailId)">
+                                                <i class="pi pi-trash"></i>
+                                            </button>
                                         </div>
                                     </div>
-                                    <div class="ps-2 pt-3">
-                                        <button class="btn btn-rounded"
-                                            (click)="editExperience(experienceModal, experience.experienceDetailId)">
-                                            <i class="pi pi-pencil"></i>
-                                        </button>
-                                        <button class="ps-2 btn btn-rounded-danger"
-                                            (click)="deleteExperience(experience.experienceDetailId)">
-                                            <i class="pi pi-trash"></i>
-                                        </button>
-                                    </div>
-                                </div>
-                            </ng-container>
+                                </ng-container>
                             </p-scrollPanel>
                         </div>
                     </div>
@@ -252,14 +254,14 @@
                                 </div>
                             </div>
                             <p-scrollPanel [style]="{width: '100%', height: '200px'}" styleClass="custom">
-                            <div class="flex-grow-1 fs-4" *ngFor="let preferredJob of preferredJobArray"
-                                style="margin-left:5%;top:10%">
+                                <div class="flex-grow-1 fs-4" *ngFor="let preferredJob of preferredJobArray"
+                                    style="margin-left:5%;top:10%">
 
-                                <p-chip [removable]="true" separator=","
-                                    (onRemove)="deleteJob(preferredJob.preferredJobId)">{{preferredJob.jobTitle}}
-                                </p-chip>
-                            </div>
-                        </p-scrollPanel>
+                                    <p-chip [removable]="true" separator=","
+                                        (onRemove)="deleteJob(preferredJob.preferredJobId)">{{preferredJob.jobTitle}}
+                                    </p-chip>
+                                </div>
+                            </p-scrollPanel>
                         </div>
 
                     </div>
@@ -291,13 +293,12 @@
                                 </div>
                             </div>
                             <p-scrollPanel [style]="{width: '100%', height: '200px'}" styleClass="custom">
-                            <div class="flex-grow-1 fs-4" *ngFor="let skill of skillArray"
-                                style="margin-left:5%;top:10%; display:flex;">
-
-                                <p-chip [removable]="true" separator="," (onRemove)="deleteSkill(skill.skillId)">
-                                    {{skill.skillTitle}}
-                                </p-chip>
-                            </div>
+                                <div class="flex-grow-1 fs-4" *ngFor="let skill of skillArray"
+                                    style="margin-left:5%;top:10%; display:flex;">
+                                    <p-chip [removable]="true" separator="," (onRemove)="deleteSkill(skill.skillId)">
+                                        {{skill.skillTitle}}
+                                    </p-chip>
+                                </div>
                             </p-scrollPanel>
                         </div>
 

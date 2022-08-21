@@ -10,8 +10,19 @@
                     <label for="jobTitle" class="required">
                         Job Title
                     </label>
-                    <input type="text" class="form-control" placeholder="Job title" formControlName="jobTitle"
-                        id="jobTitle">
+                    <input type="text" formControlName="jobTitle" class="form-control"
+                        list="designation-datalist" placeholder="Job title" id="jobTitle">
+                    <datalist id="designation-datalist" class="datalist">
+                        <ng-container *ngFor="let designation of jobSearchList">
+                            <option [value]="designation">
+                                <span style="text-transform: capitalize;">
+                                    {{designation}}
+                                </span>
+                            </option>
+                        </ng-container>
+                    </datalist>
+                    <!-- <input type="text" class="form-control" placeholder="Job title" formControlName="jobTitle"
+                        id="jobTitle"> -->
                 </div>
 
                 <div class="mb-3">
