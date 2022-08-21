@@ -64,9 +64,9 @@ select:focus {
     background-color: var(--warning) !important;
 }
 
-.text-primary {
+/* .text-primary {
     color: var(--primary) !important;
-}
+} */
 
 .text-orange {
     color: var(--orange);
@@ -164,8 +164,15 @@ select:focus {
 }
 
 .border-none {
-    border-style: none;
+    box-shadow: none !important;
+    border-style: none !important;
 }
+
+.border-none:focus {
+    border-style: none !important;
+    box-shadow: none !important;
+}
+
 
 .vl {
     border-left: 2px solid #aeaeb4;
