@@ -158,7 +158,8 @@ export class EmployerProfileComponent implements OnInit {
     this.spinner.show();
     this.action = "Update";
     console.log(this.action);
-    this.modalService.open(ref).result.then((result) => {this.spinner.hide()});
+    this.modalService.open(ref).result.then((result) => {});
+    this.spinner.hide()
   }
   executeProfileAction() {
     if (this.action == "Update") {

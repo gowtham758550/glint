@@ -68,6 +68,7 @@ import { LoginComponent } from './components/login/login.component';
     DividerModule,
     TimelineModule,
     PasswordModule,
+    PaginatorModule,
     TooltipModule,
     CardModule,
     ChipsModule,
