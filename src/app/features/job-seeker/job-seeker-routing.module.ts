@@ -15,6 +15,7 @@ import { JobsComponent } from './components/jobs/jobs.component';
 import { JobSeekerGuard } from 'src/app/core/guards/job-seeker.guard';
 import { LoginComponent } from './components/login/login.component';
 import { RouteConstants } from 'src/app/data/enums/constatnts/route.constants';
+import { Title } from 'src/app/data/enums/constatnts/title.constants';
 
 const routeConstants = RouteConstants;
 
@@ -22,26 +23,30 @@ const routes: Routes = [
   {
     path: 'job-seeker/login',
     component: LoginComponent,
-    title: 'Employer Login | Glint'
+    title: Title.login,
     // canActivate: [JobSeekerGuard]
   },
   {
     path: 'job-seeker/signup',
     component: RegisterComponent,
+    title: Title.signup,
     // canActivate: [JobSeekerGuard],
     children: [
       {
         path: '',
         component: SignupComponent,
+        title: Title.signup
         // canActivate: [AuthGuard]
       },
       {
         path: 'personal-information',
-        component: PersonalInfoComponent
+        component: PersonalInfoComponent,
+        title: Title.jobSeekerPersonalInformation
       },
       {
         path: 'verify-account',
-        component: VerifyComponent
+        component: VerifyComponent,
+        title: Title.accoutVerification
       }
     ]
   },
@@ -52,27 +57,33 @@ const routes: Routes = [
     children: [
       {
         path: 'home',
-        component: JobsComponent
+        component: JobsComponent,
+        title: Title.jobSeekerHome
       },
       {
         path: 'my-jobs',
-        component: MyJobsComponent
+        component: MyJobsComponent,
+        title: Title.jobSeekerMyJobs
       },
       {
         path: 'job/:postJobDetailId',
-        component: JobInfoComponent
+        component: JobInfoComponent,
+        title: Title.jobInfo
       },
       {
         path:'profile',
-        component: ProfileComponent
+        component: ProfileComponent,
+        title: Title.profile
       },
       {
         path:'account-settings',
-        component: AccountSettingsComponent
+        component: AccountSettingsComponent,
+        title: Title.accountSettings
       },
       {
         path:'applied-jobs',
-        component: MyJobsComponent
+        component: MyJobsComponent,
+        title: Title.jobSeekerAppliedJobs
       }
     ]
   },

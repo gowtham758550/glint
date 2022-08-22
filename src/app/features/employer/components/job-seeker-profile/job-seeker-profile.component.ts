@@ -118,19 +118,23 @@ export class JobSeekerProfileComponent implements OnInit {
   }
 
   shortlistCandidate() {
+    this.spinner.show();
     this.appliedJobService.updateAppliedJobStatus(this.currentApplier.appliedJobId, this.postJobDetailId, Status.Shortlisted).subscribe({
       next: () => {
         this.toastr.success(`Candidate ${this.currentApplier.userName} shortlisted`);
         this.router.navigateByUrl(`/employer/job/${this.postJobDetailId}`);
+        this.spinner.hide();
       }
     });
   }
 
   rejectCandidate() {
+    this.spinner.show();
     this.appliedJobService.updateAppliedJobStatus(this.currentApplier.appliedJobId, this.postJobDetailId, Status.Rejected).subscribe({
       next: () => {
         this.toastr.info(`Candidate ${this.currentApplier.userName} rejected`);
         this.router.navigateByUrl(`/employer/job/${this.postJobDetailId}`);
+        this.spinner.hide();
       }
     })
   }

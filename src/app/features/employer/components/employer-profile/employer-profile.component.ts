@@ -109,6 +109,7 @@ export class EmployerProfileComponent implements OnInit {
         if (data.url) {
           let res = data.url;
           this.imageUrl = res + "?" + environment.profile_sas_token;
+          // this.spinner.hide();
         }
         this.isImageLoaded = true;
       },
@@ -117,6 +118,7 @@ export class EmployerProfileComponent implements OnInit {
 
   // -----------------------------------------Cover Picture-----------------------------------------
   updateCoverPicture($event: any) {
+    this.spinner.show();
     this.imageService
       .open($event, {
         aspectRatio: 20 / 4,

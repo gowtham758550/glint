@@ -31,21 +31,25 @@ const routes: Routes = [
       {
         path: '',
         component: SignupComponent,
+        title: Title.signup
         // canActivate: [AuthGuard]
       },
       {
         path: 'verify-account',
-        component: VerifyComponent
+        component: VerifyComponent,
+        title: Title.accoutVerification
       },
       {
         path: 'company-detail',
-        component: CompanyDetailComponent
+        component: CompanyDetailComponent,
+        title: Title.employerCompanyDetail
       }
     ]
   },
   {
     path: 'employer/login',
-    component: LoginComponent
+    component: LoginComponent,
+    title: Title.login
   },
   {
     path: 'employer',
@@ -54,20 +58,24 @@ const routes: Routes = [
     children: [
       {
         path: 'dashboard',
-        component: DashboardComponent
+        component: DashboardComponent,
+        title: Title.employerDashboard
       },
       {
         path: 'jobs',
-        component: JobsComponent
+        component: JobsComponent,
+        title: Title.employerManageJobs
       },
       {
         path: 'job/new',
         component: NewJobComponent,
+        title: Title.employerNewJob
         // canDeactivate:[pendingChangesGuard]  
       },
       {
         path: 'job/:postJobDetailId',
-        component: ViewJobComponent
+        component: ViewJobComponent,
+        title: Title.jobInfo
       },
       {
         path: 'job/edit/:postJobDetaiId',
@@ -75,19 +83,23 @@ const routes: Routes = [
       },
       {
         path: 'account-settings',
-        component: AccountSettingsEmployerComponent
+        component: AccountSettingsEmployerComponent,
+        title: Title.accountSettings
       },
       {
         path: 'profile',
-        component: EmployerProfileComponent
+        component: EmployerProfileComponent,
+        title: Title.profile
       },
       {
         path: 'job-seeker/profile/:jobSeekerId/:jobId',
-        component: JobSeekerProfileComponent
+        component: JobSeekerProfileComponent,
+        title: Title.jobSeekerProfile
       },
       {
         path: 'view-applicants',
-        component: JobCardsComponent
+        component: JobCardsComponent,
+        title: Title.employerViewApplications
       }
     ]
   },
