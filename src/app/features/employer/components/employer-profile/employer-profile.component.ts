@@ -87,12 +87,15 @@ export class EmployerProfileComponent implements OnInit {
         viewMode: 1,
       })
       .subscribe((data: any) => {
+        if (data != null) {
+          this.spinner.show();
+        }
         let file: any = data.file;
         let formData: FormData = new FormData();
         formData.append("profilePicture", file, file.name);
         this.profileService.addProfilePicture(formData).subscribe({
           next: (_data) => {
-            console.log("success");
+            this.toastr.success("Profile Picture Updated");
             this.getProfilePicture();
           },
           error: (error) => {
@@ -118,7 +121,6 @@ export class EmployerProfileComponent implements OnInit {
 
   // -----------------------------------------Cover Picture-----------------------------------------
   updateCoverPicture($event: any) {
-    this.spinner.show();
     this.imageService
       .open($event, {
         aspectRatio: 20 / 4,
@@ -127,12 +129,15 @@ export class EmployerProfileComponent implements OnInit {
         viewMode: 1,
       })
       .subscribe((data: any) => {
+        if (data != null) {
+          this.spinner.show();
+        }
         let file: any = data.file;
         let formData: FormData = new FormData();
         formData.append("coverPicture", file, file.name);
         this.profileService.addCoverPicture(formData).subscribe({
           next: (_data) => {
-            console.log("success");
+            this.toastr.success("Cover Picture Updated");
             this.getCoverPicture();
           },
           error: (error) => {
@@ -161,7 +166,7 @@ export class EmployerProfileComponent implements OnInit {
     this.action = "Update";
     console.log(this.action);
     this.modalService.open(ref).result.then((result) => {});
-    this.spinner.hide()
+    this.spinner.hide();
   }
   executeProfileAction() {
     if (this.action == "Update") {

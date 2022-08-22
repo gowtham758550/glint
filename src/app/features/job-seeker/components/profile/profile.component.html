@@ -13,10 +13,11 @@
         </ng-template>
         <ng-container *ngIf="isImageLoaded; then image; else imageLoader"></ng-container>
         <ng-template #imageLoader>
-            <img src="/assets/defaultProfilePicture.png"
+            <!-- <img src="/assets/defaultProfilePicture.png"
                 class="inner-image rounded-circle img-fluid img-thumbnail pointer"
                 style="width: 150px; height:150px;  margin-left: 2%; margin-top:4%;"
-                (click)="openFileTrigger(fileTigger)" pTooltip="Update Profile picture">
+                (click)="openFileTrigger(fileTigger)" pTooltip="Update Profile picture"> -->
+                <p-skeleton shape="circle" height="150px" width="150px"></p-skeleton>
         </ng-template>
         <ng-template #image>
             <img [src]="imageUrl" class="inner-image rounded-circle img-fluid img-thumbnail pointer"
@@ -182,6 +183,10 @@
                             (click)="editExperience(experienceModal, experience.experienceDetailId)">
                             <i class="pi pi-pencil"></i>
                         </span>
+                        <span class="small ps-1 pointer text-danger"
+                            (click)="deleteExperience(experience.experienceDetailId)">
+                            <i class="pi pi-trash"></i>
+                        </span>
                     </h5>
                     <span class="d-block small fw-bold">
                         {{experience.previousCompanyName}}
@@ -292,7 +297,7 @@
         <div class="text-end pb-3 pe-3">
             <button class="btn btn-orange px-2 py-1 rounded-pill"  [disabled]="!skillForm.valid"
                 (click)="executeSkillAction()">
-                {{action}}
+                Add
             </button>
         </div>
     </ng-template>

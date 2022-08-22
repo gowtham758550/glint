@@ -17,9 +17,11 @@
                 </ng-template>
                 <ng-container *ngIf="isImageLoaded; then image; else imageLoader"></ng-container>
                 <ng-template #imageLoader>
-                    <img id="innerimage" src="/assets/defaultProfilePicture.png"
-                        class="rounded-circle img-fluid img-thumbnail pointer" (click)="openFileTrigger(fileTigger)"
-                        pTooltip="Update Profile picture">
+                    <!-- <img src="/assets/defaultProfilePicture.png"
+                        class="inner-image rounded-circle img-fluid img-thumbnail pointer"
+                        style="width: 150px; height:150px;  margin-left: 2%; margin-top:4%;"
+                        (click)="openFileTrigger(fileTigger)" pTooltip="Update Profile picture"> -->
+                        <p-skeleton shape="circle" height="150px" width="150px" style="margin-left: 2%; margin-top: 4%"></p-skeleton>
                 </ng-template>
                 <ng-template #image>
                     <img id="innerimage" [src]="imageUrl" class=" rounded-circle mt-5 img-fluid img-thumbnail pointer"

@@ -57,20 +57,20 @@ export class ProfileComponent implements OnInit, OnDestroy {
 
   preferredJobFields: FormField[] = [
     {
-      type: 'chips',
-      label: 'Enter Job Title',
-      formControlName: 'preferredJobTitle',
-      class: ['w'],
+      type: "chips",
+      label: "Enter Job Title",
+      formControlName: "preferredJobTitle",
+      class: ["w"],
     },
   ];
   skillFields: FormField[] = [
     {
-      type: 'chips',
-      label: 'Enter your skills ',
-      formControlName: 'SkillTitle',
-      class: ['w'],
-    }
-  ]
+      type: "chips",
+      label: "Enter your skills ",
+      formControlName: "SkillTitle",
+      class: ["w"],
+    },
+  ];
 
   profileFields: FormField[] = [
     {
@@ -225,6 +225,9 @@ export class ProfileComponent implements OnInit, OnDestroy {
         viewMode: 1,
       })
       .subscribe((data: any) => {
+        if (data != null) {
+          this.spinner.show();
+        }
         let file: any = data.file;
         let formData: FormData = new FormData();
         formData.append("profilePicture", file, file.name);
@@ -267,7 +270,9 @@ export class ProfileComponent implements OnInit, OnDestroy {
         viewMode: 1,
       })
       .subscribe((data: any) => {
-        // this.output = data;
+        if (data != null) {
+          this.spinner.show();
+        }
         let file: any = data.file;
         let formData: FormData = new FormData();
         formData.append("coverPicture", file, file.name);
@@ -340,7 +345,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
       .getEducation()
       .subscribe((res) => {
         this.educationArray = res;
-        console.log(this.educationArray)
+        console.log(this.educationArray);
       });
   }
   //----------------------- Get Experience List Api Call ---------------------------------
@@ -522,10 +527,12 @@ export class ProfileComponent implements OnInit, OnDestroy {
   }
 
   deleteExperience(id: number) {
+    this.spinner.show();
     this.experienceService.deleteExperienceById(id).subscribe((res) => {
       console.log(res);
       this.getExperienceList();
       this.toastr.success("Experience deleted");
+      this.spinner.hide();
     });
     this.experienceDetails.removeAt(id);
   }
@@ -610,16 +617,16 @@ export class ProfileComponent implements OnInit, OnDestroy {
   }
   deleteJob(jobId: number) {
     this.spinner.show();
-    this.preferredJobService
-      .deletePreferredJobbyId(jobId)
-      .subscribe({
-        next: () => {
-          this.preferredJobArray = this.preferredJobArray.filter((preferredJob: any) => {
-            return preferredJob.preferredJobId != jobId
-          });
-          this.spinner.hide();
-        }
-      });
+    this.preferredJobService.deletePreferredJobbyId(jobId).subscribe({
+      next: () => {
+        this.preferredJobArray = this.preferredJobArray.filter(
+          (preferredJob: any) => {
+            return preferredJob.preferredJobId != jobId;
+          }
+        );
+        this.spinner.hide();
+      },
+    });
     console.log(jobId);
   }
   addJob(jobToAdd: any) {
@@ -628,32 +635,45 @@ export class ProfileComponent implements OnInit, OnDestroy {
       .addPreferredJob([{ jobTitle: jobToAdd.preferredJobTitle }])
       .subscribe((res) => this.getPreferredJob());
   }
-  preferredjobArray: any=[];
+  preferredjobArray: any = [];
   executePreferredJobAction() {
     if (this.action == "Add") {
       this.preferredJobService.getPreferredJob().subscribe((res: any) => {
         for (var j = 0; j < res.length; j++) {
           this.preferredjobArray.push(res[j].jobTitle);
         }
-        for (var i = 0; i < this.preferredJobForm.value.preferredJobTitle.length; i++) {
-          console.log(this.preferredjobArray)
+        for (
+          var i = 0;
+          i < this.preferredJobForm.value.preferredJobTitle.length;
+          i++
+        ) {
+          console.log(this.preferredjobArray);
           for (var j = 0; j < this.preferredjobArray.length; j++) {
             console.log(this.preferredjobArray[j]);
-            if (this.preferredjobArray[j].toLowerCase()=== (this.preferredJobForm.value.preferredJobTitle[i].toLowerCase())) {
+            if (
+              this.preferredjobArray[j].toLowerCase() ===
+              this.preferredJobForm.value.preferredJobTitle[i].toLowerCase()
+            ) {
               this.isPreferredJobAdded = false;
               break;
             }
-
           }
         }
         if (this.isPreferredJobAdded) {
-          for (var i = 0; i < this.preferredJobForm.value.preferredJobTitle.length; i++) {
-            this.preferredJobService.addPreferredJob([{ jobTitle: this.preferredJobForm.value.preferredJobTitle[i] }]).subscribe(res => this.getPreferredJob());
-            this.toastr.success('Job added');
+          for (
+            var i = 0;
+            i < this.preferredJobForm.value.preferredJobTitle.length;
+            i++
+          ) {
+            this.preferredJobService
+              .addPreferredJob([
+                { jobTitle: this.preferredJobForm.value.preferredJobTitle[i] },
+              ])
+              .subscribe((res) => this.getPreferredJob());
+            this.toastr.success("Job added");
             this.modalService.dismissAll();
           }
-        }
-        else {
+        } else {
           this.isPreferredJobAdded = true;
           this.toastr.warning("Job already added");
           this.modalService.dismissAll();
@@ -666,15 +686,15 @@ export class ProfileComponent implements OnInit, OnDestroy {
   skillForm!: FormGroup;
   getskill(): FormGroup {
     return this.formBuilder.group({
-      SkillTitle: ['', Validators.required]
-    })
+      SkillTitle: ["", Validators.required],
+    });
   }
   // Modal Add job
   addskill(ref: any) {
     this.skillForm = this.getskill();
     this.modalService.open(ref).result.then((result) => {});
   }
-  
+
   getSkill() {
     this.skillService.getSkills().subscribe((res) => {
       this.skillArray = res;
@@ -688,10 +708,10 @@ export class ProfileComponent implements OnInit, OnDestroy {
       next: () => {
         this.toastr.success(`Skill deleted`);
         this.skillArray = this.skillArray.filter((skill: any) => {
-          return skill['skillId'] != skillId;
+          return skill["skillId"] != skillId;
         });
         this.spinner.hide();
-      }
+      },
     });
   }
   addSkill(jobToAdd: any) {
@@ -702,27 +722,28 @@ export class ProfileComponent implements OnInit, OnDestroy {
         next: () => {
           this.skillArray.push(jobToAdd);
           this.spinner.hide();
-        }
+        },
       });
   }
 
-
-  skillTitleArray: any = []
+  skillTitleArray: any = [];
   executeSkillAction() {
-    if (this.action == 'Add') {
-      this.skillService.getSkills().subscribe(res => {
-        console.log(this.skillForm.value.SkillTitle)
+    if (this.action == "Add") {
+      this.skillService.getSkills().subscribe((res) => {
+        console.log(this.skillForm.value.SkillTitle);
         for (var i = 0; i < res.length; i++) {
-          this.skillTitleArray.push(res[i].skillTitle)
+          this.skillTitleArray.push(res[i].skillTitle);
         }
         for (var i = 0; i < this.skillForm.value.SkillTitle.length; i++) {
-          console.log(this.skillTitleArray)
+          console.log(this.skillTitleArray);
           for (var j = 0; j < this.skillTitleArray.length; j++) {
-            if (this.skillTitleArray[j].toLowerCase() === (this.skillForm.value.SkillTitle[i].toLowerCase())) {
+            if (
+              this.skillTitleArray[j].toLowerCase() ===
+              this.skillForm.value.SkillTitle[i].toLowerCase()
+            ) {
               this.isSkillAdded = false;
               break;
             }
-
           }
           // if (res[i].skillTitle === this.skillForm.value.skillTitle) {
           //   console.log(this.skillForm.value.skillTitle)
@@ -732,12 +753,13 @@ export class ProfileComponent implements OnInit, OnDestroy {
         }
         if (this.isSkillAdded) {
           for (var i = 0; i < this.skillForm.value.SkillTitle.length; i++) {
-            this.skillService.addSkills([{ skillTitle: this.skillForm.value.SkillTitle[i] }]).subscribe(res => this.getSkill());
+            this.skillService
+              .addSkills([{ skillTitle: this.skillForm.value.SkillTitle[i] }])
+              .subscribe((res) => this.getSkill());
             this.modalService.dismissAll();
           }
-          this.toastr.success('Skills added');
-        }
-        else {
+          this.toastr.success("Skills added");
+        } else {
           this.isSkillAdded = true;
           this.toastr.warning("Skill already added!");
           this.modalService.dismissAll();
