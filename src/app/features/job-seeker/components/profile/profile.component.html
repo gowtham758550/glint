@@ -146,6 +146,10 @@
                             (click)="editEducation(educationModal, education.educationDetailId)">
                             <i class="pi pi-pencil"></i>
                         </span>
+                        <span class="small ps-1 pointer text-danger"
+                            (click)="deleteEducation(education.educationDetailId)">
+                            <i class="pi pi-trash"></i>
+                        </span>
                     </h5>
                     <span class="d-block small fw-bold text-orange">
                         {{education.universityName}}

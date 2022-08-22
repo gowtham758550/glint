@@ -58,7 +58,7 @@
     </app-form> -->
 
     <!-- education details -->
-    <div class="card p-3">
+    <div class="card-shadow p-3">
         <div class="d-flex">
             <div class="flex-grow-1 fs-5">
                 Education
@@ -101,7 +101,7 @@
     </div>
     <div class="pt-3"></div>
     <!-- experience details -->
-    <div class="card p-3">
+    <div class="card-shadow p-3">
         <div class="d-flex">
             <div class="flex-grow-1 fs-5">
                 Experience
@@ -142,7 +142,7 @@
     </div>
     <div class="pt-3"></div>
     <!-- Preferred Job -->
-    <div class="card-shadow">
+    <div class="card-shadow p-3">
         <!-- card body -->
         <div class="card-body">
             <!-- card title -->
@@ -167,7 +167,7 @@
 
     <!-- Skills Section -->
 
-    <div class="card-shadow">
+    <div class="card-shadow p-3">
         <!-- card body -->
         <div class="card-body">
             <!-- card title -->
@@ -209,7 +209,7 @@
         </h4>
         <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
     </div>
-    <div class="modal-body d-flex justify-content-center">
+    <div class="modal-body">
         <app-form [formGroup]="educationForm" [formFields]="educationFields">
         </app-form>
     </div>
@@ -230,7 +230,7 @@
         </h4>
         <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
     </div>
-    <div class="modal-body d-flex justify-content-center">
+    <div class="modal-body">
         <app-form [formGroup]="experienceForm" [formFields]="experienceFields">
         </app-form>
     </div>

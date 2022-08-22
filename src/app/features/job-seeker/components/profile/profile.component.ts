@@ -435,10 +435,12 @@ export class ProfileComponent implements OnInit, OnDestroy {
   }
 
   deleteEducation(id: number) {
+    this.spinner.show();
     this.educationService.deleteEducationById(id).subscribe((res) => {
       console.log(res);
       this.getEducationList();
       this.toastr.success("Education deleted");
+      this.spinner.hide();
     });
     this.educationDetails.removeAt(id);
   }
