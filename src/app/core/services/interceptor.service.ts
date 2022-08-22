@@ -32,7 +32,7 @@ export class Interceptor implements HttpInterceptor {
                     if (typeof error.error.title == 'string') errorMessage = error.error.title;
                     else if (typeof error.error == 'string') errorMessage = error.error;
                     else if (typeof error.error.error == 'string') errorMessage = error.error.error;
-                    else errorMessage = 'Unknow error'
+                    else errorMessage = 'Unknown error'
                     this.toastr.error(errorMessage);
                     console.log(error.error);
                     setTimeout(() => {
