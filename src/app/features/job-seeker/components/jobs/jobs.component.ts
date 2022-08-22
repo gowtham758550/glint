@@ -50,9 +50,11 @@ export class JobsComponent implements OnInit {
   
   getJobs() {
     this.isLoaded = false;
+    console.log("started");
     let filters: string[] = [];
     this.filteredLocations = [];
     this.filteredExperience = [];
+    console.log("started");
     this.activatedRoute.queryParams.subscribe((params: any) => {
       if (Object.keys(params).length != 0) {
         if (params.designation && params.designation != "") {
@@ -180,6 +182,7 @@ export class JobsComponent implements OnInit {
 
 
   getPaginatorValue(event: any) {
+    // console.log(event.page);
     this.pageNumber = event.page + 1;
     this.getJobs();
 
