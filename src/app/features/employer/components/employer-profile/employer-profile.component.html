@@ -1,19 +1,19 @@
 <div class="d-flex justify-content-center align-items-center h-100">
     <div class="flex-grow-1">
         <!-- Profile Image -->
-        <div class="card shadow">
+        <div class="card-shadow">
             <div class="div">
                 <ng-container *ngIf="isCoverImageLoaded; then coverImage; else coverImageLoader"></ng-container>
                 <ng-template #coverImageLoader>
                     <img id="coverpicture" class="rounded-top text-white d-flex flex-row"
                         style="height:170px; width:100%; cursor: pointer; background-repeat: no-repeat; background-size: cover; background-blend-mode: darken;"
                         src="/assets/defaultCoverPicture.jpg" (click)="openFileTrigger(coverPicture)"
-                        pTooltip="Update Cover picture">
+                        pTooltip="Update Cover picture" tooltipPosition="bottom">
                 </ng-template>
                 <ng-template #coverImage>
                     <img id="coverpicture" class="rounded-top text-white d-flex flex-row"
                         style="height:170px; width:100%; cursor: pointer; background-repeat: no-repeat; background-size: cover; background-blend-mode: darken;"
-                        [src]="backgroundImage" (click)="openFileTrigger(coverPicture)" pTooltip="Update Cover picture">
+                        [src]="backgroundImage" tooltipPosition="bottom" (click)="openFileTrigger(coverPicture)" pTooltip="Update Cover picture">
                 </ng-template>
                 <ng-container *ngIf="isImageLoaded; then image; else imageLoader"></ng-container>
                 <ng-template #imageLoader>
@@ -37,29 +37,31 @@
                 <div class="card-body p-4 text-black" style="left:10px; top:25px;">
                     <div class="flex">
                         <div class="flex">
-                            <p class="lead fw-normal mb-1 float-start">{{employerArray.companyName}}
+                            <p class="lead fw-bold text-orange mb-1 float-start">{{employerArray.companyName}}
                             </p>
                             <div class="float-end">
                                 <button class="btn btn-rounded rounded-pill btn-raised bg-orange" (click)="updateProfile(profileModal)">
-                                Edit Profile</button>
+                                    <i class="pi pi-pencil"></i>
+                                    Edit Profile
+                                </button>
                             </div>
                             <span class="clearfix"></span>
-                            <p class="fw-200 mb-1">{{employerArray.firstName}} {{employerArray.lastName}}</p>
+                            <p class="fw-bold mb-1">{{employerArray.firstName}} {{employerArray.lastName}}</p>
 
                             <span class="clearfix"></span>
                             <p>
-                                <span><i class="p-2 pi pi-envelope"></i></span>
-                                <span class="ms-2">Email : {{email}}</span>
+                                <span><i class="pi pi-envelope"></i></span>
+                                <span class="ms-2">{{email}}</span>
                             </p>
                             <span class="clearfix"></span>
                             <p>
-                                <span><i class="p-2 pi pi-calendar"></i></span>
-                                <span class="ms-2">Date Of Birth :
-                                    {{employerArray.dateOfBirth}}</span>
+                                <span><i class="pi pi-calendar"></i></span>
+                                <span class="ms-2">
+                                    {{employerArray.dateOfBirth | date}}</span>
                             </p>
                             <p>
-                                <span><i class="p-2 pi pi-phone"></i></span>
-                                <span class="ms-2">Contact Number :
+                                <span><i class="pi pi-phone"></i></span>
+                                <span class="ms-2">
                                     {{employerArray.contactNumber}}</span>
                             </p>
 
@@ -72,13 +74,12 @@
     </div>
 </div>
 <div class="p-3"></div>
-<div class="card shadow p-4" style="margin-top:0%">
+<div class="card-cshadow p-4" style="margin-top:0%">
     <div class="d-flex">
-        <div class="flex-grow-1 fs-4">
+        <div class="flex-grow-1 fs-4 fw-bold text-orange">
             About
         </div>
     </div>
-    <hr>
     <div class="d-flex">
         <div class="flex-grow-1 fw-normal">
             {{employerArray.about}}
