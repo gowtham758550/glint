@@ -6,6 +6,15 @@ import { SkeletonModule } from 'primeng/skeleton';
 import { KnobModule } from 'primeng/knob';
 import { NgxEchartsModule } from 'ngx-echarts';
 import { ScrollPanelModule } from 'primeng/scrollpanel';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { DialogModule } from 'primeng/dialog';
+import { DatePipe } from '@angular/common';
+import { PasswordModule } from "primeng/password";
+import { DividerModule } from "primeng/divider";
+import { TooltipModule } from 'primeng/tooltip';
+import { BadgeModule } from "primeng/badge";
+import { NgxPhotoEditorModule } from 'ngx-photo-editor';
+
 import { EmployerRoutingModule } from './employer-routing.module';
 import { RegisterComponent } from './components/register/register.component';
 import { SharedModule } from 'src/app/shared/shared.module';
@@ -19,20 +28,11 @@ import { JobsComponent } from './components/jobs/jobs.component';
 import { EditJobComponent } from './components/edit-job/edit-job.component';
 import { ViewJobComponent } from './components/view-job/view-job.component';
 import { AccountSettingsEmployerComponent } from './components/account-settings-employer/account-settings-employer.component';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { DialogModule } from 'primeng/dialog';
 import { EmployerProfileComponent } from './components/employer-profile/employer-profile.component';
-import { DatePipe } from '@angular/common';
 import { JobSeekerProfileComponent } from './components/job-seeker-profile/job-seeker-profile.component'
-import { DividerModule } from "primeng/divider";
-import { PasswordModule } from "primeng/password";
-import { NgxPhotoEditorModule } from 'ngx-photo-editor';
-import {TooltipModule} from 'primeng/tooltip';
 import { JobSeekerService } from 'src/app/data/services/job-seeker.service';
-import { BadgeModule } from "primeng/badge";
 import { JobCardsComponent } from './components/job-cards/job-cards.component';
 import { LoginComponent } from './components/login/login.component';
-// import { AllApplicantsComponent } from './components/all-applicants/all-applicants.component';
 
 
 
@@ -75,6 +75,6 @@ import { LoginComponent } from './components/login/login.component';
       echarts: () => import('echarts'),
     }),
   ],
-  providers: [DatePipe, JobSeekerService ]
+  providers: [DatePipe, JobSeekerService]
 })
 export class EmployerModule { }

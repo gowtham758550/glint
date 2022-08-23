@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+
 import { Job } from 'src/app/data/models/job.model';
 import { JobService } from 'src/app/data/services/job.service';
 

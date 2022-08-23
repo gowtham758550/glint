@@ -1,5 +1,6 @@
 import { NgModule } from "@angular/core";
 import { RouterModule, Routes } from "@angular/router";
+
 import { RouteConstants } from "../data/enums/constatnts/route.constants";
 import { Title } from "../data/enums/constatnts/title.constants";
 import { ForgotPasswordComponent } from "./components/forgot-password/forgot-password.component";

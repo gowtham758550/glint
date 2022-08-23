@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+
 import { RouteConstants } from 'src/app/data/enums/constatnts/route.constants';
 
 @Component({

@@ -1,15 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrService } from 'ngx-toastr';
 import { PrimeNGConfig } from 'primeng/api';
+
 import { RouteConstants } from 'src/app/data/enums/constatnts/route.constants';
 import { FormField } from 'src/app/data/models/form-field.model';
 import { AuthService } from 'src/app/data/services/auth.service';
 import { EmployerService } from 'src/app/data/services/employer.service';
-import { JobSeekerService } from 'src/app/data/services/job-seeker.service';
-import { LocalStorage } from 'src/app/data/services/local-storage.service';
 
 @Component({
   selector: 'app-account-settings-employer',

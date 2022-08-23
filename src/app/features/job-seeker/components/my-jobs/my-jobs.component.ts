@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { PrimeIcons } from 'primeng/api';
+
 import { RouteConstants } from 'src/app/data/enums/constatnts/route.constants';
 import { Status } from 'src/app/data/enums/status.enum';
 import { AppliedJob } from 'src/app/data/models/applied-job.model';

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+
 import { RouteConstants } from 'src/app/data/enums/constatnts/route.constants';
 import { SideNavItem } from 'src/app/data/models/sidenav-item.model';
 import { AuthService } from 'src/app/data/services/auth.service';

@@ -1,14 +1,14 @@
 import { AfterContentInit, Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
+import { NgxSpinnerService } from 'ngx-spinner';
+
 import { Job } from 'src/app/data/models/job.model';
 import { JobService } from 'src/app/data/services/job.service';
-import { LocalStorage } from 'src/app/data/services/local-storage.service';
 import { AuthService } from "src/app/data/services/auth.service";
-import { ToastrService } from 'ngx-toastr';
 import { AppliedJobService } from 'src/app/data/services/applied-job.service';
 import { FilterService } from 'src/app/data/services/filter.service';
 import { environment } from 'src/environments/environment';
-import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-job-info',

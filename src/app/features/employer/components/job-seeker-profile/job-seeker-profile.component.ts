@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
+import { NgxSpinnerService } from 'ngx-spinner';
+
 import { FilterService } from 'src/app/data/services/filter.service';
-import { Appliers } from 'src/app/data/models/appliers.model';
 import { BlobService } from 'src/app/data/services/blob.service';
 import { EducationService } from 'src/app/data/services/education.service';
 import { ExperienceService } from 'src/app/data/services/experience.service';
@@ -9,10 +11,7 @@ import { JobSeekerService } from 'src/app/data/services/job-seeker.service';
 import { environment } from 'src/environments/environment';
 import { SkillsService } from 'src/app/data/services/skills.service';
 import { AppliedJobService } from 'src/app/data/services/applied-job.service';
-import { NgxSpinnerService } from 'ngx-spinner';
-import { ToastrService } from 'ngx-toastr';
 import { Status } from 'src/app/data/enums/status.enum';
-import { RouteConstants } from 'src/app/data/enums/constatnts/route.constants';
 
 @Component({
   selector: 'app-job-seeker-profile',

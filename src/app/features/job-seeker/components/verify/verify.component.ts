@@ -1,4 +1,4 @@
-import { AfterContentChecked, AfterContentInit, Component, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-verify-job-seeker',

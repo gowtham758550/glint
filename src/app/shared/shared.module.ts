@@ -8,6 +8,7 @@ import { DropdownModule } from 'primeng/dropdown'
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { StepsModule } from 'primeng/steps';
 import { ChipsModule } from 'primeng/chips';
+
 import { StepperComponent } from './components/stepper/stepper.component';
 import { FormComponent } from './components/form/form.component';
 import { LogoComponent } from './components/logo/logo.component';

@@ -1,15 +1,15 @@
 import { Component, OnInit, TemplateRef } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { ToastrService } from 'ngx-toastr';
+import { Router } from '@angular/router';
+import { NgxPhotoEditorService } from 'ngx-photo-editor';
+
 import { FormField } from 'src/app/data/models/form-field.model';
 import { JobSeekerService } from 'src/app/data/services/job-seeker.service';
 import { LocalStorage } from 'src/app/data/services/local-storage.service';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { ToastrService } from 'ngx-toastr';
 import { EducationService } from 'src/app/data/services/education.service';
-import { Education } from 'src/app/data/models/education.model';
 import { ExperienceService } from 'src/app/data/services/experience.service';
-import { Router } from '@angular/router';
-import { NgxPhotoEditorService } from 'ngx-photo-editor';
 import { BlobService } from 'src/app/data/services/blob.service';
 import { environment } from 'src/environments/environment';
 import { PreferredJobService } from 'src/app/data/services/preferred-job.service';
@@ -321,9 +321,7 @@ export class PersonalInfoComponent implements OnInit {
 
   complete() {
     if (!this.isProfilePhotoUploaded) {
-      // let file: File = path
       let formData: FormData = new FormData();
-      // formData.append('profilePicture', file, file.name);
     }
     this.jobSeekerService.updateProfile(this.profileForm.value).subscribe();
     const educations = [];

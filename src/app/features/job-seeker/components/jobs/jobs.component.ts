@@ -1,11 +1,11 @@
 import { Component, HostListener, OnInit } from "@angular/core";
 import { ActivatedRoute, Router } from "@angular/router";
+
 import { Location } from "src/app/data/enums/location.enum";
 import { Experience } from "src/app/data/models/experience.enum";
 import { Job } from "src/app/data/models/job.model";
 import { FilterService } from "src/app/data/services/filter.service";
 import { RouteConstants } from "src/app/data/enums/constatnts/route.constants";
-import { Paginator } from "primeng/paginator";
 
 @Component({
   selector: "app-job-seeker-jobs",

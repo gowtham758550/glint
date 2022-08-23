@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder } from '@angular/forms';
 import { MenuItem } from 'primeng/api';
-import { FormField } from 'src/app/data/models/form-field.model';
 
 @Component({
   selector: 'app-register',

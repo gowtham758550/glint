@@ -1,7 +1,5 @@
 import { Component, EventEmitter, HostListener, Input, OnInit, Output } from '@angular/core';
 import { FormGroup, FormBuilder } from '@angular/forms';
-import { Observable } from 'rxjs';
-import { pendingChangesGuard } from 'src/app/core/guards/pendingChanges.guard';  
 import { FormField } from 'src/app/data/models/form-field.model';
 
 @Component({

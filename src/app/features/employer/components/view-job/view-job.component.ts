@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+
 import { RouteConstants } from 'src/app/data/enums/constatnts/route.constants';
 import { Status } from 'src/app/data/enums/status.enum';
 import { Appliers } from 'src/app/data/models/appliers.model';

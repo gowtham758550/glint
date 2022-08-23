@@ -1,16 +1,16 @@
 import { formatDate } from "@angular/common";
 import { Component, OnInit } from "@angular/core";
 import { FormGroup } from "@angular/forms";
-import { Validators, FormArray, FormBuilder } from "@angular/forms";
+import { Validators, FormBuilder } from "@angular/forms";
 import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
 import { ToastrService } from "ngx-toastr";
+
 import { FormField } from "src/app/data/models/form-field.model";
 import { AuthService } from "src/app/data/services/auth.service";
 import { EmployerService } from "src/app/data/services/employer.service";
-import { JobSeekerService } from "src/app/data/services/job-seeker.service";
 import { LocalStorage } from "src/app/data/services/local-storage.service";
 import { DatePipe } from "@angular/common";
-import { NgxCroppedEvent, NgxPhotoEditorService } from "ngx-photo-editor";
+import { NgxPhotoEditorService } from "ngx-photo-editor";
 import { BlobService } from "src/app/data/services/blob.service";
 import { environment } from "src/environments/environment";
 import { NgxSpinnerService } from "ngx-spinner";
