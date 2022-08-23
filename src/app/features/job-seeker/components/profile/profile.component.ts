@@ -229,11 +229,9 @@ export class ProfileComponent implements OnInit {
         formData.append("profilePicture", file, file.name);
         this.profileService.addProfilePicture(formData).subscribe({
           next: (_data) => {
-            console.log("success");
             this.getProfilePicture();
           },
           error: (error) => {
-            console.log(error);
           },
         });
       });
@@ -266,11 +264,9 @@ export class ProfileComponent implements OnInit {
         formData.append("coverPicture", file, file.name);
         this.profileService.addCoverPicture(formData).subscribe({
           next: (_data) => {
-            console.log("success");
             this.getCoverPicture();
           },
           error: (error) => {
-            console.log(error);
           },
         });
       });
@@ -292,22 +288,17 @@ export class ProfileComponent implements OnInit {
   uploadResume(event: any) {
     this.spinner.show();
     let fileList: FileList = event.target.files;
-    console.log(fileList);
     if (fileList.length > 0) {
       let file: File = fileList[0];
-      console.log(file);
       let formData: FormData = new FormData();
       formData.append("resume", file, file.name);
-      console.log(formData);
       this.profileService.addResume(formData).subscribe({
         next: (_data) => {
-          console.log("success");
           this.toastr.success("Resume uploaded successfully!");
           //this.getResume();
           this.spinner.hide();
         },
         error: (error) => {
-          console.log(error);
         },
       });
     }
@@ -315,8 +306,6 @@ export class ProfileComponent implements OnInit {
 
   getResume() {
     this.blobService.getResume().subscribe((res: any) => {
-      console.log(res);
-      console.log(res.url);
       var link = document.createElement("a");
       link.href = res.url + "?" + environment.resume_sas_token;
       link.click();
@@ -330,9 +319,7 @@ export class ProfileComponent implements OnInit {
      this.educationService
       .getEducation()
       .subscribe((res) => {
-        console.log(res);
         this.educationArray = res;
-        console.log(this.educationArray)
       });
   }
   //----------------------- Get Experience List Api Call ---------------------------------
@@ -341,9 +328,7 @@ export class ProfileComponent implements OnInit {
      this.experienceService
       .getExperience()
       .subscribe((res) => {
-        console.log(res);
         this.experienceArray = res;
-        console.log(this.experienceArray);
       });
   }
   //-----------------------Get JobSeeker Detail Api Call ---------------------------------
@@ -429,7 +414,6 @@ export class ProfileComponent implements OnInit {
 
   deleteEducation(id: number) {
     this.educationService.deleteEducationById(id).subscribe((res) => {
-      console.log(res);
       this.getEducationList();
       this.toastr.success("Education deleted");
     });
@@ -440,13 +424,10 @@ export class ProfileComponent implements OnInit {
     if (this.action == "Add") {
       const currentEducation: any = [];
       currentEducation.push(this.educationForm.value);
-      console.log(this.educationForm.value);
       this.educationService.addEducations(currentEducation).subscribe((res) => {
-        console.log(res);
         this.getEducationList();
       });
       this.educationDetails.push(this.educationForm);
-      console.log(this.educationDetails);
       this.toastr.success("Education added");
     } else {
       this.educationToEdit = {
@@ -461,7 +442,6 @@ export class ProfileComponent implements OnInit {
       this.educationService
         .updateEducationById(this.editableId, this.educationToEdit)
         .subscribe((res) => {
-          console.log(res);
           this.getEducationList();
         });
       this.educationDetails.controls[this.editableId] = this.educationForm;
@@ -695,11 +675,6 @@ export class ProfileComponent implements OnInit {
             }
 
           }
-          // if (res[i].skillTitle === this.skillForm.value.skillTitle) {
-          //   console.log(this.skillForm.value.skillTitle)
-          //   this.isSkillAdded = false;
-          //   break;
-          // }
         }
         if (this.isSkillAdded) {
           for (var i = 0; i < this.skillForm.value.SkillTitle.length; i++) {
