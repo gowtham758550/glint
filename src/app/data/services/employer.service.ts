@@ -3,6 +3,7 @@ import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
 import { environment } from "src/environments/environment";
 import { changePasswordDTO } from "../models/change-password.model";
+import { employerProfile } from "../models/employerProfile.model";
 
 @Injectable({
     providedIn: 'root'
@@ -27,10 +28,10 @@ export class EmployerService {
     }
     changeEmail(email:string){
         console.log(email);
-        return this.httpClient.get(`${this.host}/change_email/${email}`, {responseType: 'text'});
+        return this.httpClient.get<employerProfile[]>(`${this.host}/change_email/${email}`);
     }
     getEmployerById(){
-        return this.httpClient.get(`${this.host}/get`);
+        return this.httpClient.get<employerProfile[]>(`${this.host}/get`);
     }
 
 }

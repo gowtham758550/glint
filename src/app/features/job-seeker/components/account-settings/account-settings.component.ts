@@ -78,7 +78,6 @@ export class AccountSettingsComponent implements OnInit {
   // --------------------------  change password --------------------------------------------
 
   changePassword(currentPassword: string, newPassword: string) {
-    console.log(currentPassword, newPassword)
     this.passwordObject = { CurrentPassword: currentPassword, NewPassword: newPassword }
     this.jobseekerservice.changePassword(this.passwordObject).subscribe({
       next: () => {
@@ -94,7 +93,6 @@ export class AccountSettingsComponent implements OnInit {
     console.log(password.value)
   }
   checkNewPassword(newPassword: string) {
-    console.log(newPassword);
     if (newPassword === this.currentPassword) {
       this.toastr.warning("Current Password and New Password cannot be same")
       this.showButton = false;
@@ -102,15 +100,14 @@ export class AccountSettingsComponent implements OnInit {
     else if (newPassword === "" || this.currentPassword === "") {
       this.showButton = false;
     }
-    else if(newPassword.length<8){
-
+    else if (newPassword.length < 8) {
+      this.showButton = false;
     }
     else {
       this.showButton = true;
     }
   }
   checkCurrentPassword(currentPassword: string) {
-    console.log(this.newPassword)
     if (currentPassword === "" || this.newPassword === "") {
       this.showButton = false;
     }
@@ -128,7 +125,6 @@ export class AccountSettingsComponent implements OnInit {
     this.action = 'Update';
     // this.emailForm.controls['Email'].setValue(this.Email)
     const updatedEmail = this.Email;
-    console.log(updatedEmail)
     this.jobseekerservice.changeEmail(updatedEmail)
       .subscribe({
         next: () => {

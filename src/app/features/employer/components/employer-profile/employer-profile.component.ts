@@ -14,6 +14,7 @@ import { NgxCroppedEvent, NgxPhotoEditorService } from "ngx-photo-editor";
 import { BlobService } from "src/app/data/services/blob.service";
 import { environment } from "src/environments/environment";
 import { NgxSpinnerService } from "ngx-spinner";
+import { employerProfile } from "src/app/data/models/employerProfile.model";
 
 @Component({
   selector: "app-employer-profile",
@@ -27,7 +28,7 @@ export class EmployerProfileComponent implements OnInit {
   imageUrl: string = "/assets/defaultProfilePicture.png";
 
   profileForm!: FormGroup;
-  employerArray: any = [];
+  employerArray!: employerProfile;
   email!: string;
   accessToken = this.localStorage.getItem("accessToken");
   profileFields: FormField[] = [
@@ -70,6 +71,8 @@ export class EmployerProfileComponent implements OnInit {
   ];
   action!: string;
   jobSeekerProfile: any;
+
+  //  Updating Profile Picture Method
 
   openFileTrigger(component: HTMLElement) {
     component.click();
@@ -154,7 +157,7 @@ export class EmployerProfileComponent implements OnInit {
     this.spinner.show();
     this.action = "Update";
     console.log(this.action);
-    this.modalService.open(ref).result.then((result) => {});
+    this.modalService.open(ref).result.then((result) => { });
     this.spinner.hide()
   }
   executeProfileAction() {
@@ -210,7 +213,7 @@ export class EmployerProfileComponent implements OnInit {
     private profileService: BlobService,
     private imageService: NgxPhotoEditorService,
     private spinner: NgxSpinnerService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.spinner.show();
