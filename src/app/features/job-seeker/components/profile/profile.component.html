@@ -6,13 +6,11 @@
                 <ng-container *ngIf="isCoverImageLoaded; then coverImage; else coverImageLoader"></ng-container>
                 <ng-template #coverImageLoader>
                     <img id="coverpicture" class="rounded-top text-white d-flex flex-row"
-                        style="height:170px; width:100%; cursor: pointer; background-repeat: no-repeat; background-size: cover; background-blend-mode: darken;"
                         src="/assets/defaultCoverPicture.jpg" (click)="openFileTrigger(coverPicture)"
                         tooltipPosition="bottom" pTooltip="Update Cover picture">
                 </ng-template>
                 <ng-template #coverImage>
                     <img id="coverpicture" class="rounded-top text-white d-flex flex-row"
-                        style="height:170px; width:100%; cursor: pointer; background-repeat: no-repeat; background-size: cover; background-blend-mode: darken;"
                         [src]="backgroundImage" (click)="openFileTrigger(coverPicture)" pTooltip="Update Cover picture"
                         tooltipPosition="bottom">
                 </ng-template>
@@ -65,21 +63,12 @@
                                             </a></li>
                                     </ul>
                                 </div>
-                                <!-- <button class="btn btn-rounded btn btn-outline-dark
-                                d-none d-md-block bg-dark text-white" (click)="openFileTrigger(resumeTigger)">Upload
-                                    Resume
-                                </button>
-                                <div class="p-1"></div>
-                                <button class="btn btn-rounded btn btn-outline-dark
-                                d-none d-md-block bg-dark text-white" (click)="getResume()">Download Resume
-                                </button> -->
                                 <input type="file" (change)="uploadResume($event)" accept=".pdf" style="display: none;"
                                     #resumeTigger>
 
 
                             </div>
                             <span class="clearfix"></span>
-                            <!-- <p class="fw-200 fs-6 mb-1">{{jobSeekerArray.about}}</p> -->
                             <p class="fw-200 fs-6 mb-1">{{jobSeekerArray.location}}</p>
                             <span class="clearfix"></span>
 

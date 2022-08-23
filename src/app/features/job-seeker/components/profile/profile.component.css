@@ -1,20 +1,30 @@
 div {
-    position: relative;
-  }
-  
-  .inner-image {
-    position: absolute;
-    top: 25px;
-    left: 30px;
-  }
-  :host ::ng-deep .p-chip.custom-chip {
-    background-color: rgb(115, 130, 174);
-    height: auto;
-    width:auto;
-    color: var(--primary-color-text);
+  position: relative;
+}
+
+.inner-image {
+  position: absolute;
+  top: 25px;
+  left: 30px;
+}
+
+:host ::ng-deep .p-chip.custom-chip {
+  background-color: rgb(115, 130, 174);
+  height: auto;
+  width: auto;
+  color: var(--primary-color-text);
 }
 
 .modal-title {
   color: var(--orange);
   font-weight: bold;
+}
+
+#coverpicture {
+  height: 170px;
+  width: 100%;
+  cursor: pointer;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-blend-mode: darken;
 }
