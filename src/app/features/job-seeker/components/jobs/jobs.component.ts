@@ -17,7 +17,6 @@ export class JobsComponent implements OnInit {
   // @HostListener('window:scroll', [])
   // onScroll() {
   //   if (this.isBottomReached()) {
-  //     console.log('reached');
   //   }
   // }
 
@@ -50,11 +49,9 @@ export class JobsComponent implements OnInit {
   
   getJobs() {
     this.isLoaded = false;
-    console.log("started");
     let filters: string[] = [];
     this.filteredLocations = [];
     this.filteredExperience = [];
-    console.log("started");
     this.activatedRoute.queryParams.subscribe((params: any) => {
       if (Object.keys(params).length != 0) {
         if (params.designation && params.designation != "") {
@@ -70,7 +67,6 @@ export class JobsComponent implements OnInit {
             filters.push("experienceNeeded>0");
           }
         } else if (typeof params.experience == "object") {
-          console.log(params.experience);
           params.experience.forEach((e: any) => {
             this.filteredExperience.push(Experience[e]);
           });
@@ -96,7 +92,6 @@ export class JobsComponent implements OnInit {
     this.filterService.getNonAppliedJobs(filters.toString(), this.pageNumber).subscribe({
       next: (data) => {
         this.allJobs = data;
-        // console.log(data)
         this.totalJobs - data.length;
         this.isLoaded = true;
       },
@@ -105,7 +100,6 @@ export class JobsComponent implements OnInit {
 
   applyFilters() {
     this.isLoaded = false;
-    console.log(this.filteredExperience, this.filteredLocations);
     let updatedParams = "";
     // let updatedParams: new HttpParams();
     let updatedFilter: string[] = [];
@@ -116,7 +110,6 @@ export class JobsComponent implements OnInit {
       // updatedParams = updatedParams.set('designation', this.searchText);
       updatedFilter.push(`jobTitle@=*${this.searchText}`);
     }
-    console.log(updatedParams);
     if (_filteredExperience.length > 0) {
       let experienceCount: any = 0;
       _filteredExperience.forEach((e: any) => {
@@ -138,7 +131,6 @@ export class JobsComponent implements OnInit {
     if (_filteredLocation.length > 0) {
       let tempLocation: string[] = [];
       _filteredLocation.forEach((e: any) => {
-        console.log(e);
         updatedParams += `location=${Location[e]}&`;
         // updatedParams = updatedParams.set('location', Location[e]);
         tempLocation.push(e);
@@ -155,7 +147,6 @@ export class JobsComponent implements OnInit {
         //   }
     // );
 
-    console.log("=--=-=-=-=", updatedFilter.toString());
     
     this.filterService.getNonAppliedJobs(updatedFilter.toString(), this.pageNumber).subscribe({
       next: (data) => {
@@ -182,18 +173,15 @@ export class JobsComponent implements OnInit {
 
 
   getPaginatorValue(event: any) {
-    // console.log(event.page);
     this.pageNumber = event.page + 1;
     this.getJobs();
 
   }
   
   // isBottomReached(): boolean {
-  //   console.log(window.innerHeight, window.scrollY, document.body.offsetHeight);
   //   return (window.innerHeight + window.scrollY) >= document.body.offsetHeight;
   // }
 
   getJobMinimal() {
-    this.filterService.getJobMinimal().subscribe(res => { this.minimalJob = res; console.log(this.minimalJob) })
   }
 }

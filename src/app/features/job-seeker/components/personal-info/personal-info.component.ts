@@ -210,11 +210,9 @@ export class PersonalInfoComponent implements OnInit {
         this.profileService.addProfilePicture(formData).subscribe({
           next: (_data) => {
             this.isProfilePhotoUploaded = true;
-            console.log("success");
             this.getProfilePicture();
           },
           error: (error) => {
-            console.log(error);
           },
         });
       });
@@ -315,7 +313,9 @@ export class PersonalInfoComponent implements OnInit {
   updateProfile() {
     this.jobSeekerService.updateProfile(this.profileForm.value)
       .subscribe({
-        next: res => console.log(res)
+        next: () => {
+          this.toastr.success('Profile updated');
+        }
       });
   }
 
@@ -330,16 +330,13 @@ export class PersonalInfoComponent implements OnInit {
     for (let i = 0; i < this.educationDetails.length; i++) {
       educations.push(this.educationDetails.controls[i].value);
     }
-    console.log(educations);
     this.educationService.addEducations(educations).subscribe({
-      next: data => console.log(data)
     });
     const experiences = [];
     for (let i = 0; i < this.experienceDetails.length; i++) {
       experiences.push(this.experienceDetails.controls[i].value);
     }
     this.experienceService.addExperiences(experiences).subscribe({
-      next: data => console.log(data)
     });
     this.toastr.success("Registeration completed");
     this.router.navigateByUrl(this.routeConstants.jobSeekerHome);
@@ -353,7 +350,6 @@ export class PersonalInfoComponent implements OnInit {
   }
   // Modal Add job
   addjob(ref: any) {
-    (this.action = "Add"), console.log(this.action);
     this.preferredJobForm = this.getjob();
 
     this.modalService.open(ref).result.then((result) => {});
@@ -362,18 +358,13 @@ export class PersonalInfoComponent implements OnInit {
   getPreferredJob() {
     this.preferredJobService.getPreferredJob().subscribe((res) => {
       this.preferredJobArray = res;
-      console.log(res);
     });
   }
   deleteJob(jobId: number) {
-    console.log(this.preferredJobArray);
     this.preferredJobService
       .deletePreferredJobbyId(jobId)
-      .subscribe((res) => console.log(res));
-    console.log(jobId);
   }
   addJob(jobToAdd: any) {
-    console.log(jobToAdd);
     this.preferredJobService
       .addPreferredJob([{ jobTitle: jobToAdd.preferredJobTitle }])
       .subscribe((res) => this.getPreferredJob());
@@ -382,14 +373,11 @@ export class PersonalInfoComponent implements OnInit {
   executePreferredJobAction() {
     if (this.action == "Add") {
       this.preferredJobService.getPreferredJob().subscribe((res: any) => {
-        console.log(res);
         for (var j = 0; j < res.length; j++) {
           this.preferredjobArray.push(res[j].jobTitle);
         }
         for (var i = 0; i < this.preferredJobForm.value.preferredJobTitle.length; i++) {
-          console.log(this.preferredjobArray)
           for (var j = 0; j < this.preferredjobArray.length; j++) {
-            console.log(this.preferredjobArray[j]);
             if (this.preferredjobArray[j].toLowerCase()=== (this.preferredJobForm.value.preferredJobTitle[i].toLowerCase())) {
               this.isPreferredJobAdded = false;
               break;
@@ -422,7 +410,6 @@ export class PersonalInfoComponent implements OnInit {
   }
   // Modal Add job
   addskill(ref: any) {
-    (this.action = "Add"), console.log(this.action);
     this.skillForm = this.getskill();
     this.modalService.open(ref).result.then((result) => {});
   }
@@ -430,32 +417,25 @@ export class PersonalInfoComponent implements OnInit {
     this.skillService.getSkills().subscribe((res) => {
       this.skillArray = res;
       // this.spinner.hide();
-      console.log(res);
     });
   }
   deleteSkill(jobId: number) {
-    console.log(jobId);
     this.skillService.deleteSkillbyId(jobId).subscribe((res) => {
-      console.log(res);
     });
-    console.log(jobId);
   }
   addSkill(jobToAdd: any) {
-    console.log(jobToAdd);
     this.skillService
-      .addSkills([{ skillTitle: jobToAdd.skillTitle }])
+      .addSkills([{ skillTitle: jobToAdd.skillTitle, skillId: 0 }])
       .subscribe((res) => this.getSkill());
   }
   skillTitleArray: any = []
   executeSkillAction() {
     if (this.action == 'Add') {
       this.skillService.getSkills().subscribe(res => {
-        console.log(this.skillForm.value.SkillTitle)
         for (var i = 0; i < res.length; i++) {
           this.skillTitleArray.push(res[i].skillTitle)
         }
         for (var i = 0; i < this.skillForm.value.SkillTitle.length; i++) {
-          console.log(this.skillTitleArray)
           for (var j = 0; j < this.skillTitleArray.length; j++) {
             if (this.skillTitleArray[j].toLowerCase() === (this.skillForm.value.SkillTitle[i].toLowerCase())) {
               this.isSkillAdded = false;
@@ -464,14 +444,13 @@ export class PersonalInfoComponent implements OnInit {
 
           }
           // if (res[i].skillTitle === this.skillForm.value.skillTitle) {
-          //   console.log(this.skillForm.value.skillTitle)
           //   this.isSkillAdded = false;
           //   break;
           // }
         }
         if (this.isSkillAdded) {
           for (var i = 0; i < this.skillForm.value.SkillTitle.length; i++) {
-            this.skillService.addSkills([{ skillTitle: this.skillForm.value.SkillTitle[i] }]).subscribe(res => this.getSkill());
+            this.skillService.addSkills([{ skillTitle: this.skillForm.value.SkillTitle[i], skillId: i }]).subscribe(res => this.getSkill());
             this.modalService.dismissAll();
           }
           this.toastr.success('Skills added');

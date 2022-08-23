@@ -5,8 +5,11 @@ import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
 import { NgxPhotoEditorService } from "ngx-photo-editor";
 import { NgxSpinnerService } from "ngx-spinner";
 import { ToastrService } from "ngx-toastr";
+import { ExperienceArray } from "src/app/data/models/experience-array.model";
+import { Experience } from "src/app/data/models/experience.model";
 import { FormField } from "src/app/data/models/form-field.model";
 import { Resume } from "src/app/data/models/resume.model";
+import { Skill } from "src/app/data/models/skill.model";
 import { AuthService } from "src/app/data/services/auth.service";
 import { BlobService } from "src/app/data/services/blob.service";
 import { EducationService } from "src/app/data/services/education.service";
@@ -25,35 +28,34 @@ import { environment } from "src/environments/environment";
 export class ProfileComponent implements OnInit, OnDestroy {
   backgroundImage: string = "/assets/defaultCoverPicture.jpg";
   email!: string;
-  jobSeekerProfile: any = {};
+  jobSeekerProfile = {};
   profileForm!: FormGroup;
   educationInfo: any;
   educationToEdit: any;
   experienceInfo: any;
   imageUrl: string = "/assets/defaultProfilePicture.png";
   experienceToEdit: any;
-  experienceArray: any = [];
-  editableExperience: any;
+  experienceArray: ExperienceArray[] = [];
+  editableExperience!: Experience;
   editableExperienceId!: number;
   jobSeekerArray: any;
-  isCoverclick: boolean = true;
+  isCoverclick = true;
   preferredJobArray: any = [];
-  skillArray: any = [];
+  skillArray: Skill[] = [];
   newPreferredJob!: string;
-  isSkillAdded: boolean = true;
-  isPreferredJobAdded: boolean = true;
+  isSkillAdded = true;
+  isPreferredJobAdded = true;
   profileDetails!: FormGroup;
   educationArray: any = [];
   educationDetails = new FormArray<FormGroup>([]);
   experienceDetails = new FormArray<FormGroup>([]);
   action!: string;
   editableId!: number;
-  editableEducation: any;
-  startDate: any;
-  endDate: any;
+  editableEducation: Object = {};
+  startDate!: Date;
+  endDate!: Date;
   isImageLoaded = false;
   isCoverImageLoaded = false;
-  resume!: any;
   skillDeleteIndex!: number;
 
   preferredJobFields: FormField[] = [
@@ -234,11 +236,9 @@ export class ProfileComponent implements OnInit, OnDestroy {
         formData.append("profilePicture", file, file.name);
         this.profileService.addProfilePicture(formData).subscribe({
           next: (_data) => {
-            console.log("success");
             this.getProfilePicture();
           },
           error: (error) => {
-            console.log(error);
           },
         });
       });
@@ -279,11 +279,9 @@ export class ProfileComponent implements OnInit, OnDestroy {
         formData.append("coverPicture", file, file.name);
         this.profileService.addCoverPicture(formData).subscribe({
           next: (_data) => {
-            console.log("success");
             this.getCoverPicture();
           },
           error: (error) => {
-            console.log(error);
           },
         });
       });
@@ -307,22 +305,17 @@ export class ProfileComponent implements OnInit, OnDestroy {
   uploadResume(event: any) {
     this.spinner.show();
     let fileList: FileList = event.target.files;
-    console.log(fileList);
     if (fileList.length > 0) {
       let file: File = fileList[0];
-      console.log(file);
       let formData: FormData = new FormData();
       formData.append("resume", file, file.name);
-      console.log(formData);
       this.profileService.addResume(formData).subscribe({
         next: (_data) => {
-          console.log("success");
           this.toastr.success("Resume uploaded successfully!");
           //this.getResume();
           this.spinner.hide();
         },
         error: (error) => {
-          console.log(error);
         },
       });
     }
@@ -343,7 +336,6 @@ export class ProfileComponent implements OnInit, OnDestroy {
       .getEducation()
       .subscribe((res) => {
         this.educationArray = res;
-        console.log(this.educationArray);
       });
   }
   //----------------------- Get Experience List Api Call ---------------------------------
@@ -351,9 +343,8 @@ export class ProfileComponent implements OnInit, OnDestroy {
   getExperienceList() {
     this.experienceInfo = this.experienceService
       .getExperience()
-      .subscribe((res) => {
+      .subscribe((res:any) => {
         this.experienceArray = res;
-        console.log(this.experienceArray);
       });
   }
   //-----------------------Get JobSeeker Detail Api Call ---------------------------------
@@ -368,8 +359,6 @@ export class ProfileComponent implements OnInit, OnDestroy {
           res.dateOfBirth,
           "dd-MM-yyyy"
         );
-        console.log(res.dateOfBirth);
-        console.log(res);
         this.jobSeekerArray = res;
       });
   }
@@ -381,9 +370,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
         this.authService.getUserId(this.localStorage.getItem("accessToken"))
       )
       .subscribe((res: any) => {
-        console.log(res);
         this.jobSeekerArray = res;
-        console.log(this.jobSeekerArray);
         this.jobSeekerProfile = res;
         this.dob = this.datePipe.transform(res.dateOfBirth, "dd-MM-yyyy");
         this.profileForm = this.formBuilder.group({
@@ -421,7 +408,6 @@ export class ProfileComponent implements OnInit, OnDestroy {
     this.educationForm = this.getEducation();
     this.educationService.getEducationById(id).subscribe((res) => {
       this.editableEducation = res;
-      console.log(res);
       this.educationForm.controls["qualification"].setValue(res.qualification);
       this.educationForm.controls["universityName"].setValue(
         res.universityName
@@ -440,7 +426,6 @@ export class ProfileComponent implements OnInit, OnDestroy {
   deleteEducation(id: number) {
     this.spinner.show();
     this.educationService.deleteEducationById(id).subscribe((res) => {
-      console.log(res);
       this.getEducationList();
       this.toastr.success("Education deleted");
       this.spinner.hide();
@@ -452,13 +437,10 @@ export class ProfileComponent implements OnInit, OnDestroy {
     if (this.action == "Add") {
       const currentEducation: any = [];
       currentEducation.push(this.educationForm.value);
-      console.log(this.educationForm.value);
       this.educationService.addEducations(currentEducation).subscribe((res) => {
-        console.log(res);
         this.getEducationList();
       });
       this.educationDetails.push(this.educationForm);
-      console.log(this.educationDetails);
       this.toastr.success("Education added");
     } else {
       this.educationToEdit = {
@@ -469,11 +451,9 @@ export class ProfileComponent implements OnInit, OnDestroy {
         startDate: this.educationForm.value.startDate,
         completionDate: this.educationForm.value.completionDate,
       };
-      console.log(this.educationToEdit);
       this.educationService
         .updateEducationById(this.editableId, this.educationToEdit)
         .subscribe((res) => {
-          console.log(res);
           this.getEducationList();
         });
       this.educationDetails.controls[this.editableId] = this.educationForm;
@@ -502,13 +482,11 @@ export class ProfileComponent implements OnInit, OnDestroy {
 
   editExperience(ref: any, id: number) {
     (this.action = "Update"), (this.editableExperienceId = id);
-    console.log(this.editableExperienceId);
     this.experienceForm = this.getExperience();
 
-    this.experienceService.getExperienceById(id).subscribe((res) => {
+    this.experienceService.getExperienceById(id).subscribe((res: any) => {
       this.editableExperience = res;
 
-      console.log(res);
       this.experienceForm.controls["previousCompanyName"].setValue(
         res.previousCompanyName
       );
@@ -527,7 +505,6 @@ export class ProfileComponent implements OnInit, OnDestroy {
   deleteExperience(id: number) {
     this.spinner.show();
     this.experienceService.deleteExperienceById(id).subscribe((res) => {
-      console.log(res);
       this.getExperienceList();
       this.toastr.success("Experience deleted");
       this.spinner.hide();
@@ -539,11 +516,9 @@ export class ProfileComponent implements OnInit, OnDestroy {
     if (this.action == "Add") {
       const currentExperience: any = [];
       currentExperience.push(this.experienceForm.value);
-      console.log(this.experienceForm.value);
       this.experienceService
         .addExperiences(currentExperience)
         .subscribe((res) => {
-          console.log(res);
           this.getExperienceList();
         });
       this.experienceDetails.push(this.experienceForm);
@@ -557,11 +532,9 @@ export class ProfileComponent implements OnInit, OnDestroy {
         toDate: this.experienceForm.value.toDate,
         salary: this.experienceForm.value.salary,
       };
-      console.log(this.experienceToEdit);
       this.experienceService
         .updateExperienceById(this.editableExperienceId, this.experienceToEdit)
         .subscribe((res) => {
-          console.log(res);
           this.getExperienceList();
         });
       this.experienceDetails.controls[this.editableExperienceId] =
@@ -574,16 +547,13 @@ export class ProfileComponent implements OnInit, OnDestroy {
   //--------------------------------------- update profile method------------------------------------------------
   updateProfile(ref: any) {
     this.action = "Update";
-    console.log(this.action);
     this.modalService.open(ref).result.then((result) => {});
   }
   executeProfileAction() {
     if (this.action == "Update") {
-      console.log(this.profileForm.value);
       this.jobSeekerService
         .updateProfile(this.profileForm.value)
         .subscribe((res) => {
-          console.log(res);
           this.getJobSeeker();
         });
 
@@ -600,7 +570,6 @@ export class ProfileComponent implements OnInit, OnDestroy {
   }
   // Modal Add job
   addjob(ref: any) {
-    (this.action = "Add"), console.log(this.action);
     this.preferredJobForm = this.getjob();
 
     this.modalService.open(ref).result.then((result) => {});
@@ -625,7 +594,6 @@ export class ProfileComponent implements OnInit, OnDestroy {
         this.spinner.hide();
       },
     });
-    console.log(jobId);
   }
   addJob(jobToAdd: any) {
     this.spinner.show();
@@ -645,9 +613,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
           i < this.preferredJobForm.value.preferredJobTitle.length;
           i++
         ) {
-          console.log(this.preferredjobArray);
           for (var j = 0; j < this.preferredjobArray.length; j++) {
-            console.log(this.preferredjobArray[j]);
             if (
               this.preferredjobArray[j].toLowerCase() ===
               this.preferredJobForm.value.preferredJobTitle[i].toLowerCase()
@@ -697,7 +663,6 @@ export class ProfileComponent implements OnInit, OnDestroy {
     this.skillService.getSkills().subscribe((res) => {
       this.skillArray = res;
       this.spinner.hide();
-      console.log(res);
     });
   }
   deleteSkill(skillId: number) {
@@ -715,7 +680,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
   addSkill(jobToAdd: any) {
     this.spinner.show();
     this.skillService
-      .addSkills([{ skillTitle: jobToAdd.skillTitle }])
+      .addSkills([{ skillTitle: jobToAdd.skillTitle, skillId: 0 }])
       .subscribe({
         next: () => {
           this.skillArray.push(jobToAdd);
@@ -728,12 +693,10 @@ export class ProfileComponent implements OnInit, OnDestroy {
   executeSkillAction() {
     if (this.action == "Add") {
       this.skillService.getSkills().subscribe((res) => {
-        console.log(this.skillForm.value.SkillTitle);
         for (var i = 0; i < res.length; i++) {
           this.skillTitleArray.push(res[i].skillTitle);
         }
         for (var i = 0; i < this.skillForm.value.SkillTitle.length; i++) {
-          console.log(this.skillTitleArray);
           for (var j = 0; j < this.skillTitleArray.length; j++) {
             if (
               this.skillTitleArray[j].toLowerCase() ===
@@ -744,7 +707,6 @@ export class ProfileComponent implements OnInit, OnDestroy {
             }
           }
           // if (res[i].skillTitle === this.skillForm.value.skillTitle) {
-          //   console.log(this.skillForm.value.skillTitle)
           //   this.isSkillAdded = false;
           //   break;
           // }
@@ -752,7 +714,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
         if (this.isSkillAdded) {
           for (var i = 0; i < this.skillForm.value.SkillTitle.length; i++) {
             this.skillService
-              .addSkills([{ skillTitle: this.skillForm.value.SkillTitle[i] }])
+              .addSkills([{ skillTitle: this.skillForm.value.SkillTitle[i], skillId: 0 }])
               .subscribe((res) => this.getSkill());
             this.modalService.dismissAll();
           }

@@ -40,7 +40,6 @@ export class JobInfoComponent implements OnInit, AfterContentInit {
   }
 
   ngOnInit(): void {
-    console.log(this.today)
     const postJobDetailId = this.activatedRoute.snapshot.params['postJobDetailId']
     this.getJobById();
     this.getJobMinimal();
@@ -63,7 +62,6 @@ export class JobInfoComponent implements OnInit, AfterContentInit {
     this.jobService.getJobById(postJobDetailId).subscribe({
       next: data => {
         this.job = data;
-        // console.log(this.job);
         this.isJobLoaded = true;
       }
     });
@@ -75,13 +73,9 @@ export class JobInfoComponent implements OnInit, AfterContentInit {
 
   getjobfromJobMinimal(jobList: Job[]) {
     const postJobDetailId = this.activatedRoute.snapshot.params['postJobDetailId']
-    console.log(jobList)
     for (var i = 0; i < jobList.length; i++) {
-      console.log(jobList[i].postJobDetailId)
       if (jobList[i].postJobDetailId == postJobDetailId) {
-        console.log(jobList[i])
         this.currentJob = jobList[i];
-        console.log(this.currentJob)
         break;
       }
     }

@@ -27,7 +27,7 @@ export class EducationService {
     getEducationByUserId(id:number): Observable<Education>{
         return this.httpClient.get<Education>(`${this.host}/get_by_user_id/${id}`);
     }
-    updateEducationById(id: number, updatedEducationDetail:any) {
+    updateEducationById(id: number, updatedEducationDetail:Education) {
         return this.httpClient.put(`${this.host}/update_by_id`,updatedEducationDetail,{ responseType: 'text' })
     }
     deleteEducationById(id: number){

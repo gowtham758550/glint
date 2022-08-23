@@ -40,7 +40,6 @@ export class VerifyComponent implements OnInit {
     this.authService.isVerified(email)
       .subscribe({
         next: res => {
-          console.log(res);
           if (!res) {
             this.isVerified = true;
             this.toastr.success('Verified successfully');

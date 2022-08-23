@@ -35,6 +35,5 @@ export class RegisterComponent implements OnInit {
   
 
   receiveFormData() {
-    // console.log(this.registerationForm.value);
   }
 }

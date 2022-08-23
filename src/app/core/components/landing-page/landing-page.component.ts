@@ -121,7 +121,6 @@ export class LandingPageComponent implements OnInit {
   }
 
   search() {
-    console.log(this.searchBarForm.value);
     this.router.navigate([this.routeConstants.jobSeekerHome], {
       queryParams: this.searchBarForm.value,
     });

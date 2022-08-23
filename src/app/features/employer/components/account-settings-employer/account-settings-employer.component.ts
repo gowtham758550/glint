@@ -49,7 +49,6 @@ export class AccountSettingsEmployerComponent implements OnInit {
   ngOnInit(): void {
     this.primengConfig.ripple = true;
     this.Email = this.authService.getEmail();
-    console.log(this.Email)
     this.emailForm = this.formBuilder.group({
       Email: [this.Email, [Validators.required]],
     })
@@ -58,7 +57,6 @@ export class AccountSettingsEmployerComponent implements OnInit {
   // --------------------------  change password --------------------------------------------
 
   changePassword(currentPassword: string, newPassword: string) {
-    console.log(currentPassword, newPassword)
     this.passwordObject = { CurrentPassword: currentPassword, NewPassword: newPassword }
     this.employerService.changePassword(this.passwordObject).subscribe({
       next: () => {
@@ -71,10 +69,8 @@ export class AccountSettingsEmployerComponent implements OnInit {
 
   }
   onSubmit(password: any) {
-    console.log(password.value)
   }
   checkNewPassword(newPassword: string) {
-    console.log(newPassword);
     if (newPassword === this.currentPassword) {
       this.toastr.warning("Current Password and New Password cannot be same")
       this.showButton = false;
@@ -90,7 +86,6 @@ export class AccountSettingsEmployerComponent implements OnInit {
     }
   }
   checkCurrentPassword(currentPassword: string) {
-    console.log(this.newPassword)
     if (currentPassword === "" || this.newPassword === "") {
       this.showButton = false;
     }
@@ -124,7 +119,6 @@ export class AccountSettingsEmployerComponent implements OnInit {
     this.displayMaximizable = true;
   }
   showtoastrmessage() {
-    this.authService.deleteProfile().subscribe(res => console.log(res))
     this.displayMaximizable = false;
     this.authService.logout();
     this.toastr.success('Account deleted');

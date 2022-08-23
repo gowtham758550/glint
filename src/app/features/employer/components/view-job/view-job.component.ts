@@ -44,7 +44,6 @@ export class ViewJobComponent implements OnInit {
   getJobAppliers() {
     this.filterService.getJobAppliers(this.postJobDetailId).subscribe({
       next: data => {
-        // console.log(data);
         this.appliers = data;
         this.isAppliersTableLoaded = true;
       }
@@ -61,7 +60,6 @@ export class ViewJobComponent implements OnInit {
     this.jobService.getJobById(this.postJobDetailId).subscribe({
       next: data => {
         this.job = data;
-        // console.log(data)
         this.isJobInfoLoaded = true;
       }
     });

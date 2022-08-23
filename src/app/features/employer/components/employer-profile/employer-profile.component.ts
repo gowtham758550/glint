@@ -99,7 +99,6 @@ export class EmployerProfileComponent implements OnInit {
             this.getProfilePicture();
           },
           error: (error) => {
-            console.log(error);
           },
         });
       });
@@ -141,7 +140,6 @@ export class EmployerProfileComponent implements OnInit {
             this.getCoverPicture();
           },
           error: (error) => {
-            console.log(error);
           },
         });
       });
@@ -164,17 +162,14 @@ export class EmployerProfileComponent implements OnInit {
   updateProfile(ref: any) {
     this.spinner.show();
     this.action = "Update";
-    console.log(this.action);
     this.modalService.open(ref).result.then((result) => {});
     this.spinner.hide();
   }
   executeProfileAction() {
     if (this.action == "Update") {
-      console.log(this.profileForm.value);
       this.employerService
         .updateProfile(this.profileForm.value)
         .subscribe((res) => {
-          console.log(res);
           this.getEmployer();
         });
 
@@ -186,19 +181,15 @@ export class EmployerProfileComponent implements OnInit {
     this.employerService.getEmployerById().subscribe((res: any) => {
       res.dateOfBirth = this.datePipe.transform(res.dateOfBirth, "dd-MM-yyyy");
       // res.dateOfBirth = this.dob;
-      console.log(res.dateOfBirth);
       this.employerArray = res;
     });
   }
   dob: any;
   employerProfile() {
     this.employerService.getEmployerById().subscribe((res: any) => {
-      console.log(res);
       this.employerArray = res;
-      console.log(this.employerArray);
       this.jobSeekerProfile = res;
       this.dob = this.datePipe.transform(res.dateOfBirth, "dd-MM-yyyy");
-      console.log(this.dob);
       this.profileForm = this.formBuilder.group({
         companyName: [res.companyName, [Validators.required]],
         firstName: [res.firstName, [Validators.required]],

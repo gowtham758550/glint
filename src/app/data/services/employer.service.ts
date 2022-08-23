@@ -18,14 +18,13 @@ export class EmployerService {
     updateEmployerProfile(employerProfile: object) {
         return this.httpClient.put(`${this.host}/update`, employerProfile);
     }
-    updateProfile(userInfo: object): Observable<any>  {
+    updateProfile(userInfo: object)  {
         return this.httpClient.put(`${this.host}/update`, userInfo,{responseType: 'text'});
     } 
     changePassword(passwordObject: changePasswordDTO){
         return this.httpClient.put(`${this.host}/change_password`, passwordObject,{responseType: 'text'});
     }
     changeEmail(email:string){
-        console.log(email);
         return this.httpClient.get(`${this.host}/change_email/${email}`, {responseType: 'text'});
     }
     getEmployerById(){

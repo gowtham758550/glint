@@ -15,7 +15,6 @@ export class VerificationService {
 
     verifyWithToken(token: string) {
         const params = new HttpParams().set('token', decodeURIComponent(token))
-        console.log(params.get('token'));
         return this.httpClient.get(`${this.host}/verify`, {params: params});
     } 
 }

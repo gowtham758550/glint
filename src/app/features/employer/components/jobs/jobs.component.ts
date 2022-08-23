@@ -44,7 +44,6 @@ export class JobsComponent implements OnInit {
   }
 
   routeToEdit(id: number) {
-    console.log(this.postJobDetailId)
     this.router.navigateByUrl(`/employer/job/edit/${id}`);
   }
 

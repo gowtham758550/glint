@@ -57,15 +57,12 @@ export class JobSeekerProfileComponent implements OnInit {
     this.getExperienceDetail();
   }
   getJobAppliers() {
-    console.log(this.postJobDetailId)
     this.filterService.getJobAppliers(this.postJobDetailId).subscribe({
       next: data => {
         this.appliers = data;
-        console.log(this.appliers)
         for (var i = 0; i < this.appliers.length; i++) {
           if (this.appliers[i].jobSeekerId == this.id) {
             this.currentApplier = this.appliers[i];
-            console.log(this.currentApplier)
             this.getSkillDetail(this.currentApplier);
             // this.getResumebyId(this.currentApplier.id)
             break;
@@ -79,10 +76,7 @@ export class JobSeekerProfileComponent implements OnInit {
     this.skillService.getSkillsByUserId(currentApplier.jobSeekerId).subscribe(res=>this.skillArray=res)
   }
   getResumebyId(id:number){
-    console.log(id)
     this.blobService.getResumebyId(id).subscribe((res:any)=>{
-      console.log(res);
-      console.log(res.url);
       var link = document.createElement('a');
       link.href = res.url + "?" + environment.resume_sas_token;
       link.click();
@@ -92,7 +86,6 @@ export class JobSeekerProfileComponent implements OnInit {
     })
   }
   getJobSeekerbyId() {
-    console.log(this.id);
     this.jobSeekerService.getUserById(this.id).subscribe(res => this.jobSeekerProfile = res)
   }
   getProfilePicture() {

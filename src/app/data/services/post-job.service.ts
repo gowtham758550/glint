@@ -12,7 +12,6 @@ export class PostJobService {
   constructor( private httpClient: HttpClient) { }
 
   getPostJobbyId(id:number){
-    console.log(id)
     return this.httpClient.get(`${this.host}/get/${id}`);
   }
 

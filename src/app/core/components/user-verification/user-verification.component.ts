@@ -17,12 +17,10 @@ export class UserVerificationComponent implements OnInit {
 
   ngOnInit(): void {
     const token = this.getToken();
-    console.log(token);
     if (token) {
       this.verifyWithToken(token);
 
     } else {
-      console.log('no token');
     }
   }
 
@@ -36,7 +34,6 @@ export class UserVerificationComponent implements OnInit {
 
   verifyWithToken(token: string) {
     this.verificationService.verifyWithToken(token).subscribe({
-      next: data => console.log(data)
     });
   }
 

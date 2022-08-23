@@ -5,6 +5,7 @@ import { NgxPhotoEditorService } from 'ngx-photo-editor';
 import { ToastrService } from 'ngx-toastr';
 import { RouteConstants } from 'src/app/data/enums/constatnts/route.constants';
 import { FormField } from 'src/app/data/models/form-field.model';
+import { ProfilePictureResponse } from 'src/app/data/models/profile-picture-response.model';
 import { BlobService } from 'src/app/data/services/blob.service';
 import { EmployerService } from 'src/app/data/services/employer.service';
 import { LocalStorage } from 'src/app/data/services/local-storage.service';
@@ -91,13 +92,11 @@ export class CompanyDetailComponent implements OnInit {
         autoCropArea: 1,
       })
       .subscribe((data: any) => {
-        console.log(data)
-        let file: any = data.file;
+        let file: File = data.file;
         let formData: FormData = new FormData();
         formData.append("profilePicture", file, file.name);
         this.profileService.addProfilePicture(formData).subscribe({
           next: (_data) => {
-            console.log("success");
             this.getProfilePicture();
           },
           
@@ -108,7 +107,7 @@ export class CompanyDetailComponent implements OnInit {
   getProfilePicture() {
     this.isImageLoaded = false;
     this.profileService.getProfilePicture().subscribe({
-      next: (data: any) => {
+      next: (data: ProfilePictureResponse) => {
         if (data.url) {
           let res = data.url;
           this.imageUrl = res + "?" + environment.profile_sas_token;
@@ -122,7 +121,6 @@ export class CompanyDetailComponent implements OnInit {
   }
 
   recieveFormData() {
-    // console.log(this.profileForm.value);
     this.employerService.updateEmployerProfile(this.profileForm.value).subscribe({
       next: data => {
         this.localStorage.removeItem('accessToken')

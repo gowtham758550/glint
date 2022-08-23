@@ -22,8 +22,7 @@ export class LocalStorage {
     
     getClaims(){
     this.jwt = this.getItem('accessToken');
-    console.log(this.jwt);
-    let jwtData: any = this.getItem('accessToken')?.split('.')[1];
+    let jwtData: string = this.getItem('accessToken')?.split('.')[1];
     return jwtData;
     }
 }

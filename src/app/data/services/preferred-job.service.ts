@@ -1,6 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
+import { PreferredJob } from '../models/preferred-job.model';
 
 @Injectable({
   providedIn: 'root'
@@ -11,8 +13,8 @@ export class PreferredJobService {
 
   constructor(private httpClient:HttpClient) { }
 
-  getPreferredJob(){
-    return this.httpClient.get<any>(`${this.host}/get`);
+  getPreferredJob(): Observable<PreferredJob>{
+    return this.httpClient.get<PreferredJob>(`${this.host}/get`);
   }
   addPreferredJob(preferredJobList: object[]){
     return this.httpClient.post(`${this.host}/add`, preferredJobList);

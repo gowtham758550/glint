@@ -76,7 +76,6 @@ export class BlobService {
       params: params,
       reportProgress: true,
     };
-    console.log(resume);
 
     return this.httpClient.post(`${this.resumeHost}/add`, resume, options);
   }

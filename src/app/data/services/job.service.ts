@@ -1010,8 +1010,8 @@ export class JobService {
         private httpClient: HttpClient
     ) { }
 
-    getPostedJob(): Observable<any> {
-        return this.httpClient.get(`${this.employerHost}/get`);
+    getPostedJob(): Observable<Job[]> {
+        return this.httpClient.get<Job[]>(`${this.employerHost}/get`);
     }
 
     getJobById(id: number) {

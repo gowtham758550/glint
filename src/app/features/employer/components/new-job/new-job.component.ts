@@ -110,19 +110,16 @@ export class NewJobComponent implements OnInit {
 
   getCategories() {
     this.dataService.getJobCategories().subscribe({
-      next: categories => console.log(categories)
     });
   }
 
   getQualifications() {
     this.dataService.getQualifications().subscribe({
-      next: qualifications => console.log(qualifications)
     })
   }
 
   createJob() {
     this.spinner.show();
-    console.log(this.jobForm.value);
     this.jobService.postJob(this.jobForm.value).subscribe({
       next: data => {
         this.toastr.success('Job created successfully', 'Success');

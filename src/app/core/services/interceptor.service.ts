@@ -34,7 +34,6 @@ export class Interceptor implements HttpInterceptor {
                     // else if (typeof error.error.error == 'string') errorMessage = error.error.error;
                     // else errorMessage = 'Unknow error'
                     this.toastr.error(errorMessage);
-                    console.log(error.error);
                     setTimeout(() => {
                         this.spinner.hide();
                     }, 1000)

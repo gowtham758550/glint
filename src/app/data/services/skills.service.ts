@@ -1,6 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
+import { Skill } from '../models/skill.model';
 
 @Injectable({
   providedIn: 'root'
@@ -11,10 +13,10 @@ export class SkillsService {
 
   constructor(private httpClient:HttpClient) { }
 
-  getSkills(){
-    return this.httpClient.get<any>(`${this.host}/get`);
+  getSkills(): Observable<Skill[]>{
+    return this.httpClient.get<Skill[]>(`${this.host}/get`);
   }
-  addSkills(skillList: object[]){
+  addSkills(skillList: Skill[]){
     return this.httpClient.post(`${this.host}/add`, skillList);
   }
   deleteSkillbyId(id:number){

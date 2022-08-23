@@ -20,7 +20,6 @@ export class FormComponent implements OnInit {
   @Input()
   formGroup!: FormGroup;
   get f() {
-    console.log(this.formGroup.controls)
     return this.formGroup.controls;
   }
   @Input()

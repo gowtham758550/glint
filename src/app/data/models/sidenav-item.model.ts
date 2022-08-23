@@ -1,5 +1,5 @@
 export interface SideNavItem {
     label: string,
-    icon: any,
+    icon: string,
     routeTo: string
 }
