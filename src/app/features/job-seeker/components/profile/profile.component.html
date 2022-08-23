@@ -3,7 +3,7 @@
         <ng-container *ngIf="isCoverImageLoaded; then coverImage; else coverImageLoader"></ng-container>
         <ng-template #coverImageLoader>
             <img id="coverpicture" class="rounded-top text-white d-flex flex-row cover-picture w-100"
-                src="/assets/defaultCoverPicture.jpg" (click)="openFileTrigger(coverPicture)" tooltipPosition="bottom"
+                src="/assets/JPG/defaultCoverPicture.jpg" (click)="openFileTrigger(coverPicture)" tooltipPosition="bottom"
                 pTooltip="Update Cover picture">
         </ng-template>
         <ng-template #coverImage>

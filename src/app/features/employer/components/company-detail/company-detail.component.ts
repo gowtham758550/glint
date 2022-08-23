@@ -18,7 +18,7 @@ import { environment } from 'src/environments/environment';
 })
 export class CompanyDetailComponent implements OnInit {
   isImageLoaded = true;
-  imageUrl: string = "assets/company.png";
+  imageUrl: string = "assets/PNG/company.png";
   profileForm: FormGroup = this.formBuilder.group({
     firstName: [this.localStorage.getItem('firstName'), [Validators.required]],
     lastName: [this.localStorage.getItem('lastName'), [Validators.required]],

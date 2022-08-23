@@ -23,14 +23,14 @@ import { environment } from "src/environments/environment";
   styleUrls: ["profile.component.css"],
 })
 export class ProfileComponent implements OnInit, OnDestroy {
-  backgroundImage: string = "/assets/defaultCoverPicture.jpg";
+  backgroundImage: string = "/assetsJPG//defaultCoverPicture.jpg";
   email!: string;
   jobSeekerProfile: any = {};
   profileForm!: FormGroup;
   educationInfo: any;
   educationToEdit: any;
   experienceInfo: any;
-  imageUrl: string = "/assets/defaultProfilePicture.png";
+  imageUrl: string = "/assets/PNG/defaultProfilePicture.png";
   experienceToEdit: any;
   experienceArray: any = [];
   editableExperience: any;

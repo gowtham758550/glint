@@ -21,7 +21,7 @@ export class LayoutComponent implements OnInit {
   roleEnum = Role;
   role!: Role;
   sideBarVisibility = true;
-  profilePictureSource: string='assets/defaultProfilePicture.png';
+  profilePictureSource: string='assets/PNG/defaultProfilePicture.png';
   userName!: string;
   email!: string;
 

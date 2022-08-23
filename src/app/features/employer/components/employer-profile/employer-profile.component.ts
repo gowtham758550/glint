@@ -21,10 +21,10 @@ import { NgxSpinnerService } from "ngx-spinner";
   styleUrls: ["employer-profile.component.css"],
 })
 export class EmployerProfileComponent implements OnInit {
-  backgroundImage: string = "/assets/defaultCoverPicture.jpg";
+  backgroundImage: string = "/assets/JPG/defaultCoverPicture.jpg";
   isImageLoaded = false;
   isCoverImageLoaded = false;
-  imageUrl: string = "/assets/defaultProfilePicture.png";
+  imageUrl: string = "/assets/PNG/defaultProfilePicture.png";
 
   profileForm!: FormGroup;
   employerArray: any = [];
