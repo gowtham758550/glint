@@ -19,7 +19,6 @@ export class EmployerService {
         return this.httpClient.put(`${this.host}/update`, employerProfile);
     }
     updateProfile(userInfo: object): Observable<any>  {
-        console.log(userInfo);
         return this.httpClient.put(`${this.host}/update`, userInfo,{responseType: 'text'});
     } 
     changePassword(passwordObject: changePasswordDTO){

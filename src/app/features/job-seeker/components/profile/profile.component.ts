@@ -6,6 +6,7 @@ import { NgxPhotoEditorService } from "ngx-photo-editor";
 import { NgxSpinnerService } from "ngx-spinner";
 import { ToastrService } from "ngx-toastr";
 import { FormField } from "src/app/data/models/form-field.model";
+import { Resume } from "src/app/data/models/resume.model";
 import { AuthService } from "src/app/data/services/auth.service";
 import { BlobService } from "src/app/data/services/blob.service";
 import { EducationService } from "src/app/data/services/education.service";
@@ -328,13 +329,10 @@ export class ProfileComponent implements OnInit, OnDestroy {
   }
 
   getResume() {
-    this.blobService.getResume().subscribe((res: any) => {
-      console.log(res);
-      console.log(res.url);
+    this.blobService.getResume().subscribe((res: Resume) => {
       var link = document.createElement("a");
       link.href = res.url + "?" + environment.resume_sas_token;
       link.click();
-      // window.open(link.href, '_blank');
       window.URL.revokeObjectURL(link.href);
     });
   }

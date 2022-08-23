@@ -1,9 +1,9 @@
-import { JsonPipe } from "@angular/common";
 import { HttpClient, HttpParams } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { map, Observable } from "rxjs";
+import { Observable } from "rxjs";
 import { environment } from "src/environments/environment";
 import { ProfilePictureResponse } from "../models/profile-picture-response.model";
+import { Resume } from "../models/resume.model";
 
 @Injectable({
   providedIn: "root",
@@ -61,12 +61,12 @@ export class BlobService {
   }
 
   //  -----------------------------Resume Service------------------------------------------
-  getResume(): Observable<any> {
-    return this.httpClient.get<any>(`${this.resumeHost}/get`);
+  getResume(): Observable<Resume> {
+    return this.httpClient.get<Resume>(`${this.resumeHost}/get`);
   }
 
   getResumebyId(id: number){
-    return this.httpClient.get<any>(`${this.resumeHost}/get_by_user_id/${id}`);
+    return this.httpClient.get<Resume>(`${this.resumeHost}/get_by_user_id/${id}`);
   }
 
   addResume(resume: FormData) {

@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { AccessToken } from 'src/app/data/models/access-token.model';
 import { AuthService } from 'src/app/data/services/auth.service';
 import { LocalStorage } from 'src/app/data/services/local-storage.service';
 @Component({
@@ -46,7 +47,7 @@ export class SignupComponent implements OnInit {
     this.spinner.show();
     this.authService.signup({ ...this.registerationForm.value, ...{ authRole: this.role } })
       .subscribe({
-        next: (data) => {
+        next: (data: AccessToken) => {
           this.localStorage.setItem('email', this.registerationForm.controls['email'].value);
           this.localStorage.setItem('firstName', this.registerationForm.controls['firstName'].value);
           this.localStorage.setItem('lastName', this.registerationForm.controls['lastName'].value);

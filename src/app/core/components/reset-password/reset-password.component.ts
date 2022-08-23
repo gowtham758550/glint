@@ -5,6 +5,7 @@ import { NgxSpinnerService } from 'ngx-spinner';
 import { ToastrService } from 'ngx-toastr';
 import { RouteConstants } from 'src/app/data/enums/constatnts/route.constants';
 import { Role } from 'src/app/data/enums/role.enum';
+import { AccessToken } from 'src/app/data/models/access-token.model';
 import { FormField } from 'src/app/data/models/form-field.model';
 import { AuthService } from 'src/app/data/services/auth.service';
 import { LocalStorage } from 'src/app/data/services/local-storage.service';
@@ -66,12 +67,10 @@ export class ResetPasswordComponent implements OnInit {
   }
 
   validateOTP() {
-    // const role = this.authService.getRole();
-    // console.log(role);
     this.spinner.show();
     const formValue = this.validateOTPForm.value;
     this.authService.resetPassword(formValue).subscribe({
-      next: (data:any) => {
+      next: (data: AccessToken) => {
         this.localStorage.setItem('accessToken',data.jwt);
         this.toastr.success('Password changed successfully', 'Success');
         const role = this.authService.getRole();
