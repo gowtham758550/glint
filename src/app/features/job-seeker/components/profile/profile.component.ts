@@ -309,7 +309,6 @@ export class ProfileComponent implements OnInit {
       var link = document.createElement("a");
       link.href = res.url + "?" + environment.resume_sas_token;
       link.click();
-      // window.open(link.href, '_blank');
       window.URL.revokeObjectURL(link.href);
     });
   }
