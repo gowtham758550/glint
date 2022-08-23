@@ -1,6 +1,7 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { environment } from "src/environments/environment";
+import { EducationInfo } from "../models/education-info.model";
 import { Education } from "../models/education.model";
 
 @Injectable({
@@ -19,7 +20,7 @@ export class EducationService {
         return this.httpClient.post(`${this.host}/add`, educationList, { responseType: 'text' });
     }
     getEducation() {
-        return this.httpClient.get(`${this.host}/get`)
+        return this.httpClient.get<EducationInfo[]>(`${this.host}/get`)
     }
     getEducationById(id: number) {
         return this.httpClient.get<any>(`${this.host}/get/${id}`);

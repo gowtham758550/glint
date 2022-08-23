@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
+import { SkillData } from '../models/Skilldata.model';
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +13,7 @@ export class SkillsService {
   constructor(private httpClient:HttpClient) { }
 
   getSkills(){
-    return this.httpClient.get<any>(`${this.host}/get`);
+    return this.httpClient.get<SkillData[]>(`${this.host}/get`);
   }
   addSkills(skillList: object[]){
     return this.httpClient.post(`${this.host}/add`, skillList);

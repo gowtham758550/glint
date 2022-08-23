@@ -6,6 +6,7 @@ import { NgxPhotoEditorService } from "ngx-photo-editor";
 import { NgxSpinnerService } from "ngx-spinner";
 import { ToastrService } from "ngx-toastr";
 import { FormField } from "src/app/data/models/form-field.model";
+import { Education } from "src/app/data/models/education.model";
 import { AuthService } from "src/app/data/services/auth.service";
 import { BlobService } from "src/app/data/services/blob.service";
 import { EducationService } from "src/app/data/services/education.service";
@@ -15,6 +16,9 @@ import { LocalStorage } from "src/app/data/services/local-storage.service";
 import { PreferredJobService } from "src/app/data/services/preferred-job.service";
 import { SkillsService } from "src/app/data/services/skills.service";
 import { environment } from "src/environments/environment";
+import { EducationInfo } from "src/app/data/models/education-info.model";
+import { ExperienceArray } from "src/app/data/models/ExperienceArray.model";
+import { SkillData } from "src/app/data/models/Skilldata.model";
 
 @Component({
   selector: "app-profile",
@@ -24,35 +28,34 @@ import { environment } from "src/environments/environment";
 export class ProfileComponent implements OnInit {
   backgroundImage: string = "/assets/defaultCoverPicture.jpg";
   email!: string;
-  jobSeekerProfile: any = {};
+  jobSeekerProfile: Object = {};
   profileForm!: FormGroup;
-  educationInfo: any;
-  educationToEdit: any;
-  experienceInfo: any;
+  educationInfo: EducationInfo[]=[];
+  educationToEdit: Object={};
   imageUrl: string = "/assets/defaultProfilePicture.png";
-  experienceToEdit: any;
-  experienceArray: any = [];
-  editableExperience: any;
+  experienceToEdit: Object={};
+  experienceArray: ExperienceArray[] = [];
+  editableExperience: Object={};
   editableExperienceId!: number;
-  jobSeekerArray: any;
+  jobSeekerArray:any =[];
   isCoverclick: boolean = true;
   preferredJobArray: any = [];
-  skillArray: any = [];
+  skillArray: SkillData[] = [];
   newPreferredJob!: string;
   isSkillAdded: boolean = true;
   isPreferredJobAdded: boolean = true;
   profileDetails!: FormGroup;
-  educationArray: any = [];
+  educationArray:EducationInfo[] = [];
   educationDetails = new FormArray<FormGroup>([]);
   experienceDetails = new FormArray<FormGroup>([]);
   action!: string;
   editableId!: number;
-  editableEducation: any;
-  startDate: any;
-  endDate: any;
+  editableEducation: Object={};
+  startDate!: Date;
+  endDate!: Date;
   isImageLoaded = false;
   isCoverImageLoaded = false;
-  resume!: any;
+  // resume!: any;
 
   preferredJobFields: FormField[] = [
     {
@@ -324,9 +327,10 @@ export class ProfileComponent implements OnInit {
 
   //----------------------- Get Education List Api Call ---------------------------------
   getEducationList() {
-    this.educationInfo = this.educationService
+     this.educationService
       .getEducation()
       .subscribe((res) => {
+        console.log(res);
         this.educationArray = res;
         console.log(this.educationArray)
       });
@@ -334,9 +338,10 @@ export class ProfileComponent implements OnInit {
   //----------------------- Get Experience List Api Call ---------------------------------
 
   getExperienceList() {
-    this.experienceInfo = this.experienceService
+     this.experienceService
       .getExperience()
       .subscribe((res) => {
+        console.log(res);
         this.experienceArray = res;
         console.log(this.experienceArray);
       });
