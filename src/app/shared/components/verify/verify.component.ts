@@ -14,14 +14,13 @@ import { LocalStorage } from 'src/app/data/services/local-storage.service';
   styles: [
   ]
 })
-export class VerifyComponent implements OnInit, OnDestroy {
+export class VerifyComponent implements OnInit {
 
   @Input()
   role!: string;
 
   isVerified = false;
   email!: string;
-  interval!: any;
 
   constructor(
     private router: Router,
@@ -33,12 +32,6 @@ export class VerifyComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.email = this.localStorage.getItem('email');
-    // this.interval = setInterval(() => this.getVerificationStatus(), 5000);
-    // this.getVerificationStatus();
-  }
-
-  ngOnDestroy(): void {
-    clearInterval(this.interval);
   }
 
   getVerificationStatus() {
