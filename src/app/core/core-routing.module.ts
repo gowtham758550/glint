@@ -6,18 +6,12 @@ import { ForgotPasswordComponent } from "./components/forgot-password/forgot-pas
 import { LandingPageComponent } from "./components/landing-page/landing-page.component";
 import { NotFoundComponent } from "./components/not-found/not-found.component";
 import { ResetPasswordComponent } from "./components/reset-password/reset-password.component";
-import { UserVerificationComponent } from "./components/user-verification/user-verification.component";
 
 const routes: Routes = [
     { 
         path: '',
         component: LandingPageComponent,
         title: Title.home
-    },
-    {
-        path: 'user-verification',
-        component: UserVerificationComponent,
-        title: Title.accoutVerification
     },
     {
         path: 'forgot-password',
